@@ -1,4 +1,4 @@
-## Coder Dojo Pittsburgh
+## Neil Thawani's Website
 
 Make sure node is installed. You can get it [here](https://nodejs.org/en/download/).
 
