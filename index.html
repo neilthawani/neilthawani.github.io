@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
   <head>
     <title>
-      Neil Thawani's Website
+      Neil Thawani - Graduate Student, Learning Engineer, and NLP Developer at Carnegie Mellon University
     </title>
 
     <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -11,13 +11,162 @@
     <meta property="og:image" content="src/static/images/favicon.png" />
     <meta property="og:image:width" content="200" />
     <meta property="og:image:height" content="200" />
-    <meta property="og:title" content="Neil Thawani's Website" />
+    <meta property="og:title" content="Neil Thawani - Graduate Student, Learning Engineer, and NLP Developer at Carnegie Mellon University" />
+    <meta property="og:url" content="http://www.lioninawhat.com/" />
 
     <link rel="shortcut icon" type="image/x-icon" href="src/static/images/favicon.png">
+
+    <base href="/">
     <link type="text/css" href="styles/main.css" rel="stylesheet">
   </head>
 
   <body>
-    Hello World!
+    <div class="visible-phone mobile-nav-container">
+      <ul class="mobile-nav">
+        <li class="mobile-nav-item"><a href="/">Home</a></li>
+        <li class="mobile-nav-item"><a href="/#projects">Projects</a></li>
+        <li class="mobile-nav-item"><a href="/blog">Blog</a></li>
+      </ul>
+    
+      <ul class="mobile-nav contact-icons">
+        <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+          <li class="mobile-nav-item"><i class="ii ii-twitter"></i></li>
+        </a>
+    
+        <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+          <li class="mobile-nav-item"><i class="ii ii-linkedin-box"></i></li>
+        </a>
+    
+        <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+          <li class="mobile-nav-item"><i class="ii ii-github"></i></li>
+        </a>
+      </ul>
+    </div>
+    
+    <div class="hidden-phone nav">
+      <a id="fullname" href="/">
+        <span id="firstname">&nbsp;</span>
+        <span id="lastname"></span>
+      </a>
+    
+      <ul class="nav-pills">
+        <a href="/#projects">
+          <li>Projects</li>
+        </a>
+    
+        <a href="/blog">
+          <li>Blog</li>
+        </a>
+    
+        <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+          <li><i class="ii ii-twitter"></i></li>
+        </a>
+    
+        <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+          <li><i class="ii ii-linkedin-box"></i></li>
+        </a>
+    
+        <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+          <li><i class="ii ii-github"></i></li>
+        </a>
+      </ul>
+    </div>
+    <div class="content-container">
+      <p>
+        Hello. My name is <strong>Neil Thawani</strong>. My name spelled backwards is <strong>lieN inawahT</strong>. I am currently a graduate student at Carnegie Mellon University pursuing a Masters of Educational Technology &amp; Applied Learning Science, abbreviated METALS.
+      </p>
+    
+      <a href="https://metals.hcii.cmu.edu/curriculum/" target="_blank" rel="noopener">
+        <img src="src/static/images/metals-logo.png" class="middle" height=100 />
+      </a>
+    
+      <p>
+        I have worked as a frontend engineer and K-12 computer science educator. I hope to apply the sum of my skills as a software developer working at the intersection of machine learning practice and <a href="https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=505006">STE[A]M+C</a> education.
+      </p>
+    
+      <p>
+        You can view my <a href="src/static/files/Resume_09.27.19.pdf">resume here</a>.
+      </p>
+    </div>
+    
+    <h1 class="text-center" id="projects">
+      Projects
+    </h1>
+    
+    <div class="even-columns-2">
+      <a href="no-shave.html">
+        <div class="project-card">
+          <div class="project-card-content">
+            <img src="https://no-shave.org/img/nsn_full_stacked.png" class="project-card-image">
+    
+            <div class="project-card-text">
+              <h2 class="project-card-text-name">
+                No Shave November 2016 Fundraiser
+              </h2>
+              <h3 class="project-card-text-description">
+                I decided to raise money for cancer awareness by taking a selfie of myself every day, updating my No Shave November campaign page, and sharing the daily updated photo on Facebook. I also spoke to my employer and he agreed that the company would match the funds I raised. After 30 days, <strong>I raised $630</strong> for cancer awareness.
+              </h3>
+            </div>
+          </div>
+        </div>
+      </a>
+    
+      <div class="project-card" onclick="window.open('https://github.com/neilthawani/panhandle')">
+        <div class="project-card-content">
+          <div class="project-card-text">
+            <h2 class="project-card-text-name">
+              Panhandle
+            </h2>
+            <h3 class="project-card-text-description">
+              Panhandle is a web microframework that allows developers to build websites using <a href="https://pages.github.com/" target="_blank" rel="noopener">Github Pages</a> and <a href="http://handlebarsjs.com/" target="_blank" rel="noopener">handlebars templates</a> using an automatically refreshing local dev server.
+            </h3>
+          </div>
+    
+          <p class="project-card-tools-heading">Tools used:</p>
+          <div class="project-card-tools-logos">
+            <img src="src/static/images/hbs-logo.png" class="project-card-image">
+            <img src="src/static/images/bash-logo.png" class="project-card-image">
+            <img src="src/static/images/npm-logo.png" class="project-card-image">
+            <img src="src/static/images/nodejs-logo.png" class="project-card-image">
+          </div>
+        </div>
+      </div>
+    
+      <div class="project-card" onclick="window.open('http://empathy-cards.herokuapp.com')">
+        <div class="project-card-content">
+          <div class="project-card-text">
+            <h2 class="project-card-text-name">
+              Empathy Cards
+            </h2>
+            <h3 class="project-card-text-description">
+              I turned a deck of one instruction card, 47 feeling cards, and 48 need cards into an online tool for others to use in order to better understand their emotions and inner life.
+            </h3>
+          </div>
+    
+          <p class="project-card-tools-heading">Tools used:</p>
+          <div class="project-card-tools-logos">
+            <img src="src/static/images/ember-logo.png" class="project-card-image">
+          </div>
+        </div>
+      </div>
+    
+      <div class="project-card" onclick="window.open('https://github.com/neilthawani/dabble-flashcards')">
+        <div class="project-card-content">
+          <div class="project-card-text">
+            <h2 class="project-card-text-name">
+              Dabble Flashcards
+            </h2>
+            <h3 class="project-card-text-description">
+              Dabble is a flashcards app I created for myself after working with <a href="https://www.ankiapp.com/" target="_blank" rel="noopener">AnkiApp</a>, a Mac desktop-based app that allows a user to upload CSV files.
+            </h3>
+          </div>
+        </div>
+    
+        <p class="project-card-tools-heading">Tools used:</p>
+        <div class="project-card-tools-logos">
+          <img src="src/static/images/ember-logo.png" class="project-card-image">
+        </div>
+      </div>
+    </div>
   </body>
 </html>

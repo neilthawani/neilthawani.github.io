@@ -1,0 +1,58 @@
+.project-card {
+    width: 300px;
+    min-height: 200px;
+    height: max-content;
+    padding: 5px;
+    margin: 20px 5px;
+    text-align: center;
+    box-shadow: 3px 3px $figureColor;
+    background-color: $white;
+    color: $figureColor;
+}
+
+.project-card-content {
+    padding: 20px 10px 10px 10px;
+    cursor: pointer;
+}
+
+.project-card-icon {
+    font-size: 48px;
+}
+
+.project-card-image {
+    max-width: 48px;
+}
+
+.project-card-text {
+}
+
+.project-card-text-title {
+}
+
+.project-card-text-name {
+    margin-bottom: 10px;
+}
+
+.project-card-text-description {
+}
+
+.project-card-tools-logos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        margin: 5px;
+    }
+}
+
+.project-card-tools-heading {
+    margin-top: 25px;
+    margin-left: 10px;
+    margin-block-end: 0;
+    text-align: left;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    font-weight: 400;
+}
