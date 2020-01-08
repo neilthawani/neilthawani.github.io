@@ -1,47 +1,88 @@
-// var showdown  = require('showdown'),
-//     converter = new showdown.Converter(),
-//     text      = '# hello, markdown!',
-//     html      = converter.makeHtml(text);
-let fs = require("fs");
-let glob = require("glob");
-// let Handlebars = require("handlebars");
-let mkdirp = require("mkdirp");
-let path = require("path");
+const fs = require('fs');
+const showdown  = require('showdown');
+const beautifyHtml = require('js-beautify').html;
+const path = require("path");
+const formatDistanceToNow = require("date-fns").formatDistanceToNow;
 
-function compileMarkdownFiles (pattern, folderPath) {
-    var files = glob.sync(pattern);
+// Usage:
+// node build/showdown-helper src/markdown/blog/ src/views/templates/blog/
 
-    if (!files.length) {
-        throw new Error(`No template files found for pattern ${pattern}`);
-    }
+var args = process.argv.slice(2);
+var from = args[0];
+var toFolder = args[1];
 
-    if (process.env.debug) {
-        console.log("Templates", files);
-    }
+var isDirectory;
 
-    files.forEach(file => {
-        var source = fs.readFileSync(file).toString(),
-            // template = Handlebars.compile(source),
-            distDirectory = path.dirname(file).replace(folderPath, "");//,
-            // distPath;
-
-        // if (distDirectory === folderPath.slice(0, folderPath.length - 1)) {
-        //     distPath = outputFolder + path.basename(file, ".md") + ".hbs";
-        // } else {
-        //     distPath = outputFolder + distDirectory + path.sep + path.basename(file, ".md") + ".hbs";
-        // }
-
-        mkdirp.sync(distDirectory);
-        fs.writeFileSync(distPath, source);
-
-        if (process.env.debug) {
-            console.log("Template written to", distPath);
-        }
-    });
+try {
+    isDirectory = fs.lstatSync(from).isDirectory();
+} catch(e) {
+    console.error("Error\n", e);
+    process.exit(0);
 }
 
-const api = {
-    compileMarkdownFiles
-};
+if (isDirectory) {
+    console.log(`Parsing files in directory "${from}" to "${toFolder}"`);
 
-module.exports = api;
+    var showdownConverter = new showdown.Converter(),
+        blogPostArray = [];
+
+    var files = fs.readdirSync(from)
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        if (path.extname(file) !== ".md") {
+            continue;
+        }
+
+        var fileSlug = file.split(".")[0];
+        var markdownFile = fs.readFileSync(`${from}${fileSlug}.md`).toString();
+        var jsonFile = fs.readFileSync(`${from}${fileSlug}.json`).toString();
+        var jsonData = JSON.parse(jsonFile);
+
+        var title = jsonData["title"];
+        var createdAt = jsonData["created_at"];
+        var tags = jsonData["tags"];
+
+        var titleString = `<h1 class="blog-post-title">${title}</h1>`;
+        var postAsHtml = `<article class="blog-post-content">${showdownConverter.makeHtml(markdownFile)}</article>`;
+        var distanceOfTimeInWords = formatDistanceToNow(new Date(createdAt), { addSuffix: true});
+        var createdAtString = `<p class="blog-post-created-at">Published ${distanceOfTimeInWords} on ${createdAt}</p>`;
+        var tagsString = tags.map((tag) => {
+            return `<span class="blog-post-tag">${tag}</span>`;
+        }).join("");
+        var tagsSection = `<p class="blog-post-tags">${tagsString}</p>`;
+
+        var fileContents = `<div class="blog-post-container">\n\n${titleString}\n\n${postAsHtml}\n\n${tagsSection}\n\n${createdAtString}\n\n{{> blog-post-comment}}\n\n</div>`,
+            formattedFileContents = beautifyHtml(fileContents),
+            fullTemplate = `{{#> base}}\n\n${formattedFileContents}\n\n{{/base}}`;
+
+        var filenameToWrite = `${toFolder}${fileSlug}`;
+        fs.writeFileSync(`${filenameToWrite}.hbs`, fullTemplate);
+        blogPostArray.push({ "filename": `blog/${fileSlug}`, "title": title, "createdAt": createdAt, "tags": tagsString });
+    }
+
+    var indexFileContents = '<div class="blog-post-item-list"><h1 class="text-center">All Posts</h1>\n\n',
+        blogPostArray = blogPostArray.sort(function(a, b) {
+            return new Date(a["createdAt"]) - new Date(b["createdAt"]);
+        }).reverse();
+
+    for (var i = 0; i < blogPostArray.length; i++) {
+        var blogPostObj = blogPostArray[i],
+            filename = blogPostObj["filename"],
+            title = blogPostObj["title"],
+            createdAt = blogPostObj["createdAt"],
+            tags = blogPostObj["tags"];
+
+        var link = `<a class="blog-post-item-link" href="${filename}.html">${title}</a>`,
+            tags = `<p class="blog-post-item-tags">${tags}</p>`,
+            datestamp = `<p class="blog-post-item-created-at">Published ${createdAt}</p>`;
+
+        var postItem = `<div class="blog-post-item">${link}\n\n${tags}\n\n${datestamp}</div>\n\n`
+
+        indexFileContents += postItem;
+    }
+
+    var formattedIndexFileContents = beautifyHtml(indexFileContents),
+        fullIndexTemplate = `{{#> base}}\n\n${formattedIndexFileContents}\n\n{{> blog-post-comment}}\n\n{{/base}}`;
+
+    fs.writeFileSync(`${toFolder}index.hbs`, fullIndexTemplate)
+}

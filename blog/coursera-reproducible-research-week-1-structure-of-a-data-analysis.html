@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
+  <head>
+    <title>
+      Neil Thawani - Graduate Student at Carnegie Mellon University
+    </title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="src/static/images/favicon.png" />
+    <meta property="og:image:width" content="200" />
+    <meta property="og:image:height" content="200" />
+    <meta property="og:title" content="Neil Thawani - Graduate Student, Learning Engineer, and NLP Developer at Carnegie Mellon University" />
+    <meta property="og:url" content="http://www.lioninawhat.com/" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="src/static/images/favicon.png">
+
+    <base href="/">
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/showdownjs/showdown/1.0.1/dist/showdown.min.js"></script>
+    <script src="http://cdn.date-fns.org/v1.9.0/date_fns.min.js"></script>
+
+    <script type="text/javascript" src="src/static/javascript/blog.js"></script>
+    <script type="text/javascript" src="src/static/javascript/button-selector.js"></script>
+    <script type="text/javascript" src="src/static/javascript/menu.js"></script>
+
+    <link type="text/css" href="styles/main.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="visible-phone mobile-nav-container">
+      <ul class="mobile-nav">
+        <li class="mobile-nav-item"><a href="/">Home</a></li>
+        <li class="mobile-nav-item"><a href="/#projects">Projects</a></li>
+        <li class="mobile-nav-item"><a href="/blog">Blog</a></li>
+      </ul>
+    
+      <ul class="mobile-nav contact-icons">
+        <li class="mobile-nav-item">
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <i class="ii ii-twitter"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-linkedin-box"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-github"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="hidden-phone">
+      <div class="nav">
+        <a id="fullname" href="/">
+          <span id="firstname">&nbsp;</span>
+          <span id="lastname"></span>
+        </a>
+    
+        <ul class="nav-pills">
+          <a href="/#projects">
+            <li>Projects</li>
+          </a>
+    
+          <a href="/blog">
+            <li>Blog</li>
+          </a>
+    
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <li><i class="ii ii-twitter"></i></li>
+          </a>
+    
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-linkedin-box"></i></li>
+          </a>
+    
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-github"></i></li>
+          </a>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="blog-post-container">
+    
+        <h1 class="blog-post-title">Coursera - Reproducible Research - Week 1 - Structure of a Data Analysis</h1>
+    
+        <article class="blog-post-content">
+            <p>Steps in a data analysis</p>
+            <ol>
+                <li>Define the question</li>
+                <li>Define the ideal data set</li>
+                <li>Determine what data you can access</li>
+                <li>Obtain the data</li>
+                <li>Clean the data</li>
+                <li>Exploratory data analysis</li>
+                <li>Statistical prediction/modeling</li>
+                <li>Interpret results</li>
+                <li>Challenge results</li>
+                <li>Synthesize/write up results</li>
+                <li>Create reproducible code</li>
+            </ol>
+            <p>You will have either a surplus or insufficient information in order to solve your problems. Defining a question as narrowly as possible will help to reduce the noise in solving your problem.</p>
+            <p>e.g.,
+                <br />
+                Start with a general question: Can I automatically detect e-mails that are spam or not?
+                Make it concrete: Can I use quantitative characteristics of the emails to classify them as spam?</p>
+            <p>Defining the ideal data set</p>
+            <ul>
+                <li>descriptive - a whole population</li>
+                <li>exploratory - a random sample with many variables measured</li>
+                <li>inferential - the right population, randomly sampled</li>
+                <li>predictive - a training and test data set from the same population</li>
+                <li>causal - data from a randomized study</li>
+                <li>mechanistic - data about all components of the system</li>
+            </ul>
+            <p>Determine what data you can access</p>
+            <ul>
+                <li>Sometimes you can find free data on the web</li>
+                <li>Other times you may need to buy the data</li>
+                <li>Be sure to respect Terms of Use</li>
+                <li>If the data doesn't exist, you may need to generate it yourself</li>
+            </ul>
+            <p>Obtain the data</p>
+            <ul>
+                <li>Try to obtain the raw data</li>
+                <li>Be sure to reference the source</li>
+                <li>Polite emails go a long way</li>
+                <li>If you load the data from an internet source, record the URL and time accessed</li>
+            </ul>
+            <p>Clean the data</p>
+            <ul>
+                <li>Raw data often needs to be processed</li>
+                <li>If it is pre-processed, make sure you understand how</li>
+                <li>Understand the source of the data (census sample, convenience sample, etc.)</li>
+                <li>May need reformatting, subsampling - record those steps</li>
+                <li><strong>Determine if the data are good enough</strong> - if not, quit or change data</li>
+            </ul>
+            <p>Subsampling our data set</p>
+            <ul>
+                <li>We need to generate a test set and a training set (prediction)</li>
+            </ul>
+            <p>Exploratory data analysis</p>
+            <ul>
+                <li>Look at summaries of the data</li>
+                <li>Check for missing data</li>
+                <li>Create exploratory plots</li>
+                <li>Perform exploratory analyses (e.g., clustering)</li>
+            </ul>
+            <p>Statistical prediction/modeling</p>
+            <ul>
+                <li>should be informed by the results of your exploratory analysis</li>
+                <li>exact methods depend on the question of interest</li>
+                <li>transformations/processing should be accounted for when necessary</li>
+                <li>measures of uncertainty should be reported</li>
+            </ul>
+            <p>Interpret results</p>
+            <ul>
+                <li>Use the appropriate language (describes, correlates with/associated with, leads to/causes, predicts)</li>
+                <li>Give an explanation</li>
+                <li>Interpret coefficients</li>
+                <li>Interpret measures of uncertainty</li>
+            </ul>
+            <p>Challenge results</p>
+            <ul>
+                <li>Challenge all steps: question, data source, processing, analysis, conclusions</li>
+                <li>Challenge measures of uncertainty</li>
+                <li>Challenge choices of terms to include in models</li>
+                <li>Think of potential alternative analyses</li>
+            </ul>
+            <p>Synthesize/write-up results</p>
+            <ul>
+                <li>Lead with the question</li>
+                <li>Summarize the analyses into the story</li>
+                <li>Don't include every analysis; include it if it is needed for the story or to address a challenge</li>
+                <li>Order analyses according to the story, rather than chronologically</li>
+                <li>Include "pretty" figures that contribute to the story</li>
+            </ul>
+            <p>Lastly, create reproducible code using Markdown, knitr, Rstudio. It will make the evidence for your conclusions much more powerful.</p>
+        </article>
+    
+        <p class="blog-post-tags"><span class="blog-post-tag">coursera</span><span class="blog-post-tag">reproducible research</span></p>
+    
+        <p class="blog-post-created-at">Published almost 5 years ago on January 18, 2015</p>
+    
+        <div id="disqus_thread">
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'lioninawhat';
+        
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'lioninawhat';
+        
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function () {
+                    var s = document.createElement('script'); s.async = true;
+                    s.type = 'text/javascript';
+                    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+                    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                }());
+            </script>
+        </div>
+    
+    </div>
+    
+  </body>
+</html>

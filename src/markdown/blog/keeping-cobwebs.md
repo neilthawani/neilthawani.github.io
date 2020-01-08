@@ -1,0 +1,11 @@
+I started boxing a while ago. All that hopping and punching leaves my body sore, so I do releasing stretches several times a week after work.
+
+Today I was doing a [forward fold](https://www.yogajournal.com/.image/t_share/MTQ2MjI3NjIzNzE3MDUzNDU3/hp_288_09_bjk2-forwardbends.jpg) and as I turned my head from side to side, I saw two spiders about three feet apart, perched on their webs underneath the window sill in my living room.
+
+I like most spiders. I think tarantulas are fluffy and the brown spiders in my apartment had caught bugs that I would not like crawling on my couch or [around me](http://www.burkemuseum.org/blog/myth-you-swallow-spiders-your-sleep). However, I know that if I saw some eggs on these spider webs, I would collect and trash them immediately. These outdoor visitors are only welcome in my house if they serve my purposes. Otherwise, they are pests.
+
+I think this idea can also be applied to character traits, which form the web of our personalities. We all have qualities about ourselves that we enjoy and some that we might not enjoy as much. If we want to change something about ourselves, generating space between our thoughts and actions creates a positive feedback loop that becomes easier to repeat over time, as long as it's reinforced consistently with the same repeated action in response to a perceived stimulus.
+
+We have traits that we might consider undesirable - like a quick temper, aloof demeanor, or interests in activities that aren't accepted by mainstream society - but those traits or activities may serve us in ways that protect us, fend off threats, or otherwise increase our enjoyment in life. I know not having mosquitos or moths flying around in my apartment increases my quality of life significantly, and I owe it to these spiders and their cobwebs.
+
+But sometimes, if the detrimental consequences of these traits outweigh their benefits - if the spiders lay too many unwanted eggs, then it might be necessary to get rid of that cobweb of traits in our persona and allow nature to cultivate and time to bring us spiders that can do the job we want done right and without harm.

@@ -1,0 +1,55 @@
+{{#> base}}
+
+<div class="blog-post-container">
+
+    <h1 class="blog-post-title">Coursera - The Data Scientist's Toolbox - Week 2 - Introduction to Github</h1>
+
+    <article class="blog-post-content">
+        <p><a href="http://en.wikipedia.org/wiki/GitHub" target="_blank">"GitHub is a web-based hosting service for software development projects that use the Git revision control system."</a></p>
+        <p>How does GitHub work?</p>
+        <ul>
+            <li>allows users to "push" and "pull" their local repositories to and from remote repositories on the web</li>
+            <li>provides users with a homepage that displays their public repositories</li>
+            <li>users' repositories are backed up on the GitHub server in case something happens to the local copies</li>
+            <li>social aspect allows users to follow one another and share projects</li>
+        </ul>
+        <p><a href="http://www.github.com" target="_blank">Set up a GitHub account</a> using the same e-mail you configured in Git on your computer.</p>
+        <p>Your GitHub profile:</p>
+        <ul>
+            <li>is where all your activity on GitHub is displayed</li>
+            <li>allows you to show other people who you are and what you are working on</li>
+            <li>becomes a portfolio of your work as you work on more and more projects</li>
+        </ul>
+        <p><u>Git vs. GitHub</u></p>
+        <ul>
+            <li>You don't need GitHub to use Git</li>
+            <li>Git is local (on your computer), GitHub is remote (on the web)</li>
+        </ul>
+        <p><u>Creating a GitHub repository (repo)</u></p>
+        <p>Two ways:</p>
+        <ol>
+            <li>Start a repo from scratch</li>
+            <li><a href="https://help.github.com/articles/fork-a-repo" target="_blank">Fork another user's repo</a></li>
+        </ol>
+        <p>Creating a Local Repo</p>
+        <ol>
+            <li>Create and navigate to a directory.</li>
+            <li>Initialize a local Git repo using git init</li>
+            <li>Point your local repo at the remote repo on GitHub using <span class="code">git remote add origin <url></span></li>
+        </ol>
+        <p>Cloning a Forked Repo</p>
+        <ol>
+            <li>Create and navigate to a directory on your local machine.</li>
+            <li>Type <span class="code">git clone url</span></li>
+        </ol>
+    </article>
+
+    <p class="blog-post-tags"><span class="blog-post-tag">coursera</span><span class="blog-post-tag">data scientist's toolbox</span><span class="blog-post-tag">git</span><span class="blog-post-tag">github</span></p>
+
+    <p class="blog-post-created-at">Published almost 5 years ago on January 14, 2015</p>
+
+    {{> blog-post-comment}}
+
+</div>
+
+{{/base}}

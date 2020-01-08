@@ -1,9 +1,7 @@
 {
-  created_at: "18-09-2015",
-  slug: "a-theory-of-talent-management-forming-a-board-of-advisers", // optional, implicit from matching filenames
-  title: "A Theory of Talent Management - Forming a Board of Advisers"
-  tags: [
-    "aiesec",
-    "talent management"
-  ]
+  "id": "53",
+  "title": "A Theory of Talent Management - Forming a Board of Advisers",
+  "created_at": "September 18, 2015",
+  "slug": "a-theory-of-talent-management-forming-a-board-of-advisers",
+  "tags": ["talent management", "aiesec"]
 }

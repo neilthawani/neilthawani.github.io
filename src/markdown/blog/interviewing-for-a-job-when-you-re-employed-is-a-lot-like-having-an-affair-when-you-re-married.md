@@ -1,0 +1,17 @@
+<p>I disappeared for two hours over my lunch break - I usually do an hour for lunch at 11 or noon. I walked home, got my laptop, and debated taking my name badge off.</p>
+
+<p><em>"What if it leaves a bad impression? Like I'm disloyal or something?"</em> I asked myself.<br />
+<em>"Well of course, that's what you want to do here,"</em> I surreptitiously replied.</p>
+
+<p>Minutes later, as I walked toward the cafè, I saw my hand slide the badge out of my belt loop and into my pocket.</p>
+
+<p>At lunch, I talked about her - my old company - extensively. I talked about what we had done together, the memories we'd shared, the responsibilities she'd entrusted me with, and lately, how everything I do for her feels boring - out of habitual duty rather than for the sake of creating art. I told him - my suitor - that I had learned a lot in our relationship, but it was time for me to move on - and that I had known it for a while. He showed me his software and how beautiful and fast it was.</p>
+
+<p>After a demo of the product's capabilities, I asked him: "How can I help you?" My closer. It was the end of the interview, and my interviewer was beyond impressed. Companies (and people) love it when you ask how you can help them.</p>
+
+<p>"Well, we need a JavaScript developer. Are you free tomorrow to come into the office to talk to my technical lead?"<br />
+<em>"Play it cool,"</em> I told myself. "Yeah, I'll send you an e-mail around six tonight with my availability. I think I'm free - let me just check my calendar when I get home."</p>
+
+<p>I walked him to his car and dropped my bag off in my own car's trunk before walking back to the office. I grabbed my water bottle from my desk, walked around my team area, refilled my water, walked back to my desk, put my headphones on, and nobody said a word to me.</p>
+
+<p>Business as usual.</p>

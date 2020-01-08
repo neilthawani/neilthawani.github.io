@@ -1,0 +1,38 @@
+{{#> base}}
+
+<div class="blog-post-container">
+
+    <h1 class="blog-post-title">Model Representation</h1>
+
+    <article class="blog-post-content">
+        <p>Notation:</p>
+        <p><em>x<sup>(i)</sup></em>: input variables/features</p>
+        <p><em>y<sup>(i)</sup></em>: output/target variables</p>
+        <p><em>(x<sup>(i)</sup>, y<sup>(i)</sup>)</em>: training example (pair)</p>
+        <p><strong>training set</strong> - a list of training examples</p>
+        <p><strong>superscripted <em>(i)</em></strong> - an index into the training set (not an exponentiation)</p>
+        <p>Given a training set, we want to learn a function h<sub>&theta;</sub>(x) so that it is a good predictor for each value of x's corresponding y. This function is called a <strong>hypothesis function</strong>.</p>
+        <p><em>e.g.,</em> given a set of square feet and costs of houses, you could create a scatter plot of data</p>
+        <p><strong>supervised learning</strong> - given the "right answer" for each example in the training set for the data</p>
+        <p><strong>regression problem</strong> - given square feet of a living area, we want to predict a real-valued output (the price)</p>
+        <p><strong>classification problem</strong> - given square feet of a living area, we want to predict a discrete value (if it's a house or apartment)</p>
+        <p><strong>x</strong>: input, square feet of a living area</p>
+        <p><strong>y</strong>: output, estimated price</p>
+        <p><strong>h<sub>&theta;</sub>(x)</strong>: hypothesis function that maps from x to y</p>
+        <p>Take the training set and put it through the learning algorithm.</p>
+        <p>We represent our hypothesis function with:
+            h<sub>&theta;</sub>(x) = &theta;<sub>0</sub> + &theta;<sub>1</sub>x</p>
+        <p>This is univariate (x) linear regression.</p>
+        <p>&theta;<sub>0</sub> and &theta;<sub>1</sub> are the parameters of the model.</p>
+        <p>We compute these parameters using the <strong>cost function</strong>.</p>
+    </article>
+
+    <p class="blog-post-tags"><span class="blog-post-tag">coursera</span><span class="blog-post-tag">machine learning</span><span class="blog-post-tag">andrew ng</span></p>
+
+    <p class="blog-post-created-at">Published about 3 years ago on November 28, 2016</p>
+
+    {{> blog-post-comment}}
+
+</div>
+
+{{/base}}

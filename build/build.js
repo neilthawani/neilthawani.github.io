@@ -1,15 +1,11 @@
-// node build/build.js -d cwd -p "src/views/partials/**/*.hbs" -l "src/views/layouts/**/*.hbs" -t "src/views/templates/**/*.hbs" -v
-
 let commander = require("commander");
 let config = require("../build/config");
-let showdownHelper = require("../build/showdown-helper");
 let handlebarsToHtml = require("../build/handlebars-to-html");
 
 commander
   .usage("-templates <pattern> -d <path>")
   .description("Write handlebars templates to a directory as static html.")
   .option("-d, --directory", "output directory")
-  .option("-b, --blogposts [pattern]", "folder and glob pattern containing markdown blog posts")
   .option("-H, --helpers", "path to JavaScript file containing helpers")
   .option("-p, --partials [pattern]", "glob pattern to match partial files")
   .option("-l, --layouts [pattern]", "glob pattern to match layout files")
@@ -19,10 +15,6 @@ commander
 
 if (commander.verbose) {
     process.env.debug = true;
-}
-
-if (commander.blogposts && commander.partialsFolder) {
-    showdownHelper.compileMarkdownFiles(commander.blogposts, commander.partialsFolder)
 }
 
 if (commander.partials) {

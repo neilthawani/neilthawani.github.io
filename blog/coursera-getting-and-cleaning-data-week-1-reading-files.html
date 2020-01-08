@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
+  <head>
+    <title>
+      Neil Thawani - Graduate Student at Carnegie Mellon University
+    </title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="src/static/images/favicon.png" />
+    <meta property="og:image:width" content="200" />
+    <meta property="og:image:height" content="200" />
+    <meta property="og:title" content="Neil Thawani - Graduate Student, Learning Engineer, and NLP Developer at Carnegie Mellon University" />
+    <meta property="og:url" content="http://www.lioninawhat.com/" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="src/static/images/favicon.png">
+
+    <base href="/">
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/showdownjs/showdown/1.0.1/dist/showdown.min.js"></script>
+    <script src="http://cdn.date-fns.org/v1.9.0/date_fns.min.js"></script>
+
+    <script type="text/javascript" src="src/static/javascript/blog.js"></script>
+    <script type="text/javascript" src="src/static/javascript/button-selector.js"></script>
+    <script type="text/javascript" src="src/static/javascript/menu.js"></script>
+
+    <link type="text/css" href="styles/main.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="visible-phone mobile-nav-container">
+      <ul class="mobile-nav">
+        <li class="mobile-nav-item"><a href="/">Home</a></li>
+        <li class="mobile-nav-item"><a href="/#projects">Projects</a></li>
+        <li class="mobile-nav-item"><a href="/blog">Blog</a></li>
+      </ul>
+    
+      <ul class="mobile-nav contact-icons">
+        <li class="mobile-nav-item">
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <i class="ii ii-twitter"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-linkedin-box"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-github"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="hidden-phone">
+      <div class="nav">
+        <a id="fullname" href="/">
+          <span id="firstname">&nbsp;</span>
+          <span id="lastname"></span>
+        </a>
+    
+        <ul class="nav-pills">
+          <a href="/#projects">
+            <li>Projects</li>
+          </a>
+    
+          <a href="/blog">
+            <li>Blog</li>
+          </a>
+    
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <li><i class="ii ii-twitter"></i></li>
+          </a>
+    
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-linkedin-box"></i></li>
+          </a>
+    
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-github"></i></li>
+          </a>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="blog-post-container">
+    
+        <h1 class="blog-post-title">Coursera - Getting and Cleaning Data - Week 1 - Reading Files</h1>
+    
+        <article class="blog-post-content">
+            <p><u>Reading Local Files</u></p>
+            <p>Loading flat files - read.table()</p>
+            <ul>
+                <li>this is the main function for reading data into R</li>
+                <li>reads the data into RAM - large data sets can cause problems</li>
+                <li>important parameters: file, header, sep, row.names, nrows</li>
+                <li>Related methods: read.csv(), read.csv2()</li>
+            </ul>
+            <p><u>Some more important parameters</u></p>
+            <p><u>quote</u> - you can tell R whether there are any quoted values; quote="" means no quotes</p>
+            <p><u>na.strings</u> - set the character that represents a missing value</p>
+            <p><u>nrows</u> - how many rows to read from the file</p>
+            <p><u>skip</u> - number of lines to skip before starting to read</p>
+            <p><u>Reading Excel Files</u></p>
+            <p>read.xlsx, read.xlsx2 are in library(xlsx)</p>
+            <p>write.xslx() will write out an Excel file with similar arguments</p>
+            <p>The XLConnect package (link to XLConnect Vignette) has more options for writing and manipulating Excel files.</p>
+            <p>In general, it is advised that you store your data in either a database, .txt, or .csv file, since they are easier to distribute.</p>
+            <p><u>Reading XML</u></p>
+            <p><u>library(XML)</u> - the XML library</p>
+            <pre>
+    doc <- xmlTreeParse(fileUrl, useInternal = TRUE)
+    rootNode <- xmlRoot(doc)
+    </pre>
+            <p><u>xmlName(rootNode)</u> - gets the name of the root node</p>
+            <p>Get the names of the nested elements under the root node: names(rootNode)</p>
+            <p>You can access parts of the XML document similar to how you access a list.</p>
+            <p><u>rootNode[[1]]</u> - access the first element and its children</p>
+            <p><u>rootNode[[1]][[1]]</u> - access the first child of the first element</p>
+            <p><u>xmlSApply(rootNode, xmlValue)</u> - programmatically extract parts of the file; gets all the text from the document</p>
+            <p>You can access information directly using <a href="http://www.stat.berkeley.edu/~statcur/Workshop2/Presentations/XML.pdf" target="_blank">XPath</a>.</p>
+            <p>extract specific nodes using XPath: <span class="code">xmlSApply(rootNode, "//nodeName", xmlValue)</span></p>
+            <p><u>Reading JSON</u></p>
+            <pre>
+    library(jsonlite)
+    jsonData <- fromJSON(url)
+    names(jsonData)
+    </pre>
+            <p><u>Accessing nested objects in JSON</u></p>
+            <pre>
+    &gt; names(jsonData$objectName)
+    &gt; jsonData$objectName$subObject
+    </pre>
+            <p><u>Writing Data Frames to JSON</u></p>
+            <pre>
+    &gt; myJson <- toJSON(dataset, pretty=TRUE)
+    &gt; cat(myjson) # output to console
+    </pre>
+            <p><u>Convert back to Data Frame</u></p>
+            <pre>
+    dataset2 <- fromJSON(myJson)
+    head(dataset2)
+    </pre>
+        </article>
+    
+        <p class="blog-post-tags"><span class="blog-post-tag">coursera</span><span class="blog-post-tag">getting and cleaning data</span></p>
+    
+        <p class="blog-post-created-at">Published almost 5 years ago on January 13, 2015</p>
+    
+        <div id="disqus_thread">
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'lioninawhat';
+        
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'lioninawhat';
+        
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function () {
+                    var s = document.createElement('script'); s.async = true;
+                    s.type = 'text/javascript';
+                    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+                    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                }());
+            </script>
+        </div>
+    
+    </div>
+    
+  </body>
+</html>

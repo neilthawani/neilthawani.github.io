@@ -1,25 +1,13 @@
 @import "variables"; // variables MUST go first
+@import "mobile";
 
+@import "blog";
+@import "button-selector";
 @import "grid";
 @import "icons";
 @import "menu";
 @import "projects";
 @import "tables";
-@import "mobile";
-
-// Desktop
-@media (min-width: 992px) {
-    .visible-phone {
-        display: none;
-    }
-}
-
-// Mobile
-@media (max-width: 991px) {
-    .hidden-phone {
-        display: none;
-    }
-}
 
 ul {
     -webkit-margin-before: 0;
@@ -29,13 +17,18 @@ ul {
     -webkit-padding-start: 0;
 }
 
-a {
+a, a:-webkit-any-link {
+    background-color: $groundColor;
     color: $figureColor;
     text-decoration: none;
 
     &:hover {
-        text-decoration: none;
+        text-decoration: underline;
     }
+}
+
+a.has-img {
+    background: none;
 }
 
 body {
@@ -69,19 +62,25 @@ p:last-child {
     margin: 10px auto;
 }
 
+.hidden {
+    display: none;
+}
+
 .content-container {
     color: $figureColor;
     padding: 20px 40px;
     background-color: $white;
     box-shadow: 2px 2px 1px $figureColor;
-    margin: 25px auto 40px auto;
+    margin: 40px auto;
     width: 50%;
 
     // Prevent vertical margin collapse with flexbox!
     display: flex;
     flex-direction: column;
+}
 
-    a:hover {
-        text-decoration: underline;
+@media (max-width: 991px) {
+    .content-container {
+        width: inherit;
     }
 }

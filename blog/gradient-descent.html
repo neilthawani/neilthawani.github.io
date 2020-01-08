@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
+  <head>
+    <title>
+      Neil Thawani - Graduate Student at Carnegie Mellon University
+    </title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="src/static/images/favicon.png" />
+    <meta property="og:image:width" content="200" />
+    <meta property="og:image:height" content="200" />
+    <meta property="og:title" content="Neil Thawani - Graduate Student, Learning Engineer, and NLP Developer at Carnegie Mellon University" />
+    <meta property="og:url" content="http://www.lioninawhat.com/" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="src/static/images/favicon.png">
+
+    <base href="/">
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/showdownjs/showdown/1.0.1/dist/showdown.min.js"></script>
+    <script src="http://cdn.date-fns.org/v1.9.0/date_fns.min.js"></script>
+
+    <script type="text/javascript" src="src/static/javascript/blog.js"></script>
+    <script type="text/javascript" src="src/static/javascript/button-selector.js"></script>
+    <script type="text/javascript" src="src/static/javascript/menu.js"></script>
+
+    <link type="text/css" href="styles/main.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="visible-phone mobile-nav-container">
+      <ul class="mobile-nav">
+        <li class="mobile-nav-item"><a href="/">Home</a></li>
+        <li class="mobile-nav-item"><a href="/#projects">Projects</a></li>
+        <li class="mobile-nav-item"><a href="/blog">Blog</a></li>
+      </ul>
+    
+      <ul class="mobile-nav contact-icons">
+        <li class="mobile-nav-item">
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <i class="ii ii-twitter"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-linkedin-box"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-github"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="hidden-phone">
+      <div class="nav">
+        <a id="fullname" href="/">
+          <span id="firstname">&nbsp;</span>
+          <span id="lastname"></span>
+        </a>
+    
+        <ul class="nav-pills">
+          <a href="/#projects">
+            <li>Projects</li>
+          </a>
+    
+          <a href="/blog">
+            <li>Blog</li>
+          </a>
+    
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <li><i class="ii ii-twitter"></i></li>
+          </a>
+    
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-linkedin-box"></i></li>
+          </a>
+    
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-github"></i></li>
+          </a>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="blog-post-container">
+    
+        <h1 class="blog-post-title">Gradient Descent</h1>
+    
+        <article class="blog-post-content">
+            <p><strong>gradient descent</strong> - an algorithm for minimizing the cost function J(&theta;<sub>0</sub>&theta;<sub>1</sub>) and estimating the parameters of the hypothesis function h<sub>&theta;</sub>(x) = &theta;<sub>0</sub> + &theta;<sub>1</sub>x</p>
+            <p><img src="http://i.imgur.com/HAjeQJ6.png" alt="gradient descent graph" /></p>
+            <p>We graph the cost function based on its fields, that is: the parameter range of our hypothesis function and the cost resulting by choosing a set of parameters.
+                To minimize the cost function, we take the derivative of the cost function starting where the red circles are in the graph above. The red arrows in the graph show the potential minima.
+                This derivative value will give us a direction to move towards on our graph. We step down the cost function in the direction with the steepest descent. The size of each step is determined by &alpha;, the learning rate.</p>
+            <p>&alpha;: the learning rate, or how big of a step we take when we update &theta;<sub>j</sub></p>
+            <p>If alpha is too small, gradient descent might approach the minimum too slowly.</p>
+            <p>If alpha is too large, gradient descent might overshoot the minimum, fail to converge, or diverge.</p>
+            <p>If we're at a local minimum, then the derivative is 0 (slope is 0), and our value doesn't update.</p>
+            <p>The gradient descent algorithm is:</p>
+            <p>Repeat until convergence:
+                <img src="http://i.imgur.com/t2LGVS5.png" alt="gradient descent algorithm" /></p>
+            <p>where j = [0, 1], the index numbers.</p>
+            <p>At each iteration, the parameters &theta;<sub>0</sub> and &theta;<sub>1</sub> should be simultaneously updated. Updating either parameter before calculating another one on the <em>j<sup>(th)</sup></em> iteration would lead to incorrect values.</p>
+            <p><img src="http://i.imgur.com/oWnQuC1.png" alt="correct way to iterate gradient descent algorithm" /></p>
+        </article>
+    
+        <p class="blog-post-tags"><span class="blog-post-tag">coursera</span><span class="blog-post-tag">machine learning</span><span class="blog-post-tag">andrew ng</span></p>
+    
+        <p class="blog-post-created-at">Published about 3 years ago on November 28, 2016</p>
+    
+        <div id="disqus_thread">
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'lioninawhat';
+        
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'lioninawhat';
+        
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function () {
+                    var s = document.createElement('script'); s.async = true;
+                    s.type = 'text/javascript';
+                    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+                    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                }());
+            </script>
+        </div>
+    
+    </div>
+    
+  </body>
+</html>

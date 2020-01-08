@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
   <head>
     <title>
-      Neil Thawani - Graduate Student, Learning Engineer, and NLP Developer at Carnegie Mellon University
+      Neil Thawani - Graduate Student at Carnegie Mellon University
     </title>
 
     <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -17,6 +17,17 @@
     <link rel="shortcut icon" type="image/x-icon" href="src/static/images/favicon.png">
 
     <base href="/">
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/showdownjs/showdown/1.0.1/dist/showdown.min.js"></script>
+    <script src="http://cdn.date-fns.org/v1.9.0/date_fns.min.js"></script>
+
+    <script type="text/javascript" src="src/static/javascript/blog.js"></script>
+    <script type="text/javascript" src="src/static/javascript/button-selector.js"></script>
+    <script type="text/javascript" src="src/static/javascript/menu.js"></script>
+
     <link type="text/css" href="styles/main.css" rel="stylesheet">
   </head>
 
@@ -29,55 +40,63 @@
       </ul>
     
       <ul class="mobile-nav contact-icons">
-        <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
-          <li class="mobile-nav-item"><i class="ii ii-twitter"></i></li>
-        </a>
+        <li class="mobile-nav-item">
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <i class="ii ii-twitter"></i>
+          </a>
+        </li>
     
-        <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
-          <li class="mobile-nav-item"><i class="ii ii-linkedin-box"></i></li>
-        </a>
+        <li class="mobile-nav-item">
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-linkedin-box"></i>
+          </a>
+        </li>
     
-        <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
-          <li class="mobile-nav-item"><i class="ii ii-github"></i></li>
-        </a>
+        <li class="mobile-nav-item">
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-github"></i>
+          </a>
+        </li>
       </ul>
     </div>
     
-    <div class="hidden-phone nav">
-      <a id="fullname" href="/">
-        <span id="firstname">&nbsp;</span>
-        <span id="lastname"></span>
-      </a>
-    
-      <ul class="nav-pills">
-        <a href="/#projects">
-          <li>Projects</li>
+    <div class="hidden-phone">
+      <div class="nav">
+        <a id="fullname" href="/">
+          <span id="firstname">&nbsp;</span>
+          <span id="lastname"></span>
         </a>
     
-        <a href="/blog">
-          <li>Blog</li>
-        </a>
+        <ul class="nav-pills">
+          <a href="/#projects">
+            <li>Projects</li>
+          </a>
     
-        <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
-          <li><i class="ii ii-twitter"></i></li>
-        </a>
+          <a href="/blog">
+            <li>Blog</li>
+          </a>
     
-        <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
-          <li><i class="ii ii-linkedin-box"></i></li>
-        </a>
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <li><i class="ii ii-twitter"></i></li>
+          </a>
     
-        <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
-          <li><i class="ii ii-github"></i></li>
-        </a>
-      </ul>
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-linkedin-box"></i></li>
+          </a>
+    
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-github"></i></li>
+          </a>
+        </ul>
+      </div>
     </div>
     <div class="content-container">
       <p>
         Hello. My name is <strong>Neil Thawani</strong>. My name spelled backwards is <strong>lieN inawahT</strong>. I am currently a graduate student at Carnegie Mellon University pursuing a Masters of Educational Technology &amp; Applied Learning Science, abbreviated METALS.
       </p>
     
-      <a href="https://metals.hcii.cmu.edu/curriculum/" target="_blank" rel="noopener">
-        <img src="src/static/images/metals-logo.png" class="middle" height=100 />
+      <a class="middle has-img" href="https://metals.hcii.cmu.edu/curriculum/" target="_blank" rel="noopener">
+        <img src="src/static/images/metals-logo.png" height=100 />
       </a>
     
       <p>
@@ -85,54 +104,55 @@
       </p>
     
       <p>
-        You can view my <a href="src/static/files/Resume_09.27.19.pdf">resume here</a>.
+        You can view my <a href="src/static/files/resume.pdf">resume here</a>.
+      </p>
+    
+      <p>
+        I am currently building <a href="http://www.rowschool.com" target="_blank" rel="noopener">Row School</a>, an online academy for K-12 teachers to teach computer science and other skills needed for humanity to move forward in the 21st century, grounded with theory from <a href="https://medium.com/inspired-ideas-prek-12/what-is-learning-science-a1dc07ec4ce" target="_blank" rel="noopener">learning science</a> and <a href="https://faculty.washington.edu/ajko/cer" target="_blank" rel="noopener">computer science education research</a>.
       </p>
     </div>
     
-    <h1 class="text-center" id="projects">
-      Projects
-    </h1>
+    <div class="button-selector">
+      <h1 class="text-center" id="projects">
+        Projects
+      </h1>
     
-    <div class="even-columns-2">
-      <a href="no-shave.html">
-        <div class="project-card">
-          <div class="project-card-content">
-            <img src="https://no-shave.org/img/nsn_full_stacked.png" class="project-card-image">
+      <ul class="button-selector-pills">
+        <a href="javascript:void(0)" onclick=showProjects('all')>
+          <li>All</li>
+        </a>
     
-            <div class="project-card-text">
-              <h2 class="project-card-text-name">
-                No Shave November 2016 Fundraiser
-              </h2>
-              <h3 class="project-card-text-description">
-                I decided to raise money for cancer awareness by taking a selfie of myself every day, updating my No Shave November campaign page, and sharing the daily updated photo on Facebook. I also spoke to my employer and he agreed that the company would match the funds I raised. After 30 days, <strong>I raised $630</strong> for cancer awareness.
-              </h3>
-            </div>
-          </div>
-        </div>
-      </a>
+        <a href="javascript:void(0)" onclick=showProjects('frontend')>
+          <li>Frontend</li>
+        </a>
     
-      <div class="project-card" onclick="window.open('https://github.com/neilthawani/panhandle')">
+        <a href="javascript:void(0)" onclick=showProjects('education')>
+          <li>Education</li>
+        </a>
+    
+        <a href="javascript:void(0)" onclick=showProjects('other')>
+          <li>Other</li>
+        </a>
+      </ul>
+    </div>
+    
+    <div class="even-columns-3">
+      <div class="project-card" onclick="window.open('no-shave.html')" data-attr-type="other">
         <div class="project-card-content">
+          <img src="https://no-shave.org/img/nsn_full_stacked.png" class="project-card-image">
+    
           <div class="project-card-text">
             <h2 class="project-card-text-name">
-              Panhandle
+              No Shave November 2016 Fundraiser
             </h2>
             <h3 class="project-card-text-description">
-              Panhandle is a web microframework that allows developers to build websites using <a href="https://pages.github.com/" target="_blank" rel="noopener">Github Pages</a> and <a href="http://handlebarsjs.com/" target="_blank" rel="noopener">handlebars templates</a> using an automatically refreshing local dev server.
+              I decided to raise money for cancer awareness by taking a selfie of myself every day, updating my No Shave November campaign page, and sharing the daily updated photo on Facebook. I also spoke to my employer and he agreed that the company would match the funds I raised. After 30 days, <strong>I raised $630</strong> for cancer awareness.
             </h3>
-          </div>
-    
-          <p class="project-card-tools-heading">Tools used:</p>
-          <div class="project-card-tools-logos">
-            <img src="src/static/images/hbs-logo.png" class="project-card-image">
-            <img src="src/static/images/bash-logo.png" class="project-card-image">
-            <img src="src/static/images/npm-logo.png" class="project-card-image">
-            <img src="src/static/images/nodejs-logo.png" class="project-card-image">
           </div>
         </div>
       </div>
     
-      <div class="project-card" onclick="window.open('http://empathy-cards.herokuapp.com')">
+      <div class="project-card" onclick="window.open('http://empathy-cards.herokuapp.com')"  data-attr-type="frontend">
         <div class="project-card-content">
           <div class="project-card-text">
             <h2 class="project-card-text-name">
@@ -150,7 +170,7 @@
         </div>
       </div>
     
-      <div class="project-card" onclick="window.open('https://github.com/neilthawani/dabble-flashcards')">
+      <div class="project-card" onclick="window.open('https://github.com/neilthawani/dabble-flashcards')"  data-attr-type="frontend">
         <div class="project-card-content">
           <div class="project-card-text">
             <h2 class="project-card-text-name">
@@ -167,6 +187,88 @@
           <img src="src/static/images/ember-logo.png" class="project-card-image">
         </div>
       </div>
+    
+      <div class="project-card" onclick="window.open('https://github.com/neilthawani/intro-to-csv')" data-attr-type="education">
+        <div class="project-card-content">
+          <div class="project-card-text">
+            <h2 class="project-card-text-name">
+              Intro to CSV Operations in Ruby
+            </h2>
+            <h3 class="project-card-text-description">
+              This is a lesson plan built for the Turing School of Software and Design. It also covers memory management, reviewing documentation, and edge cases involved in parsing CSV data.
+              <br><br>
+              This lesson is targeted toward novice students who know nothing about data processing.
+            </h3>
+          </div>
+    
+          <p class="project-card-tools-heading">Tools used:</p>
+          <div class="project-card-tools-logos">
+            <img src="src/static/images/ruby-logo.png" class="project-card-image">
+          </div>
+        </div>
+      </div>
+    
+      <div class="project-card" onclick="window.open('src/static/files/projects/e-learning/project-report.pdf')" data-attr-type="education">
+        <div class="project-card-content">
+          <div class="project-card-text">
+            <h2 class="project-card-text-name">
+              Performing CRUD Operations on the DOM Using JavaScript
+            </h2>
+            <h3 class="project-card-text-description">
+              This is an Open Learning Initiative (OLI) module made for the Programmable User Interfaces course at Carnegie Mellon University. You can view the 15-minute video presentation below, which explains my motivation for creating this course, challenges I encountered, and feedback received from students during and after the course was designed.
+              <br><br>
+              <iframe width="375" height="210" src="https://www.youtube.com/embed/DUrZiSUCp1U" frameborder="0" allowfullscreen></iframe>
+            </h3>
+          </div>
+    
+          <p class="project-card-tools-heading">Tools used:</p>
+          <div class="project-card-tools-logos">
+            <img src="src/static/images/oli-logo.png" class="project-card-image">
+          </div>
+        </div>
+      </div>
+    
+      <div class="project-card" onclick="window.open('https://github.com/neilthawani/panhandle')" data-attr-type="other">
+        <div class="project-card-content">
+          <div class="project-card-text">
+            <h2 class="project-card-text-name">
+              Panhandle
+            </h2>
+            <h3 class="project-card-text-description">
+              Panhandle is a web microframework that allows developers to build websites using <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> and <a href="http://handlebarsjs.com/" target="_blank" rel="noopener">handlebars templates</a> using an automatically refreshing local dev server.
+            </h3>
+          </div>
+    
+          <p class="project-card-tools-heading">Tools used:</p>
+          <div class="project-card-tools-logos">
+            <img src="src/static/images/hbs-logo.png" class="project-card-image">
+            <img src="src/static/images/bash-logo.png" class="project-card-image">
+            <img src="src/static/images/npm-logo.png" class="project-card-image">
+            <img src="src/static/images/nodejs-logo.png" class="project-card-image">
+          </div>
+        </div>
+      </div>
+    
+      <div class="project-card" onclick="window.open('https://github.com/neilthawani/ixdo-digital-sketch')" data-attr-type="other">
+        <div class="project-card-content">
+          <div class="project-card-text">
+            <h2 class="project-card-text-name">
+              Dashboard Design
+            </h2>
+            <h3 class="project-card-text-description">
+              During this project, I took upon the role of a User Experience (UX) Designer to create a digital dashboard for a university Introduction to Game Design course. Most of my peers used tools like PowerPoint, Figma, or Adobe Sketch to create their designs, but I used Ember.js to more readily use the data provided in the dashboard as a design constraint. In this repository are code, demos for each view I created, and a Process Book detailing my iterations and thought process.
+            </h3>
+          </div>
+    
+          <p class="project-card-tools-heading">Tools used:</p>
+          <div class="project-card-tools-logos">
+            <img src="src/static/images/ember-logo.png" class="project-card-image">
+          </div>
+        </div>
+      </div>
     </div>
+    
+    <!--
+    METALS projects - eLearning and EGIA -->
   </body>
 </html>

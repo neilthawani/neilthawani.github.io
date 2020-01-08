@@ -1,0 +1,33 @@
+{{#> base}}
+
+<div class="blog-post-container">
+
+    <h1 class="blog-post-title">Unsupervised Learning</h1>
+
+    <article class="blog-post-content">
+        <p>In unsupervised learning, we are given unstructured data and have no idea what our results should look like.</p>
+        <p>We can derive the structure of our input data by clustering it based on relationships among the variables in the data. We may have no idea what the effects of these variables are.</p>
+        <p>With unsupervised learning there is no feedback based on the prediction results.</p>
+        <p><em>e.g.,</em> Clustering</p>
+        <p>Given 1,000,000 different genes, find a way to automatically group these genes into groups related by different variables such as:</p>
+        <ol>
+            <li>lifespan,</li>
+            <li>location, </li>
+            <li>roles, etc.</li>
+        </ol>
+        <p><em>e.g.,</em> Non-clustering/"The Cocktail Party" algorithm</p>
+        <p>find structure in a chaotic environment, like separating voices and music from noise at a <a href="https://en.wikipedia.org/wiki/Cocktail_party_effect">cocktail party</a>.</p>
+        <p>In Octave:</p>
+        <p><code>[W,s,v] = svd((repmat(sum(x.*x, 1), size(x,1), 1).*x)*x');</code></p>
+        <p><code>svd</code> is an in-language linear algebra routine.</p>
+    </article>
+
+    <p class="blog-post-tags"><span class="blog-post-tag">coursera</span><span class="blog-post-tag">machine learning</span><span class="blog-post-tag">andrew ng</span></p>
+
+    <p class="blog-post-created-at">Published about 3 years ago on November 28, 2016</p>
+
+    {{> blog-post-comment}}
+
+</div>
+
+{{/base}}

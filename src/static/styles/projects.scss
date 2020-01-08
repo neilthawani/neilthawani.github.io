@@ -1,11 +1,10 @@
 .project-card {
-    width: 300px;
-    min-height: 200px;
+    width: 400px;
     height: max-content;
     padding: 5px;
     margin: 20px 5px;
     text-align: center;
-    box-shadow: 3px 3px $figureColor;
+    box-shadow: 2px 2px 1px $figureColor;
     background-color: $white;
     color: $figureColor;
 }
@@ -55,4 +54,18 @@
     font-size: 0.7em;
     text-transform: uppercase;
     font-weight: 400;
+}
+
+@media (max-width: 991px) {
+    .project-card {
+        margin: 20px 0;
+    }
+
+    iframe {
+        width: 100%;
+    }
+
+    h3 {
+        font-size: 1em;
+    }
 }

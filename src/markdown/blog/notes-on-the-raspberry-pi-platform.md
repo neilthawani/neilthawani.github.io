@@ -1,0 +1,1 @@
+<a href="//www.slideshare.net/NeilThawani/the-raspberry-pi-platform" title="The Raspberry Pi Platform" target="_blank"><iframe src="//www.slideshare.net/slideshow/embed_code/key/CHKhle9heeR60M" width="100%" height="800" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border: 0; min-width: 100%;" allowfullscreen> </iframe></a>
