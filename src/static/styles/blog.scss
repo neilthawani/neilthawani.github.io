@@ -1,8 +1,9 @@
 .blog-post-item-list {
     color: $figureColor;
-    padding: 20px 200px;
+    padding: 20px 40px;
     background-color: $white;
-    margin: 40px;
+    margin: 40px auto;
+    width: 75%;
     box-shadow: 2px 2px 1px $figureColor;
 
     a, a:-webkit-any-link {
@@ -37,7 +38,7 @@
     padding: 20px 40px;
     background-color: $white;
     box-shadow: 2px 2px 1px $figureColor;
-    margin: 25px auto 40px auto;
+    margin: 40px auto;
     width: 75%;
 }
 
@@ -75,7 +76,7 @@
 
 @media (max-width: 991px) {
     .blog-post-item-list {
-        margin: 40px 0;
+        margin: 25px 0 0 0;
         padding: 20px;
     }
 
@@ -87,8 +88,12 @@
     }
 
     .blog-post-container {
-        margin: 20px 0;
+        margin: 25px 0 0 0;
         width: inherit;
+
+        * {
+            max-width: -webkit-fill-available;
+        }
     }
 }
 

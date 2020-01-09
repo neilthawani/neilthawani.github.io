@@ -8,9 +8,10 @@
 
 .blog-post-item-list {
   color: #777;
-  padding: 20px 200px;
+  padding: 20px 40px;
   background-color: white;
-  margin: 40px;
+  margin: 40px auto;
+  width: 75%;
   box-shadow: 2px 2px 1px #777; }
   .blog-post-item-list a, .blog-post-item-list a:-webkit-any-link {
     background: none; }
@@ -36,7 +37,7 @@
   padding: 20px 40px;
   background-color: white;
   box-shadow: 2px 2px 1px #777;
-  margin: 25px auto 40px auto;
+  margin: 40px auto;
   width: 75%; }
 
 .blog-post-title {
@@ -63,14 +64,16 @@
 
 @media (max-width: 991px) {
   .blog-post-item-list {
-    margin: 40px 0;
+    margin: 25px 0 0 0;
     padding: 20px; }
   .blog-post-tags .blog-post-tag,
   .blog-post-item-tags .blog-post-tag {
     display: inline-block; }
   .blog-post-container {
-    margin: 20px 0;
-    width: inherit; } }
+    margin: 25px 0 0 0;
+    width: inherit; }
+    .blog-post-container * {
+      max-width: -webkit-fill-available; } }
 
 .new-blog-post-container {
   margin: 0 40px; }
@@ -108,7 +111,7 @@
   padding: 10px;
   box-shadow: 2px 2px 1px #777;
   width: max-content;
-  margin: 25px auto; }
+  margin: 40px auto; }
 
 .button-selector-pills {
   display: flex;
@@ -6686,7 +6689,8 @@ i:before {
   background-color: white;
   color: #777;
   padding: 10px 0;
-  margin-bottom: 25px; }
+  margin-bottom: 25px;
+  box-shadow: 2px 2px 1px #777; }
 
 .mobile-nav {
   text-align: center;
@@ -6714,7 +6718,7 @@ i:before {
   width: 400px;
   height: max-content;
   padding: 5px;
-  margin: 20px 5px;
+  margin: 0 0 40px 0;
   text-align: center;
   box-shadow: 2px 2px 1px #777;
   background-color: white;
@@ -6752,7 +6756,9 @@ i:before {
 
 @media (max-width: 991px) {
   .project-card {
-    margin: 20px 0; }
+    margin: 0 0 25px 0; }
+    .project-card:last-child {
+      margin-bottom: 0; }
   iframe {
     width: 100%; }
   h3 {
@@ -6838,7 +6844,7 @@ p:last-child {
   padding: 20px 40px;
   background-color: white;
   box-shadow: 2px 2px 1px #777;
-  margin: 40px auto;
+  margin: 25px auto;
   width: 50%;
   display: flex;
   flex-direction: column; }

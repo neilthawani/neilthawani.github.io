@@ -8,85 +8,92 @@ function renderMarkdownAsHtml() {
     target.innerHTML = html;
 }
 
-document.addEventListener("keyup", renderMarkdownAsHtml);
+// end renderer code
+
+var getMetaJson = function() {
+    var date = new Date();
+    var month = date.toLocaleString('default', { month: 'long' });
+
+    var id = date.getTime();
+    var createdAt = `${month} ${date.getDate()}, ${date.getFullYear()}`;
+    var title = document.getElementById("new-post-title").value;
+    var slug = slugifyTitle(title);
+
+    var metaJson = {
+        "id": id,
+        "title": title,
+        "created_at": createdAt,
+        "slug": slug,
+        "tags": []
+    };
+
+    return metaJson;
+}
+
+var getPostAsHbs = function() {
+    var metaJson = getMetaJson();
+
+    var titleString = `<h1 class="blog-post-title">${metaJson['title']}</h1>`;
+    var html = $("#rendered-markdown")[0].innerHTML;
+    var postAsHtml = `<article class="blog-post-content">${html}</article>`;
+    var createdAt = metaJson['created_at'];
+    var createdAtString = `<p class="blog-post-created-at">Published ${createdAt}</p>`;
+    var tagsString = "";
+    // (tags || []).map((tag) => {
+    //     return `<span class="blog-post-tag">${tag}</span>`;
+    // }).join("");
+    var tagsSection = `<p class="blog-post-tags">${tagsString}</p>`;
+
+    var fileContents = `<div class="blog-post-container">\n\n${titleString}\n\n${postAsHtml}\n\n${tagsSection}\n\n${createdAtString}\n\n{{> blog-post-comment}}\n\n</div>`;
+        // formattedFileContents = beautifyHtml(fileContents),
+    var fullTemplate = `{{#> base}}\n\n${fileContents}\n\n{{/base}}`;
+
+    return fullTemplate;
+}
+
+var downloadPostContent = function() {
+    var metaJson = getMetaJson();
+    var jsonFileContents = JSON.stringify(metaJson, null, 2);
+    var jsonFilename = `${metaJson['slug']}.json`;
+
+    var jsonLink = document.createElement('a');
+    jsonLink.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(jsonFileContents));
+    jsonLink.setAttribute('download', jsonFilename);
+    jsonLink.click();
+
+    var postAsHbs = getPostAsHbs();
+    var hbsFilename = `${metaJson['slug']}.hbs`;
+    var hbsLink = document.createElement('a');
+    hbsLink.setAttribute('href', 'data:text/hbs;charset=utf-8,' + encodeURIComponent(postAsHbs));
+    hbsLink.setAttribute('download', hbsFilename);
+    hbsLink.click();
+}
 
 // markdown and json file creation upon submit
 document.addEventListener('DOMContentLoaded', function(event) {
-    var createPostButton = document.getElementById("create-post");
-    createPostButton.onclick = function(e) {
-        var date = new Date();
-        var month = date.toLocaleString('default', { month: 'long' });
-
-        var id = date.getTime();
-        var createdAt = `${month} ${date.getDate()}, ${date.getFullYear()}`;
-        var title = document.getElementById("new-post-title").value;
-        var slug = slugifyTitle(title);
-
-        function downloadMetaData() {
-            var metaData = {
-              "id": id,
-              "title": title,
-              "created_at": createdAt,
-              "slug": slug,
-              "tags": []
-            };
-            var jsonFileContents = JSON.stringify(metaData, null, 2);
-            var jsonFilename = `${slug}.json`;
-
-            var pp = document.createElement('a');
-            pp.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(jsonFileContents));
-            pp.setAttribute('download', jsonFilename);
-            pp.click();
-        }
-
-        setTimeout(function() {
-          downloadMetaData()
-        }, 500);
-
-        function downloadHbs() {
-            var titleString = `<h1 class="blog-post-title">${title}</h1>`;
-            var html = $("#rendered-markdown")[0].innerHTML;
-            var postAsHtml = `<article class="blog-post-content">${html}</article>`;
-            var distanceOfTimeInWords = dateFns.distanceInWords(new Date(createdAt), { addSuffix: true});
-            var createdAtString = `<p class="blog-post-created-at">Published ${distanceOfTimeInWords} on ${createdAt}</p>`;
-            var tagsString = "";
-            // (tags || []).map((tag) => {
-            //     return `<span class="blog-post-tag">${tag}</span>`;
-            // }).join("");
-            var tagsSection = `<p class="blog-post-tags">${tagsString}</p>`;
-
-            var fileContents = `<div class="blog-post-container">\n\n${titleString}\n\n${postAsHtml}\n\n${tagsSection}\n\n${createdAtString}\n\n{{> blog-post-comment}}\n\n</div>`,
-                // formattedFileContents = beautifyHtml(fileContents),
-                fullTemplate = `{{#> base}}\n\n${fileContents}\n\n{{/base}}`;
-
-            var hbsFilename = `${slug}.hbs`;
-            var pp = document.createElement('a');
-            pp.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fullTemplate));
-            pp.setAttribute('download', hbsFilename);
-            pp.click();
-        }
-
-        setTimeout(function() {
-            downloadHbs()
-        }, 500);
+    var newPostTextarea = document.getElementById("new-post-textarea");
+    if (newPostTextarea) {
+        newPostTextarea.onkeyup =  renderMarkdownAsHtml;
     }
+
+    var createPostButton = document.getElementById("create-post");
+    if (createPostButton) {
+        createPostButton.onclick = downloadPostContent;
+    }
+
 });
 
-var slugifyTitle = function(str) {
-    str = str.replace(/^\s+|\s+$/g, ''); // trim
-    str = str.toLowerCase();
+function slugifyTitle(string) {
+    const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
+    const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
+    const p = new RegExp(a.split('').join('|'), 'g')
 
-    // remove accents, swap ñ for n, etc
-    var from = "àáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
-    var to   = "aaaaaeeeeiiiioooouuuunc------";
-
-    for (var i=0, l=from.length ; i<l ; i++) {
-        str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
-    }
-
-    str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
-        .replace(/\s+/g, '-') // collapse whitespace and replace by -
-        .replace(/-+/g, '-'); // collapse dashes
-
-    return str;
+    return string.toString().toLowerCase()
+      .replace(/\s+/g, '-') // Replace spaces with -
+      .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
+      .replace(/&/g, '-and-') // Replace & with 'and'
+      .replace(/[^\w\-]+/g, '') // Remove all non-word characters
+      .replace(/\-\-+/g, '-') // Replace multiple - with single -
+      .replace(/^-+/, '') // Trim - from start of text
+      .replace(/-+$/, '') // Trim - from end of text
 }

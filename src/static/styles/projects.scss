@@ -2,7 +2,7 @@
     width: 400px;
     height: max-content;
     padding: 5px;
-    margin: 20px 5px;
+    margin: 0 0 40px 0;
     text-align: center;
     box-shadow: 2px 2px 1px $figureColor;
     background-color: $white;
@@ -58,7 +58,11 @@
 
 @media (max-width: 991px) {
     .project-card {
-        margin: 20px 0;
+        margin: 0 0 25px 0;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 
     iframe {

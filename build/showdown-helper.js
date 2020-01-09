@@ -82,7 +82,7 @@ if (isDirectory) {
     }
 
     var formattedIndexFileContents = beautifyHtml(indexFileContents),
-        fullIndexTemplate = `{{#> base}}\n\n${formattedIndexFileContents}\n\n{{> blog-post-comment}}\n\n{{/base}}`;
+        fullIndexTemplate = `{{#> base}}\n\n${formattedIndexFileContents}\n\n{{/base}}`;
 
     fs.writeFileSync(`${toFolder}index.hbs`, fullIndexTemplate)
 }
