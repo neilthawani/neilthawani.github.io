@@ -45,7 +45,7 @@ var getPostAsHbs = function() {
     var createdAt = metaJson['created_at'];
     var createdAtString = `<p class="blog-post-created-at">Published ${createdAt}</p>`;
     var tagsString = "";
-    if (metaJson["tags"]) {
+    if (metaJson["tags"].toString().length > 0) {
         tagsString = tags.map((tag) => {
             return `<span class="blog-post-tag">${tag}</span>`;
         }).join("");
