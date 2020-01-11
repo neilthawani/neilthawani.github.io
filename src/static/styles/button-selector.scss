@@ -33,6 +33,10 @@
             color: $figureColor;
         }
     }
+
+    li.active {
+        text-decoration: underline;
+    }
 }
 
 @media (max-width: 991px) {

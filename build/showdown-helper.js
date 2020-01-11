@@ -2,7 +2,6 @@ const fs = require('fs');
 const showdown  = require('showdown');
 const beautifyHtml = require('js-beautify').html;
 const path = require("path");
-const formatDistanceToNow = require("date-fns").formatDistanceToNow;
 
 // Usage:
 // node build/showdown-helper src/markdown/blog/ src/views/templates/blog/
@@ -44,8 +43,7 @@ if (isDirectory) {
 
         var titleString = `<h1 class="blog-post-title">${title}</h1>`;
         var postAsHtml = `<article class="blog-post-content">${showdownConverter.makeHtml(markdownFile)}</article>`;
-        var distanceOfTimeInWords = formatDistanceToNow(new Date(createdAt), { addSuffix: true});
-        var createdAtString = `<p class="blog-post-created-at">Published ${distanceOfTimeInWords} on ${createdAt}</p>`;
+        var createdAtString = `<p class="blog-post-created-at">Published ${createdAt}</p>`;
         var tagsString = tags.map((tag) => {
             return `<span class="blog-post-tag">${tag}</span>`;
         }).join("");

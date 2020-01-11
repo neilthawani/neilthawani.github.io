@@ -131,6 +131,8 @@
       text-decoration: none;
       background-color: #eee;
       color: #777; }
+  .button-selector-pills li.active {
+    text-decoration: underline; }
 
 @media (max-width: 991px) {
   .button-selector {
