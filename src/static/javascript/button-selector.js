@@ -2,7 +2,7 @@ var showProjects = function (label) {
     var buttonSelectorPills = $(".button-selector-pills").find("a li");
 
     for (var i = 0; i < buttonSelectorPills.length; i++) {
-        buttonSelectorPills[i].style.textDecoration = "none";
+        buttonSelectorPills[i].style.backgroundColor = "white";
     }
 
     for (var i = 0; i < buttonSelectorPills.length; i++) {
@@ -11,7 +11,7 @@ var showProjects = function (label) {
         console.log("pillTitle", pillTitle, "label", label);
 
         if (pillTitle === label) {
-            buttonSelectorPills[i].style.textDecoration = "underline";
+            buttonSelectorPills[i].style.backgroundColor = "#eee";
             break;
         }
     }
