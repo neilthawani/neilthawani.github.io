@@ -129,7 +129,7 @@
     color: #777; }
     .button-selector-pills li:hover {
       text-decoration: none;
-      background-color: #eee;
+      background-color: #eee !important;
       color: #777; }
   .button-selector-pills li.active {
     text-decoration: underline; }

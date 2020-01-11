@@ -29,7 +29,7 @@
 
         &:hover {
             text-decoration: none;
-            background-color: $groundColor;
+            background-color: $groundColor !important;
             color: $figureColor;
         }
     }
