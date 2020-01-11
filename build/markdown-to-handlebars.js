@@ -4,7 +4,8 @@ const beautifyHtml = require('js-beautify').html;
 const path = require("path");
 
 // Usage:
-// node build/showdown-helper src/markdown/blog/ src/views/templates/blog/
+// node build/markdown-to-handlebars src/markdown/blog/ src/views/templates/blog/
+// aliased as `npm run build-md` in package.json
 
 var args = process.argv.slice(2);
 var from = args[0];
@@ -25,7 +26,7 @@ if (isDirectory) {
     var showdownConverter = new showdown.Converter(),
         blogPostArray = [];
 
-    var files = fs.readdirSync(from)
+    var files = fs.readdirSync(from);
     for (var i = 0; i < files.length; i++) {
         var file = files[i];
         if (path.extname(file) !== ".md") {
@@ -42,6 +43,7 @@ if (isDirectory) {
         var tags = jsonData["tags"];
 
         var titleString = `<h1 class="blog-post-title">${title}</h1>`;
+        var subtitleString = `<h1 class="blog-post-subtitle">${metaJson['subtitle']}</h1>`;
         var postAsHtml = `<article class="blog-post-content">${showdownConverter.makeHtml(markdownFile)}</article>`;
         var createdAtString = `<p class="blog-post-created-at">Published ${createdAt}</p>`;
         var tagsString = tags.map((tag) => {
@@ -67,6 +69,7 @@ if (isDirectory) {
         var blogPostObj = blogPostArray[i],
             filename = blogPostObj["filename"],
             title = blogPostObj["title"],
+            subtitle = blogPostObj["subtitle"],
             createdAt = blogPostObj["createdAt"],
             tags = blogPostObj["tags"];
 

@@ -30,7 +30,7 @@
   margin-top: 0px;
   margin-block-end: 10px; }
   .blog-post-item-tags .blog-post-tag {
-    font-size: 12px; }
+    font-size: 14px; }
 
 .blog-post-container {
   color: #777;
@@ -45,7 +45,6 @@
   margin-bottom: 20px; }
 
 .blog-post-tags {
-  margin-top: 20px;
   margin-block-end: 20px; }
 
 .blog-post-tag {
@@ -54,7 +53,8 @@
   padding: 5px 10px;
   background-color: white;
   box-shadow: 2px 2px 1px #777;
-  border: 1px solid #777; }
+  border: 1px solid #777;
+  margin-top: 5px; }
   .blog-post-tag:not(:last-child) {
     margin-right: 5px; }
 
@@ -65,7 +65,8 @@
 @media (max-width: 991px) {
   .blog-post-item-list {
     margin: 25px 0 0 0;
-    padding: 20px; }
+    padding: 20px;
+    width: inherit; }
   .blog-post-tags .blog-post-tag,
   .blog-post-item-tags .blog-post-tag {
     display: inline-block; }
@@ -77,18 +78,24 @@
 
 .new-blog-post-container {
   margin: 0 40px; }
+  .new-blog-post-container input {
+    border: 1px solid #777;
+    font-family: inherit;
+    font-weight: 300; }
+  .new-blog-post-container #new-post-textarea, .new-blog-post-container input {
+    width: 100%; }
+    .new-blog-post-container #new-post-textarea:focus, .new-blog-post-container input:focus {
+      outline: none; }
 
 #new-post-title {
-  font-size: 42px;
-  border: 1px solid #777;
-  font-family: inherit;
-  font-weight: 300;
-  width: 100%; }
+  font-size: 42px; }
 
-#new-post-textarea {
-  width: 100%; }
-  #new-post-textarea:focus {
-    outline: none; }
+#new-post-subtitle {
+  margin-top: 10px;
+  font-size: 24px; }
+
+#new-post-tags {
+  font-size: 18px; }
 
 #rendered-markdown {
   background-color: white;
@@ -111,7 +118,7 @@
   padding: 10px;
   box-shadow: 2px 2px 1px #777;
   width: max-content;
-  margin: 40px auto; }
+  margin: 40px auto 0 auto; }
 
 .button-selector-pills {
   display: flex;
@@ -137,7 +144,8 @@
 @media (max-width: 991px) {
   .button-selector {
     width: inherit;
-    font-size: inherit; } }
+    font-size: inherit;
+    margin: 25px 0 0 0; } }
 
 .even-columns-1 {
   list-style: none;
@@ -6720,11 +6728,13 @@ i:before {
   width: 400px;
   height: max-content;
   padding: 5px;
-  margin: 0 0 40px 0;
+  margin: 40px 0 0 0;
   text-align: center;
   box-shadow: 2px 2px 1px #777;
   background-color: white;
   color: #777; }
+  .project-card:last-child {
+    margin-bottom: 40px; }
 
 .project-card-content {
   padding: 20px 10px 10px 10px;
@@ -6758,7 +6768,7 @@ i:before {
 
 @media (max-width: 991px) {
   .project-card {
-    margin: 0 0 25px 0; }
+    margin: 25px 0 0 0; }
     .project-card:last-child {
       margin-bottom: 0; }
   iframe {

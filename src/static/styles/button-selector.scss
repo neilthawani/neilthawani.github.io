@@ -4,7 +4,7 @@
     padding: 10px;
     box-shadow: 2px 2px 1px $figureColor;
     width: max-content;
-    margin: 40px auto;
+    margin: 40px auto 0 auto;
 }
 
 .button-selector-pills { // ul
@@ -43,5 +43,6 @@
     .button-selector {
         width: inherit;
         font-size: inherit;
+        margin: 25px 0 0 0;
     }
 }

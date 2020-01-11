@@ -29,7 +29,7 @@
     margin-block-end: 10px;
 
     .blog-post-tag {
-        font-size: 12px;
+        font-size: 14px;
     }
 }
 
@@ -52,7 +52,6 @@
 }
 
 .blog-post-tags {
-    margin-top: 20px;
     margin-block-end: 20px;
 }
 
@@ -63,6 +62,7 @@
     background-color: $white;
     box-shadow: 2px 2px 1px $figureColor;
     border: 1px solid $figureColor;
+    margin-top: 5px;
 
     &:not(:last-child) {
         margin-right: 5px;
@@ -78,6 +78,7 @@
     .blog-post-item-list {
         margin: 25px 0 0 0;
         padding: 20px;
+        width: inherit;
     }
 
     .blog-post-tags,
@@ -100,22 +101,37 @@
 // create blog post
 .new-blog-post-container {
     margin: 0 40px;
+
+    input {
+        border: 1px solid $figureColor;
+        font-family: inherit;
+        font-weight: 300;
+    }
+
+    #new-post-textarea, input {
+        width: 100%;
+
+        &:focus {
+            outline: none;
+        }
+    }
 }
 
 #new-post-title {
     font-size: 42px;
-    border: 1px solid $figureColor;
-    font-family: inherit;
-    font-weight: 300;
-    width: 100%;
+
+}
+
+#new-post-subtitle {
+    margin-top: 10px;
+    font-size: 24px;
 }
 
 #new-post-textarea {
-    width: 100%;
+}
 
-    &:focus {
-        outline: none;
-    }
+#new-post-tags {
+    font-size: 18px;
 }
 
 #rendered-markdown {

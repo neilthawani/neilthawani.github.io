@@ -19,8 +19,7 @@
     "watch-css": "nodemon -e scss -x \"npm run build-css\"",
     "build-views": "node build/build.js -d cwd -p \"src/views/partials/**/*.hbs\" -l \"src/views/layouts/**/*.hbs\" -t \"src/views/templates/**/*.hbs\" -v",
     "watch-views": "nodemon -e hbs -x \"npm run build-views\"",
-    "build-md": "node build/showdown-helper src/markdown/blog/ src/views/templates/blog/",
-    "watch-md": "nodemon -e md -x \"npm run build-md\"",
+    "build-md": "node build/markdown-to-handlebars src/markdown/blog/ src/views/templates/blog/",
     "clear-html": "rm *.html && rm **/*.html"
   },
   "repository": {

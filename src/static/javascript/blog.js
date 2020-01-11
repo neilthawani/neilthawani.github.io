@@ -17,14 +17,19 @@ var getMetaJson = function() {
     var id = date.getTime();
     var createdAt = `${month} ${date.getDate()}, ${date.getFullYear()}`;
     var title = document.getElementById("new-post-title").value;
+    var subtitle = document.getElementById("new-post-subtitle").value;
+    var tags = document.getElementById("new-post-tags").value.split(",").map((tag) => {
+        return tag.trim();
+    });
     var slug = slugifyTitle(title);
 
     var metaJson = {
         "id": id,
         "title": title,
+        "subtitle": subtitle,
         "created_at": createdAt,
         "slug": slug,
-        "tags": []
+        "tags": tags
     };
 
     return metaJson;
@@ -34,28 +39,37 @@ var getPostAsHbs = function() {
     var metaJson = getMetaJson();
 
     var titleString = `<h1 class="blog-post-title">${metaJson['title']}</h1>`;
+    var subtitleString = `<h1 class="blog-post-subtitle">${metaJson['subtitle']}</h1>`;
     var html = $("#rendered-markdown")[0].innerHTML;
     var postAsHtml = `<article class="blog-post-content">${html}</article>`;
     var createdAt = metaJson['created_at'];
     var createdAtString = `<p class="blog-post-created-at">Published ${createdAt}</p>`;
     var tagsString = "";
-    // (tags || []).map((tag) => {
-    //     return `<span class="blog-post-tag">${tag}</span>`;
-    // }).join("");
+    if (metaJson["tags"]) {
+        tagsString = tags.map((tag) => {
+            return `<span class="blog-post-tag">${tag}</span>`;
+        }).join("");
+    }
     var tagsSection = `<p class="blog-post-tags">${tagsString}</p>`;
 
     var fileContents = `<div class="blog-post-container">\n\n${titleString}\n\n${postAsHtml}\n\n${tagsSection}\n\n${createdAtString}\n\n{{> blog-post-comment}}\n\n</div>`;
-        // formattedFileContents = beautifyHtml(fileContents),
+
     var fullTemplate = `{{#> base}}\n\n${fileContents}\n\n{{/base}}`;
 
     return fullTemplate;
 }
 
 var downloadPostContent = function() {
+    var markdownText = document.getElementById("new-post-textarea").value;
+    var markdownFilename = `${markdownText}.md`;
+    var mdLink = document.createElement("a");
+    mdLink.setAttribute("href", "data:text/md;chartset=utf-8" + encodeURIComponent(markdownText));
+    mdLink.setAttribute("download", markdownFilename);
+    mdLink.click();
+
     var metaJson = getMetaJson();
     var jsonFileContents = JSON.stringify(metaJson, null, 2);
     var jsonFilename = `${metaJson['slug']}.json`;
-
     var jsonLink = document.createElement('a');
     jsonLink.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(jsonFileContents));
     jsonLink.setAttribute('download', jsonFilename);
