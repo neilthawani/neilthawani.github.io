@@ -25,7 +25,6 @@
 }
 
 .blog-post-item-tags {
-    margin-top: 0px;
     margin-block-end: 10px;
 
     .blog-post-tag {
@@ -52,6 +51,7 @@
 }
 
 .blog-post-tags {
+    margin-block-start: 10px;
     margin-block-end: 20px;
 }
 
@@ -62,7 +62,7 @@
     background-color: $white;
     box-shadow: 2px 2px 1px $figureColor;
     border: 1px solid $figureColor;
-    margin-top: 5px;
+    margin-top: 10px;
 
     &:not(:last-child) {
         margin-right: 5px;
@@ -79,6 +79,12 @@
         margin: 25px 0 0 0;
         padding: 20px;
         width: inherit;
+    }
+
+    .blog-post-item-tags {
+        .blog-post-tag {
+            margin-top: 2px;
+        }
     }
 
     .blog-post-tags,

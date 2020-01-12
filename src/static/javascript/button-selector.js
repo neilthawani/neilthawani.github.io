@@ -1,3 +1,9 @@
+document.addEventListener('DOMContentLoaded', function(event) {
+    var buttonSelectorPills = $(".button-selector-pills").find("a li");
+    buttonSelectorPills[0].style.backgroundColor = "#eee";
+});
+
+
 var showProjects = function (label) {
     var buttonSelectorPills = $(".button-selector-pills").find("a li");
 
