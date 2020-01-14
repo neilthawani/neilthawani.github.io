@@ -6735,8 +6735,6 @@ i:before {
   box-shadow: 2px 2px 1px #777;
   background-color: white;
   color: #777; }
-  .project-card:last-child {
-    margin-bottom: 40px; }
 
 .project-card-content {
   padding: 20px 10px 10px 10px;
@@ -6771,8 +6769,6 @@ i:before {
 @media (max-width: 991px) {
   .project-card {
     margin: 25px 0 0 0; }
-    .project-card:last-child {
-      margin-bottom: 0; }
   iframe {
     width: 100%; }
   h3 {
@@ -6828,7 +6824,7 @@ a.has-img {
 
 body {
   background-color: #eee;
-  margin: 0 auto;
+  margin: 0 auto 40px auto;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, "Arial Light", sans-serif;
   font-weight: 300;
   color: #777;
@@ -6864,5 +6860,7 @@ p:last-child {
   flex-direction: column; }
 
 @media (max-width: 991px) {
+  body {
+    margin: 0 auto; }
   .content-container {
     width: inherit; } }

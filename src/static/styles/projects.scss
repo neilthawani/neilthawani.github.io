@@ -8,9 +8,9 @@
     background-color: $white;
     color: $figureColor;
 
-    &:last-child {
-        margin-bottom: 40px;
-    }
+    // &:last-child {
+    //     margin-bottom: 40px;
+    // }
 }
 
 .project-card-content {
@@ -64,9 +64,9 @@
     .project-card {
         margin: 25px 0 0 0;
 
-        &:last-child {
-            margin-bottom: 0;
-        }
+        // &:last-child {
+        //     margin-bottom: 0;
+        // }
     }
 
     iframe {
