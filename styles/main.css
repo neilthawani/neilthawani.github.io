@@ -96,6 +96,9 @@
   margin-top: 10px;
   font-size: 24px; }
 
+#new-post-textarea {
+  font-size: 20px; }
+
 #new-post-tags {
   font-size: 18px; }
 
