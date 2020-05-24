@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function(event) {
     var buttonSelectorPills = $(".button-selector-pills").find("a li");
-    buttonSelectorPills[0].style.backgroundColor = "#eee";
+    if (buttonSelectorPills && buttonSelectorPills[0]) {
+        buttonSelectorPills[0].style.backgroundColor = "#eee";
+    }
 });
 
 
