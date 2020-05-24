@@ -6740,8 +6740,7 @@ i:before {
   color: #777; }
 
 .project-card-content {
-  padding: 20px 10px 10px 10px;
-  cursor: pointer; }
+  padding: 20px 10px 10px 10px; }
 
 .project-card-icon {
   font-size: 48px; }
@@ -6751,6 +6750,10 @@ i:before {
 
 .project-card-text-name {
   margin-bottom: 10px; }
+  .project-card-text-name a.project-card-text-link {
+    background-color: white; }
+    .project-card-text-name a.project-card-text-link:hover {
+      text-decoration: underline; }
 
 .project-card-tools-logos {
   display: flex;
