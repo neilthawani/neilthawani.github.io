@@ -15,7 +15,6 @@
 
 .project-card-content {
     padding: 20px 10px 10px 10px;
-    cursor: pointer;
 }
 
 .project-card-icon {
@@ -34,6 +33,14 @@
 
 .project-card-text-name {
     margin-bottom: 10px;
+
+    a.project-card-text-link {
+        background-color: white;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 
 .project-card-text-description {
