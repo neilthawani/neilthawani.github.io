@@ -61,11 +61,13 @@ var getPostAsHbs = function() {
 
 var downloadPostContent = function() {
     var metaJson = getMetaJson();
+    console.log("metaJson", metaJson);
 
+    var markdownFileContents = document.getElementById("new-post-textarea").value;
     var markdownFilename = `${metaJson['slug']}.md`;
-    var mdLink = document.createElement("a");
-    mdLink.setAttribute("href", "data:text/md;chartset=utf-8" + encodeURIComponent(markdownFilename));
-    mdLink.setAttribute("download", markdownFilename);
+    var mdLink = document.createElement('a');
+    mdLink.setAttribute('href', 'data:text/md;charset=utf-8,' + encodeURIComponent(markdownFileContents));
+    mdLink.setAttribute('download', markdownFilename);
     mdLink.click();
 
     var jsonFileContents = JSON.stringify(metaJson, null, 2);
