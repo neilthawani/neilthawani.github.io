@@ -6746,6 +6746,7 @@ i:before {
   font-size: 48px; }
 
 .project-card-image {
+  max-height: 48px;
   max-width: 48px; }
 
 .project-card-text-name {
