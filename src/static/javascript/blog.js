@@ -35,33 +35,32 @@ var getMetaJson = function() {
     return metaJson;
 }
 
-var getPostAsHbs = function() {
-    var metaJson = getMetaJson();
-
-    var titleString = `<h1 class="blog-post-title">${metaJson['title']}</h1>`;
-    var subtitleString = `<h1 class="blog-post-subtitle">${metaJson['subtitle']}</h1>`;
-    var html = $("#rendered-markdown")[0].innerHTML;
-    var postAsHtml = `<article class="blog-post-content">${html}</article>`;
-    var createdAt = metaJson['created_at'];
-    var createdAtString = `<p class="blog-post-created-at">Published ${createdAt}</p>`;
-    var tagsString = "";
-    if (metaJson["tags"].toString().length > 0) {
-        tagsString = metaJson['tags'].map((tag) => {
-            return `<span class="blog-post-tag">${tag}</span>`;
-        }).join("");
-    }
-    var tagsSection = `<p class="blog-post-tags">${tagsString}</p>`;
-
-    var fileContents = `<div class="blog-post-container">\n\n${titleString}\n\n${postAsHtml}\n\n${tagsSection}\n\n${createdAtString}\n\n{{> blog-post-comment}}\n\n</div>`;
-
-    var fullTemplate = `{{#> base}}\n\n${fileContents}\n\n{{/base}}`;
-
-    return fullTemplate;
-}
+// var getPostAsHbs = function() {
+//     var metaJson = getMetaJson();
+//
+//     var titleString = `<h1 class="blog-post-title">${metaJson['title']}</h1>`;
+//     var subtitleString = `<h1 class="blog-post-subtitle">${metaJson['subtitle']}</h1>`;
+//     var html = $("#rendered-markdown")[0].innerHTML;
+//     var postAsHtml = `<article class="blog-post-content">${html}</article>`;
+//     var createdAt = metaJson['created_at'];
+//     var createdAtString = `<p class="blog-post-created-at">Published ${createdAt}</p>`;
+//     var tagsString = "";
+//     if (metaJson["tags"].toString().length > 0) {
+//         tagsString = metaJson['tags'].map((tag) => {
+//             return `<span class="blog-post-tag">${tag}</span>`;
+//         }).join("");
+//     }
+//     var tagsSection = `<p class="blog-post-tags">${tagsString}</p>`;
+//
+//     var fileContents = `<div class="blog-post-container">\n\n${titleString}\n\n${postAsHtml}\n\n${tagsSection}\n\n${createdAtString}\n\n{{> blog-post-comment}}\n\n</div>`;
+//
+//     var fullTemplate = `{{#> base}}\n\n${fileContents}\n\n{{/base}}`;
+//
+//     return fullTemplate;
+// }
 
 var downloadPostContent = function() {
     var metaJson = getMetaJson();
-    console.log("metaJson", metaJson);
 
     var markdownFileContents = document.getElementById("new-post-textarea").value;
     var markdownFilename = `${metaJson['slug']}.md`;
@@ -77,19 +76,19 @@ var downloadPostContent = function() {
     jsonLink.setAttribute('download', jsonFilename);
     jsonLink.click();
 
-    var postAsHbs = getPostAsHbs();
-    var hbsFilename = `${metaJson['slug']}.hbs`;
-    var hbsLink = document.createElement('a');
-    hbsLink.setAttribute('href', 'data:text/hbs;charset=utf-8,' + encodeURIComponent(postAsHbs));
-    hbsLink.setAttribute('download', hbsFilename);
-    hbsLink.click();
+    // var postAsHbs = getPostAsHbs();
+    // var hbsFilename = `${metaJson['slug']}.hbs`;
+    // var hbsLink = document.createElement('a');
+    // hbsLink.setAttribute('href', 'data:text/hbs;charset=utf-8,' + encodeURIComponent(postAsHbs));
+    // hbsLink.setAttribute('download', hbsFilename);
+    // hbsLink.click();
 }
 
 // markdown and json file creation upon submit
 document.addEventListener('DOMContentLoaded', function(event) {
     var newPostTextarea = document.getElementById("new-post-textarea");
     if (newPostTextarea) {
-        newPostTextarea.onkeyup =  renderMarkdownAsHtml;
+        newPostTextarea.onkeyup = renderMarkdownAsHtml;
     }
 
     var createPostButton = document.getElementById("create-post");
