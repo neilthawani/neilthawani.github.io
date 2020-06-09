@@ -8,8 +8,8 @@
       <li>All</li>
     </a>
 
-    <a href="javascript:void(0)" onclick=showProjects('frontend')>
-      <li>Frontend</li>
+    <a href="javascript:void(0)" onclick=showProjects('development')>
+      <li>Development</li>
     </a>
 
     <a href="javascript:void(0)" onclick=showProjects('education')>
@@ -23,60 +23,71 @@
 </div>
 
 <div class="even-columns-3">
-  <div class="project-card" data-attr-type="other">
-    <div class="project-card-content">
-      <img src="https://no-shave.org/img/nsn_full_stacked.png" class="project-card-image">
-
-      <div class="project-card-text">
-        <h2 class="project-card-text-name">
-          <a target="_blank" rel="noopener" class="project-card-text-link" href="no-shave.html">
-            No Shave November 2016 Fundraiser
-          </a>
-        </h2>
-        <h3 class="project-card-text-description">
-          I decided to raise money for cancer awareness by taking a selfie of myself every day, updating my No Shave November campaign page, and sharing the daily updated photo on Facebook. I also spoke to my employer and he agreed that the company would match the funds I raised. After 30 days, <strong>I raised $630</strong> for cancer awareness.
-        </h3>
-      </div>
-    </div>
-  </div>
-
-  <div class="project-card" data-attr-type="frontend">
+  <div class="project-card" data-attr-type="education">
     <div class="project-card-content">
       <div class="project-card-text">
         <h2 class="project-card-text-name">
-          <a target="_blank" rel="noopener" class="project-card-text-link" href="http://empathy-cards.herokuapp.com">
-            Empathy Cards
+          <a target="_blank" rel="noopener" class="project-card-text-link" href="http://lioninawhat.com/how-an-everyday-object-works/">
+            How a pin tumbler lock works
           </a>
         </h2>
         <h3 class="project-card-text-description">
-          I turned a deck of one instruction card, 47 feeling cards, and 48 need cards into an online tool for others to use in order to better understand their emotions and inner life.
+          This project and its collaborative counterpart were developed with a team of two others. We used <a href="https://pdfs.semanticscholar.org/0755/1d304294355fd359649e17cf126670908b5b.pdf" target="_blank" rel="noopener">Invent-then-Tell</a> in order to evaluate how students transferred conceptual knowledge about pin tumbler locks to procedural knowledge about a master key system works. Take a look at the <a href="https://github.com/neilthawani/how-an-everyday-object-works" target="_blank" rel="noopener">source code</a> and <a href="src/static/files/projects/tools-for-online-learning/how-an-everyday-object-works.pdf" target="_blank" rel="noopener">project writeup</a>.
+          <br /><br />
+          The <a href="http://lioninawhat.com/how-an-everyday-object-works-collaborative/" target="_blank" rel="noopener">collaborative version</a> of this lesson was created using a <a href="https://www.jigsaw.org/" target="_blank" rel="noopener">Jigsaw</a> paradigm, where students teach each other specific conceptual knowledge about the lock mechanism and come together to finish the lesson. <a href="https://github.com/neilthawani/how-an-everyday-object-works-collaborative" target="_blank" rel="noopener">Source code</a> and <a href="src/static/files/projects/tools-for-online-learning/how-an-everyday-object-works-collaborative.pdf" target="_blank" rel="noopener">a writeup</a> are also available for this project.
         </h3>
       </div>
 
       <p class="project-card-tools-heading">Tools used:</p>
       <div class="project-card-tools-logos">
-        <img src="src/static/images/ember-logo.png" class="project-card-image">
+        <img alt="HTML Logo" src="src/static/images/html.png" class="project-card-image">
+        <img alt="CSS Logo" src="src/static/images/css.png" class="project-card-image">
+        <img alt="JavaScript Logo" src="src/static/images/js.png" class="project-card-image">
       </div>
     </div>
   </div>
 
-  <div class="project-card" data-attr-type="frontend">
+  <div class="project-card" data-attr-type="development">
     <div class="project-card-content">
       <div class="project-card-text">
         <h2 class="project-card-text-name">
-          <a target="_blank" rel="noopener" class="project-card-text-link" href="https://github.com/neilthawani/dabble-flashcards">
-            Dabble Flashcards
+          <a target="_blank" rel="noopener" class="project-card-text-link" href="https://lioninawhat.com/learnersourced-growth-mindset-questions/">
+            A learnersourced quiz with feedback
           </a>
         </h2>
         <h3 class="project-card-text-description">
-          Dabble is a flashcards app I created for myself after working with <a onclick="https://www.ankiapp.com/" href="https://www.ankiapp.com/" target="_blank" rel="noopener">AnkiApp</a>, a Mac desktop-based app that allows a user to upload CSV files.
+          <a href="https://dspace.mit.edu/handle/1721.1/101464" target="_blank" rel="noopener">Learnersourcing</a> is a technique for taking open-ended responses to questions and developing formative assessment question/answer pairs. In this project, I took raw data from quizzes we did in my Tools for Online Learning course, parsed it according to a cross-referencing algorithm, and generated a new quiz questions, answers, and feedback. A full writeup with code is located in the project's <a href="https://github.com/neilthawani/learnersourced-growth-mindset-questions" target="_blank" rel="noopener">GitHub repository</a>.
         </h3>
       </div>
-    </div>
 
-    <p class="project-card-tools-heading">Tools used:</p>
-    <div class="project-card-tools-logos">
-      <img src="src/static/images/ember-logo.png" class="project-card-image">
+      <p class="project-card-tools-heading">Tools used:</p>
+      <div class="project-card-tools-logos">
+        <img alt="Jupyter Logo" src="src/static/images/jupyter-logo.png" class="project-card-image">
+        <img alt="Python Logo" src="src/static/images/python-logo.png" class="project-card-image">
+      </div>
+    </div>
+  </div>
+
+  <div class="project-card" data-attr-type="development">
+    <div class="project-card-content">
+      <div class="project-card-text">
+        <h2 class="project-card-text-name">
+          <a target="_blank" rel="noopener" class="project-card-text-link" href="src/static/files/projects/NoRILLA Semester Writeup.pdf">
+            NoRILLA
+          </a>
+        </h2>
+        <h3 class="project-card-text-description">
+          In Spring 2020, I worked with NoRILLA, a mixed reality platform which teaches students physics principles using interactive and constructive activities. This document summarizes the work I did over the course of four months, which included object segmentation, detection, and debugging a computer vision algorithm. More information about NoRILLA and its founder can be found <a href="https://www.hcii.cmu.edu/news/event/2016/08/thesis-defense-nesra-yannier" target="_blank" rel="noopener">here</a>.
+        </h3>
+      </div>
+
+      <p class="project-card-tools-heading">Tools used:</p>
+      <div class="project-card-tools-logos">
+        <img alt="RealSense Logo" src="src/static/images/realsense-logo.png" class="project-card-image">
+        <img alt="Java Logo" src="src/static/images/java-logo.png" class="project-card-image">
+        <img alt="Processing Logo" src="src/static/images/processing-logo.png" class="project-card-image">
+        <img alt="OpenCV Logo" src="src/static/images/opencv-logo.png" class="project-card-image">
+      </div>
     </div>
   </div>
 
@@ -97,7 +108,7 @@
 
       <p class="project-card-tools-heading">Tools used:</p>
       <div class="project-card-tools-logos">
-        <img src="src/static/images/ruby-logo.png" class="project-card-image">
+        <img alt="Ruby Logo" src="src/static/images/ruby-logo.png" class="project-card-image">
       </div>
     </div>
   </div>
@@ -117,8 +128,8 @@
 
       <p class="project-card-tools-heading">Tools used:</p>
       <div class="project-card-tools-logos">
-        <img src="src/static/images/google-forms-logo.png" class="project-card-image">
-        <img src="src/static/images/canvas-logo.png" class="project-card-image">
+        <img alt="Google Forms Logo" src="src/static/images/google-forms-logo.png" class="project-card-image">
+        <img alt="Canvas LMS Logo" src="src/static/images/canvas-logo.png" class="project-card-image">
       </div>
     </div>
   </div>
@@ -140,12 +151,12 @@
 
       <p class="project-card-tools-heading">Tools used:</p>
       <div class="project-card-tools-logos">
-        <img src="src/static/images/oli-logo.png" class="project-card-image">
+        <img alt="Open Learning Initiative Logo" src="src/static/images/oli-logo.png" class="project-card-image">
       </div>
     </div>
   </div>
 
-  <div class="project-card" data-attr-type="other">
+  <div class="project-card" data-attr-type="development">
     <div class="project-card-content">
       <div class="project-card-text">
         <h2 class="project-card-text-name">
@@ -160,10 +171,10 @@
 
       <p class="project-card-tools-heading">Tools used:</p>
       <div class="project-card-tools-logos">
-        <img src="src/static/images/hbs-logo.png" class="project-card-image">
-        <img src="src/static/images/bash-logo.png" class="project-card-image">
-        <img src="src/static/images/npm-logo.png" class="project-card-image">
-        <img src="src/static/images/nodejs-logo.png" class="project-card-image">
+        <img alt="Handlebars.JS Logo" src="src/static/images/hbs-logo.png" class="project-card-image">
+        <img alt="Bash Logo" src="src/static/images/bash-logo.png" class="project-card-image">
+        <img alt="NPM Logo" src="src/static/images/npm-logo.png" class="project-card-image">
+        <img alt="Node.JS Logo" src="src/static/images/nodejs-logo.png" class="project-card-image">
       </div>
     </div>
   </div>
@@ -183,11 +194,65 @@
 
       <p class="project-card-tools-heading">Tools used:</p>
       <div class="project-card-tools-logos">
-        <img src="src/static/images/ember-logo.png" class="project-card-image">
+        <img alt="Ember.js Logo" src="src/static/images/ember-logo.png" class="project-card-image">
       </div>
     </div>
   </div>
-</div>
 
-<!--
-METALS projects - eLearning and EGIA -->
+  <div class="project-card" data-attr-type="other">
+    <div class="project-card-content">
+      <img alt="No Shave November Logo" src="https://no-shave.org/img/nsn_full_stacked.png" class="project-card-image">
+
+      <div class="project-card-text">
+        <h2 class="project-card-text-name">
+          <a target="_blank" rel="noopener" class="project-card-text-link" href="no-shave.html">
+            No Shave November 2016 Fundraiser
+          </a>
+        </h2>
+        <h3 class="project-card-text-description">
+          I decided to raise money for cancer awareness by taking a selfie of myself every day, updating my No Shave November campaign page, and sharing the daily updated photo on Facebook. I also spoke to my employer and he agreed that the company would match the funds I raised. After 30 days, <strong>I raised $630</strong> for cancer awareness.
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-card" data-attr-type="development">
+    <div class="project-card-content">
+      <div class="project-card-text">
+        <h2 class="project-card-text-name">
+          <a target="_blank" rel="noopener" class="project-card-text-link" href="http://empathy-cards.herokuapp.com">
+            Empathy Cards
+          </a>
+        </h2>
+        <h3 class="project-card-text-description">
+          I turned a deck of one instruction card, 47 feeling cards, and 48 need cards into an online tool for others to use in order to better understand their emotions and inner life.
+        </h3>
+      </div>
+
+      <p class="project-card-tools-heading">Tools used:</p>
+      <div class="project-card-tools-logos">
+        <img alt="Ember.js Logo" src="src/static/images/ember-logo.png" class="project-card-image">
+      </div>
+    </div>
+  </div>
+
+  <div class="project-card" data-attr-type="development">
+    <div class="project-card-content">
+      <div class="project-card-text">
+        <h2 class="project-card-text-name">
+          <a target="_blank" rel="noopener" class="project-card-text-link" href="https://github.com/neilthawani/dabble-flashcards">
+            Dabble Flashcards
+          </a>
+        </h2>
+        <h3 class="project-card-text-description">
+          Dabble is a flashcards app I created for myself after working with <a onclick="https://www.ankiapp.com/" href="https://www.ankiapp.com/" target="_blank" rel="noopener">AnkiApp</a>, a Mac desktop-based app that allows a user to upload CSV files.
+        </h3>
+      </div>
+    </div>
+
+    <p class="project-card-tools-heading">Tools used:</p>
+    <div class="project-card-tools-logos">
+      <img alt="Ember.js Logo" src="src/static/images/ember-logo.png" class="project-card-image">
+    </div>
+  </div>
+</div>
