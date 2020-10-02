@@ -10,6 +10,7 @@
 .button-selector-pills { // ul
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     margin-top: 10px;
 
     a, a:-webkit-any-link {
@@ -44,5 +45,11 @@
         width: inherit;
         font-size: inherit;
         margin: 25px 0 0 0;
+    }
+
+    .button-selector-pills {
+        li {
+            padding: 10px;
+        }
     }
 }
