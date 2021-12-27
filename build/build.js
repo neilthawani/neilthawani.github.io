@@ -1,5 +1,3 @@
-// node build/build.js -d cwd -p "src/views/partials/**/*.hbs" -l "src/views/layouts/**/*.hbs" -t "src/views/templates/**/*.hbs" -v
-
 let commander = require("commander");
 let config = require("../build/config");
 let handlebarsToHtml = require("../build/handlebars-to-html");

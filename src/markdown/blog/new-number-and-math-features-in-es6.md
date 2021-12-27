@@ -1,0 +1,280 @@
+<h4><u>Number</u></h4>
+
+<p>You can specify integers in binary and octal notation:</p>
+<pre>
+> 0xFF // ES5 - hexadecimal
+255
+
+> 0b11 // ES6 - binary
+3
+
+> 0o10 // ES6 - octal
+8
+</pre>
+
+<p>Number.prototype.toString(radix) can be used to convert numbers from decimal.</p>
+
+<pre>
+> 255.toString(16)
+'ff'
+
+> 4.toString(2)
+'100'
+
+> 8.toString(8)
+'10'
+</pre>
+
+<p>For parseInt(string, radix?), if radix is missing, 0, or 16, parseInt parses hexadecimal literal notation to base 10.</p>
+
+<pre>
+> parseInt('0xFF')
+255
+
+> parseInt('0xFF', 0)
+255
+
+> parseInt('0xFF', 16)
+255
+</pre>
+
+<p>Otherwise, digits are parsed until the first non-digit.</p>
+
+<pre>
+> parseInt('0xFF', 10)
+0
+
+> parseInt('0xFF', 17)
+0
+</pre>
+
+<p>parseInt does not have support for binary or octal literal notation. Number() does, though.</p>
+
+<pre>
+> Number('0b111')
+7
+
+> Number('0o10')
+8
+</pre>
+
+<p>To parseInt() base 2 or 8 numbers, indicate the radix as the second parameter.</p>
+
+<p>The Number() constructor has new methods in ES6: isFinite, isNaN, parseFloat() and parseInt().</p>
+
+<pre>
+> Number.isFinite(NaN)
+false
+</pre>
+
+<p>The constructor method does not automatically coerce its parameter automatically to type 'number,' unlike the global method.</p>
+
+<pre>
+> Number.isFinite('123')
+false
+
+> isFinite('123')
+true
+
+> Number.isNaN('???')
+false
+
+> isNaN('???')
+true
+</pre>
+
+<p>
+NaN is the only value that doesn't equal itself.
+</p>
+
+<pre>
+> const x = NaN
+> x === NaN
+false
+</pre>
+
+<p>
+You can check if a value is NaN using:
+</p>
+
+<pre>
+> x !== x
+true
+</pre>
+
+<p>Using Number.isNaN is more descriptive:</p>
+
+<pre>
+> Number.isNaN(x)
+true
+</pre>
+
+<p>Number.parseFloat(string) and Number.parseInt(string, radix) work exactly like their global counterparts.</p>
+
+<p>Rounding errors can become a problem in JavaScript. Number.EPSILON specifies a reasonable margin of error when comparing floating point numbers.</p>
+
+<pre>
+> 0.1 + 0.2 === 0.3
+false
+
+> function epsEqu(x, y) { return Math.abs(x - y) < Number.EPSILON; }
+> console.log(epsEqu(0.1+0.2, 0.3));
+true
+</pre>
+
+<p>JavaScript only has floating point numbers (doubles). Integers are just floating point numbers without a decimal fraction.</p>
+
+<p>Number.isInteger(number) returns true if its parameter is a 'number' and does not have a decimal fraction.</p>
+
+<pre>
+> Number.isInteger(-17)
+true
+> Number.isInteger(33)
+true
+> Number.isInteger(33.1)
+false
+> Number.isInteger('33')
+false
+> Number.isInteger(NaN)
+false
+> Number.isInteger(Infinity)
+false
+</pre>
+
+<p>JavaScript numbers only have enough storage space to represent 53 bit signed integers. That is, for all integers i in the range -2^53 < i < 2^53 are safe. The following methods determine if an integer is safe:</p>
+
+<pre>
+Number.MAX_SAFE_INTEGER = Math.pow(2, 53)-1;
+Number.MIN_SAFE_INTEGER = -Number.MAX_SAFE_INTEGER;
+Number.isSafeInteger(number)
+</pre>
+
+<p>JavaScript Safe integers have a one-to-one mapping between them and the mathematical integers they represent. Unsafe integers do not:</p>
+
+<pre>
+> Math.pow(2, 53)
+9007199254740992
+
+> 9007199254740992
+9007199254740992
+> 9007199254740993
+9007199254740992
+> 9007199254740994
+9007199254740994
+> 9007199254740995
+9007199254740996
+> 9007199254740996
+9007199254740996
+> 9007199254740997
+9007199254740996
+</pre>
+
+<p>When performing arithmetic in JavaScript,</p>
+
+<pre>isSafeInteger(a) && isSafeInteger(b) && isSafeInteger(a op b)</pre>
+
+<p>validates that the result of the operation and its operands are safe integers.</p>
+
+<p>JavaScript's 53-bit integers are a problem if 64-bit integers are needed. The only way around this is to use a library for higher-precision numbers (bigints or bigfloats). Decimal.js is an example library.</p>
+
+<h4><u>Math</u></h4>
+
+<p>Math.sign(x) returns the sign of x as +1 or -1. For 0 and NaN, the parameter is returned.</p>
+
+<p>Math.trunc(x) removes the decimal fraction of x.</p>
+
+<p>Math.cbrt(x) returns the cube root of x.</p>
+
+<p>A good case practice for floating point number is to store them using a 0 instead of a 1. This is because floating point numbers with base 10 are internally represented as mantissa x 10^exponent. Use cases include exponentiation and logarithms.</p>
+
+<p>
+(A) 0.000000234 = 2.34 * 10-7. Significant digits: 234
+<br />
+(B) 1.000000234 = 1.000000234 * 100. Significant digits: 1000000234
+</p>
+
+<p>In this example, A has higher precision than B. We can see this applied in the following example:</p>
+
+<pre>
+> 1e-16 === 0
+false
+> 1 + 1e-16 === 1
+true
+</pre>
+
+<p>Math.expml(x) returns Math.exp(x) - 1. This is the inverse of Math.loglp().</p>
+
+<p>This method provides higher precision when Math.exp() has results close to 1. For example:</p>
+
+<pre>
+> Math.expm1(1e-10)
+1.00000000005e-10
+> Math.exp(1e-10)-1
+1.000000082740371e-10
+</pre>
+
+<p>Math.loglp(x) returns Math.log(1 + x).</p>
+
+<p>This method also lets you specify parameters that are close to 1 with higher precision.</p>
+
+<pre>
+> Math.log(1 + 1e-16)
+0
+> Math.log(1 + 0)
+0
+</pre>
+
+<p>In contrast, log1p() produces different results:</p>
+
+<pre>
+> Math.log1p(1e-16)
+1e-16
+> Math.log1p(0)
+0
+</pre>
+
+<p>Math.log2(x) computes the logarithm to base 2.</p>
+
+<pre>
+> Math.log2(8)
+3
+</pre>
+
+<p>Math.log10(x) computes the logarithm to base 10.</p>
+
+<pre>
+> Math.log10(100)
+2
+</pre>
+
+<p>Trigonometric functions include:</p>
+<pre>
+Math.sinh(x)
+Math.cosh(x)
+Math.tanh(x)
+Math.asinh(x)
+Math.acosh(x)
+Math.atanh(x)
+</pre>
+
+<p>Math.hypot(...values) computes the square root of the sum of the squares of its arguments.</p>
+
+<h4><u>Fun facts: Bitwise operations</u></h4>
+
+<p>Math.clz32(x) counts the leading zero bits in the 32-bit integer x.</p>
+
+<pre>
+> Math.clz32(0b01000000000000000000000000000000)
+1
+> Math.clz32(0b00100000000000000000000000000000)
+2
+> Math.clz32(2)
+30
+> Math.clz32(1)
+31
+</pre>
+
+<p>Counting leading zeros in an integer number is a critical operation in many DSP algorithms, such as normalization of samples in sound or video processing, as well as in real-time schedulers to quickly find the highest-priority task ready-to-run.</p>
+
+<hr />
+<p>Source: <a href="http://www.exploringjs.com" target="_blank">Exploring ES6</a> by <a href="http://www.rauschma.de" target="_blank">Dr. Axel Rauschmayer</a>.</p>

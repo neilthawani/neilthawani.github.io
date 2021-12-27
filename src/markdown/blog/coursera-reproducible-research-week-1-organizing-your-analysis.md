@@ -1,0 +1,69 @@
+<p>Data analysis files</p>
+<ul>
+<li>Data - raw and processed</li>
+<li>Figures - exploratory and final</li>
+<li>R code - raw/unused scripts, final scripts, R Markdown files</li>
+<li>Text - README files, text of analysis/report</li>
+</ul>
+
+<p>Raw Data</p>
+<ul>
+<li>should be stored in your analysis folder</li>
+<li>if accessed from the web, include the URL, description, and data accessed in the README</li>
+</ul>
+
+<p>Processed Data</p>
+<ul>
+<li>should be named so it is easy to see which script generated the data</li>
+<li>the processing script - processed data mapping should occur in the README</li>
+<li>should be tidy</li>
+</ul>
+
+<p>Exploratory figures</p>
+<ul>
+<li>made during the course of your analysis, not necessarily part of your final report</li>
+<li>do not need to be 'pretty'</li>
+</ul>
+
+<p>Final figures</p>\t
+<ul>
+<li>usually a small subset of the original figures</li>
+<li>axes/colors set to make the figure clear</li>
+<li>possibly multiple panels</li>
+</ul>
+
+<p>Raw scripts</p>
+<ul>
+<li>may be less commented (but comments help you!)</li>
+<li>may be multiple versions</li>
+<li>may include analyses that are later discarded</li>
+</ul>
+
+<p>Final scripts</p>
+<ul>
+<li>clearly commented - small comments liberally (what, why, when, how), bigger commented blocks for whole sections</li>
+<li>include processing details</li>
+<li>only analyses that appear in the final write-up</li>
+</ul>
+
+<p>R Markdown Files</p>
+<ul>
+<li>can be used to generate reproducible reports</li>
+<li>text and R code are integrated</li>
+<li>very easy to create in Rstudio</li>
+</ul>
+
+<p>Readme files</p>
+<ul>
+<li>Not necessary if you use R Markdown</li>
+<li>should contain step-by-step instructions for analysis</li>
+<li>Example: http://github.com/jtleek/swfdr/blob/master/REAMDE.md</li>
+</ul>
+
+<p>Text of the document</p>
+<ul>
+<li>should include a title. introduction (motivation), methods (statistics you used), results (including measures of uncertainty), and conclusions (including potential problems)</li>
+<li>should tell a story</li>
+<li>should not include every analysis you performed</li>
+<li>references should be included for statistical methods</li>
+</ul>

@@ -1,0 +1,100 @@
+A friend and I go to a restaurant or bar each week to work on projects together. This week I was writing a best man speech for a wedding in about a month. I arrived a little later than our usual meeting time of 8 pm and saw my friend standing at a bar table with some people I had never seen before. He was chatting up two women who appeared to be in their mid-twenties like us, and I found out they all worked at the same Company. I got a drink and joined them. Their conversation was mostly about the Company they worked at, so I took out my laptop and started writing my speech at a table next to theirs.
+
+At some point, I heard the words "Well, nothing *actually* matters!" and "So what's the point?" I was concerned, but I also guessed that this wasn't just some nihilistic rambling. I joined them at their table again and found out that they were still talking about the Company, but the conversation had transitioned to how they do the same thing day-in, day-out with no sense of meaning or impact upon their clients. They didn't feel connected to their work. One person - let's call her Olivia - said she had had four different managers in three months. 
+
+"That's strange. Why do you think that is?" I asked earnestly.
+
+She said it was hard to find joy in the redundancy of her work. "After getting a degree in software engineering and a job at the Company, I spend my days writing [TCL](https://en.wikipedia.org/wiki/Tcl) scripts."
+
+*That makes sense,* I thought. *Writing TCL scripts every day would be boring.* "Do you have an idea of what you truly want to do in your career or professional life in the long-term?"
+
+"No." She said she didn't have any long-term goals or really any idea of what she wanted to truly do with her life.
+
+I told her that I used to be a Vice President of Talent Management for a local branch of [a global non-profit](http://www.aiesec.org) and had experience recruiting, training, mentoring, and retaining employees. "Would you like some purpose-finding exercises?" I asked.
+
+She stared at me for a moment and said, "Sir." I smiled. "I'm sorry, I don't know why I called you that. But I don't think you understand my situation."
+
+"Ok, tell me about it." I was used to this reaction, but clearly, something more was going on than team transfers and workplace monotony.
+
+Her friend, who we'll call Tina, then interrupted us. "It's all about what's between their legs!" I was confused by this interjection, but Olivia didn't seem to be. She continued.
+
+"I've been transferred to eight different teams in the past twelve months," she elaborated.
+
+"But you said you didn't know what you want to do in the long-term," I said. "Doesn't that mean your managers care about your career by letting you branch out? If you lack a sense of direction or focus, then switching you between teams, especially if you're competent, builds your skill set so you can figure out what you like."
+
+"No." She clarified, "The thing is: I do the same thing for every team."
+
+"Wait, what?" This absolutely did not make sense.
+
+"Yeah," she continued. "I'm the most competent person on my team. People ask me for help and somehow simultaneously belittle my abilities. And when it comes time to get a raise, they give it to - "
+
+"It's all about what's between their legs!" Tina yelled again.
+
+*Why would a manager shuffle a competent employee around between teams?* I thought. *Maybe she's training new employees.*
+
+"I train my co-workers, I travel to client sites, but when it comes time to get to the next level - and it's not about the pay raise, I swear. I'm happy with how much I make, more or less."
+
+"It's about what's between their legs!!!" Tina exclaimed once more.
+
+"Hold on, Tina. This doesn't make sense." I needed to dig deeper. "Do you have quarterly or annual reviews?" I asked.
+
+"That's a good question," Olivia continued. "We have annual reviews. And usually, at review time - I've been there four years - "
+
+"Four years in the same position?"
+
+"Different teams, but yes. The same tasks. Usually at review time, the promotions will go to the men on the team."
+
+Tina was silent.
+
+"Did you ask for a raise? Statistically, men are more likely to be assertive and ask for what they want and women -"
+
+"You don't get a raise if you don't get a promotion," she explained. "We have men on our team who have asked for raises and they get the same answer."
+
+"Well if you want to be promoted, you need to say, 'This is what I offer to the team. This is my value.' At the end of the day, every employee is expendable." It felt good to wear my talent management hat.
+
+"You're right. We have 56 people doing TCL work," Olivia affirmed.
+
+Tina interjected again. "So you're saying, on top of working 40+ hours a week, helping clients with implementations and traveling weekly, I have to go out of my way and say to my manager that I deserve a raise or a promotion? What kind of crap is that?"
+
+"If someone leaves, a new person will take their place, get trained, and be contributing value to the company's bottom line." I declared. "That's all your boss cares about - they don't actually care about your personal welfare unless you assert your own value to them. That's the game you're playing. That's the Company's prerogative - to pay you the least amount of money and get the most work out of you. You don't have leverage in this situation - the Company does. You are easily replaceable. Your desire to work in an actual meritocracy is valid and there might be companies that function that way, but that's how it works at your Company. Sorry about it."
+
+Tina frowned at me but acknowledged that she understood my meaning. She and Olivia had been working at the Company for years and knew its inner-workings. We returned to the topic of annual reviews.
+
+I asked Olivia, "So do you try to negotiate a promotion in your annual reviews? You need to list your achievements to get it."
+
+"Yes, I do that."
+
+"Then it doesn't make sense that you're switching teams and not migrating across the tech stack."
+
+"Right. See, the thing is - we have a stack ranking system."
+
+I groaned. Stack ranking became notorious after reports out of Microsoft shed light on the internal politics that emerge when team members' performance reviews yield a forced bell curve distribution. A product of Corporate America's desire to improve employee performance, [stack ranking was abolished](https://www.bloomberg.com/news/articles/2013-11-13/microsoft-kills-its-hated-stack-rankings-dot-does-anyone-do-employee-reviews-right) after studies found that most employees are mediocre or average with a small handful of superstars interspersed within an organization - a skewed distribution. Stack ranking also has untold effects on high performers who, demotivated by falling low on the bell curve don't perform as high as their full potential, as the process intends.
+
+"To get a raise, we need to get promoted. But the people who get promoted and fall on the higher end of the curve are men because they get along with the managers - who are also men. I may be the most competent person on the team, but when it comes time for promotions, I get placed at the lower end of the curve while the guy who sits on social media at his desk and tells a few crass jokes to my boss gets promoted. Then I get moved to another team so I become someone else's problem - at the same level as before."
+
+"Wow." I observed her headband, earrings, and dress. "That's the Boys' Club. Fundamentally, because you present yourself as a feminine person to your coworkers, they don't take you seriously." I glanced at Tina. "Regardless of how many cigars you smoke and tall boy beers you drink."
+
+"Exactly!" Olivia exclaimed. She may have felt vindicated, but I knew that in my own professional life, I contributed to this dynamic in untold ways.
+
+"You are trapped in a non-virtuous cycle," I said.
+
+"Exactly. And people talk down to me, don't take me seriously as a team member, and if I complain, then I'm less likely to get promoted still because I'm not cultivating a team mindset or whatever."
+
+"So you dress in a feminine manner, you present as a cis heteronormative female, and you're punished for it because you work in a Boys' Club."
+
+"And nobody takes me seriously. And I don't get promoted. And people talk down to me."
+
+"Sounds like you should get a new job," I said.
+
+"I think so too."
+
+---
+
+*Edit, Friday, June 21st, 2017*:
+"Sounds like you should get a new job," I said.
+
+There's a funny thing men do. We run the world. Our day-to-day perceptions of CEOs, presidents, and providers are men. And since these images are reinforced daily, it's easy to believe that we know what someone *should* do in a situation that oppresses them. It's easy to believe that our thoughts are *right* and *just* and *fair* and *true* and *reasonable*.
+
+But what if we're wrong? After all, we're also see every day that today's men are more often wrong than not. [Toxic](https://www.youtube.com/watch?v=37BdS5KH9K8) [masculinity](http://www.artofmanliness.com/), [rape](https://en.wikipedia.org/wiki/People_v._Turner) [culture](https://www.youtube.com/watch?v=fwMukKqx-Os), and [intersectional human rights](http://everydayfeminism.com/) for all people haven't been addressed in the man-ocracy. There's not enough empathy for people who lack power in society, and that is slowly but surely leading us to a great shift in the world.
+
+I shouldn't have should-ed all over Olivia. She didn't ask me for my advice - she was simply generous enough to share her experience with me. And that is a lesson I will take moving forward back into the boys' clubs I will go into in the future.

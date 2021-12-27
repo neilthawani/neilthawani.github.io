@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
+  <head>
+    <title>
+      Neil Thawani - Software Engineer and K-12 STEAM+Computing Educator
+    </title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="src/static/images/favicon.png" />
+    <meta property="og:image:width" content="200" />
+    <meta property="og:image:height" content="200" />
+    <meta property="og:title" content="Neil Thawani - Software Engineer and K-12 STEAM+Computing Educator" />
+    <meta property="og:url" content="http://www.lioninawhat.com/" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="src/static/images/favicon.png">
+
+    <base href="/">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-22ETHGYB6N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-22ETHGYB6N');
+    </script>
+    
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/showdownjs/showdown/1.9.1/dist/showdown.min.js"></script>
+
+    <script type="text/javascript" src="src/static/javascript/blog.js"></script>
+    <script type="text/javascript" src="src/static/javascript/button-selector.js"></script>
+    <script type="text/javascript" src="src/static/javascript/menu.js"></script>
+
+    <link type="text/css" href="styles/main.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="visible-phone mobile-nav-container">
+      <ul class="mobile-nav">
+        <li class="mobile-nav-item"><a href="/">Home</a></li>
+        <li class="mobile-nav-item"><a href="/#projects">Projects</a></li>
+        <li class="mobile-nav-item"><a href="/blog">Blog</a></li>
+      </ul>
+    
+      <ul class="mobile-nav contact-icons">
+        <li class="mobile-nav-item">
+          <a href="/meet.html">
+            <i class="ii ii-calendar-clock"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <i class="ii ii-twitter"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-linkedin-box"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-github"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="hidden-phone">
+      <div class="nav">
+        <a id="fullname" href="/">
+          <span id="firstname">&nbsp;</span>
+          <span id="lastname"></span>
+        </a>
+    
+        <ul class="nav-pills">
+          <a href="/#projects">
+            <li>Projects</li>
+          </a>
+    
+          <a href="/blog">
+            <li>Blog</li>
+          </a>
+    
+          <a href="/meet.html">
+            <li><i class="ii ii-calendar-clock"></i></li>
+          </a>
+    
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <li><i class="ii ii-twitter"></i></li>
+          </a>
+    
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-linkedin-box"></i></li>
+          </a>
+    
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-github"></i></li>
+          </a>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="blog-post-container">
+    
+        <h1 class="blog-post-title">Performing Quality Assurance on a Small Development Team</h1>
+    
+        <article class="blog-post-content">
+            <p>
+                <p>At work, we have a release coming out in about a week. After months of planning, development, and manual testing, we've upgraded an application with about 300 web components from <a href="http://iamstef.net/ember-app-kit/" target="_blank">Ember's App Kit</a> framework to <a href="http://ember-cli.com/" target="_blank">Ember CLI</a>.</p>
+                <p>While the UI is supposed to look the same between these two apps, the architecture has changed drastically in some areas, since we took the time to refactor code quality mistakes in the previous build and <a href="http://stackoverflow.com/questions/49002/prefer-composition-over-inheritance" target="_blank">composed</a> data visualization modules and their bound events in a way that makes many components reusable.</p>
+                <p>Now that we're in the home stretch, we're doing continuous rounds of manual QA at the beginning of each day, finding bugs, filing them in <a href="http://www.asana.com" target="_blank">Asana</a>, and fixing them quickly, and I thought I'd share that process. How do we do QA?</p>
+                <p>
+                    <h3 style="font-weight:lighter;display:inline;">1.</h3> Branch and develop.
+                </p>
+                <p>If you're using git, like we are, for version control, <a href="https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows" target="_blank">it makes sense to work on your own branch</a>, since branching is a fundamental Good Case Practice<sup>TM</sup>.</p>
+                <p>
+                    <h3 style="font-weight:lighter;display:inline;">2.</h3> Verify your code works on your local machine before committing it.
+                </p>
+                <p>This is common sense, but sometimes the joy of <em>thinking</em> you've solved a problem is more fun than verifying that it's actually been solved.</p>
+                <p>
+                    <h3 style="font-weight:lighter;display:inline;">3.</h3> Commit, push, and get a code review.
+                </p>
+                <pre>
+    &gt; git add .
+    &gt; git commit -am "This is a commit message that specifies the things in the code that were changed with respect to the feature(s) under development."
+    &gt; git push origin my_branch_name
+    </pre>
+                <p>After someone pushes to the repository, the other developers on the team receive an e-mail. Here, code reviews are completed, comments regarding changes are posted on the commit, and at the end of that process, the developer who originally pushed the code issues a pull request to the master branch. Steps 2 and 3 are repeated as often as necessary before the pull request is issued.</p>
+                <p>
+                    <h3 style="font-weight:lighter;display:inline;">4.</h3> Our architect merges the changes into master.
+                </p>
+                <p>While this process has its flaws - we do manual QA instead of running automated tests, and code reviews are encouraged but not inherently mandated - using version control with an easy-to-internalize process on a small, agile team is key to our success.</p>
+        </article>
+    
+        <p class="blog-post-tags"><span class="blog-post-tag">software development</span><span class="blog-post-tag">agile</span><span class="blog-post-tag">git</span></p>
+    
+        <p class="blog-post-created-at">Published January 28, 2016</p>
+    
+        <div id="disqus_thread">
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'lioninawhat';
+        
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'lioninawhat';
+        
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function () {
+                    var s = document.createElement('script'); s.async = true;
+                    s.type = 'text/javascript';
+                    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+                    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                }());
+            </script>
+        </div>
+    
+    </div>
+    
+  </body>
+</html>

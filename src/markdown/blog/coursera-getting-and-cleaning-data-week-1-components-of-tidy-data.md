@@ -1,0 +1,52 @@
+<p>Four things you should have after going from a raw data set to a tidy data set:</p>
+<ol>
+<li>the raw data</li>
+<li>a tidy data set</li>
+<li>a code book describing each variable and its values in the tidy data set</li>
+<li>an explicit and exact recipe you used to go from steps 1 to steps 2 and 3</li>
+</ol>
+
+<p>Raw Data is in the right format if you did not:</p>
+<ul>
+<li>run software on the data</li>
+<li>manipulate any of the numbers in the data</li>
+<li>remove any data from the data set</li>
+<li>summarize the data in any way</li>
+</ul>
+
+<p>The following standards are available in the guide <a href="http://www.github.com/jtleek/datasharing" target="_blank">How to share data with a statistician</a>.</p>
+
+<p>Tidy data has the following properties:</p>
+<ul>
+<li>each variable you measure should be in one column</li>
+<li>each different observation of that variable should be in a different row</li>
+<li>there should be one table for each "kind" of variable</li>
+<li>if you have multiple tables, they should include a column in the table that allows them to be linked</li>
+<li>each table should be in its own file</li>
+</ul>
+
+<p>A common format for this document is a Word/text file (or Markdown). There should be a section called "Study Design" that has a thorough description of how you collected the data. There must be a section called "Code Book" that describes each variable and its units.</p>
+
+<p>The Code Book should contain information about:</p>
+<ul>
+<li>variables (including units) in the data set not contained in the tidy data</li>
+<li>the summary choices you made</li>
+<li>the experimental study design you used</li>
+</ul>
+
+<p>The Instruction List</p>
+<ul>
+<li>is ideally a computer script in R or Python</li>
+<li>the input for the script is the raw data</li>
+<li>the output is the processed, tidy data</li>
+<li>there are no parameters to the script</li>
+</ul>
+
+<p>In some cases, it will not be possible to script every step. In that case, you should provide instructions like steps:</p>
+<ol>
+<li>Take the raw file, run version 3.1.2 of the summarize software with parameters a=1, b=2, c=3</li>
+<li>Run the software separately for each sample.</li>
+<li>Take column three of outputfile.txt for each sample and that is the corresponding row in the output data set.</li>
+</ol>
+
+<p><a href="http://www.colbertnation.com/the-colbert-report-videos/425748/april-23-2013/austerity-s-spreadsheet-error" target="_blank">Why is the instruction list important?</a></p>

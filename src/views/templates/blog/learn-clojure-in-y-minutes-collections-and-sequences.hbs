@@ -1,0 +1,95 @@
+{{#> base}}
+
+<div class="blog-post-container">
+
+    <h1 class="blog-post-title">Learn clojure in Y minutes - Collections and Sequences</h1>
+
+    <article class="blog-post-content">
+        <p>The following is from <a href="http://learnxinyminutes.com/docs/clojure/" target="_blank">Learn clojure in Y minutes</a>.</p>
+        <p><u>list</u> - a <a href="http://en.wikipedia.org/wiki/Linked_list" target="_blank">linked list</a> data structure</p>
+        <p><u>vector</u> - an <a href="http://en.wikipedia.org/wiki/Array_data_structure#One-dimensional_arrays" target="_blank">array</a> data structure</p>
+        <p>These are java classes too:</p>
+        <pre>&gt; (class '(1 2 3))
+clojure.lang.PersistentList
+
+&gt; (class (list 1 2 3))
+clojure.lang.PersistentList
+
+&gt; (class [1 2 3])
+clojure.lang.PersistentVector</pre>
+        <p>Lists and vectors are collections.</p>
+        <p><u>collection</u> - a group of data</p>
+        <pre>&gt; (coll? '(1 2 3))
+true
+
+&gt; (coll? [1 2 3])
+true</pre>
+        <p>Only lists are sequences.</p>
+        <p><u>sequence</u> - abstract description of a list of data</p>
+        <pre>&gt; (seq? '(1 2 3))
+true
+
+&gt; (seq? [1 2 3])
+false</pre>
+        <p>You only need to provide an entry to a sequence when it is accessed.</p>
+        <pre>&gt; (range 4)
+(0 1 2 3)
+
+&gt; (take 4 (range))
+(0 1 2 3)</pre>
+        <p>Because of this, seqs can be lazy.</p>
+        <p><u>lazy seq</u> - defines an infinite series</p>
+        <pre>&gt; (range)
+OutOfMemoryError Java heap space  java.util.Arrays.copyOf (Arrays.java:2882)</pre>
+        <p><u>cons</u> - add an item to the beginning of a list or vector</p>
+        <pre>&gt; (cons 4 '(1 2 3))
+(4 1 2 3)
+
+&gt; (cons 4 [1 2 3])
+(4 1 2 3)</pre>
+        <p><u>conj</u> - adds an item to a collection in the most efficient way</p>
+        <p>For lists, the item is inserted to the beginning.</p>
+        <pre>&gt; (conj 4 '(1 2 3))
+ClassCastException java.lang.Long cannot be cast to clojure.lang.IPersistentCollection  clojure.core/conj (core.clj:83)</pre>
+        <p>Oops.</p>
+        <pre>&gt; (conj '(1 2 3) 4)
+(4 1 2 3)</pre>
+        <p>For vectors, the item is added to the end.</p>
+        <pre>&gt; (conj 4 [1 2 3])
+ClassCastException java.lang.Long cannot be cast to clojure.lang.IPersistentCollection  clojure.core/conj (core.clj:83)
+
+&gt; (conj [1 2 3] 4)
+[1 2 3 4]</pre>
+        <p>This operation is not commutative.</p>
+        <p><u>concat</u> - adds lists or collections together</p>
+        <pre>&gt; (concat [1 2] '(3 4))
+(1 2 3 4)</pre>
+        <p>To interact with collections, you can use functions like <span class="code">filter</span> or <span class="code">map</span>.</p>
+        <pre>&gt; (filter even? '(1 2 3))
+(2)
+
+&gt; (map inc [1 2 3])
+(2 3 4)
+
+&gt; (map inc (range 5)
+(1 2 3 4 5)</pre>
+        <p><u>reduce</u> - used to reduce collections</p>
+        <p>The following distributes the <span class="code">+</span> over each thing in the vector: </p>
+        <pre>&gt; (reduce + [1 2 3 4]) ; (+ (+ (+ 1 2) 3) 4)
+10</pre>
+        <p><span class="code">reduce</span> can also take three arguments, with the first argument defining an initial value. The following turns the list
+            <pre>'(3 2 1)</pre> into a vector: </p>
+        <pre>&gt; (reduce conj [] '(3 2 1))
+; (conj (conj (conj [] 3) 2) 1)
+[3 2 1]</pre>
+    </article>
+
+    <p class="blog-post-tags"><span class="blog-post-tag">clojure</span><span class="blog-post-tag">learn clojure in y minutes</span></p>
+
+    <p class="blog-post-created-at">Published January 05, 2015</p>
+
+    {{> blog-post-comment}}
+
+</div>
+
+{{/base}}

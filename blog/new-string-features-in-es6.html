@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
+  <head>
+    <title>
+      Neil Thawani - Software Engineer and K-12 STEAM+Computing Educator
+    </title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="src/static/images/favicon.png" />
+    <meta property="og:image:width" content="200" />
+    <meta property="og:image:height" content="200" />
+    <meta property="og:title" content="Neil Thawani - Software Engineer and K-12 STEAM+Computing Educator" />
+    <meta property="og:url" content="http://www.lioninawhat.com/" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="src/static/images/favicon.png">
+
+    <base href="/">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-22ETHGYB6N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-22ETHGYB6N');
+    </script>
+    
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/showdownjs/showdown/1.9.1/dist/showdown.min.js"></script>
+
+    <script type="text/javascript" src="src/static/javascript/blog.js"></script>
+    <script type="text/javascript" src="src/static/javascript/button-selector.js"></script>
+    <script type="text/javascript" src="src/static/javascript/menu.js"></script>
+
+    <link type="text/css" href="styles/main.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="visible-phone mobile-nav-container">
+      <ul class="mobile-nav">
+        <li class="mobile-nav-item"><a href="/">Home</a></li>
+        <li class="mobile-nav-item"><a href="/#projects">Projects</a></li>
+        <li class="mobile-nav-item"><a href="/blog">Blog</a></li>
+      </ul>
+    
+      <ul class="mobile-nav contact-icons">
+        <li class="mobile-nav-item">
+          <a href="/meet.html">
+            <i class="ii ii-calendar-clock"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <i class="ii ii-twitter"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-linkedin-box"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-github"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="hidden-phone">
+      <div class="nav">
+        <a id="fullname" href="/">
+          <span id="firstname">&nbsp;</span>
+          <span id="lastname"></span>
+        </a>
+    
+        <ul class="nav-pills">
+          <a href="/#projects">
+            <li>Projects</li>
+          </a>
+    
+          <a href="/blog">
+            <li>Blog</li>
+          </a>
+    
+          <a href="/meet.html">
+            <li><i class="ii ii-calendar-clock"></i></li>
+          </a>
+    
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <li><i class="ii ii-twitter"></i></li>
+          </a>
+    
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-linkedin-box"></i></li>
+          </a>
+    
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-github"></i></li>
+          </a>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="blog-post-container">
+    
+        <h1 class="blog-post-title">New String Features in ES6</h1>
+    
+        <article class="blog-post-content">
+            <p>New string methods:</p>
+            <pre>
+    > "string".startsWith("str", position = 0)
+    true
+    > "string".endsWith("ing", endPosition = arg1.length)
+    true
+    > "string".includes("rin", position = 0)
+    true
+    > "string".repeat(3)
+    "stringstringstring"
+    </pre>
+            <p>Each of these methods has an optional second parameter, which specifies where the string to be searched starts or ends:</p>
+            <pre>
+    > "string".startsWith("tri", 1)
+    true
+    > "string".endsWith("in", 5)
+    true
+    > "string".includes("tri", 1)
+    true
+    > "string".includes("tri", 2)
+    false
+    </pre>
+            <p>ES6 has a new type of string literal called a template literal:</p>
+            <pre>
+    const first = 'Neil';
+    const last = 'Thawani';
+    
+    console.log(`Hello ${first} ${last}.`);
+    </pre>
+            <p>Template literals can also be used to create multi-line strings.</p>
+            <pre>
+    const multiLine = `This
+    is
+    a
+    multi-line
+    string.`;
+    </pre>
+            <p>Template literals are also 'raw' if you prefix them with the tag String.raw.</p>
+            <pre>
+    const str = String.raw`Not a newline: \
+    `;
+    console.log(str === 'Not a newline: \\\
+    '); // true
+    </pre>
+            <p>Escape characters are not interpreted.</p>
+            <p>Strings are iterable. You can use for of to iterate over their characters.</p>
+            <pre>
+    > for (const ch of 'abc') { console.log(ch); }
+    a
+    b
+    c
+    </pre>
+            <p>You can use the spread operator to turn strings into Arrays.</p>
+            <pre>
+    > const chars = [...'abc'];
+    ['a', 'b', 'c']
+    </pre>
+            <hr />
+            <p>Source: <a href="http://www.exploringjs.com" target="_blank">Exploring ES6</a> by <a href="http://www.rauschma.de" target="_blank">Dr. Axel Rauschmayer</a>.</p>
+        </article>
+    
+        <p class="blog-post-tags"><span class="blog-post-tag">javascript</span><span class="blog-post-tag">exploring es6</span></p>
+    
+        <p class="blog-post-created-at">Published March 14, 2016</p>
+    
+        <div id="disqus_thread">
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'lioninawhat';
+        
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'lioninawhat';
+        
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function () {
+                    var s = document.createElement('script'); s.async = true;
+                    s.type = 'text/javascript';
+                    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+                    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                }());
+            </script>
+        </div>
+    
+    </div>
+    
+  </body>
+</html>

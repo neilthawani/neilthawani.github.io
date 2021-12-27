@@ -3,8 +3,9 @@ var childProcess = require("child_process");
 
 var params = {
 	open: false,
-	file: "*", // TODO: set this
-	wait: 500,
+	ignore: "node_modules",
+	file: "*", // TODO: set this for 404
+	wait: 0,
 	logLevel: 2
 };
 
@@ -13,6 +14,8 @@ var params = {
 // Run `npm run build-css` to test and the console will show an error if this is the case.
 // Sometimes, if build works but watch doesn't, you will have to run
 // `watch-css` from the terminal manually. It should be ok then.
+
+// Upon blog post creation, run `npm run build-md`.
 childProcess.exec("npm run build-views && npm run build-css && npm run watch-views && npm run watch-css", {
         "shell": true
     },

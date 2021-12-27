@@ -1,0 +1,23 @@
+<p>With the new year approaching and people making New Year's resolutions, I thought I'd revisit a question asked by some existentially-minded individuals when determining their pursuits in life: why? Many <a href="http://www.businessinsider.com/elon-musk-first-principles-2015-1" target="_blank">physicists and engineers</a> reason from <a href="https://en.wikipedia.org/wiki/First_principle" target="_blank">first principles</a>, which are axioms that can be used to derive logical conclusions. How does one reason from first principles?</p>
+
+<p style="text-align:center;"><iframe width="560" height="315" src="https://www.youtube.com/embed/NV3sBlRgzTI" frameborder="0" allowfullscreen></iframe></p>
+
+<h4 style="font-weight: 400;">1. What am I trying to achieve here? What is my goal?</h4>
+
+<p style="margin-left:10px;">Let's start with something <a href="https://en.wikipedia.org/wiki/SMART_criteria" target="_blank">simple but specific</a>: weight loss. I want to lose 20 pounds in 5 months. That is: I want to lose 20 pounds by June 1st, 2016.</p>
+
+<h4 style="font-weight: 400;">2. What information/evidence do I have, how does this affect the probable outcomes, and what information/evidence do I still need to make a good decision?</h4>
+
+<p style="margin-left:10px;">I currently weigh 220 pounds. This affects the maximum caloric intake necessary to maintain my weight and affects the types of exercises I can do. I need to find out which exercises I can do to mitigate any potential joint pain, maximize caloric burn in a sustainable way, and still enjoy my workouts.</p>
+
+<h4 style="font-weight: 400;">3. What are the potential second order (and higher) impacts of this scenario (both upside and downside)?</h4>
+
+<p style="margin-left:10px;">I will need to monitor my diet and make sure my caloric deficit enables me to lose weight at the rate I want to. This may impact social outings where drinking and eating are common ways of connecting with people. I will also need to spend a significant amount of time prepping food, going to the gym, and taking into account how often I need to do my laundry to wear clean gym clothes.</p>
+
+<p>Other questions you can ask are:</p>
+<ul>
+<li>What has to happen for "X" scenario to be true?</li>
+<li>What are the risks and rewards of various scenarios and how likely are they to transpire?</li>
+</ul>
+
+<p>Admittedly, all this seem a bit excessive for such a simple goal, but understanding the framework that first principles provide for achieving <a href="http://lifehacker.com/5872262/differentiate-between-goals-and-resolutions-to-aid-in-personal-achievement" target="_blank">goals or resolutions</a> can aid in achieving things that have a higher degree of complexity. Understanding constraints, how to mitigate risks, and proper planning are excellent first steps toward achieving one's objectives. The next step is discipline.</p>

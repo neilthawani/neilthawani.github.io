@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
+  <head>
+    <title>
+      Neil Thawani - Software Engineer and K-12 STEAM+Computing Educator
+    </title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="src/static/images/favicon.png" />
+    <meta property="og:image:width" content="200" />
+    <meta property="og:image:height" content="200" />
+    <meta property="og:title" content="Neil Thawani - Software Engineer and K-12 STEAM+Computing Educator" />
+    <meta property="og:url" content="http://www.lioninawhat.com/" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="src/static/images/favicon.png">
+
+    <base href="/">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-22ETHGYB6N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-22ETHGYB6N');
+    </script>
+    
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/showdownjs/showdown/1.9.1/dist/showdown.min.js"></script>
+
+    <script type="text/javascript" src="src/static/javascript/blog.js"></script>
+    <script type="text/javascript" src="src/static/javascript/button-selector.js"></script>
+    <script type="text/javascript" src="src/static/javascript/menu.js"></script>
+
+    <link type="text/css" href="styles/main.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="visible-phone mobile-nav-container">
+      <ul class="mobile-nav">
+        <li class="mobile-nav-item"><a href="/">Home</a></li>
+        <li class="mobile-nav-item"><a href="/#projects">Projects</a></li>
+        <li class="mobile-nav-item"><a href="/blog">Blog</a></li>
+      </ul>
+    
+      <ul class="mobile-nav contact-icons">
+        <li class="mobile-nav-item">
+          <a href="/meet.html">
+            <i class="ii ii-calendar-clock"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <i class="ii ii-twitter"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-linkedin-box"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-github"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="hidden-phone">
+      <div class="nav">
+        <a id="fullname" href="/">
+          <span id="firstname">&nbsp;</span>
+          <span id="lastname"></span>
+        </a>
+    
+        <ul class="nav-pills">
+          <a href="/#projects">
+            <li>Projects</li>
+          </a>
+    
+          <a href="/blog">
+            <li>Blog</li>
+          </a>
+    
+          <a href="/meet.html">
+            <li><i class="ii ii-calendar-clock"></i></li>
+          </a>
+    
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <li><i class="ii ii-twitter"></i></li>
+          </a>
+    
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-linkedin-box"></i></li>
+          </a>
+    
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-github"></i></li>
+          </a>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="blog-post-container">
+    
+        <h1 class="blog-post-title">Learn clojure in Y minutes - Maps</h1>
+    
+        <article class="blog-post-content">
+            <p>The following is from <a href="http://learnxinyminutes.com/docs/clojure/" target="_blank">Learn clojure in Y minutes</a>.</p>
+            <p><u>array maps</u> and <u>hash maps</u> share the <u>map</u> interface.</p>
+            <p><u>array maps</u> - less fast lookup, retains key order</p>
+            <p><u>hash maps</u> - fast lookup, doesn't retain key order</p>
+            <pre>&gt; (class {:a 1 :b 2 :c 3})
+    clojure.lang.PersistentArrayMap
+    
+    &gt; (class (hash-map :a 1 :b 2 :c 3))
+    clojure.lang.PersistentHashMap</pre>
+            <p>Array maps eventually become hash maps after they get sufficiently large.</p>
+            <p><u>keyword</u> - like strings, but with efficiency bonuses</p>
+            <p>Maps can use any hashable type as a key, but usually keywords are best.</p>
+            <pre>&gt; (class :a)
+    clojure.lang.Keyword
+    
+    &gt; (def stringmap {"a" 1 "b" 2 "c" 3})
+    #'learn-clojure.core/stringmap
+    
+    &gt; (def keymap {:a 1 :b 2 :c 3})
+    #'learn-clojure.core/keymap</pre>
+            <p><u>Note:</u> Commas in a map are treated the same as whitespace.</p>
+            <p>You can retrieve a value from a map by calling it as a function.</p>
+            <pre>&gt; (stringmap "a")
+    1
+    
+    &gt; (keymap :b)
+    2</pre>
+            <p>This operation is commutative with keywords, but not with strings.</p>
+            <pre>&gt; (:b keymap)
+    2</pre>
+            <p><u>Note:</u> A non-existent key in a map yields nil.</p>
+            <p><u>assoc</u> - used to add new keys to hash maps</p>
+            <p><u>dissoc</u> - used to remove keys from hash maps</p>
+            <pre>&gt; (def newkeymap (assoc keymap :d 4))
+    #'learn-clojure.core/newkeymap
+    
+    &gt; newkeymap
+    {:c 3, :b 2, :d 4, :a 1}
+    
+    &gt; (dissoc keymap :b)
+    {:b 2, :a 1}</pre>
+            <p>Don't forget that clojure types are immutable.</p>
+            <pre>&gt; keymap
+    {:c 3, :b 2, :a 1}</pre>
+        </article>
+    
+        <p class="blog-post-tags"><span class="blog-post-tag">clojure</span><span class="blog-post-tag">learn clojure in y minutes</span></p>
+    
+        <p class="blog-post-created-at">Published January 07, 2015</p>
+    
+        <div id="disqus_thread">
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'lioninawhat';
+        
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'lioninawhat';
+        
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function () {
+                    var s = document.createElement('script'); s.async = true;
+                    s.type = 'text/javascript';
+                    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+                    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                }());
+            </script>
+        </div>
+    
+    </div>
+    
+  </body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
+  <head>
+    <title>
+      Neil Thawani - Software Engineer and K-12 STEAM+Computing Educator
+    </title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="src/static/images/favicon.png" />
+    <meta property="og:image:width" content="200" />
+    <meta property="og:image:height" content="200" />
+    <meta property="og:title" content="Neil Thawani - Software Engineer and K-12 STEAM+Computing Educator" />
+    <meta property="og:url" content="http://www.lioninawhat.com/" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="src/static/images/favicon.png">
+
+    <base href="/">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-22ETHGYB6N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-22ETHGYB6N');
+    </script>
+    
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/showdownjs/showdown/1.9.1/dist/showdown.min.js"></script>
+
+    <script type="text/javascript" src="src/static/javascript/blog.js"></script>
+    <script type="text/javascript" src="src/static/javascript/button-selector.js"></script>
+    <script type="text/javascript" src="src/static/javascript/menu.js"></script>
+
+    <link type="text/css" href="styles/main.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="visible-phone mobile-nav-container">
+      <ul class="mobile-nav">
+        <li class="mobile-nav-item"><a href="/">Home</a></li>
+        <li class="mobile-nav-item"><a href="/#projects">Projects</a></li>
+        <li class="mobile-nav-item"><a href="/blog">Blog</a></li>
+      </ul>
+    
+      <ul class="mobile-nav contact-icons">
+        <li class="mobile-nav-item">
+          <a href="/meet.html">
+            <i class="ii ii-calendar-clock"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <i class="ii ii-twitter"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-linkedin-box"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-github"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="hidden-phone">
+      <div class="nav">
+        <a id="fullname" href="/">
+          <span id="firstname">&nbsp;</span>
+          <span id="lastname"></span>
+        </a>
+    
+        <ul class="nav-pills">
+          <a href="/#projects">
+            <li>Projects</li>
+          </a>
+    
+          <a href="/blog">
+            <li>Blog</li>
+          </a>
+    
+          <a href="/meet.html">
+            <li><i class="ii ii-calendar-clock"></i></li>
+          </a>
+    
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <li><i class="ii ii-twitter"></i></li>
+          </a>
+    
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-linkedin-box"></i></li>
+          </a>
+    
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-github"></i></li>
+          </a>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="blog-post-container">
+    
+        <h1 class="blog-post-title">Symbols in ES6</h1>
+    
+        <article class="blog-post-content">
+            <p>Symbols are a new primitive type in ES6.</p>
+            <p>They are mainly used as unique property keys in conjunction with <code>Symbol.iterator</code> - a symbol never clashes with any other property key (symbol or string).</p>
+            <p>Previously, strings were used to represent concepts such as colors. In ES6, symbols ensure constants are always unique.</p>
+            <p>Symbols are not subject to type coercion with concatenation (<code>+</code>) or interpolation (<code>${}</code>), but can be converted explicitly using <code>String(var)</code> or <code>.toString()</code>.</p>
+            <p>The following operations are aware of symbols as property keys:</p>
+            <ul>
+                <li><code>Reflect.ownKeys()</code></li>
+                <li><code>Property access via []</code></li>
+                <li><code>Object.assign()</code></li>
+            </ul>
+            <p>The following operations ignore symbols as property keys:</p>
+            <ul>
+                <li><code>Object.keys()</code></li>
+                <li><code>Object.getOwnPropertyNames()</code></li>
+                <li><code>for-in</code> loop</li>
+            </ul>
+            <h3 id="anewprimitivetype">A New Primitive Type</h3>
+            <p>Symbols are tokens that serve as unique IDs.</p>
+            <pre><code class="javascript language-javascript">const symbol1 = Symbol('symb');
+    </code></pre>
+            <p>A string-valued description parameter can be passed into the constructor and is used when the symbol is converted to a string.</p>
+            <pre><code class="javascript language-javascript">&gt; String(symbol1)
+    'Symbol(symb)'
+    
+    &gt; typeof symbol1
+    'symbol'
+    </code></pre>
+            <p>Symbols can be used as property keys:</p>
+            <pre><code class="javascript language-javascript">&gt; const MY_KEY = Symbol();
+    &gt; const obj = {};
+    &gt; obj[MY_KEY] = 123;
+    &gt; console.log(obj[MY_KEY]);
+    123
+    </code></pre>
+            <p>Classes and object literals have a featured called computed property keys. Computed property keys are specified using square brackets.</p>
+            <pre><code class="javascript language-javascript">&gt; const MY_KEY = Symbol();
+    &gt; const obj = {
+        [MY_KEY]: 123
+    };
+    </code></pre>
+            <p>A method definition can also have a computed key:</p>
+            <pre><code class="javascript language-javascript">&gt; const FOO = Symbol();
+    &gt; const obj = {
+        [FOO]() {
+            return 'bar';
+        }
+    };
+    &gt; console.log(obj[FOO]());
+    bar
+    </code></pre>
+            <p>In ES6, since symbols can become the key of a property, these definitions are necessary:</p>
+            <ul>
+                <li>Property keys are either strings or symbols.</li>
+                <li>String-valued property keys are called property names.</li>
+                <li>Symbol-valued property keys are called property symbols.</li>
+            </ul>
+            <h3 id="usingsymbolstorepresentconcepts">Using Symbols to Represent Concepts</h3>
+            <p>Because symbols have unique IDs, even if their assigned values are the same, they cannot be confused with each other.</p>
+            <pre><code class="javascript language-javascript">&gt; var COLOR_RED = 'red';
+    &gt; var MOOD_ANGRY = 'red';
+    &gt; COLOR_RED === MOOD_ANGRY
+    true
+    
+    &gt; const COLOR_RED = Symbol('red');
+    &gt; const MOOD_ANGRY = Symbol('red');
+    &gt; COLOR_RED === MOOD_ANGRY
+    false
+    </code></pre>
+            <p>Representing non-clashing keys as symbols is useful:</p>
+            <ul>
+                <li>for non-public properties in inheritance hierarchies</li>
+                <li>to keep meta-level properties from clashing with base-level properties</li>
+            </ul>
+            <p>As keys of non-public properties, symbols are not exempt from unauthorized access since you can find out all own property keys, including symbols, of an object using <code>Reflect.ownKeys()</code>.</p>
+            <p>You can add iterability to an object via the property key <code>Symbol.iterator</code> and it won't clash with anything. </p>
+            <h3 id="convertingsymbolstootherprimitivetypes">Converting symbols to other primitive types</h3>
+            <p>You can explicitly convert a symbol to:</p>
+            <ul>
+                <li>boolean (<code>Boolean(sym)</code>)</li>
+                <li>string (<code>String(sym)</code>, <code>sym.toString()</code>)</li>
+            </ul>
+            <pre><code class="javascript language-javascript">&gt; const sym = Symbol('hello');
+    &gt; String(sym)
+    'Symbol(hello)'
+    </code></pre>
+            <p>If no value is passed into the constructor, only <code>Symbol()</code> is returned.</p>
+            <p>If you want to use concatenation or template literals with symbol values, you must use explicit conversion.</p>
+            <p>You can implicitly convert a symbol to:</p>
+            <ul>
+                <li>boolean (<code>!sym</code>)</li>
+            </ul>
+            <p>String coercion is forbidden (using +) because symbols should not be coerced to string-value property keys.</p>
+            <p>Number coercion is forbidden (using mathematical operators) because they should not be coerced to number-value property keys. In addition, <code>Number.parseInt(sym)</code>, which returns a string value, throws a <code>TypeError</code>.</p>
+            <h3 id="jsonandsymbols">JSON and symbols</h3>
+            <p>To pass a symbol into <code>JSON.stringify</code>, </p>
+            <pre><code class="javascript language-javascript">&gt; const MY_SYMBOL = Symbol.for('http://example.com/my_symbol');
+    &gt; const obj = { myKey: MY_SYMBOL };
+    
+    &gt; const str = JSON.stringify(obj, '@@' + Symbol.keyFor(symbolReplacer) + '@@');
+    &gt; console.log(str);
+    {"myKey":"@@http://example.com/my_symbol@@"}
+    </code></pre>
+            <p>A symbol is encoded as a string by putting <code>'@@'</code> before and after the symbol's key. Only symbols created using <code>Symbol.for()</code> have a key.</p>
+            <p>Likewise, you can reverse this process using <code>JSON.parse</code> on the JSON object after obtaining the symbol for the key.</p>
+            <h3 id="wrapperobjectsforsymbols">Wrapper Objects for Symbols</h3>
+            <p>To convert objects to symbols,</p>
+            <pre><code class="javascript language-javascript">&gt; const sym = Symbol();
+    &gt; const wrapper = Object(sym);
+    &gt; typeof wrapper
+    'object'
+    &gt; wrapper instanceof symbol
+    true
+    </code></pre>
+            <hr />
+            <p>Source: <a href="http://www.exploringjs.com">Exploring ES6</a> by <a href="http://www.rauschma.de">Dr. Axel Rauschmayer</a>.</p>
+        </article>
+    
+        <p class="blog-post-tags"><span class="blog-post-tag">javascript</span><span class="blog-post-tag">exploring es6</span></p>
+    
+        <p class="blog-post-created-at">Published August 21, 2016</p>
+    
+        <div id="disqus_thread">
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'lioninawhat';
+        
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'lioninawhat';
+        
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function () {
+                    var s = document.createElement('script'); s.async = true;
+                    s.type = 'text/javascript';
+                    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+                    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                }());
+            </script>
+        </div>
+    
+    </div>
+    
+  </body>
+</html>

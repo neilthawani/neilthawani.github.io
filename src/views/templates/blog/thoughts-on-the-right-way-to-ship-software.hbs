@@ -1,0 +1,94 @@
+{{#> base}}
+
+<div class="blog-post-container">
+
+    <h1 class="blog-post-title">Thoughts on the Right Way to Ship Software</h1>
+
+    <article class="blog-post-content">
+        <p>The following ideas were garnered primarily from <a href="http://firstround.com/review/the-right-way-to-ship-software/" target="_blank">First Round Capital's blog</a>. In her blog post, Jocelyn Goldfein, an angel investor and former engineering exec at Facebook and VMWare, details her experiences and lessons she's learned after working at various tech companies. She says that while much of software engineering dogma endorses precise coding estimates, thoroughly detailed specs, and maybe even A/B testing UI designs, these techniques don't work for every product. Recently at <a href="http://www.infegy.com" target="_blank">work</a>, we've been reorganizing and preparing for a software release. I work on an <a href="http://www.emberjs.com" target="_blank">Ember.js-based</a> web application that is undergoing some refactoring on a separate branch, which has led to an unexpected shipping delay. This delay in shipping to production has sparked conversations on our product development team:</p>
+        <ol>
+            <li>How do we set reasonable and accurate release dates for our products?</li>
+            <li>How do we create a process that builds trust with other teams within the organization and customers?</li>
+        </ol>
+        <p>In software development, there's the classical time/space tradeoff, which Goldfein also talked about in <a href="http://www.pivotaltracker.com/community/tracker-blog/make-smart-tradeoffs-developing-software-products" target="_blank">an interview with Pivotal Labs</a>: by maximizing for schedule predictability, a company loses engineering productivity. That is, constraints placed upon an engineer's creative capabilities will create cognitive debt: "This must be perfectly aligned to these standards, and I must spend time entering and exiting flow in order to make it so." In exchange for flow, developers are spending time either triaging bugs, building tests, or doing other quality-assuring tasks, and effort is exchanged for time. Development teams should ask, before investing all this time: <em>"Is this process well-suited to my situation?"</em></p>
+        <p>At VMWare, Goldfein discovered that because her company worked with large enterprises, predictable release dates and high software reliability were key priorities to take into account before shipping. Before considering using new technology, she had to think about the dependencies and what kind of ripple effect any decision would have on software reliability. Conversely, Facebook's mantra "move fast and break things" stemmed from a need to drive user engagement and increase advertisement effectiveness. For a product with network effects and a small initial revenue stream, Facebook needed to ship features to its most important stakeholders - its users - quickly, in addition to iteratively developing features and fixing bugs as they were discovered with each rolling release. They needed as little red tape as was reasonably possible in order to ship quickly, and first mover advantage was crucial in Facebook's success in driving user engagement and growth. These contrasting examples bring to light the first question a business must answer when shipping software:</p>
+        <h4>1. Who's your customer? That is, how do you make money?</h4>
+        <div class="centered">
+            <table>
+                \t<tr>
+                    \t\t<td>
+                        \t\t</td>
+                    \t\t<td>
+                        \t\t\t<u>High price tag - they need your software</u>
+                        \t\t</td>
+                    \t\t<td>
+                        \t\t\t<u>Lower price tag - they have to want your software</u>
+                        \t\t</td>
+                    \t</tr>
+
+                \t<tr>
+                    \t\t<td>
+                        \t\t\t<u>Focus on</u>
+                        \t\t</td>
+                    \t\t<td>
+                        \t\t\tReliability, quality, functionality, predictable release schedule
+                        \t\t</td>
+                    \t\t<td>
+                        \t\t\tUser experience, rolling release schedule
+                        \t\t</td>
+                    \t</tr>
+
+                \t<tr>
+                    \t\t<td>
+                        \t\t\t<u>How to do this</u>
+                        \t\t</td>
+                    \t\t<td>
+                        \t\t\tDetailed specs, estimating time to complete tasks, analyzing dependencies, continuous integration and automated tests, beta testing, customer support
+                        \t\t</td>
+                    \t\t<td>
+                        \t\t\tEmpower the design team and enable communication between design, UX and engineering. Prototype and iterate before committing to release dates. Deprioritize bugs that affect only a few people.
+                        \t\t</td>
+                    \t</tr>
+
+                \t<tr>
+                    \t\t<td>
+                        \t\t\t<u>Sacrifices</u>
+                        \t\t</td>
+                    \t\t<td>
+                        \t\t\tSpeed, productivity
+                        \t\t</td>
+                    \t\t<td>
+                        \t\t\tForesight
+                        \t\t</td>
+                    \t</tr>
+
+                \t<tr>
+                    \t\t<td>
+                        \t\t\t<u>Results</u>
+                        \t\t</td>
+                    \t\t<td>
+                        \t\t\tCustomer retention
+                        \t\t</td>
+                    \t\t<td>
+                        \t\t\tCustomer retention
+                        \t\t</td>
+                    \t</tr>
+            </table>
+        </div>
+        <p>At my company, we stand in the middle of this tradeoff matrix - I find that with most categorically labeled ideas, there is almost always an unlabeled middle continuum. We have a piece of software that we sell to agencies and enterprises that is still in its infancy after only a year and a half in production. After its initial release, we served our clients with bug fixes and minor feature improvements while attempting to innovate new offerings. This left our small development team confused, scrambling to push code while our account managers worked to retain customers who stayed for our exceptional customer service and beautiful UX.</p>
+        <h4>2. Assess which tradeoffs you will make when you deploy. How much are you willing to risk?</h4>
+        <p>Goldfein states that for products running on a <a href="https://en.wikipedia.org/wiki/Thin_client" target="_blank">thin client</a>, companies have total control over their runtime environment, since hosting configuration is in their hands and not on a remote user's desktop machine or other device, and having a test matrix for multiple environments isn't necessary because you can continuously deploy software in the cloud. Another positive trait about web applications is that there is no legacy code to maintain. However, responsive design is very expensive to manage for different screen sizes and devices. In order to ensure design standards are up to par with user expectations, Goldfein recommends A/B testing with small cohorts of users. For products with large user bases, "move fast and break things" means that specs and QA for new features are an afterthought when cast under the same light as hotfixing bugs that threaten UX and app stability.</p>
+        <p>Applying these ideas to our situation: by defining roughly quarterly release dates, we can set expectations with marketing, sales, and our clients and fulfill or exceed these expectations predictably while managing pressure caused by occasional <a href="http://www.sixsigmacertificationcourse.com/tag/floundering/" target="_blank">floundering</a> when stress is induced due to tight deadlines and still-buggy software. To build trust and improve transparency with teams internally, we created a product backlog for account managers to submit defects and feature suggestions to. We also triage, fix, and continuously ship bugs throughout the week when they are reported by internal staff. These hotfixes are our #1 priority as a development team, and developing new features and fixing issues present on our refactor branch take a backseat to making sure that user experience and information presented to users within the application is consistent and accurate.</p>
+        <p>In the end, it's clear that software development is about risk management, and risks taken can lead to mistakes made that cause pain to your customers. When Twitter first came out, the <a href="http://knowyourmeme.com/memes/fail-whale" target="_blank">Fail Whale</a> was a meme created to reflect its status when the site was under maintenance. However, because users didn't pay for it, they tolerated its ups and downs in jest. But imagine paying thousands or tens of thousands of dollars for a piece of software. There would be no time spent creating clever memes and more rioting for refunds.</p>
+        <p>All in all, by making the appropriate tradeoffs for what they want to accomplish, fixing mistakes quickly and shipping the best product for users, tech companies that ship software stand a higher chance of succeeding. As a company evolves and grows, its release process should evolve and grow, and as people come and go in an organization, they will have an impact upon its culture, creating a form for functional processes to be built upon. By hiring the right people to form a core identity for a company, the organization can grow in a sustainable way.</p>
+    </article>
+
+    <p class="blog-post-tags"><span class="blog-post-tag">software development</span><span class="blog-post-tag">shipping</span></p>
+
+    <p class="blog-post-created-at">Published November 16, 2015</p>
+
+    {{> blog-post-comment}}
+
+</div>
+
+{{/base}}

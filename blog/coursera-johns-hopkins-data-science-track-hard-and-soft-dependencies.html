@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
+  <head>
+    <title>
+      Neil Thawani - Software Engineer and K-12 STEAM+Computing Educator
+    </title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="src/static/images/favicon.png" />
+    <meta property="og:image:width" content="200" />
+    <meta property="og:image:height" content="200" />
+    <meta property="og:title" content="Neil Thawani - Software Engineer and K-12 STEAM+Computing Educator" />
+    <meta property="og:url" content="http://www.lioninawhat.com/" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="src/static/images/favicon.png">
+
+    <base href="/">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-22ETHGYB6N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-22ETHGYB6N');
+    </script>
+    
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/showdownjs/showdown/1.9.1/dist/showdown.min.js"></script>
+
+    <script type="text/javascript" src="src/static/javascript/blog.js"></script>
+    <script type="text/javascript" src="src/static/javascript/button-selector.js"></script>
+    <script type="text/javascript" src="src/static/javascript/menu.js"></script>
+
+    <link type="text/css" href="styles/main.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="visible-phone mobile-nav-container">
+      <ul class="mobile-nav">
+        <li class="mobile-nav-item"><a href="/">Home</a></li>
+        <li class="mobile-nav-item"><a href="/#projects">Projects</a></li>
+        <li class="mobile-nav-item"><a href="/blog">Blog</a></li>
+      </ul>
+    
+      <ul class="mobile-nav contact-icons">
+        <li class="mobile-nav-item">
+          <a href="/meet.html">
+            <i class="ii ii-calendar-clock"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <i class="ii ii-twitter"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-linkedin-box"></i>
+          </a>
+        </li>
+    
+        <li class="mobile-nav-item">
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <i class="ii ii-github"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="hidden-phone">
+      <div class="nav">
+        <a id="fullname" href="/">
+          <span id="firstname">&nbsp;</span>
+          <span id="lastname"></span>
+        </a>
+    
+        <ul class="nav-pills">
+          <a href="/#projects">
+            <li>Projects</li>
+          </a>
+    
+          <a href="/blog">
+            <li>Blog</li>
+          </a>
+    
+          <a href="/meet.html">
+            <li><i class="ii ii-calendar-clock"></i></li>
+          </a>
+    
+          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+            <li><i class="ii ii-twitter"></i></li>
+          </a>
+    
+          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-linkedin-box"></i></li>
+          </a>
+    
+          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+            <li><i class="ii ii-github"></i></li>
+          </a>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="blog-post-container">
+    
+        <h1 class="blog-post-title">Coursera - Johns Hopkins Data Science Track hard and soft dependencies</h1>
+    
+        <article class="blog-post-content">
+            <p>It's an incredibly difficult task to type notes on complex machine learning algorithms, so I'm resorting to paper. I might scan those sheets and upload them here, but for now, I'm in the middle of the second week of <a href="https://www.coursera.org/course/ml" target="_blank">Andrew Ng's Machine Learning</a> course, and it's going well.</p>
+            <p>To get myself back on track with the data science track, I scheduled time during February and March to take multiple courses at a time. However, <a href="http://www.reddit.com/r/datascience/comments/2tp93v/is_anyone_doing_the_hopkins_coursera_data_science/" target="_blank">this Reddit post</a> had a <a href="http://www.reddit.com/r/datascience/comments/2tp93v/is_anyone_doing_the_hopkins_coursera_data_science/co192p5" target="_blank">user</a> mention something about dependencies between the courses. After some digging, I found <a href="https://d396qusza40orc.cloudfront.net/rprog/doc/JHDSS_CourseDependencies.pdf" target="_blank">this pdf document</a>, outlining the "hard" and "soft" dependencies between the courses in the track.</p>
+            <p><u>TL;DR:</u> Take the track's courses in the following blocks:</p>
+            <p></p>
+            </p>
+            <table>
+                <tr>
+                    <th>Block 1</th>
+                    <th>Block 2</th>
+                    <th>Block 3</th>
+                </tr>
+                <tr>
+                    <td>The Data Scientist's Toolbox</td>
+                    <td>Getting and Cleaning Data</td>
+                    <td>Regression Models</td>
+                </tr>
+                <tr>
+                    <td>R Programming
+                    <td>Exploratory Data Analysis</td>
+                    <td>Practical Machine Learning</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Reproducible Research</td>
+                    <td>Developing Data Products</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Statistical Inference</td>
+                    <td></td>
+                </tr>
+            </table>
+            <p></p>
+            </p>
+            <p><u>Note:</u> The sheet says of Practical Machine Learning:
+                <br />
+                <em>This course has hard dependencies on R Programming, The Data Scientist's Toolbox and Regression Models. It has a soft dependency on Exploratory Data Analysis.</em></p>
+            <p>However, since I'm currently taking Machine Learning, I imagine Practical Machine Learning won't be too bad. Let's hope I'm right!</p>
+        </article>
+    
+        <p class="blog-post-tags"><span class="blog-post-tag">coursera</span><span class="blog-post-tag">data science</span></p>
+    
+        <p class="blog-post-created-at">Published January 28, 2015</p>
+    
+        <div id="disqus_thread">
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'lioninawhat';
+        
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'lioninawhat';
+        
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function () {
+                    var s = document.createElement('script'); s.async = true;
+                    s.type = 'text/javascript';
+                    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+                    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                }());
+            </script>
+        </div>
+    
+    </div>
+    
+  </body>
+</html>

@@ -1,94 +1,129 @@
-.menu-container {
-    background-color: $gold;
-    border-bottom: 5px solid $blue;
-    margin-bottom: 30px;
-}
-
-.menu-item-list {
-    list-style: none;
-    margin: 0 20px;
+.nav { // div
+    font-size: 24px;
+    background-color: $white;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding-inline-start: 0;
-}
+    margin-bottom: 40px;
+    padding: 25px 100px;
+    box-shadow: 2px 2px 1px $figureColor;
 
-.menu-item-list-item {
-    padding: 10px 40px;
-    font-size: 24px;
-    font-weight: 200;
-    color: $blue;
-    display: inline;
-    position: relative;
-}
-
-.menu-item-list-item .menu-item-list-item-link {
-    color: $blue;
-
-    &:visited {
-        color: $blue;
-    }
-}
-
-.menu-item-list-dropdown-list-item .menu-item-list-item-link {
-    &:visited {
-        color: $blue;
-    }
-}
-
-.menu-item-list-dropdown {
-    @extend .menu-item-list-item;
-
-    .menu-item-list-item-link {
-        i {
-            position: absolute;
-            top: 13px;
-            right: -5px;
-        }
+    a, a:-webkit-any-link {
+        background: none;
 
         &:hover {
             text-decoration: none;
         }
+
+        &:focus {
+            text-decoration: none;
+        }
+    }
+
+}
+
+#fullname {
+    font-size: 48px;
+
+    &:hover {
+        #firstname:after {
+            -webkit-animation: changeFirstName 2s ease forwards; /* Safari 4.0 - 8.0 */
+            animation: changeFirstName 2s ease forwards;
+        }
+
+        #lastname:after {
+            -webkit-animation: changeLastName 2s ease forwards; /* Safari 4.0 - 8.0 */
+            animation: changeLastName 2s ease forwards;
+        }
     }
 }
 
-.menu-item-list-dropdown-list {
-    display: none;
-    position: absolute;
-    list-style: none;
-    top: 39px;
-    right: 0;
-    font-size: 24px;
-    font-weight: 200;
-    color: $blue;
-    background-color: $gold;
-    border: 1px solid $blue;
-    padding-inline-start: 0;
-    min-width: 100%;
-    width: max-content;
-    z-index: 999;
+#firstname:after {
+    content: "Neil ";
 }
 
-.menu-item-list-dropdown:hover .menu-item-list-dropdown-list {
-    display: inherit;
+@keyframes changeFirstName {
+    0% { content: "LNei "; }
+    25% { content: "LiNe "; }
+    50% { content: "LieN "; }
+    75% { content: "Lien "; }
+    100% { content: "Lion "; }
 }
 
-.menu-item-list-dropdown-list-item {
-    padding: 10px 20px 5px 20px;
-    max-width: 100%;
-    float: none;
-    display: list-item;
-    position: relative;
-    list-style: none;
+#lastname:after {
+    content: "Thawani";
+}
 
-    &:hover {
-        background-color: $blue;
-        color: $gold;
+@keyframes changeLastName {
+    0% { content: "IThawan"; }
+    12% { content: "InThawa"; }
+    25% { content: "InaThaw"; }
+    37% { content: "InawTha"; }
+    50% { content: "InawaTh"; }
+    62% { content: "InawahT"; }
+    75% { content: "Inawhat"; }
+    87% { content: "in a what"; }
+    100% { content: "in a what?"; }
+}
 
-        .menu-item-list-item-link {
-            width: max-content;
-            color: $gold;
-            background-color: $blue;
+.nav-pills { // ul
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+
+    li {
+        position: relative;
+        display: block;
+        padding: 10px 15px;
+        text-align: center;
+        border-radius: 0px;
+        background-color: $white;
+        color: $figureColor;
+
+        &:hover {
+            text-decoration: none;
+            background-color: $groundColor;
+            color: $figureColor;
         }
+    }
+}
+
+.mobile-nav-container {
+    width: 100%;
+    background-color: $white;
+    color: $figureColor;
+    padding: 10px 0;
+    margin-bottom: 25px;
+    box-shadow: 2px 2px 1px $figureColor;
+}
+
+.mobile-nav {
+    text-align: center;
+    list-style: none;
+    padding: 5px;
+    display: flex;
+    justify-content: space-evenly;
+
+    .mobile-nav-item {
+        display: inline;
+
+        a {
+            background: none;
+            text-decoration: none;
+            padding: 10px 15px;
+            text-align: center;
+            border-radius: 0px;
+
+            &:focus {
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.mobile-nav.contact-icons {
+    justify-content: center;
+
+    a {
+        margin: 5px 20px 0 20px;
     }
 }

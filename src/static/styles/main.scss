@@ -1,89 +1,90 @@
 @import "variables"; // variables MUST go first
-
-@import "community";
-@import "curriculum";
-@import "grid";
-@import "hero";
-@import "icons";
-@import "mentors";
-@import "menu";
-@import "tables";
-@import "tags";
-@import "today";
-
 @import "mobile";
+
+@import "blog";
+@import "button-selector";
+@import "grid";
+@import "icons";
+@import "menu";
+@import "projects";
+@import "tables";
+
+ul {
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 0;
+}
+
+a, a:-webkit-any-link {
+    background-color: $groundColor;
+    color: $figureColor;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+a.has-img {
+    background: none;
+}
+
+body {
+    background-color: $groundColor;
+    margin: 0 auto 40px auto;
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, "Arial Light", sans-serif;
+    font-weight: 300;
+    color: $figureColor;
+    font-size: 1.25em;
+}
+
+h1, h2, h3, h6 {
+    font-weight: inherit;
+    margin: 0;
+}
+
+// override Chrome defaults
+p {
+  margin-block-start: 0;
+}
+
+p:last-child {
+  margin-block-end: 0;
+}
 
 .text-center {
     text-align: center;
 }
 
 .middle {
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 10px auto;
+}
+
+.hidden {
+    display: none;
 }
 
 .content-container {
-    max-width: 75%;
-    margin: 20px auto;
+    color: $figureColor;
+    padding: 20px 40px;
+    background-color: $white;
+    box-shadow: 2px 2px 1px $figureColor;
+    margin: 25px auto;
+    width: 50%;
 
     // Prevent vertical margin collapse with flexbox!
     display: flex;
     flex-direction: column;
 }
 
-.main-page-header {
-    max-width: 40%;
-    text-align: justify;
-    margin: auto;
-}
-
-.content-box {
-    border: 1px solid black;
-    box-shadow: 2px 2px 2px black;
-    padding: 20px;
-    margin: 20px 0;
-}
-
-.main-page-buttons {
-    display: flex;
-    justify-content: space-around;
-    width: 75%;
-    margin: auto;
-}
-
-.button {
-    font-size: 18px;
-    font-weight: 400;
-    font: "Arial Bold", "sans-serif";
-    padding: 10px 20px;
-    cursor: pointer;
-    border: 1px solid $black;
-    width: max-content;
-
-    a {
-        color: $white;
-        background-color: inherit;
-
-        &:hover {
-            text-decoration: none;
-        }
-
-        &:visited {
-            color: $white;
-        }
+@media (max-width: 991px) {
+    body {
+        margin: 0 auto;
     }
-}
 
-.button-blue {
-    background-color: $blue;
-}
-
-.button-green {
-    background-color: $green;
-}
-
-a.has-img {
-// a:has(> img) { - in progress in CSS4
-    background-color: transparent;
+    .content-container {
+        width: inherit;
+    }
 }

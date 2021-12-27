@@ -1,0 +1,5 @@
+<p>Yesterday at work I found out that one of my co-workers, after working for about a year and a half, is leaving to go to Amazon in Seattle. He was originally designated to be my mentor when I first started and we spent time together outside work occasionally.</p>
+
+<p>I also found out that the startup I was planning on applying to and the reason I was learning Clojure, Wit.AI, <a href="https://wit.ai/blog/2015/01/05/wit-ai-facebook" target="_blank">was acquired by Facebook</a>. Yesterday.</p>
+
+<p>It's time to find a new dream.</p>

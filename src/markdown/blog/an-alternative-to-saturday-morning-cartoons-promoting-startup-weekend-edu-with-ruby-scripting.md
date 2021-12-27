@@ -1,0 +1,50 @@
+<p>When I was younger, I used to frequent <a href="http://www.dal.net/" target="_blank">DALnet</a> using the <a href="http://www.mirc.com/" target="_blank">mIRC client</a>. I visited #IRCHelp, #Pokemon, and other chatrooms, and spent much of my youth becoming a faster and faster typist.</p>
+
+<p>As a frequent IRC user, I made scripts using the mIRC Scripts Editor:</p>
+
+<p><img src="http://i.imgur.com/3Td9quy.gif" height=300 alt="mirc script editor"/></p>
+
+<p>and that experience carried on into an interest (and later a career) in computers and technology. Today, I live in Kansas City and work with a team of organizers facilitating <a href="http://www.up.co/communities/usa/kansas-city/" target="_blank">Startup Weekends</a>, 52-hour events where teams pitch ideas for and build businesses with their peers. At the end of the weekend, judges vote on the best ideas and prizes are rewarded to the teams with the intent of facilitating their future success.</p>
+
+<p>Right now, a team based at the <a href="http://www.theleanlab.org" target="_blank">Lean Lab</a> is working to organize and promote SWEDU - <a href="http://www.up.co/communities/usa/kansas-city/startup-weekend/4030" target="_blank">Startup Weekend EDU</a>, based on a theme of building startups to improve education. Another team in St. Louis is organizing their own <a href="http://www.up.co/communities/usa/st-louis/startup-weekend/4854" target="_blank">SWEDU - St. Louis</a>, and have offered a wager to Kansas Citians.</p>
+
+<p>Whichever team has the most <a href="http://theleanlab.org/1/post/2015/01/the-i-70-swedu-battle.html" target="_blank">retweets, shares, and conversations about the event</a> respective to the city hosting the event <u>next Wednesday, January 14th</u> will win:
+<ul>
+<li>a sampling of the losing's city's best food (KC sends BBQ, St. Louis sends toasted ravioli, Gus's pretzels and Provel cheese),</li>
+<li>game tickets to that city's professional indoor soccer team (KC = Comets and St. Louis = Ambush), and</li>
+<li>bragging rights.</li>
+</ul>
+</p>
+
+<p>In doing my part for this competition, I created a Ruby script to retweet all tweets that <a href="http://www.twitter.com/swedukc" target="_blank">@SWEDUKC</a> puts out on their Twitter account next week. Release the kraken!</p>
+
+<pre>require 'twitter'
+
+TWITTER_CONSUMER_KEY = ''
+TWITTER_CONSUMER_SECRET = ''
+TWITTER_OAUTH_TOKEN = ''
+TWITTER_OAUTH_TOKEN_SECRET = ''
+
+twitterClient = Twitter::REST::Client.new do |config|
+  config.consumer_key = TWITTER_CONSUMER_KEY
+  config.consumer_secret = TWITTER_CONSUMER_SECRET
+  config.access_token = TWITTER_OAUTH_TOKEN
+  config.access_token_secret = TWITTER_OAUTH_TOKEN_SECRET
+end
+
+tweeted_list = Array.new
+
+while true do
+  timeline = twitterClient.user_timeline("swedukc")
+  sleep 900
+
+  timeline.each do |tweet|
+    if !tweeted_list.include? tweet
+      twitterClient.retweet(tweet.id)
+      tweeted_list << tweet
+      sleep 10
+    end
+  end
+end</pre>
+
+<p>This is neither good nor evil - this is for victory.</p>

@@ -1,0 +1,29 @@
+Let's play a game. First, we'll define some rules. Naturally, the first rule is to have fun.
+
+The second rule is that you need to level up. How do you level up? By learning lessons. To win the game, you need to wake up, although you're not technically asleep. In this game, you are a soul - a formless bit of ether - immersed in a world where you learn lessons to level up. At the final level, when you remember that you are asleep, you awaken. This game is but a dream. Do these rules sound familiar?
+
+How do you learn lessons in order to level up? First you need to grow - but not literally, since you're a soul and not a body. You grow by remembering past moments and emotions that confused you when you had experienced them, but are critical to your awakening Now and winning this game.
+
+But these times in the past that you "remember" create inertia. Why is "remember" in quotes? Because if you actually remembered, you would awaken and win the game. Inertia sets you in motion - generally in a direction you didn't necessarily choose toward paths that make you more asleep. In this game, you're down a path called Then and you need to be in a place - a moment - called Here (and sometimes Now). So how do you get Here?
+
+Before we mentioned something about moments and emotions. But those only came after you fell asleep and stayed asleep. This means you were awake once. But how does this make sense - how can you experience moments if you're asleep but when you awaken, they disappear and you come Here? The lesson you were supposed to learn Then will happen again Here soon. Don't forget: this is a game. These are the rules.
+
+The rules state that if you want to awaken, you need to learn lessons. And if you're down a path called Then and you're stuck there, you have a lesson that you need to learn to come back to Here, where you once were. You can remember what you've forgotten by peering within your self. What would you have done Then with what you know Now?
+
+So what happens when you get Here? Does the game start over? If you get Here, you'll awaken and know that you used to not know that you were asleep. If you're reading these rules, you are being told that you might not be awake but you might not necessarily know it. That might create frustration within you, soul.
+
+Lessons and learning them creates frustration, which can morph into hardship, and that hardship can make you want to turn back, not learn the lessons, and fall back asleep. But in this game, sleeping more forcefully pushes you to want to awaken. Why?
+
+This game started from a Void. That's where you spawned from. In this game, like any other, you can die. Your soul can wither and shrivel and evaporate into that Void. If you wondered for any reason if there was a Void and if it was part of the game - if you wanted to know if that was a lesson you needed to learn. But the takeaway for the real lesson is that the Void is forever, and in this game, so are you.
+
+If you die in this game and return to the Void, you didn't awaken and you experienced pain from not wanting to learn lessons. But this pain actually comes from the Void. If you are born of something, what makes you think that you don't have any of it in you? This is where the magic happens. These are cheat codes to the game, in a way.
+
+The rules say that you spawn from the Void, and that the Void is within you, meaning that within you - a soul - are the solutions to the lessons to be learned so you can awaken and win the game. Do you feel like you're remembering these rules? Remember the lessons that you've forgotten by peering within yourself at the Void. The Void is nothing but open space. You can expand your vision by making that space larger.
+
+One last thing. In this game, you will also meet other souls. Some are awake and some are asleep, and they all come from the Void - the same place as you - so they all have the exact same space within them. Knowing this because you have read these rules means that you're a little bit more awake than the souls that didn't read the rules. Although this is the case, you won't necessarily know how specifically to make them wake up.
+
+Because you are from the Void and because the Void is in you and because the Void is in all the other souls you encounter in this game, to those souls that read the rules: the way you win the game is to remember that you are asleep. You set up reminders for yourself, which you naturally forgot because you were asleep, and you can't remember things if you aren't awake, right?
+
+Awakening might hurt sometimes if you don't learn lessons fast enough. It'll start from within your soul and affect how you move down paths toward Then and get more explicit as you move further from Here and closer to Then. But if you're Then and you remember what you've forgotten, you can get closer to Here (and Now) by peering within. If it's too cluttered, you can create space.
+
+Those that have read the rules, they - and you - will know how to win the game. Are you ready to play?

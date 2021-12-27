@@ -1,0 +1,32 @@
+{{#> base}}
+
+<div class="blog-post-container">
+
+    <h1 class="blog-post-title">Gradient Descent for Linear Regression</h1>
+
+    <article class="blog-post-content">
+        <p>When applied specifically to the case of linear regression, we can derive a new form of the gradient descent equation by substituting our actual cost and hypothesis functions, modifying the equation to:</p>
+        <p><img src="http://i.imgur.com/T4NrouY.png" alt="gradient descent for linear regression algorithm" /></p>
+        <p><strong>m</strong>: the size of the training set</p>
+        <p><strong>&theta;<sub>0</sub>, &theta;<sub>1</sub></strong>: constants that change simultaneously
+            x<sub>i</sub>, y<sub>i</sub>: values of the given training set (i.e., the data)</p>
+        <p>Note that the value for converging upon &theta;<sub>1</sub> is because of the value of the derivative of the cost function J with respect to &theta;<sub>1</sub>:</p>
+        <p><img src="http://i.imgur.com/N62W6ls.png" alt="derivative of cost function J with respect to theta1" /></p>
+        <p>Starting with a guess for our hypothesis and repeating these equations yields more and more accurate results for our parameters.</p>
+        <p><strong>batch gradient descent</strong> - gradient descent on the original cost function J which looks at every example in the entire training set on every step</p>
+        <p>Assuming the learning rate &alpha; is not too large, batch gradient descent always converges to the global minimum. This is because it always yields a convex, bowl-shaped graph with only one global optimum.</p>
+        <p>In the 3D plane:</p>
+        <p><img src="http://i.imgur.com/FAqV6pn.png" alt="bowl-shaped batch gradient descent graph" /></p>
+        <p>In the 2D plane:</p>
+        <p><img src="http://i.imgur.com/5L9oECU.png" alt="2D batch gradient descent graph" /></p>
+    </article>
+
+    <p class="blog-post-tags"><span class="blog-post-tag">coursera</span><span class="blog-post-tag">machine learning</span><span class="blog-post-tag">andrew ng</span></p>
+
+    <p class="blog-post-created-at">Published November 28, 2016</p>
+
+    {{> blog-post-comment}}
+
+</div>
+
+{{/base}}

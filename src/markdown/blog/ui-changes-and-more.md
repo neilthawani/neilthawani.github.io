@@ -1,0 +1,11 @@
+<p>Every three months, I perform a quarterly review of my goals. Today is October 6th, 2015, and I am just a few days late delivering on the following changes to this blog:</p>
+
+<ul>
+<li>refactor SASS stylesheets and change color theme</li>
+<li>migrate comments from native Rails to Disqus</li>
+<li>change URLs from primary_id attributes to slugged post titles</li>
+<li>append the date each article was published to its footer</li>
+<li>change the title of the blog from "Lion in a what?" to "Neil's Blog" and append each post or tag's name to the title when the user is viewing it</li>
+</ul>
+
+<p>I suppose that, without clients, it's an acceptable statement to issue: late is better than never!</p>
