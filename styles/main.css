@@ -6621,6 +6621,85 @@ i:before {
 .ii-zip-box-mixin, .ii-zip-box:before {
   content: "\f92b"; }
 
+@media (max-width: 480px) {
+  .love-container {
+    margin-top: -25px !important;
+    margin-bottom: -25px !important; }
+    .love-container #pictures {
+      display: block !important; }
+      .love-container #pictures img {
+        margin-bottom: 25px !important; }
+    .love-container #potentialDealbreakers .potential-dealbreakers {
+      display: block !important; }
+      .love-container #potentialDealbreakers .potential-dealbreakers div {
+        margin-right: 0 !important; } }
+
+.love-container {
+  font-family: serif;
+  margin: -50px 0;
+  background-color: red;
+  color: white;
+  padding: 50px;
+  line-height: 1.5; }
+  .love-container a, .love-container a:-webkit-any-link {
+    color: white;
+    text-decoration: underline;
+    background-color: transparent; }
+    .love-container a:hover, .love-container a:-webkit-any-link:hover {
+      color: red;
+      background-color: white; }
+  .love-container h1, .love-container h2, .love-container h3 {
+    font-weight: 600;
+    font-family: sans-serif; }
+  .love-container h1 span,
+  .love-container h2 span,
+  .love-container h3 span {
+    font-weight: 400;
+    font-family: serif; }
+  .love-container #name span a, .love-container #name span a:-webkit-any-link {
+    color: white;
+    text-decoration: underline; }
+    .love-container #name span a:hover, .love-container #name span a:-webkit-any-link:hover {
+      color: red;
+      background-color: white; }
+  .love-container #pictures {
+    display: flex; }
+    .love-container #pictures img {
+      margin: 0 25px;
+      height: 250px; }
+  .love-container .abbreviation,
+  .love-container .sentence {
+    border: 1px solid white;
+    padding: 5px;
+    margin: 5px;
+    width: max-content;
+    cursor: pointer;
+    max-width: 75vw; }
+    .love-container .abbreviation:hover,
+    .love-container .sentence:hover {
+      background-color: white;
+      color: red; }
+      .love-container .abbreviation:hover a,
+      .love-container .sentence:hover a {
+        color: red; }
+  .love-container .sentence {
+    border: double; }
+  .love-container #potentialDealbreakers {
+    margin-top: 25px; }
+  .love-container #potentialDealbreakers .potential-dealbreakers {
+    display: flex;
+    flex-wrap: wrap; }
+    .love-container #potentialDealbreakers .potential-dealbreakers h2 {
+      text-decoration: underline; }
+    .love-container #potentialDealbreakers .potential-dealbreakers div {
+      margin-right: 25px;
+      flex: 1 0 20%; }
+  .love-container #potentialDealbreakers .potential-dealbreakers p {
+    border: double;
+    padding: 5px; }
+  .love-container #bestWayToContact {
+    margin-top: 50px; }
+
 .nav {
   font-size: 24px;
   background-color: white;
