@@ -6621,6 +6621,19 @@ i:before {
 .ii-zip-box-mixin, .ii-zip-box:before {
   content: "\f92b"; }
 
+@media (max-width: 480px) {
+  .love-container {
+    margin-top: -25px !important;
+    margin-bottom: -25px !important; }
+    .love-container #pictures {
+      display: block !important; }
+      .love-container #pictures img {
+        margin-bottom: 25px !important; }
+    .love-container #potentialDealbreakers .potential-dealbreakers {
+      display: block !important; }
+      .love-container #potentialDealbreakers .potential-dealbreakers div {
+        margin-right: 0 !important; } }
+
 .love-container {
   font-family: serif;
   margin: -50px 0;

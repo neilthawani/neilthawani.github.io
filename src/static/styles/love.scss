@@ -1,3 +1,26 @@
+@media (max-width: $screen-phone) {
+    .love-container {
+        margin-top: -25px !important;
+        margin-bottom: -25px !important;
+
+        #pictures {
+            display: block !important;
+
+            img {
+                margin-bottom: 25px !important;
+            }
+        }
+
+        #potentialDealbreakers .potential-dealbreakers {
+            display: block !important;
+
+            div {
+                margin-right: 0 !important;
+            }
+        }
+    }
+}
+
 .love-container {
     font-family: serif;
     margin: -50px 0;
@@ -76,7 +99,7 @@
     #potentialDealbreakers {
         margin-top: 25px;
     }
-    
+
     #potentialDealbreakers .potential-dealbreakers {
         display: flex;
         flex-wrap: wrap;
@@ -92,7 +115,6 @@
     }
 
     #potentialDealbreakers .potential-dealbreakers p {
-        // display: none;
         border: double;
         padding: 5px;
     }
