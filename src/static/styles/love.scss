@@ -50,7 +50,6 @@
         }
     }
 
-    .potential-dealbreakers h2,
     .abbreviation,
     .sentence {
         border: 1px solid white;
@@ -71,19 +70,31 @@
     }
 
     .sentence {
-        border: double;//1px double white;
+        border: double;
     }
 
+    #potentialDealbreakers {
+        margin-top: 25px;
+    }
+    
     #potentialDealbreakers .potential-dealbreakers {
         display: flex;
+        flex-wrap: wrap;
+
+        h2 {
+            text-decoration: underline;
+        }
 
         div {
             margin-right: 25px;
+            flex: 1 0 20%;
         }
     }
 
     #potentialDealbreakers .potential-dealbreakers p {
-        display: none;
+        // display: none;
+        border: double;
+        padding: 5px;
     }
 
     #bestWayToContact {

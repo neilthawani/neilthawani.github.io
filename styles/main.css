@@ -6654,7 +6654,6 @@ i:before {
     .love-container #pictures img {
       margin: 0 25px;
       height: 250px; }
-  .love-container .potential-dealbreakers h2,
   .love-container .abbreviation,
   .love-container .sentence {
     border: 1px solid white;
@@ -6663,23 +6662,28 @@ i:before {
     width: max-content;
     cursor: pointer;
     max-width: 75vw; }
-    .love-container .potential-dealbreakers h2:hover,
     .love-container .abbreviation:hover,
     .love-container .sentence:hover {
       background-color: white;
       color: red; }
-      .love-container .potential-dealbreakers h2:hover a,
       .love-container .abbreviation:hover a,
       .love-container .sentence:hover a {
         color: red; }
   .love-container .sentence {
     border: double; }
+  .love-container #potentialDealbreakers {
+    margin-top: 25px; }
   .love-container #potentialDealbreakers .potential-dealbreakers {
-    display: flex; }
+    display: flex;
+    flex-wrap: wrap; }
+    .love-container #potentialDealbreakers .potential-dealbreakers h2 {
+      text-decoration: underline; }
     .love-container #potentialDealbreakers .potential-dealbreakers div {
-      margin-right: 25px; }
+      margin-right: 25px;
+      flex: 1 0 20%; }
   .love-container #potentialDealbreakers .potential-dealbreakers p {
-    display: none; }
+    border: double;
+    padding: 5px; }
   .love-container #bestWayToContact {
     margin-top: 50px; }
 
