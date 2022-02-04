@@ -6621,6 +6621,14 @@ i:before {
 .ii-zip-box-mixin, .ii-zip-box:before {
   content: "\f92b"; }
 
+.love-container {
+  margin: 50px; }
+
+#pictures {
+  display: flex; }
+  #pictures img {
+    height: 250px; }
+
 .nav {
   font-size: 24px;
   background-color: white;
