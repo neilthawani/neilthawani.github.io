@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
             abbreviation: 'enjoys being present in society',
             sentence: 'Likes going to things like galas, balls, parties. Basically, like, enjoys being present in society. I enjoy spending time at home and I also like going out. And when I go out, I like to do things like go dancing or go to different venues to explore a community. I don\'t really like live music and treat concerts I go to as homework to listen to the artist\'s discography before I go so I know what I\'m listening to.',
         }, {
-            abbreviation: 'a partner in <strikethrough>crime</strikethrough> doing legal activities',
+            abbreviation: 'a partner in <strike>crime</strike> doing legal activities',
             sentence: 'A Global Citizen or a Third Culture Kid. I am the son of first-generation immigrants and I have also learned/forgotten four foreign languages (German, Spanish, Russian, Hindi). I enjoy learning languages before I travel to a country and blend well into a crowd somehow. I have traveled to some parts of 6/7 continents and I would like to travel some more. I want to meet a partner in crime doing legal activities who might be interested in doing the same.',
         }, {
             abbreviation: 'Self-actualized.',
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
                 'I round up at the Taco Bell drive thru and donate clothes or other in-kind goods when I can. I enjoy giving money to charitable causes, but I do not give 10% of my income to charity at the moment. I would like to explore Effective Altruism further to understand where to best put my "heart-" and "head-"led investments in the future of our world.',
             ],
         },
-        bestWayToContact: 'Email neilthawani@gmail.com with a subject line prepended with "[GoogleDoc of Love]." An ideal message is similar to the format of this doc with a list of desired traits/habits you want to see in your mate, some self-awareness with various implications, and potential dealbreakers. Some logistical information (age, sex, location, etc.) would be good too.'
+        bestWayToContact: 'Email <a href="mailto:neilthawani@gmail.com">neilthawani@gmail.com</a> prepending the subject line with <strong>[GoogleDoc of Love]</strong>. An ideal message is similar to the format of this doc with a list of desired traits/habits you want to see in your mate, some self-awareness with various implications, and potential dealbreakers. Some logistical information (age, sex, location, etc.) would be good too. Alternatively, you could just shoot your shot.'
     };
 
     const nameHeader = document.getElementById('name');
@@ -126,9 +126,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
         array.forEach((obj) => {
             const sentence = `<p>${obj.sentence}</p>`;
-            // const abbreviation; // TODO
 
-            el.innerHTML += sentence;
+            const abbreviationDiv = `<div class="abbreviation">${obj.abbreviation}</div>`;
+            el.innerHTML += abbreviationDiv;
         })
     });
 
@@ -136,15 +136,42 @@ document.addEventListener('DOMContentLoaded', function(event) {
         const el = document.getElementById(field);
         const array = loveStruct.potentialDealbreakers[field];
 
-        array.forEach((sentence) => {
-          const item = `<p>${sentence}</p>`;
+        el.addEventListener('click', function(evt) {
+            console.log('click', evt);
+            // debugger;
 
-          el.innerHTML += item;
+            // const parentDiv =
+            // const toAppend = evt.path[1].children;
+            // evt.path[1].innerHTML = '';
+            // console.log('toAppend', toAppend);
+            // console.log('array', array);
+            // array.forEach((sentence) => {
+            //     console.log('sentence', sentence);
+            //     const item = `<p>${sentence}</p>`;
+            //     console.log('evt.path[2]', evt.path[2]);
+            //     // debugger;
+            //
+            // });
+
+            evt.path[2].innerHTML += '<span>hahahah</span>';
         });
     });
 
     const contactDiv = document.getElementById('bestWayToContact');
     contactDiv.lastElementChild.innerHTML = loveStruct.bestWayToContact;
+
+    const abbreviations = document.getElementsByClassName('abbreviation');
+    for (var i = 0; i < abbreviations.length; i++) {
+        abbreviations[i].addEventListener('click', function(evt) {
+            const abbrev = evt.path[0].innerText;
+            const headingLabel = evt.path[1].id;
+            let sentence = loveStruct[headingLabel].filter((item) => item.abbreviation === abbrev)[0].sentence;
+
+            sentence = sentence.replace(abbrev, `<strong><u>${abbrev}</u></strong>`);
+            evt.path[0].innerHTML = sentence;
+            evt.path[0].className = 'sentence';
+        });
+    }
 });
 
 </script>
@@ -191,27 +218,28 @@ document.addEventListener('DOMContentLoaded', function(event) {
         <div id="potentialDealbreakers">
             <h1>Potential Dealbreakers</h1>
 
-            <div class="potential-dealbreakers" id="time">
-                <h2>Time</h2>
-            </div>
+            <div class="potential-dealbreakers">
+                <div id="time">
+                    <h2>Time</h2>
+                </div>
 
-            <div class="potential-dealbreakers" id="sex">
-                <h2>Sex</h2>
-            </div>
+                <div id="sex">
+                    <h2>Sex</h2>
+                </div>
 
-            <div class="potential-dealbreakers" id="kids">
-                <h2>Kids</h2>
-            </div>
+                <div id="kids">
+                    <h2>Kids</h2>
+                </div>
 
-            <div class="potential-dealbreakers" id="money">
-                <h2>Money</h2>
+                <div id="money">
+                    <h2>Money</h2>
+                </div>
             </div>
         </div>
 
-        <h3 id="bestWayToContact">
-            Best way to contact:
+        <div id="bestWayToContact">
+            <h2>Best way to contact:</h2>
             <span></span>
         </h3>
-
     </div>
 {{/base}}

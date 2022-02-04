@@ -1,11 +1,92 @@
 .love-container {
-    margin: 50px;
-}
+    font-family: serif;
+    margin: -50px 0;
+    background-color: red;
+    color: white;
+    padding: 50px;
+    line-height: 1.5;
 
-#pictures {
-    display: flex;
+    a, a:-webkit-any-link {
+        color: white;
+        text-decoration: underline;
+        background-color: transparent;
 
-    img {
-        height: 250px;
+        &:hover {
+            color: red;
+            background-color: white;
+        }
+    }
+
+    h1, h2, h3 {
+        font-weight: 600;
+        font-family: sans-serif;
+    }
+
+    h1 span,
+    h2 span,
+    h3 span {
+        font-weight: 400;
+        font-family: serif;
+    }
+
+    #name {
+        span a, span a:-webkit-any-link {
+            color: white;
+            text-decoration: underline;
+
+            &:hover {
+                color: red;
+                background-color: white;
+            }
+        }
+    }
+
+    #pictures {
+        display: flex;
+
+        img {
+            margin: 0 25px;
+            height: 250px;
+        }
+    }
+
+    .potential-dealbreakers h2,
+    .abbreviation,
+    .sentence {
+        border: 1px solid white;
+        padding: 5px;
+        margin: 5px;
+        width: max-content;
+        cursor: pointer;
+        max-width: 75vw;
+
+        &:hover {
+            background-color: white;
+            color: red;
+
+            a {
+                color: red;
+            }
+        }
+    }
+
+    .sentence {
+        border: double;//1px double white;
+    }
+
+    #potentialDealbreakers .potential-dealbreakers {
+        display: flex;
+
+        div {
+            margin-right: 25px;
+        }
+    }
+
+    #potentialDealbreakers .potential-dealbreakers p {
+        display: none;
+    }
+
+    #bestWayToContact {
+        margin-top: 50px;
     }
 }
