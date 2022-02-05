@@ -126,50 +126,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
         const array = loveStruct[key];
 
         array.forEach((obj, index) => {
-            // console.log('key', key);
             const abbreviationDiv = `<div class="abbreviation" data-struct=${key} data-index=${index} onClick="traitClicked(${key}, ${index})">${obj.abbreviation}</div>`;
             el.innerHTML += abbreviationDiv;
         });
     });
-
-    // const abbreviations = document.getElementsByClassName('abbreviation');
-    // for (var i = 0; i < abbreviations.length; i++) {
-    //     abbreviations[i].addEventListener('click', function(evt) {
-    //         let abbrev;
-    //         for (var i = 0; i < evt.path.length; i++) {
-    //             const hasAttribute = evt.path[i].className === 'abbreviation';
-    //
-    //             if (hasAttribute) {
-    //                 abbrev = evt.path[i].innerText;
-    //                 break;
-    //             }
-    //         }
-    //
-    //         let headingLabel;
-    //         for (var i = 0; i < evt.path.length; i++) {
-    //             headingLabel = evt.path[i].id;
-    //             if (traitArrayKeys.includes(headingLabel)) break;
-    //         }
-    //
-    //         let index;
-    //         for (var i = 0; i < evt.path.length; i++) {
-    //             index = parseInt(evt.path[i].getAttribute('data-index'), 10);
-    //             if (!isNaN(index)) break;
-    //         }
-    //
-    //         let content = loveStruct[headingLabel][index];
-    //
-    //         if (evt.path[0].getAttribute('data-expanded') === 'true') {
-    //             content = content.abbreviation;
-    //             evt.path[0].setAttribute('data-expanded', false);
-    //         } else {
-    //             content = content.sentence;//.replace(abbrev, `<strong><u>${abbrev}</u></strong>`);
-    //             evt.path[0].setAttribute('data-expanded', true);
-    //         }
-    //
-    //         evt.path[0].innerHTML = content;
-    //     });
-    // }
 
     const contactDiv = document.getElementById('bestWayToContact');
     contactDiv.lastElementChild.innerHTML = loveStruct.bestWayToContact;
@@ -194,14 +154,10 @@ function dealbreakerClicked(id) {
 }
 
 function traitClicked(traitDiv, index) {
-    // console.log('traitDiv', traitDiv);
     const trait = traitDiv.id;
-    const divToModify = traitDiv.querySelector(`[data-index="${index}"]`);//[index];
-    // const index = parseInt(id, 10);
-    // debugger;
+    const divToModify = traitDiv.querySelector(`[data-index="${index}"]`);
     const abbrevObj = loveStruct[trait][index];
-    // console.log('abbrevObj', abbrevObj);
-    // debugger;
+
     if (divToModify.getAttribute('data-expanded') === 'true') {
         divToModify.innerHTML = abbrevObj.abbreviation;
         divToModify.setAttribute('data-expanded', false);
