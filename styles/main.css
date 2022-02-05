@@ -6692,12 +6692,12 @@ i:before {
     .love-container #potentialDealbreakers .potential-dealbreakers [data-expanded=true] {
       border: double;
       cursor: pointer; }
+      .love-container #potentialDealbreakers .potential-dealbreakers [data-expanded=true]:hover {
+        color: #851d18;
+        background-color: #cff; }
       .love-container #potentialDealbreakers .potential-dealbreakers [data-expanded=true] h2 {
         text-decoration: underline;
         border: none; }
-        .love-container #potentialDealbreakers .potential-dealbreakers [data-expanded=true] h2:hover {
-          color: #cff;
-          background-color: #851d18; }
     .love-container #potentialDealbreakers .potential-dealbreakers h2 {
       border: 1px solid #cff;
       padding: 5px 15px;
