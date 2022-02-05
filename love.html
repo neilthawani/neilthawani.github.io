@@ -1,111 +1,111 @@
 <script>
-document.addEventListener('DOMContentLoaded', function(event) {
-    const loveStruct = {
-        name: 'Neil Thawani',
-        ipaLink: 'http://ipa-reader.xyz/?text=nil%20%CE%B8%C9%99w%C9%94ni',
-        dateOfBirth: '16 September 1988',
-        diet: 'Omnivore, mostly vegetarian.',
-        locationOfOrigin: 'Columbia, Missouri, USA',
-        presentLocation: 'Digital nomad, exploring the US and looking to settle down in a location by May 2022.',
-        pictures: [{
-            src: 'src/static/images/love/bensons_wedding.png',
-            alt: 'Me in November 2019 at my friend\'s wedding'
-        }, {
-            src: 'src/static/images/love/coderdojo_pfp.png',
-            alt: 'Me at CoderDojo KC in February 2016'
-        }],
-        desiredTraitsInAPartner: [{
-            abbreviation: 'Optimistic about the future.',
-            sentence: 'Optimistic about the future. The world is getting better - all the data says so. But there\'s a lot of income inequality and the old order is slowly dying so the new one can be born. The next few years are going to be choppy, but overall, I am optimistic about the future and would like to be with someone who is too.',
-        }, {
-            abbreviation: 'The willingness to do The Work.',
-            sentence: 'The willingness to do The Work. This means engaging in some form of meditation (passive or active) and practicing overall mental wellness. This means cultivating compassion (loving kindness), grace (forgiveness), and mercy (an understanding of your innate humanity with its conditioning and context) for yourself over time so you can grow and put that person - present and grounded - out into the world to serve others.',
-        }, {
-            abbreviation: 'Fitness oriented.',
-            sentence: 'Fitness oriented. I am a yogi and a boxer. If I have time, I move my body 7 days a week. I enjoy long walks and would like to remain mobile long into old age.',
-        }, {
-            abbreviation: 'I want to meet someone who can teach me something.',
-            sentence: 'Deeply knowledgeable about one subject. I would like to be with someone who is as enamored by their work as I am with mine. It can be broad discipline-specific knowledge or deep academic/researched knowledge, but charming people who know things about stuff and can articulate what they know confidently are so attractive. I want to meet someone who can teach me something.',
-        }, {
-            abbreviation: 'being sweet',
-            sentence: 'Physically affectionate. I like to define this as "being sweet on someone." I\'ve noticed that my voice "lightens" if I\'m talking to someone I\'m attracted to or care about deeply. I am easily put under people\'s spells and prefer to not be shaken from the magic if I am with a romantic partner.',
-        }, {
-            abbreviation: 'perspective',
-            sentence: 'Knows when to slow down and when to go fast from an emotionality/productivity standpoint. I think this is something I struggle with - so much that my initial articulation of it (this doc was originally a bulleted list of short sentences) is not very comprehensible. I live life quite outside of most people\'s definition of balance, and I am looking for someone with more perspective than I have for what my priorities can and should be while I strive to live according to my own personal definitions of success in various dimensions of my life.',
-        }, {
-            abbreviation: 'Have an open heart.',
-            sentence: 'Emotionally available. I have a lot of feelings and I like talking about them. I love processing emotions and the language of intimacy that develops between two people who are discovering each other or adore each other. I want to feel psychologically safe with a lover to crack this fruit of love wide open and eat its pulp like … I don\'t know where I\'m going with this. tl;dr: Have an open heart.',
-        }, {
-            abbreviation: 'doesn\'t chew with their mouth open',
-            sentence: 'Class and etiquette (e.g., doesn\'t chew with their mouth open). I think this includes a history of eating at fancy dinners and knowing extremely wealthy people - like C-suite executives, founders of tech companies - and not being intimidated by their presence. I\'ve had a strange and charmed life, and I understand power structures inherent in these interactions, but I get along with powerful people very well because I read a little bit of Dale Carnegie and winged the rest. (Classy.) Regarding etiquette, I had a friend who would chew with her mouth open, gnashing so loudly even through the filter of my noise-canceling headphones. I hated her for it. I think we\'re still friends, but we haven\'t spoken in months. I hope this entire paragraph is interpreted only in a semi-serious manner.',
-        }, {
-            abbreviation: 'jokes',
-            sentence: 'A sense of humor. I like jokes and good-natured roasting. For example, my friend said he was surprised when he got a girlfriend with his mustache and I joked with him that it might be time to shave it off - unless his girlfriend was really into it. And he went on to tell me about how she said he could grow whatever facial hair he liked as long as the mustache stayed. Charming, wholesome, and one of many very enjoyable bits. I do not do improv comedy very well, but I loved watching Whole Line Is It Anyway and know the rules of improv. I watch standup comedy semi-regularly and performing one day as a standup comedian is something on my bucket list. I have a dry sense of humor that is also influenced by many stand-up comedians from the late 20th century - George Carlin, Richard Pryor, and the like. I also enjoy Anthony Jeselnik\'s dark humor and alternative sketch comedy like SNL, Mad TV and Kids in the Hall.',
-        }, {
-            abbreviation: 'enjoys being present in society',
-            sentence: 'Likes going to things like galas, balls, parties. Basically, like, enjoys being present in society. I enjoy spending time at home and I also like going out. And when I go out, I like to do things like go dancing or go to different venues to explore a community. I don\'t really like live music and treat concerts I go to as homework to listen to the artist\'s discography before I go so I know what I\'m listening to.',
-        }, {
-            abbreviation: 'a partner in crime and/or doing legal activities',
-            sentence: 'A Global Citizen or a Third Culture Kid. I am the son of first-generation immigrants and I have also learned/forgotten four foreign languages (German, Spanish, Russian, Hindi). I enjoy learning languages before I travel to a country and blend well into a crowd somehow. I have traveled to some parts of 6/7 continents and I would like to travel some more. I want to meet a partner in crime and/or doing legal activities who might be interested in doing the same.',
-        }, {
-            abbreviation: 'Self-actualized.',
-            sentence: 'Self-actualized. Interested in doing meaningful work (whatever that means to you). I am interested in being "out there" in the world, and the relationships I make in my career are a large part of my regular life, although I have a close inner circle of personal friends. A partner might even be uncovering their passion and that charges their energy up and out of bed in the morning, as they develop devotion toward some quest that their head and heart are bound inevitably toward.',
-        }, {
-            abbreviation: 'you should value having people you love close to you',
-            sentence: 'Values family. I have a large nuclear, chosen, and extended family. You don\'t have to have a large family, but you should value having people you love close to you - emotionally and/or geographically.',
-        }, {
-            abbreviation: 'Familiar with hippie culture.',
-            sentence: 'Familiar with hippie culture. Some of my best friends are former (or current!) flower children and tree huggers.',
-        }],
-        thingsINoticedAboutMyself: [{
-            abbreviation: 'hungry for knowledge',
-            sentence: 'I am quite hungry for knowledge. If I see something I don\'t understand, I try to find out about it. I use my phone for calls, texting, and Googling interesting facts.',
-        }, {
-            abbreviation: 'good memory',
-            sentence: 'I view the world through a series of mental models and frameworks and organize information from a systems perspective. I usually reason from induction. I have a uniquely good memory - my rate of long-term memory consolidation is very high, and I augment this with Google Calendar. I text my friends on their birthdays. When I say, "Noted" in conversation, it means that I actually made a mental or literal note and will return to that thought later. I am uniquely prepared for many situations and this has manifested itself in the form of overpacking for airplane trips by about 20 lbs. and then paring down to the essentials before I leave for the airport - portable luggage scale at the ready.',
-        }, {
-            abbreviation: 'I am an intuitive and sensory-oriented person.',
-            sentence: 'I can generally gauge people\'s character, motivations, and latch onto their interests within about 10 minutes of conversation. I am an intuitive and sensory-oriented person. Of course, I don\'t gel with everyone, but most people are interesting and open to the sort of banter I like to engage in - mostly friendly, sometimes weird or unexpected.',
-        }, {
-            abbreviation: 'therapy',
-            sentence: 'I have spent hours in therapy. I have done <a href="https://www.amazon.com/How-Do-Work-Recognize-Patterns/dp/006301209X">The Work</a>. I believe in and employ <a href="https://www.amazon.com/Nonviolent-Communication-Language-Life-Changing-Relationships/dp/189200528X">Non-Violent/Compassionate Communication</a>.',
-        }, {
-            abbreviation: 'swagtastic',
-            sentence: 'I am swagtastic but also trying to be humble as I move forward in my life.'
-        }, {
-            abbreviation: 'What is randomness, anyway?',
-            sentence: 'I am not necessarily religious or spiritual, but I do find value in rituals and the concept of God. I do not know if I believe that we have Free Will and I have noticed non-linearities and synchronicities and "gut feelings" contribute a lot more to my lived experience than a "scientist" should admit. What is randomness, anyway?',
-        }, {
-            abbreviation: 'I do not watch professional sports.',
-            sentence: 'I do not watch professional sports. I appreciate and enjoy competition and I am very competitive when I participate in sports, but I do not actively watch the NBA, NFL, MLB, NHL, FIFA, etc. unless in an otherwise enjoyable social context like a house party (e.g., Super Bowl parties) or a special event. I watched the Atlanta United FC soccer match against CF Montreal in November 2019 as part of my friend\'s bachelor party agenda.',
-        }],
-        potentialDealbreakers: {
-            time: [
-                'I am a social scientist and software engineer. I am also a project leader, so I spend most of my time thinking about very serious things.',
-                'I also enjoy playing video games (Apex Legends, Rocket League) with friends on my gaming laptop and enjoy reading about pop culture. I like bad reality TV (The Circle, Love is Blind, Flavor of Love, etc.), and I go to movie theaters sometimes.',
-                'I spend most of my time working in a relatively sustainable way. I say "relatively"  because I have a good social support system and a "wellness" routine that consists of yoga, boxing, monthly sports massages, and evolving slowly into finding out what exactly an esthetician does. Sometimes this doesn\'t happen and I need to rest intently.',
-                'I [have] practice(d) <a href="https://www.dhamma.org/">Vipassana</a> meditation and can very easily do quite literally nothing at all. I like to go to a 10-day Vipassana workshop once per year.',
-                'I wake up at around 8am and sleep around midnight most days. This varies occasionally by plus/minus two hours either way, but that\'s the standard routine and I am generally well-rested.',
-                '"Quality Time" is one of my love languages, but "Words of Affirmation" is not. I enjoy praise and compliments and receive them well, but not as much as time well spent.',
-                '"Acts of Service" is not one of my love languages, but I think someone whose it is can benefit from my organized nature. I\'ll wash your dishes. That\'s how you know I really like you.',
-            ],
-            sex: [
-                'I am masculine, cisgender, and mostly monogamous with a handful of stints practicing ethical nonmonogamy. I am mostly heterosexual. I think sex is a unique connection between people that is fun to explore.',
-                'I am not attracted to a particular body type, but you have to take care of yourself and have love for your earthly vessel. I also pick my nose, but I\'m trying to stop.',
-                '"Physical Touch" is one of my love languages. Sex is a fairly important part of a romantic relationship to me. I enjoy cuddling and being physically affectionate.',
-            ],
-            kids: [
-                'I would like to have kids someday. I am not sure if I am dead set on biological children. I might be open to a Brangelina-style adoption spree, but I anticipate limiting the quantity of children I have by imagining the financial, time, and energy constraints I will have when I become a father.',
-            ],
-            money: [
-                '"Gift Giving" is not one of my love languages. I like giving thoughtful gifts to people, but it\'s usually on or around special occasions. I\'ll pick up on something when I spend time with someone, make a note of it, and buy it before their birthday.',
-                'I am frugal and the son of first-generation Indian immigrants. This has had such a significant impact on my worldview that I think it bears repeating. My parents are relatively conservative but intelligent enough to be open-minded about many things. They do not believe in "wasting" money. Sometimes I do, but I prefer to save a majority of my income and otherwise invest the rest wisely in endeavors that grant long-term financial gain or emotional enjoyment. My gaming laptop was one particular indulgence that feels like an investment in my happiness.',
-                'I round up at the Taco Bell drive thru and donate clothes or other in-kind goods when I can. I enjoy giving money to charitable causes, but I do not give 10% of my income to charity at the moment. I would like to explore Effective Altruism further to understand where to best put my "heart-" and "head-"led investments in the future of our world.',
-            ],
-        },
-        bestWayToContact: 'Email <a href="mailto:neilthawani@gmail.com?subject=[GoogleDoc of Love]">neilthawani@gmail.com</a> prepending the subject line with <strong>[GoogleDoc of Love]</strong>. An ideal message is similar to the format of this doc with a list of desired traits/habits you want to see in your mate, some self-awareness with various implications, and potential dealbreakers. Some logistical information (age, sex, location, etc.) would be good too. Alternatively, you could just shoot your shot.'
-    };
+const loveStruct = {
+    name: 'Neil Thawani',
+    ipaLink: 'http://ipa-reader.xyz/?text=nil%20%CE%B8%C9%99w%C9%94ni',
+    dateOfBirth: '16 September 1988',
+    diet: 'Omnivore, mostly vegetarian.',
+    locationOfOrigin: 'Columbia, Missouri, USA',
+    presentLocation: 'Digital nomad, exploring the US and looking to settle down in a location by May 2022.',
+    pictures: [{
+        src: 'src/static/images/love/bensons_wedding.png',
+        alt: 'Me in November 2019 at my friend\'s wedding'
+    }, {
+        src: 'src/static/images/love/coderdojo_pfp.png',
+        alt: 'Me at CoderDojo KC in February 2016'
+    }],
+    desiredTraitsInAPartner: [{
+        abbreviation: 'Optimistic about the future.',
+        sentence: 'Optimistic about the future. The world is getting better - all the data says so. But there\'s a lot of income inequality and the old order is slowly dying so the new one can be born. The next few years are going to be choppy, but overall, I am optimistic about the future and would like to be with someone who is too.',
+    }, {
+        abbreviation: 'The willingness to do The Work.',
+        sentence: 'The willingness to do The Work. This means engaging in some form of meditation (passive or active) and practicing overall mental wellness. This means cultivating compassion (loving kindness), grace (forgiveness), and mercy (an understanding of your innate humanity with its conditioning and context) for yourself over time so you can grow and put that person - present and grounded - out into the world to serve others.',
+    }, {
+        abbreviation: 'Fitness oriented.',
+        sentence: 'Fitness oriented. I am a yogi and a boxer. If I have time, I move my body 7 days a week. I enjoy long walks and would like to remain mobile long into old age.',
+    }, {
+        abbreviation: 'I want to meet someone who can teach me something.',
+        sentence: 'Deeply knowledgeable about one subject. I would like to be with someone who is as enamored by their work as I am with mine. It can be broad discipline-specific knowledge or deep academic/researched knowledge, but charming people who know things about stuff and can articulate what they know confidently are so attractive. I want to meet someone who can teach me something.',
+    }, {
+        abbreviation: 'being sweet',
+        sentence: 'Physically affectionate. I like to define this as "being sweet on someone." I\'ve noticed that my voice "lightens" if I\'m talking to someone I\'m attracted to or care about deeply. I am easily put under people\'s spells and prefer to not be shaken from the magic if I am with a romantic partner.',
+    }, {
+        abbreviation: 'perspective',
+        sentence: 'Knows when to slow down and when to go fast from an emotionality/productivity standpoint. I think this is something I struggle with - so much that my initial articulation of it (this doc was originally a bulleted list of short sentences) is not very comprehensible. I live life quite outside of most people\'s definition of balance, and I am looking for someone with more perspective than I have for what my priorities can and should be while I strive to live according to my own personal definitions of success in various dimensions of my life.',
+    }, {
+        abbreviation: 'Have an open heart.',
+        sentence: 'Emotionally available. I have a lot of feelings and I like talking about them. I love processing emotions and the language of intimacy that develops between two people who are discovering each other or adore each other. I want to feel psychologically safe with a lover to crack this fruit of love wide open and eat its pulp like … I don\'t know where I\'m going with this. tl;dr: Have an open heart.',
+    }, {
+        abbreviation: 'doesn\'t chew with their mouth open',
+        sentence: 'Class and etiquette (e.g., doesn\'t chew with their mouth open). I think this includes a history of eating at fancy dinners and knowing extremely wealthy people - like C-suite executives, founders of tech companies - and not being intimidated by their presence. I\'ve had a strange and charmed life, and I understand power structures inherent in these interactions, but I get along with powerful people very well because I read a little bit of Dale Carnegie and winged the rest. (Classy.) Regarding etiquette, I had a friend who would chew with her mouth open, gnashing so loudly even through the filter of my noise-canceling headphones. I hated her for it. I think we\'re still friends, but we haven\'t spoken in months. I hope this entire paragraph is interpreted only in a semi-serious manner.',
+    }, {
+        abbreviation: 'jokes',
+        sentence: 'A sense of humor. I like jokes and good-natured roasting. For example, my friend said he was surprised when he got a girlfriend with his mustache and I joked with him that it might be time to shave it off - unless his girlfriend was really into it. And he went on to tell me about how she said he could grow whatever facial hair he liked as long as the mustache stayed. Charming, wholesome, and one of many very enjoyable bits. I do not do improv comedy very well, but I loved watching Whole Line Is It Anyway and know the rules of improv. I watch standup comedy semi-regularly and performing one day as a standup comedian is something on my bucket list. I have a dry sense of humor that is also influenced by many stand-up comedians from the late 20th century - George Carlin, Richard Pryor, and the like. I also enjoy Anthony Jeselnik\'s dark humor and alternative sketch comedy like SNL, Mad TV and Kids in the Hall.',
+    }, {
+        abbreviation: 'enjoys being present in society',
+        sentence: 'Likes going to things like galas, balls, parties. Basically, like, enjoys being present in society. I enjoy spending time at home and I also like going out. And when I go out, I like to do things like go dancing or go to different venues to explore a community. I don\'t really like live music and treat concerts I go to as homework to listen to the artist\'s discography before I go so I know what I\'m listening to.',
+    }, {
+        abbreviation: 'a partner in crime and/or doing legal activities',
+        sentence: 'A Global Citizen or a Third Culture Kid. I am the son of first-generation immigrants and I have also learned/forgotten four foreign languages (German, Spanish, Russian, Hindi). I enjoy learning languages before I travel to a country and blend well into a crowd somehow. I have traveled to some parts of 6/7 continents and I would like to travel some more. I want to meet a partner in crime and/or doing legal activities who might be interested in doing the same.',
+    }, {
+        abbreviation: 'Self-actualized.',
+        sentence: 'Self-actualized. Interested in doing meaningful work (whatever that means to you). I am interested in being "out there" in the world, and the relationships I make in my career are a large part of my regular life, although I have a close inner circle of personal friends. A partner might even be uncovering their passion and that charges their energy up and out of bed in the morning, as they develop devotion toward some quest that their head and heart are bound inevitably toward.',
+    }, {
+        abbreviation: 'you should value having people you love close to you',
+        sentence: 'Values family. I have a large nuclear, chosen, and extended family. You don\'t have to have a large family, but you should value having people you love close to you - emotionally and/or geographically.',
+    }, {
+        abbreviation: 'Familiar with hippie culture.',
+        sentence: 'Familiar with hippie culture. Some of my best friends are former (or current!) flower children and tree huggers.',
+    }],
+    thingsINoticedAboutMyself: [{
+        abbreviation: 'hungry for knowledge',
+        sentence: 'I am quite hungry for knowledge. If I see something I don\'t understand, I try to find out about it. I use my phone for calls, texting, and Googling interesting facts.',
+    }, {
+        abbreviation: 'good memory',
+        sentence: 'I view the world through a series of mental models and frameworks and organize information from a systems perspective. I usually reason from induction. I have a uniquely good memory - my rate of long-term memory consolidation is very high, and I augment this with Google Calendar. I text my friends on their birthdays. When I say, "Noted" in conversation, it means that I actually made a mental or literal note and will return to that thought later. I am uniquely prepared for many situations and this has manifested itself in the form of overpacking for airplane trips by about 20 lbs. and then paring down to the essentials before I leave for the airport - portable luggage scale at the ready.',
+    }, {
+        abbreviation: 'I am an intuitive and sensory-oriented person.',
+        sentence: 'I can generally gauge people\'s character, motivations, and latch onto their interests within about 10 minutes of conversation. I am an intuitive and sensory-oriented person. Of course, I don\'t gel with everyone, but most people are interesting and open to the sort of banter I like to engage in - mostly friendly, sometimes weird or unexpected.',
+    }, {
+        abbreviation: 'therapy',
+        sentence: 'I have spent hours in therapy. I have done <a href="https://www.amazon.com/How-Do-Work-Recognize-Patterns/dp/006301209X">The Work</a>. I believe in and employ <a href="https://www.amazon.com/Nonviolent-Communication-Language-Life-Changing-Relationships/dp/189200528X">Non-Violent/Compassionate Communication</a>.',
+    }, {
+        abbreviation: 'swagtastic',
+        sentence: 'I am swagtastic but also trying to be humble as I move forward in my life.'
+    }, {
+        abbreviation: 'What is randomness, anyway?',
+        sentence: 'I am not necessarily religious or spiritual, but I do find value in rituals and the concept of God. I do not know if I believe that we have Free Will and I have noticed non-linearities and synchronicities and "gut feelings" contribute a lot more to my lived experience than a "scientist" should admit. What is randomness, anyway?',
+    }, {
+        abbreviation: 'I do not watch professional sports.',
+        sentence: 'I do not watch professional sports. I appreciate and enjoy competition and I am very competitive when I participate in sports, but I do not actively watch the NBA, NFL, MLB, NHL, FIFA, etc. unless in an otherwise enjoyable social context like a house party (e.g., Super Bowl parties) or a special event. I watched the Atlanta United FC soccer match against CF Montreal in November 2019 as part of my friend\'s bachelor party agenda.',
+    }],
+    potentialDealbreakers: {
+        time: [
+            'I am a social scientist and software engineer. I am also a project leader, so I spend most of my time thinking about very serious things.',
+            'I also enjoy playing video games (Apex Legends, Rocket League) with friends on my gaming laptop and enjoy reading about pop culture. I like bad reality TV (The Circle, Love is Blind, Flavor of Love, etc.), and I go to movie theaters sometimes.',
+            'I spend most of my time working in a relatively sustainable way. I say "relatively"  because I have a good social support system and a "wellness" routine that consists of yoga, boxing, monthly sports massages, and evolving slowly into finding out what exactly an esthetician does. Sometimes this doesn\'t happen and I need to rest intently.',
+            'I [have] practice(d) <a href="https://www.dhamma.org/">Vipassana</a> meditation and can very easily do quite literally nothing at all. I like to go to a 10-day Vipassana workshop once per year.',
+            'I wake up at around 8am and sleep around midnight most days. This varies occasionally by plus/minus two hours either way, but that\'s the standard routine and I am generally well-rested.',
+            '"Quality Time" is one of my love languages, but "Words of Affirmation" is not. I enjoy praise and compliments and receive them well, but not as much as time well spent.',
+            '"Acts of Service" is not one of my love languages, but I think someone whose it is can benefit from my organized nature. I\'ll wash your dishes. That\'s how you know I really like you.',
+        ],
+        sex: [
+            'I am masculine, cisgender, and mostly monogamous with a handful of stints practicing ethical nonmonogamy. I am mostly heterosexual. I think sex is a unique connection between people that is fun to explore.',
+            'I am not attracted to a particular body type, but you have to take care of yourself and have love for your earthly vessel. I also pick my nose, but I\'m trying to stop.',
+            '"Physical Touch" is one of my love languages. Sex is a fairly important part of a romantic relationship to me. I enjoy cuddling and being physically affectionate.',
+        ],
+        kids: [
+            'I would like to have kids someday. I am not sure if I am dead set on biological children. I might be open to a Brangelina-style adoption spree, but I anticipate limiting the quantity of children I have by imagining the financial, time, and energy constraints I will have when I become a father.',
+        ],
+        money: [
+            '"Gift Giving" is not one of my love languages. I like giving thoughtful gifts to people, but it\'s usually on or around special occasions. I\'ll pick up on something when I spend time with someone, make a note of it, and buy it before their birthday.',
+            'I am frugal and the son of first-generation Indian immigrants. This has had such a significant impact on my worldview that I think it bears repeating. My parents are relatively conservative but intelligent enough to be open-minded about many things. They do not believe in "wasting" money. Sometimes I do, but I prefer to save a majority of my income and otherwise invest the rest wisely in endeavors that grant long-term financial gain or emotional enjoyment. My gaming laptop was one particular indulgence that feels like an investment in my happiness.',
+            'I round up at the Taco Bell drive thru and donate clothes or other in-kind goods when I can. I enjoy giving money to charitable causes, but I do not give 10% of my income to charity at the moment. I would like to explore Effective Altruism further to understand where to best put my "heart-" and "head-"led investments in the future of our world.',
+        ],
+    },
+    bestWayToContact: 'Email <a href="mailto:neilthawani@gmail.com?subject=[GoogleDoc of Love]">neilthawani@gmail.com</a> prepending the subject line with <strong>[GoogleDoc of Love]</strong>. An ideal message is similar to the format of this doc with a list of desired traits/habits you want to see in your mate, some self-awareness with various implications, and potential dealbreakers. Some logistical information (age, sex, location, etc.) would be good too. Alternatively, you could just shoot your shot.'
+};
 
+document.addEventListener('DOMContentLoaded', function(event) {
     const nameHeader = document.getElementById('name');
     nameHeader.lastElementChild.innerHTML = `<a href=${loveStruct.ipaLink}>${loveStruct.name}</a>`;
 
@@ -136,14 +136,21 @@ document.addEventListener('DOMContentLoaded', function(event) {
     const abbreviations = document.getElementsByClassName('abbreviation');
     for (var i = 0; i < abbreviations.length; i++) {
         abbreviations[i].addEventListener('click', function(evt) {
-            const abbrev = evt.path[0].innerText;
+            let abbrev;
+            for (var i = 0; i < evt.path.length; i++) {
+                const hasAttribute = evt.path[i].className === 'abbreviation';
+
+                if (hasAttribute) {
+                    abbrev = evt.path[i].innerText;
+                    break;
+                }
+            }
 
             let headingLabel;
             for (var i = 0; i < evt.path.length; i++) {
                 headingLabel = evt.path[i].id;
                 if (traitArrayKeys.includes(headingLabel)) break;
             }
-
 
             let index;
             for (var i = 0; i < evt.path.length; i++) {
@@ -165,20 +172,28 @@ document.addEventListener('DOMContentLoaded', function(event) {
         });
     }
 
-    ['time', 'sex', 'kids', 'money'].forEach((field) => {
-        const el = document.getElementById(field);
-        const array = loveStruct.potentialDealbreakers[field];
+    const contactDiv = document.getElementById('bestWayToContact');
+    contactDiv.lastElementChild.innerHTML = loveStruct.bestWayToContact;
+});
+
+function dealbreakerClicked(id) {
+    const el = document.getElementById(id);
+
+    if (el.getAttribute('data-expanded') === 'true') {
+        // debugger;
+        el.innerHTML = el.innerHTML.slice(0, el.innerHTML.indexOf('</h2>') + 5);
+        el.setAttribute('data-expanded', false);
+    } else {
+        const array = loveStruct.potentialDealbreakers[id];
 
         array.forEach((sentence) => {
             const item = `<p>${sentence}</p>`;
             el.innerHTML += item;
         });
-    });
 
-    const contactDiv = document.getElementById('bestWayToContact');
-    contactDiv.lastElementChild.innerHTML = loveStruct.bestWayToContact;
-});
-
+        el.setAttribute('data-expanded', true);
+    }
+}
 </script>
 
 <!DOCTYPE html>
@@ -334,19 +349,19 @@ document.addEventListener('DOMContentLoaded', function(event) {
                 <h1>Potential Dealbreakers</h1>
     
                 <div class="potential-dealbreakers">
-                    <div id="time">
+                    <div id="time" onClick="dealbreakerClicked('time')">
                         <h2>Time</h2>
                     </div>
     
-                    <div id="sex">
+                    <div id="sex" onClick="dealbreakerClicked('sex')">
                         <h2>Sex</h2>
                     </div>
     
-                    <div id="kids">
+                    <div id="kids" onClick="dealbreakerClicked('kids')">
                         <h2>Kids</h2>
                     </div>
     
-                    <div id="money">
+                    <div id="money" onClick="dealbreakerClicked('money')">
                         <h2>Money</h2>
                     </div>
                 </div>

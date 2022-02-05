@@ -6667,6 +6667,9 @@ i:before {
     .love-container #pictures img {
       margin: 0 25px;
       height: 250px; }
+  .love-container #desiredTraitsInAPartner,
+  .love-container #thingsINoticedAboutMyself {
+    margin-top: 25px; }
   .love-container .abbreviation {
     border: 1px solid #cff;
     padding: 5px;
@@ -6686,13 +6689,25 @@ i:before {
   .love-container #potentialDealbreakers .potential-dealbreakers {
     display: flex;
     flex-wrap: wrap; }
+    .love-container #potentialDealbreakers .potential-dealbreakers [data-expanded=true] {
+      border: double;
+      cursor: pointer; }
+      .love-container #potentialDealbreakers .potential-dealbreakers [data-expanded=true] h2 {
+        text-decoration: underline;
+        border: none; }
+        .love-container #potentialDealbreakers .potential-dealbreakers [data-expanded=true] h2:hover {
+          color: #cff;
+          background-color: #851d18; }
     .love-container #potentialDealbreakers .potential-dealbreakers h2 {
       border: 1px solid #cff;
       padding: 5px 15px;
-      margin: auto;
-      width: max-content; }
+      margin: 25px auto 10px auto;
+      width: max-content;
+      cursor: pointer; }
+      .love-container #potentialDealbreakers .potential-dealbreakers h2:hover {
+        color: #851d18;
+        background-color: #cff; }
     .love-container #potentialDealbreakers .potential-dealbreakers div {
-      margin-right: 25px;
       flex: 1 0 20%;
       text-align: center; }
   .love-container #potentialDealbreakers .potential-dealbreakers p {

@@ -76,6 +76,11 @@ $loveContrastColor: #cff;
         }
     }
 
+    #desiredTraitsInAPartner,
+    #thingsINoticedAboutMyself {
+        margin-top: 25px;
+    }
+
     .abbreviation,
      {
         border: 1px solid $loveContrastColor;
@@ -106,25 +111,45 @@ $loveContrastColor: #cff;
     #potentialDealbreakers .potential-dealbreakers {
         display: flex;
         flex-wrap: wrap;
+        // margin-top: 50px 0;
+
+        [data-expanded=true] {
+            border: double;
+            cursor: pointer;
+
+            h2 {
+                text-decoration: underline;
+                border: none;
+
+                &:hover {
+                    color: $loveContrastColor;
+                    background-color: $red;
+                }
+            }
+        }
 
         h2 {
             border: 1px solid $loveContrastColor;
-            // text-decoration: underline;
             padding: 5px 15px;
-            // text-align: center;
-            margin: auto;
+            margin: 25px auto 10px auto;
             width: max-content;
+            cursor: pointer;
+
+            &:hover {
+                color: $red;
+                background-color: $loveContrastColor;
+            }
         }
 
         div {
-            margin-right: 25px;
             flex: 1 0 20%;
             text-align: center;
+
+
         }
     }
 
     #potentialDealbreakers .potential-dealbreakers p {
-        // border: double;
         padding: 5px;
     }
 
