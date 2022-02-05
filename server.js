@@ -13,7 +13,7 @@ var params = {
 // this will fail silently if you have typos in your SASS.
 // Run `npm run build-css` to test and the console will show an error if this is the case.
 // Sometimes, if build works but watch doesn't, you will have to run
-// `watch-css` from the terminal manually. It should be ok then.
+// `npm run watch-css` from the terminal manually. It should be ok then.
 
 // Upon blog post creation, run `npm run build-md`.
 childProcess.exec("npm run build-views && npm run build-css && npm run watch-views && npm run watch-css", {
