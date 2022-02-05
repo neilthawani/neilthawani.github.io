@@ -182,14 +182,28 @@ document.addEventListener('DOMContentLoaded', function(event) {
             let sentence = loveStruct[headingLabel].filter((item) => item.abbreviation === abbrev)[0]?.sentence;
             sentence = sentence?.replace(abbrev, `<strong><u>${abbrev}</u></strong>`);
 
-            if (!sentence) {
-                return;
+            // debugger;
+            if (evt.path[0].getAttribute('data-expanded') === 'true') {
+                console.log('it\'s a sentence!');
+                debugger;
             }
 
+
+            // if (!sentence) {
+            //     return;
+            // }
+
             evt.path[0].innerHTML = sentence;
-            evt.path[0].className = 'sentence';
+            // evt.path[0].a
+            // debugger;
+            evt.path[0].setAttribute('data-expanded', true);
+            // evt.path[0].className = 'sentence';
         });
     }
+
+    // const sentences = document.getElementsByClassName('sentence');
+    // console.log('sentences', sentences);
+    // sentences.addEventListener('click')
 });
 
 </script>

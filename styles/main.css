@@ -6637,17 +6637,17 @@ i:before {
 .love-container {
   font-family: serif;
   margin: -50px 0;
-  background-color: red;
-  color: white;
+  background-color: #851d18;
+  color: #cff;
   padding: 50px;
   line-height: 1.5; }
   .love-container a, .love-container a:-webkit-any-link {
-    color: white;
+    color: #cff;
     text-decoration: underline;
     background-color: transparent; }
     .love-container a:hover, .love-container a:-webkit-any-link:hover {
-      color: red;
-      background-color: white; }
+      color: #851d18;
+      background-color: #cff; }
   .love-container h1, .love-container h2, .love-container h3 {
     font-weight: 600;
     font-family: sans-serif; }
@@ -6657,32 +6657,29 @@ i:before {
     font-weight: 400;
     font-family: serif; }
   .love-container #name span a, .love-container #name span a:-webkit-any-link {
-    color: white;
+    color: #cff;
     text-decoration: underline; }
     .love-container #name span a:hover, .love-container #name span a:-webkit-any-link:hover {
-      color: red;
-      background-color: white; }
+      color: #851d18;
+      background-color: #cff; }
   .love-container #pictures {
     display: flex; }
     .love-container #pictures img {
       margin: 0 25px;
       height: 250px; }
-  .love-container .abbreviation,
-  .love-container .sentence {
-    border: 1px solid white;
+  .love-container .abbreviation {
+    border: 1px solid #cff;
     padding: 5px;
     margin: 5px;
     width: max-content;
     cursor: pointer;
     max-width: 75vw; }
-    .love-container .abbreviation:hover,
-    .love-container .sentence:hover {
-      background-color: white;
-      color: red; }
-      .love-container .abbreviation:hover a,
-      .love-container .sentence:hover a {
-        color: red; }
-  .love-container .sentence {
+    .love-container .abbreviation:hover {
+      background-color: #cff;
+      color: #851d18; }
+      .love-container .abbreviation:hover a {
+        color: #851d18; }
+  .love-container [data-expanded=true] {
     border: double; }
   .love-container #potentialDealbreakers {
     margin-top: 25px; }

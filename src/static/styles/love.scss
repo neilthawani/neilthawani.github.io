@@ -1,3 +1,6 @@
+$red: #851d18;
+$loveContrastColor: #cff;
+
 @media (max-width: $screen-phone) {
     .love-container {
         margin-top: -25px !important;
@@ -24,19 +27,19 @@
 .love-container {
     font-family: serif;
     margin: -50px 0;
-    background-color: red;
-    color: white;
+    background-color: $red;
+    color: $loveContrastColor;
     padding: 50px;
     line-height: 1.5;
 
     a, a:-webkit-any-link {
-        color: white;
+        color: $loveContrastColor;
         text-decoration: underline;
         background-color: transparent;
 
         &:hover {
-            color: red;
-            background-color: white;
+            color: $red;
+            background-color: $loveContrastColor;
         }
     }
 
@@ -54,12 +57,12 @@
 
     #name {
         span a, span a:-webkit-any-link {
-            color: white;
+            color: $loveContrastColor;
             text-decoration: underline;
 
             &:hover {
-                color: red;
-                background-color: white;
+                color: $red;
+                background-color: $loveContrastColor;
             }
         }
     }
@@ -74,8 +77,8 @@
     }
 
     .abbreviation,
-    .sentence {
-        border: 1px solid white;
+     {
+        border: 1px solid $loveContrastColor;
         padding: 5px;
         margin: 5px;
         width: max-content;
@@ -83,16 +86,16 @@
         max-width: 75vw;
 
         &:hover {
-            background-color: white;
-            color: red;
+            background-color: $loveContrastColor;
+            color: $red;
 
             a {
-                color: red;
+                color: $red;
             }
         }
     }
 
-    .sentence {
+    [data-expanded=true] {
         border: double;
     }
 
