@@ -108,17 +108,23 @@ $loveContrastColor: #cff;
         flex-wrap: wrap;
 
         h2 {
-            text-decoration: underline;
+            border: 1px solid $loveContrastColor;
+            // text-decoration: underline;
+            padding: 5px 15px;
+            // text-align: center;
+            margin: auto;
+            width: max-content;
         }
 
         div {
             margin-right: 25px;
             flex: 1 0 20%;
+            text-align: center;
         }
     }
 
     #potentialDealbreakers .potential-dealbreakers p {
-        border: double;
+        // border: double;
         padding: 5px;
     }
 

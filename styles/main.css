@@ -6687,12 +6687,15 @@ i:before {
     display: flex;
     flex-wrap: wrap; }
     .love-container #potentialDealbreakers .potential-dealbreakers h2 {
-      text-decoration: underline; }
+      border: 1px solid #cff;
+      padding: 5px 15px;
+      margin: auto;
+      width: max-content; }
     .love-container #potentialDealbreakers .potential-dealbreakers div {
       margin-right: 25px;
-      flex: 1 0 20%; }
+      flex: 1 0 20%;
+      text-align: center; }
   .love-container #potentialDealbreakers .potential-dealbreakers p {
-    border: double;
     padding: 5px; }
   .love-container #bestWayToContact {
     margin-top: 50px; }
