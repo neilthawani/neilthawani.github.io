@@ -124,86 +124,81 @@ document.addEventListener('DOMContentLoaded', function(event) {
         let el = document.getElementById(key);
         const array = loveStruct[key];
 
-        array.forEach((obj) => {
+        array.forEach((obj, index) => {
             const sentence = `<p>${obj.sentence}</p>`;
 
-            const abbreviationDiv = `<div class="abbreviation">${obj.abbreviation}</div>`;
+            const abbreviationDiv = `<div class="abbreviation" data-struct=${key} data-index=${index}>${obj.abbreviation}</div>`;
             el.innerHTML += abbreviationDiv;
         })
     });
-
-    ['time', 'sex', 'kids', 'money'].forEach((field) => {
-        const el = document.getElementById(field);
-        const array = loveStruct.potentialDealbreakers[field];
-
-        array.forEach((sentence) => {
-            // console.log('sentence', sentence);
-            const item = `<p>${sentence}</p>`;
-            // console.log('evt.path[2]', evt.path[2]);
-            // debugger;
-            el.innerHTML += item;
-        });
-
-        el.addEventListener('click', function(evt) {
-            console.log('click', evt);
-            // debugger;
-
-            // const parentDiv =
-            const toAppend = evt.path[1].children;
-            // debugger;
-            for (var i = 0; i < toAppend.length; i++) {
-              // debugger;
-                evt.path[3].innerHTML += `<${toAppend[i].tagName}>${toAppend[i].innerHTML}</${toAppend[i].tagName}>`;
-            }
-            // toAppend[i].tagName
-            // toAppend.forEach((elToAppend) => {
-            //
-            // });
-            // evt.path[3].innerHTML += toAppend;
-            // evt.path[1].innerHTML = '';
-            // console.log('toAppend', toAppend);
-            // console.log('array', array);
-
-
-            // evt.path[2].innerHTML += '<span>hahahah</span>';
-
-            // append div id="time" to div id="potentialDealbreakers"
-        });
-    });
-
-    const contactDiv = document.getElementById('bestWayToContact');
-    contactDiv.lastElementChild.innerHTML = loveStruct.bestWayToContact;
 
     const abbreviations = document.getElementsByClassName('abbreviation');
     for (var i = 0; i < abbreviations.length; i++) {
         abbreviations[i].addEventListener('click', function(evt) {
             const abbrev = evt.path[0].innerText;
             const headingLabel = evt.path[1].id;
-            let sentence = loveStruct[headingLabel].filter((item) => item.abbreviation === abbrev)[0]?.sentence;
-            sentence = sentence?.replace(abbrev, `<strong><u>${abbrev}</u></strong>`);
 
-            // debugger;
-            if (evt.path[0].getAttribute('data-expanded') === 'true') {
-                console.log('it\'s a sentence!');
-                debugger;
+            let index;
+            for (var i = 0; i < evt.path.length; i++) {
+                index = parseInt(evt.path[i].getAttribute('data-index'), 10);
+                if (!isNaN(index)) break;
             }
 
+            let content = loveStruct[headingLabel][index];
 
-            // if (!sentence) {
-            //     return;
-            // }
+            if (evt.path[0].getAttribute('data-expanded') === 'true') {
+                content = content.abbreviation;
+                evt.path[0].setAttribute('data-expanded', false);
+            } else {
+                content = content.sentence.replace(abbrev, `<strong><u>${abbrev}</u></strong>`);
+                evt.path[0].setAttribute('data-expanded', true);
+            }
 
-            evt.path[0].innerHTML = sentence;
-            // evt.path[0].a
-            // debugger;
-            evt.path[0].setAttribute('data-expanded', true);
-            // evt.path[0].className = 'sentence';
+            evt.path[0].innerHTML = content;
         });
     }
 
-    // const sentences = document.getElementsByClassName('sentence');
-    // console.log('sentences', sentences);
-    // sentences.addEventListener('click')
+    // ['time', 'sex', 'kids', 'money'].forEach((field) => {
+    //     const el = document.getElementById(field);
+    //     const array = loveStruct.potentialDealbreakers[field];
+    //
+    //     array.forEach((sentence) => {
+    //         // console.log('sentence', sentence);
+    //         const item = `<p>${sentence}</p>`;
+    //         // console.log('evt.path[2]', evt.path[2]);
+    //         // debugger;
+    //         el.innerHTML += item;
+    //     });
+    //
+    //     el.addEventListener('click', function(evt) {
+    //         console.log('click', evt);
+    //         // debugger;
+    //
+    //         // const parentDiv =
+    //         const toAppend = evt.path[1].children;
+    //         // debugger;
+    //         for (var i = 0; i < toAppend.length; i++) {
+    //           // debugger;
+    //             evt.path[3].innerHTML += `<${toAppend[i].tagName}>${toAppend[i].innerHTML}</${toAppend[i].tagName}>`;
+    //         }
+    //         // toAppend[i].tagName
+    //         // toAppend.forEach((elToAppend) => {
+    //         //
+    //         // });
+    //         // evt.path[3].innerHTML += toAppend;
+    //         // evt.path[1].innerHTML = '';
+    //         // console.log('toAppend', toAppend);
+    //         // console.log('array', array);
+    //
+    //
+    //         // evt.path[2].innerHTML += '<span>hahahah</span>';
+    //
+    //         // append div id="time" to div id="potentialDealbreakers"
+    //     });
+    // });
+
+    const contactDiv = document.getElementById('bestWayToContact');
+    contactDiv.lastElementChild.innerHTML = loveStruct.bestWayToContact;
 });
 
 </script>
