@@ -1,3 +1,6 @@
+$red: #851d18;
+$loveContrastColor: #cff;
+
 @media (max-width: $screen-phone) {
     .love-container {
         margin-top: -25px !important;
@@ -24,19 +27,19 @@
 .love-container {
     font-family: serif;
     margin: -50px 0;
-    background-color: red;
-    color: white;
+    background-color: $red;
+    color: $loveContrastColor;
     padding: 50px;
     line-height: 1.5;
 
     a, a:-webkit-any-link {
-        color: white;
+        color: $loveContrastColor;
         text-decoration: underline;
         background-color: transparent;
 
         &:hover {
-            color: red;
-            background-color: white;
+            color: $red;
+            background-color: $loveContrastColor;
         }
     }
 
@@ -54,12 +57,12 @@
 
     #name {
         span a, span a:-webkit-any-link {
-            color: white;
+            color: $loveContrastColor;
             text-decoration: underline;
 
             &:hover {
-                color: red;
-                background-color: white;
+                color: $red;
+                background-color: $loveContrastColor;
             }
         }
     }
@@ -73,9 +76,14 @@
         }
     }
 
+    #desiredTraitsInAPartner,
+    #thingsINoticedAboutMyself {
+        margin-top: 25px;
+    }
+
     .abbreviation,
-    .sentence {
-        border: 1px solid white;
+     {
+        border: 1px solid $loveContrastColor;
         padding: 5px;
         margin: 5px;
         width: max-content;
@@ -83,16 +91,16 @@
         max-width: 75vw;
 
         &:hover {
-            background-color: white;
-            color: red;
+            background-color: $loveContrastColor;
+            color: $red;
 
             a {
-                color: red;
+                color: $red;
             }
         }
     }
 
-    .sentence {
+    [data-expanded=true] {
         border: double;
     }
 
@@ -103,19 +111,45 @@
     #potentialDealbreakers .potential-dealbreakers {
         display: flex;
         flex-wrap: wrap;
+        // margin-top: 50px 0;
+
+        [data-expanded=true] {
+            border: double;
+            cursor: pointer;
+
+            h2 {
+                text-decoration: underline;
+                border: none;
+
+                &:hover {
+                    color: $loveContrastColor;
+                    background-color: $red;
+                }
+            }
+        }
 
         h2 {
-            text-decoration: underline;
+            border: 1px solid $loveContrastColor;
+            padding: 5px 15px;
+            margin: 25px auto 10px auto;
+            width: max-content;
+            cursor: pointer;
+
+            &:hover {
+                color: $red;
+                background-color: $loveContrastColor;
+            }
         }
 
         div {
-            margin-right: 25px;
             flex: 1 0 20%;
+            text-align: center;
+
+
         }
     }
 
     #potentialDealbreakers .potential-dealbreakers p {
-        border: double;
         padding: 5px;
     }
 
