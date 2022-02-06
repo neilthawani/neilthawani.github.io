@@ -6709,7 +6709,11 @@ i:before {
         background-color: #cff; }
     .love-container #potentialDealbreakers .potential-dealbreakers div {
       flex: 1 0 20%;
-      text-align: center; }
+      text-align: center;
+      height: max-content; }
+      .love-container #potentialDealbreakers .potential-dealbreakers div:hover a, .love-container #potentialDealbreakers .potential-dealbreakers div:hover a:visited, .love-container #potentialDealbreakers .potential-dealbreakers div:hover a:hover {
+        color: #851d18;
+        background-color: #cff; }
   .love-container #potentialDealbreakers .potential-dealbreakers p {
     padding: 5px; }
   .love-container #bestWayToContact {

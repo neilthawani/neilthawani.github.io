@@ -142,8 +142,14 @@ $loveContrastColor: #cff;
         div {
             flex: 1 0 20%;
             text-align: center;
+            height: max-content;
 
-
+            &:hover {
+                a, a:visited, a:hover {
+                    color: $red;
+                    background-color: $loveContrastColor;
+                }
+            }
         }
     }
 
