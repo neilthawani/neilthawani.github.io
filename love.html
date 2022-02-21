@@ -102,7 +102,7 @@ const loveStruct = {
             'I round up at the Taco Bell drive thru and donate clothes or other in-kind goods when I can. I enjoy giving money to charitable causes, but I do not give 10% of my income to charity at the moment. I would like to explore Effective Altruism further to understand where to best put my "heart-" and "head-"led investments in the future of our world.',
         ],
     },
-    bestWayToContact: 'Email <a href="mailto:neilthawani@gmail.com?subject=[Love Doc]">neilthawani@gmail.com</a> prepending the subject line with <strong>[Love Doc]</strong>. An ideal message is similar to the format of this doc with a list of desired traits/habits you want to see in your mate, some self-awareness with various implications, and potential dealbreakers. Some logistical information (age, sex, location, etc.) would be good too. Alternatively, you could just shoot your shot.'
+    bestWayToContact: 'Email <a href="mailto:neilthawani@gmail.com?subject=[Love Doc]">neilthawani@gmail.com</a> prepending the subject line with <strong>[Love Doc]</strong>.<br /><br />An ideal message is similar to the format of this doc with a list of desired traits/habits you want to see in your mate, some self-awareness with various implications, and potential dealbreakers. Some logistical information (age, sex, location, etc.) would be good too.<br /><br />Alternatively, you could just shoot your shot.'
 };
 
 document.addEventListener('DOMContentLoaded', function(event) {
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         const array = loveStruct[key];
 
         array.forEach((obj, index) => {
-            const abbreviationDiv = `<div class="abbreviation" data-struct=${key} data-index=${index} onClick="traitClicked(${key}, ${index})">${obj.abbreviation}</div>`;
+            const abbreviationDiv = `<div class="abbreviation" data-expanded="false" data-struct=${key} data-index=${index} onClick="traitClicked(${key}, ${index})">${obj.abbreviation}</div>`;
             el.innerHTML += abbreviationDiv;
         });
     });
@@ -172,7 +172,7 @@ function traitClicked(traitDiv, index) {
 <html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
   <head>
     <title>
-      Neil Thawani - Software Engineer and K-12 STEAM+Computing Educator
+      A very detailed dating profile ...
     </title>
 
     <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -196,7 +196,7 @@ function traitClicked(traitDiv, index) {
 
       gtag('config', 'G-22ETHGYB6N');
     </script>
-    
+
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -212,69 +212,36 @@ function traitClicked(traitDiv, index) {
 
   <body>
     <div class="visible-phone mobile-nav-container">
-      <ul class="mobile-nav">
-        <li class="mobile-nav-item"><a href="/">Home</a></li>
-        <li class="mobile-nav-item"><a href="/#projects">Projects</a></li>
-        <li class="mobile-nav-item"><a href="/blog">Blog</a></li>
-      </ul>
-    
-      <ul class="mobile-nav contact-icons">
-        <li class="mobile-nav-item">
-          <a href="/meet.html">
-            <i class="ii ii-calendar-clock"></i>
-          </a>
-        </li>
-    
-        <li class="mobile-nav-item">
-          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
-            <i class="ii ii-twitter"></i>
-          </a>
-        </li>
-    
-        <li class="mobile-nav-item">
-          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
-            <i class="ii ii-linkedin-box"></i>
-          </a>
-        </li>
-    
-        <li class="mobile-nav-item">
-          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
-            <i class="ii ii-github"></i>
-          </a>
-        </li>
+      <ul class="mobile-nav love-menu">
+        <li class="mobile-nav-item"><a href="/love.html#name">About Me</a></li>
+        <li class="mobile-nav-item"><a href="/love.html#desiredTraitsInAPartner">About You</a></li>
+        <li class="mobile-nav-item"><a href="/love.html#dealbreakers">Dealbreakers</a></li>
+        <li class="mobile-nav-item"><a href="/love.html#bestWayToContact">Contact</a></li>
       </ul>
     </div>
     
     <div class="hidden-phone">
-      <div class="nav">
+      <div class="nav love-menu">
         <a id="fullname" href="/">
           <span id="firstname">&nbsp;</span>
           <span id="lastname"></span>
         </a>
     
         <ul class="nav-pills">
-          <a href="/#projects">
-            <li>Projects</li>
+          <a href="/love.html#name">
+            <li>About Me</li>
           </a>
     
-          <a href="/blog">
-            <li>Blog</li>
+          <a href="/love.html#desiredTraitsInAPartner">
+            <li>About You</li>
           </a>
     
-          <a href="/meet.html">
-            <li><i class="ii ii-calendar-clock"></i></li>
+          <a href="/love.html#dealbreakers">
+            <li>Dealbreakers</li>
           </a>
     
-          <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
-            <li><i class="ii ii-twitter"></i></li>
-          </a>
-    
-          <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
-            <li><i class="ii ii-linkedin-box"></i></li>
-          </a>
-    
-          <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
-            <li><i class="ii ii-github"></i></li>
+          <a href="/love.html#bestWayToContact">
+            <li>Contact</li>
           </a>
         </ul>
       </div>
@@ -309,18 +276,18 @@ function traitClicked(traitDiv, index) {
                 <h2>Pictures:</h2>
             </div>
     
-            <div id="desiredTraitsInAPartner">
-                <h1>Desired Traits in a Partner</h1>
-            </div>
-    
             <div id="thingsINoticedAboutMyself">
                 <h1>Things I Noticed About Myself</h1>
+            </div>
+    
+            <div id="desiredTraitsInAPartner">
+                <h1>Desired Traits in a Partner</h1>
             </div>
     
             <div id="potentialDealbreakers">
                 <h1>Potential Dealbreakers</h1>
     
-                <div class="potential-dealbreakers">
+                <div class="potential-dealbreakers" id="dealbreakers">
                     <div id="time" onClick="dealbreakerClicked('time')">
                         <h2>Time</h2>
                     </div>
