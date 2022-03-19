@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         const array = loveStruct[key];
 
         array.forEach((obj, index) => {
-            const abbreviationDiv = `<div class="abbreviation" data-expanded="false" data-struct=${key} data-index=${index} onClick="traitClicked(${key}, ${index})">${obj.abbreviation}</div>`;
+            const abbreviationDiv = `<div class="abbreviation" data-expanded="false" data-struct=${key} data-index=${index} onClick="traitClicked(${key}, ${index})">+ ${obj.abbreviation}</div>`;
             el.innerHTML += abbreviationDiv;
         });
     });
@@ -159,10 +159,10 @@ function traitClicked(traitDiv, index) {
     const abbrevObj = loveStruct[trait][index];
 
     if (divToModify.getAttribute('data-expanded') === 'true') {
-        divToModify.innerHTML = abbrevObj.abbreviation;
+        divToModify.innerHTML = `+ ${abbrevObj.abbreviation}`;
         divToModify.setAttribute('data-expanded', false);
     } else {
-        divToModify.innerHTML = abbrevObj.sentence.replace(abbrevObj.abbreviation, `<strong><u>${abbrevObj.abbreviation}</u></strong>`);;
+        divToModify.innerHTML = `– ` + abbrevObj.sentence.replace(abbrevObj.abbreviation, `<strong><u>${abbrevObj.abbreviation}</u></strong>`);;
         divToModify.setAttribute('data-expanded', true);
     }
 }
@@ -213,8 +213,8 @@ function traitClicked(traitDiv, index) {
   <body>
     <div class="visible-phone mobile-nav-container">
       <ul class="mobile-nav love-menu">
-        <li class="mobile-nav-item"><a href="/love.html#name">About Me</a></li>
-        <li class="mobile-nav-item"><a href="/love.html#desiredTraitsInAPartner">About You</a></li>
+        <li class="mobile-nav-item"><a href="/love.html#name">Me</a></li>
+        <li class="mobile-nav-item"><a href="/love.html#desiredTraitsInAPartner">You</a></li>
         <li class="mobile-nav-item"><a href="/love.html#dealbreakers">Dealbreakers</a></li>
         <li class="mobile-nav-item"><a href="/love.html#bestWayToContact">Contact</a></li>
       </ul>

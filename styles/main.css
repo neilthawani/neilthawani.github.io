@@ -6643,7 +6643,7 @@ i:before {
 .mobile-nav.love-menu .mobile-nav-item a,
 .nav.love-menu a li,
 .nav.love-menu .mobile-nav-item a {
-  padding: 5px;
+  padding: 5px 15px;
   text-align: center; }
 
 .love-container {
