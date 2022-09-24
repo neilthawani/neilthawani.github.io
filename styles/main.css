@@ -6628,7 +6628,8 @@ i:before {
     .love-container #pictures {
       display: block !important; }
       .love-container #pictures img {
-        margin-bottom: 25px !important; }
+        margin-bottom: 25px !important;
+        max-width: 75%; }
     .love-container #potentialDealbreakers .potential-dealbreakers {
       display: block !important; }
       .love-container #potentialDealbreakers .potential-dealbreakers div {
@@ -6675,10 +6676,14 @@ i:before {
       color: #851d18;
       background-color: #cff; }
   .love-container #pictures {
-    display: flex; }
+    text-align: center; }
+    .love-container #pictures a:hover {
+      background-color: transparent; }
     .love-container #pictures img {
-      margin: 0 25px;
+      margin: 0 25px 40px 25px;
       height: 250px; }
+      .love-container #pictures img:hover {
+        text-decoration: none; }
   .love-container #desiredTraitsInAPartner,
   .love-container #thingsINoticedAboutMyself {
     margin-top: 25px; }

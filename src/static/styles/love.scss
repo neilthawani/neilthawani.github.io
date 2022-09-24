@@ -11,6 +11,7 @@ $loveContrastColor: #cff;
 
             img {
                 margin-bottom: 25px !important;
+                max-width: 75%;
             }
         }
 
@@ -86,11 +87,19 @@ $loveContrastColor: #cff;
     }
 
     #pictures {
-        display: flex;
+        text-align: center;
+
+        a:hover {
+            background-color: transparent;
+        }
 
         img {
-            margin: 0 25px;
+            margin: 0 25px 40px 25px;
             height: 250px;
+
+            &:hover {
+                text-decoration: none;
+            }
         }
     }
 
