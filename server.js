@@ -1,3 +1,7 @@
+// Instructions to add a blog post:
+// Create a .md and .json file with the correct metadata 
+// Upon blog post creation, run `npm run build-md`.
+
 var liveServer = require("live-server");
 var childProcess = require("child_process");
 
@@ -15,7 +19,6 @@ var params = {
 // Sometimes, if build works but watch doesn't, you will have to run
 // `npm run watch-css` from the terminal manually. It should be ok then.
 
-// Upon blog post creation, run `npm run build-md`.
 childProcess.exec("npm run build-views && npm run build-css && npm run watch-views && npm run watch-css", {
         "shell": true
     },

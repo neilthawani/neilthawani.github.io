@@ -51,8 +51,9 @@ ArityException Wrong number of args (0) passed to: core/hello  clojure.lang.AFn.
 &gt; (hello-again "Neil")
 "Hello Neil"</pre>
         <p>
-            <p>Clojure allows <a href="http://en.wikipedia.org/wiki/Variadic_function" target="_blank">variadic functions</a>.<p></p>
-                <pre>
+        <p>Clojure allows <a href="http://en.wikipedia.org/wiki/Variadic_function" target="_blank">variadic functions</a>.
+        <p></p>
+        <pre>
 &gt; (def hello-someone
 \t([] "Hello World")
 \t([name] (str "Hello " name)))
@@ -63,16 +64,16 @@ ArityException Wrong number of args (0) passed to: core/hello  clojure.lang.AFn.
 
 &gt; (hello-someone "Neil")
 "Hello Neil")</pre>
-                <p>Another way of defining a variadic function is by using the & operator to define packed arguments:</p>
-                <pre>
+        <p>Another way of defining a variadic function is by using the & operator to define packed arguments:</p>
+        <pre>
 &gt; (defn count-args [& args]
 \t(str "You passed " (count args) " args: " args))
 #'learn-clojure.core/count-args
 
 &gt; (count-args 1 2 3)
 You passed 3 args: (1 2 3)</pre>
-                <p>You can mix regular arguments with packed arguments:</p>
-                <pre>
+        <p>You can mix regular arguments with packed arguments:</p>
+        <pre>
 &gt; (defn hello-count [name & args]
 \t(str "Hello " name ", you passed " (count args) " args"))
 #'learn-clojure.core/hello-count
