@@ -46,11 +46,16 @@ function writeFiles (pattern, folderPath, outputFolder) {
         console.log("Templates", files);
     }
 
-    files.forEach((file, index) => {
+    files.forEach(file => {
         var source = fs.readFileSync(file).toString(),
             template = Handlebars.compile(source)(),
             distDirectory = path.dirname(file).replace(folderPath, ""),
             distPath;
+
+        // Remove OGP URL meta tag from blog pages
+        if (distDirectory === 'blog') {
+            template = template.replace('<meta property="og:url" content="http://www.lioninawhat.com/" />', '');
+        }
 
         // Modify <title> tag for blog/index page.
         if (distDirectory === 'blog' && file.includes('index.hbs')) {
