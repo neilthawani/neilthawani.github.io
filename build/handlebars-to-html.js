@@ -27,6 +27,14 @@ function registerPartials (pattern, folderPath) {
     });
 }
 
+function grabPageTitle(template) {
+    const titleTag = '<title>';
+    const openTitleTagIndex = template.indexOf(titleTag);
+    const closeTitleTagIndex = template.indexOf('</title>');
+
+    return template.substring(openTitleTagIndex + titleTag.length, closeTitleTagIndex);
+}
+
 function writeFiles (pattern, folderPath, outputFolder) {
     var files = glob.sync(pattern);
 
@@ -38,11 +46,50 @@ function writeFiles (pattern, folderPath, outputFolder) {
         console.log("Templates", files);
     }
 
-    files.forEach(file => {
+    files.forEach((file, index) => {
         var source = fs.readFileSync(file).toString(),
-            template = Handlebars.compile(source),
+            template = Handlebars.compile(source)(),
             distDirectory = path.dirname(file).replace(folderPath, ""),
             distPath;
+
+        // Modify <title> tag for blog/index page.
+        if (distDirectory === 'blog' && file.includes('index.hbs')) {
+            // Grab title.
+            const title = grabPageTitle(template);
+
+            // Transform the content between the <title> tags and meta OGP title tag.
+            const newTitle = 'Neil Thawani - Blog';
+                                          
+            template = template.replaceAll(title, newTitle);
+        }
+
+        // Add custom titles and OGP tags to blog posts.
+        if (distDirectory === 'blog' && !file.includes('index.hbs')) {
+            // Grab title.
+            const title = grabPageTitle(template);
+
+            // Transform the content between the <title> tags and meta OGP title tag.
+            const blogPostTitleTag = '<h1 class="blog-post-title">';
+            const newTitleStartIndex = template.indexOf(blogPostTitleTag);
+            const newTitleEndIndex = template.indexOf('</h1>');
+            const newTitle = `Neil Thawani - Blog - ${template.substring(newTitleStartIndex + blogPostTitleTag.length, newTitleEndIndex)}`;
+                                          
+            template = template.replaceAll(title, newTitle);
+
+            // Grab blog post content, generate OGP description, insert the meta OGP description tag into the template.
+            const blogPostContentTag = '<article class="blog-post-content">';
+            const ogpDescriptionStartIndex = template.indexOf(blogPostContentTag);
+            const ogpDescriptionEndIndex = template.indexOf('</article>');
+            const inadvisableRegex = /(<([^>]+)>)/ig;
+            const description = template.substring(ogpDescriptionStartIndex + blogPostContentTag.length, ogpDescriptionEndIndex)
+                                    .replace(inadvisableRegex, ' ')
+                                    .slice(0, 200)
+                                    .concat('...');
+            const ogpDescription = `<meta property="og:description" content="${description}" />`;
+            const metaDescTagStartIndex = template.lastIndexOf(newTitle) + `${newTitle} " />}`.length - 1;
+            
+            template = template.slice(0, metaDescTagStartIndex) + `    ${ogpDescription}\n` + template.slice(metaDescTagStartIndex);
+        }
 
         if (distDirectory === folderPath.slice(0, folderPath.length - 1)) {
             distPath = outputFolder + path.basename(file, ".hbs") + ".html";
@@ -51,7 +98,7 @@ function writeFiles (pattern, folderPath, outputFolder) {
         }
 
         mkdirp.sync(distDirectory);
-        fs.writeFileSync(distPath, template());
+        fs.writeFileSync(distPath, template);
 
         if (process.env.debug) {
             console.log("Template written to", distPath);
