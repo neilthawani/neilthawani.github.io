@@ -1,3 +1,5 @@
+@use "variables" as *; // variables MUST go first
+
 .project-card {
     width: 400px;
     height: max-content;

@@ -1,3 +1,5 @@
+@use "variables" as *; // variables MUST go first
+
 .blog-post-item-list {
     color: $figureColor;
     padding: 20px 40px;
@@ -6,7 +8,7 @@
     width: 75%;
     box-shadow: 2px 2px 1px $figureColor;
 
-    a, a:-webkit-any-link {
+    a, a:any-link {
         background: none;
     }
 }
@@ -99,7 +101,7 @@
         width: inherit;
 
         * {
-            max-width: -webkit-fill-available;
+            max-width: fill-available;
         }
     }
 }

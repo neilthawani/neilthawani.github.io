@@ -1,3 +1,5 @@
+@use "variables" as *;
+
 $red: #851d18;
 $loveContrastColor: #cff;
 
@@ -51,7 +53,7 @@ $loveContrastColor: #cff;
     padding: 25px;
     line-height: 1.5;
 
-    a, a:-webkit-any-link {
+    a, a:any-link {
         color: $loveContrastColor;
         text-decoration: underline;
         background-color: transparent;
@@ -75,7 +77,7 @@ $loveContrastColor: #cff;
     }
 
     #name {
-        span a, span a:-webkit-any-link {
+        span a, span a:any-link {
             color: $loveContrastColor;
             text-decoration: underline;
 

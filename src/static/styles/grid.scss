@@ -1,6 +1,8 @@
+@use 'sass:math' as math;
+
 @function evenColumnWidth($num_columns, $width_precision)
 {
-  @return percentage(floor((1 / $num_columns) * $width_precision) / $width_precision)
+  @return math.percentage(math.div(math.floor(math.div(1, $num_columns) * $width_precision), $width_precision))
 }
 
 @mixin evenColumnsMixin {
@@ -22,8 +24,12 @@
         flex: 1 0 evenColumnWidth($column, 100);
       }
 
-      .even-column:nth-last-child(-n+#{$column} + 1) + .even-column:nth-child(n+#{$column} + 1) {
-        max-width: evenColumnWidth($column, 10000);
+      // .even-column:nth-last-child(-n+#{$column} + 1) + .even-column:nth-child(n+#{$column} + 1) {
+      //   max-width: evenColumnWidth($column, 10000);
+      // }
+      
+      .even-column:nth-last-child(#{-1 * $column + 1}) + .even-column:nth-child(#{ $column + 1 }) {
+          max-width: evenColumnWidth($column, 10000);
       }
     }
   }

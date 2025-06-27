@@ -1,24 +1,24 @@
-@import "variables"; // variables MUST go first
-@import "mobile";
+@use "variables" as *; // variables MUST go first
+@use "mobile";
 
-@import "blog";
-@import "button-selector";
-@import "grid";
-@import "icons";
-@import "love";
-@import "menu";
-@import "projects";
-@import "tables";
+@use "blog";
+@use "button-selector";
+@use "grid";
+@use "icons";
+@use "love";
+@use "menu";
+@use "projects";
+@use "tables";
 
 ul {
-    -webkit-margin-before: 0;
-    -webkit-margin-after: 0;
-    -webkit-margin-start: 0;
-    -webkit-margin-end: 0;
-    -webkit-padding-start: 0;
+    margin-before: 0;
+    margin-after: 0;
+    margin-start: 0;
+    margin-end: 0;
+    padding-start: 0;
 }
 
-a, a:-webkit-any-link {
+a, a:any-link {
     background-color: $groundColor;
     color: $figureColor;
     text-decoration: none;

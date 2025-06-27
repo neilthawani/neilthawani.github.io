@@ -1,3 +1,5 @@
+@use "variables" as *; // variables MUST go first
+
 .nav { // div
     font-size: 24px;
     background-color: $white;
@@ -6,8 +8,9 @@
     margin-bottom: 40px;
     padding: 25px 100px;
     box-shadow: 2px 2px 1px $figureColor;
+    align-items: center;
 
-    a, a:-webkit-any-link {
+    a, a:any-link {
         background: none;
 
         &:hover {
@@ -26,12 +29,12 @@
 
     &:hover {
         #firstname:after {
-            -webkit-animation: changeFirstName 2s ease forwards; /* Safari 4.0 - 8.0 */
+            animation: changeFirstName 2s ease forwards; /* Safari 4.0 - 8.0 */
             animation: changeFirstName 2s ease forwards;
         }
 
         #lastname:after {
-            -webkit-animation: changeLastName 2s ease forwards; /* Safari 4.0 - 8.0 */
+            animation: changeLastName 2s ease forwards; /* Safari 4.0 - 8.0 */
             animation: changeLastName 2s ease forwards;
         }
     }
