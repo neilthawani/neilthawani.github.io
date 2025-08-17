@@ -106,7 +106,7 @@ const loveStruct = {
             'I am frugal and the son of first-generation Indian immigrants. Most of my money is spent on food and gas, and I like to go on a trip every three months - usually domestic, sometimes international.',
         ],
     },
-    bestWayToContact: 'Email <a href="mailto:neilthawani@gmail.com?subject=[Love Doc]">neilthawani@gmail.com</a> prepending the subject line with <strong>[Love Doc]</strong>.<br /><br />An ideal message is similar to the format of this doc with a list of desired traits/habits you want to see in your mate, some self-awareness with various implications, and potential dealbreakers. Some logistical information (age, sex, location, etc.) would be good too.<br /><br />Alternatively, you could just <a href="https://twitter.com/lioninawhat" target="_blank">shoot your shot</a>.'
+    bestWayToContact: 'Email <a href="mailto:neilthawani@gmail.com?subject=[Love Doc]">neilthawani@gmail.com</a> prepending the subject line with <strong>[Love Doc]</strong>.<br /><br />An ideal message is similar to the format of this doc with a list of desired traits/habits you want to see in your mate, some self-awareness with various implications, and potential dealbreakers. Some logistical information (age, sex, location, etc.) would be good too.<br /><br />Alternatively, you could just <a href="https://twitter.com/neilthawani" target="_blank">shoot your shot</a>.'
 };
 
 document.addEventListener('DOMContentLoaded', function(event) {
@@ -121,7 +121,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
     const picturesDiv = document.getElementById('pictures');
     loveStruct.pictures.forEach((item) => {
         const image = `<a href='${item.src}'><img src='${item.src}' alt='${item.alt}' /></a>`;
-        // const image = `<img src='${item.src}' alt='${item.alt}' />`;
         picturesDiv.innerHTML += image;
     });
 
@@ -171,13 +170,6 @@ function traitClicked(traitDiv, index) {
         divToModify.setAttribute('data-expanded', true);
     }
 }
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    dealbreakerClicked('time');
-    dealbreakerClicked('sex');
-    dealbreakerClicked('kids');
-    dealbreakerClicked('money');
-})();
 </script>
 
 <!DOCTYPE html>
@@ -286,6 +278,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
             <div id="pictures">
                 <h2>Pictures (click to expand)</h2>
+            </div>
+            
+            <div>
+                <h2 class="text-center">All boxes are also expandable.</h2>
             </div>
     
             <div id="potentialDealbreakers">
