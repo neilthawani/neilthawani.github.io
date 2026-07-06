@@ -1,0 +1,17 @@
+{
+    "editor.formatOnSave": true,
+    "editor.detectIndentation": false,
+    "files.associations": {
+        "*.hbs": "handlebars"
+    },
+    "[scss]": {
+        "editor.insertSpaces": false,
+        "editor.tabSize": 4,
+        "editor.detectIndentation": false
+    },
+    "[handlebars]": {
+        "editor.insertSpaces": false,
+        "editor.tabSize": 4,
+        "editor.detectIndentation": false
+    }
+}

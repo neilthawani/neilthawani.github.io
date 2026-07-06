@@ -1,122 +1,108 @@
 <div class="visible-phone mobile-nav-container">
-  <ul class="mobile-nav">
-    <li class="mobile-nav-item"><a href="/">Home</a></li>
-    <li class="mobile-nav-item"><a href="/#projects">Projects</a></li>
-    {{!-- <li class="mobile-nav-item"><a href="/blog">Blog</a></li> --}}
-  </ul>
+	<ul class="mobile-nav">
+		<li class="mobile-nav-item"><a href="/">Home</a></li>
+		<li class="mobile-nav-item"><a href="/#projects">Projects</a></li>
+		{{!-- <li class="mobile-nav-item"><a href="/blog">Blog</a></li> --}}
+	</ul>
 
-<div
-  id="google-calendar-hidden-wrapper"
-  class="google-calendar-hidden-wrapper"
-  aria-hidden="true"
->
-  <span id="google-calendar-button-target"></span>
-</div>
+	<div id="google-calendar-hidden-wrapper" class="google-calendar-hidden-wrapper" aria-hidden="true">
+		<span id="google-calendar-button-target"></span>
+	</div>
 
-<link
-  href="https://calendar.google.com/calendar/scheduling-button-script.css"
-  rel="stylesheet"
-/>
+	<link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet" />
 
-<script
-  src="https://calendar.google.com/calendar/scheduling-button-script.js"
-  defer>
-</script>
+	<script src="https://calendar.google.com/calendar/scheduling-button-script.js" defer>
+	</script>
 
-<script>
-  window.addEventListener('load', function () {
-    const appointmentUrl =
-      'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1vSfnMKhIpeU1ZowBil0TSVvXHG7wtW_7WTRlhbt6R73kc4BIIyEIs29Zfrup_tB_6L7VzmOYr?gv=true';
+	<script>
+		window.addEventListener('load', function () {
+			const appointmentUrl =
+				'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1vSfnMKhIpeU1ZowBil0TSVvXHG7wtW_7WTRlhbt6R73kc4BIIyEIs29Zfrup_tB_6L7VzmOYr?gv=true';
 
-    const iconButton = document.getElementById('calendar-icon-button');
-    const target = document.getElementById('google-calendar-button-target');
-    const hiddenWrapper = document.getElementById('google-calendar-hidden-wrapper');
+			const iconButton = document.getElementById('calendar-icon-button');
+			const target = document.getElementById('google-calendar-button-target');
+			const hiddenWrapper = document.getElementById('google-calendar-hidden-wrapper');
 
-    calendar.schedulingButton.load({
-      url: appointmentUrl,
-      color: '#039BE5',
-      label: 'Book an appointment',
-      target,
-    });
+			calendar.schedulingButton.load({
+				url: appointmentUrl,
+				color: '#039BE5',
+				label: 'Book an appointment',
+				target,
+			});
 
-    iconButton.addEventListener('click', function () {
-      const googleButton = hiddenWrapper.querySelector(
-        'button, a, [role="button"]'
-      );
+			iconButton.addEventListener('click', function () {
+				const googleButton = hiddenWrapper.querySelector(
+					'button, a, [role="button"]'
+				);
 
-      if (googleButton) {
-        googleButton.click();
-      } else {
-        window.open(appointmentUrl, '_blank', 'noopener,noreferrer');
-      }
-    });
-  });
-</script>
+				if (googleButton) {
+					googleButton.click();
+				} else {
+					window.open(appointmentUrl, '_blank', 'noopener,noreferrer');
+				}
+			});
+		});
+	</script>
 
-  <ul class="mobile-nav contact-icons">
-    <li class="mobile-nav-item">
-  <button
-    id="calendar-icon-button"
-    class="calendar-icon-button"
-    type="button"
-    aria-label="Book an appointment"
-    title="Book an appointment"
-  >
-    <i class="ii ii-calendar-clock" aria-hidden="true"></i>
-  </button>
-</li>
+	<ul class="mobile-nav contact-icons">
+		<li class="mobile-nav-item">
+			<button id="calendar-icon-button" class="calendar-icon-button" type="button"
+				aria-label="Book an appointment" title="Book an appointment">
+				<i class="ii ii-calendar-clock" aria-hidden="true"></i>
+			</button>
+		</li>
 
-    <li class="mobile-nav-item">
-      <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
-        <i class="ii ii-twitter"></i>
-      </a>
-    </li>
+		<li class="mobile-nav-item">
+			<a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+				<i class="ii ii-twitter"></i>
+			</a>
+		</li>
 
-    <li class="mobile-nav-item">
-      <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
-        <i class="ii ii-linkedin-box"></i>
-      </a>
-    </li>
+		<li class="mobile-nav-item">
+			<a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+				<i class="ii ii-linkedin-box"></i>
+			</a>
+		</li>
 
-    <li class="mobile-nav-item">
-      <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
-        <i class="ii ii-github"></i>
-      </a>
-    </li>
-  </ul>
+		<li class="mobile-nav-item">
+			<a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+				<i class="ii ii-github"></i>
+			</a>
+		</li>
+	</ul>
 </div>
 
 <div class="hidden-phone">
-  <div class="nav">
-    <a id="fullname" href="/">
-      <span id="firstname">&nbsp;</span>
-      <span id="lastname"></span>
-    </a>
+	<div class="nav">
+		<a id="fullname" href="/">
+			<span id="firstname">&nbsp;</span>
+			<span id="lastname"></span>
+		</a>
 
-    <ul class="nav-pills">
-      <a href="/#projects">
-        <li>Projects</li>
-      </a>
+		<ul class="nav-pills">
+			<a href="/#projects">
+				<li>Projects</li>
+			</a>
 
-      {{!-- <a href="/blog">
-        <li>Blog</li>
-      </a> --}}
+			{{!-- <a href="/blog">
+				<li>Blog</li>
+			</a> --}}
 
-      <a href="/meet.html">
-        <li><i class="ii ii-calendar-clock"></i></li>
-      </a>
+			<a href="/meet.html">
+				<li><i class="ii ii-calendar-clock"></i></li>
+			</a>
 
-      <a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
-        <li><i class="ii ii-twitter"></i></li>
-      </a>
+			<a href="http://www.twitter.com/lioninawhat" target="_blank" rel="noopener">
+				<li><i class="ii ii-twitter"></i></li>
+			</a>
 
-      <a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
-        <li><i class="ii ii-linkedin-box"></i></li>
-      </a>
+			<a href="http://www.linkedin.com/in/neilthawani" target="_blank" rel="noopener">
+				<li><i class="ii ii-linkedin-box"></i></li>
+			</a>
 
-      <a href="http://github.com/neilthawani" target="_blank" rel="noopener">
-        <li><i class="ii ii-github"></i></li>
-      </a>
-    </ul>
-  </div>
+			<a href="http://github.com/neilthawani" target="_blank" rel="noopener">
+				<li><i class="ii ii-github"></i></li>
+			</a>
+		</ul>
+	</div>
 </div>
