@@ -4,7 +4,7 @@
     width: 400px;
     height: max-content;
     padding: 5px;
-    margin: 64px 4px 0 4px;
+    // margin: 64px 4px 0 4px;
     text-align: center;
     box-shadow: 2px 2px 1px $figureColor;
     background-color: $white;
@@ -43,6 +43,7 @@
 }
 
 .project-card-text-description {
+    overflow-wrap: anywhere;
 }
 
 .project-card-tools-logos {
@@ -68,6 +69,9 @@
 
 @media (max-width: 991px) {
     .project-card {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
         margin: 25px 0 0 0;
 
         // &:last-child {

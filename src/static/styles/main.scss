@@ -78,6 +78,8 @@ p:last-child {
     // Prevent vertical margin collapse with flexbox!
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
 @media (max-width: 991px) {
@@ -86,6 +88,8 @@ p:last-child {
     }
 
     .content-container {
-        width: inherit;
+        width: 100%;
+        margin: 16px 0 0 0;
+        padding: 40px;
     }
 }
