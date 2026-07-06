@@ -9077,9 +9077,45 @@ i:before {
 
 .mobile-nav.contact-icons {
   justify-content: center;
+  align-items: center;
+  gap: 40px;
 }
-.mobile-nav.contact-icons a {
-  margin: 5px 20px 0 20px;
+.mobile-nav.contact-icons a,
+.mobile-nav.contact-icons .calendar-icon-button {
+  margin: 0;
+}
+.mobile-nav.contact-icons .mobile-nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.calendar-icon-button {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 10px 15px;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+}
+
+.calendar-icon-button .ii {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.google-calendar-hidden-wrapper {
+  position: fixed !important;
+  left: -99999px !important;
+  top: -99999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .project-card {
