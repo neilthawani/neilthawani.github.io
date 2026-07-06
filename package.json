@@ -4,6 +4,7 @@
   "description": "Neil Thawani's website",
   "main": "server.js",
   "dependencies": {
+    "concurrently": "^9.2.1",
     "handlebars": "^4.7.7",
     "js-beautify": "^1.14.0",
     "live-server": "^1.2.1",
@@ -16,9 +17,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "build-css": "sass --load-path=scss src/static/styles/main.scss styles/main.css",
-    "watch-css": "nodemon -e scss -x \"npm run build-css\"",
+    "watch-css": "nodemon --watch src/static/styles --ext scss --exec \"npm run build-css\"",
     "build-views": "node build/build.js -d cwd -p \"src/views/partials/**/*.hbs\" -l \"src/views/layouts/**/*.hbs\" -t \"src/views/templates/**/*.hbs\" -v",
-    "watch-views": "nodemon -e hbs -x \"npm run build-views\"",
+    "watch-views": "nodemon --watch src/views --ext hbs --exec \"npm run build-views\"",
+    "watch": "concurrently -k -n views,css -c cyan,yellow \"npm run watch-views\" \"npm run watch-css\"",
+    "dev-build-and-watch": "npm run build-views && npm run build-css && npm run watch",
     "build-md": "node build/markdown-to-handlebars src/markdown/blog/ src/views/templates/blog/",
     "update-post": "npm run build-md",
     "clear-html": "rm *.html && rm **/*.html"
