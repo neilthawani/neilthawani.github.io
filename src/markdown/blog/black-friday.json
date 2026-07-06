@@ -3,5 +3,9 @@
   "title": "Black Friday",
   "created_at": "December 03, 2017",
   "slug": "black-friday",
-  "tags": ["life", "commerce"]
+  "tags": [
+    "life",
+    "commerce"
+  ],
+  "is_visible": false
 }

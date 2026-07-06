@@ -3,5 +3,9 @@
   "title": "Installing Clojure",
   "created_at": "January 04, 2015",
   "slug": "installing-clojure",
-  "tags": ["clojure", "leiningen"]
+  "tags": [
+    "clojure",
+    "leiningen"
+  ],
+  "is_visible": false
 }

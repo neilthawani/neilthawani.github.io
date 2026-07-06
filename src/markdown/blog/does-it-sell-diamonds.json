@@ -3,5 +3,10 @@
   "title": "Does it sell diamonds?",
   "created_at": "May 08, 2016",
   "slug": "does-it-sell-diamonds",
-  "tags": ["life", "goals", "blogging"]
+  "tags": [
+    "life",
+    "goals",
+    "blogging"
+  ],
+  "is_visible": false
 }

@@ -3,5 +3,9 @@
   "title": "Weeding",
   "created_at": "July 10, 2017",
   "slug": "weeding",
-  "tags": ["life", "gardening"]
+  "tags": [
+    "life",
+    "gardening"
+  ],
+  "is_visible": false
 }

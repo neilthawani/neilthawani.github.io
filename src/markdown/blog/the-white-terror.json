@@ -3,5 +3,9 @@
   "title": "The white terror",
   "created_at": "June 19, 2019",
   "slug": "the-white-terror",
-  "tags": ["fiction", "horror"]
+  "tags": [
+    "fiction",
+    "horror"
+  ],
+  "is_visible": false
 }

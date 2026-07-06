@@ -3,5 +3,10 @@
   "title": "Three months later...",
   "created_at": "July 07, 2015",
   "slug": "three-months-later",
-  "tags": ["life", "goals", "vision planning"]
+  "tags": [
+    "life",
+    "goals",
+    "vision planning"
+  ],
+  "is_visible": false
 }

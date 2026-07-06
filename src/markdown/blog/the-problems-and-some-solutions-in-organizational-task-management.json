@@ -3,5 +3,11 @@
   "title": "The Problems (and Some Solutions) in Organizational Task Management",
   "created_at": "September 22, 2016",
   "slug": "the-problems-and-some-solutions-in-organizational-task-management",
-  "tags": ["leadership", "delegation", "task management", "aiesec"]
+  "tags": [
+    "leadership",
+    "delegation",
+    "task management",
+    "aiesec"
+  ],
+  "is_visible": false
 }

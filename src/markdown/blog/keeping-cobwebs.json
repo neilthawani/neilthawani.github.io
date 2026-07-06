@@ -3,5 +3,10 @@
   "title": "Keeping Cobwebs",
   "created_at": "May 27, 2018",
   "slug": "keeping-cobwebs",
-  "tags": ["personal development", "metaphors", "life"]
+  "tags": [
+    "personal development",
+    "metaphors",
+    "life"
+  ],
+  "is_visible": false
 }

@@ -3,5 +3,11 @@
   "title": "Coursera - The Data Scientist's Toolbox - Week 2 - Basic Git Commands",
   "created_at": "January 14, 2015",
   "slug": "coursera-the-data-scientist-s-toolbox-week-2-basic-git-commands",
-  "tags": ["coursera", "data scientist's toolbox", "git", "github"]
+  "tags": [
+    "coursera",
+    "data scientist's toolbox",
+    "git",
+    "github"
+  ],
+  "is_visible": false
 }

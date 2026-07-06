@@ -3,5 +3,10 @@
   "title": "On Leadership - Revisiting the Old and Beautiful",
   "created_at": "January 23, 2015",
   "slug": "on-leadership-revisiting-the-old-and-beautiful",
-  "tags": ["life", "leadership", "entrepreneurship"]
+  "tags": [
+    "life",
+    "leadership",
+    "entrepreneurship"
+  ],
+  "is_visible": false
 }

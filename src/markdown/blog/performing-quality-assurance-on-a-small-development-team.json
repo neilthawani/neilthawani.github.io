@@ -3,5 +3,10 @@
   "title": "Performing Quality Assurance on a Small Development Team",
   "created_at": "January 28, 2016",
   "slug": "performing-quality-assurance-on-a-small-development-team",
-  "tags": ["software development", "agile", "git"]
+  "tags": [
+    "software development",
+    "agile",
+    "git"
+  ],
+  "is_visible": false
 }

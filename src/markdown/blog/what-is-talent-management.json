@@ -3,5 +3,10 @@
   "title": "What is talent management?",
   "created_at": "July 21, 2017",
   "slug": "what-is-talent-management",
-  "tags": ["talent management", "organizational development", "professional development"]
+  "tags": [
+    "talent management",
+    "organizational development",
+    "professional development"
+  ],
+  "is_visible": false
 }

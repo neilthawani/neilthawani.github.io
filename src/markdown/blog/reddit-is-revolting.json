@@ -3,5 +3,10 @@
   "title": "reddit is Revolting",
   "created_at": "July 17, 2015",
   "slug": "reddit-is-revolting",
-  "tags": ["reddit", "social media", "editorial"]
+  "tags": [
+    "reddit",
+    "social media",
+    "editorial"
+  ],
+  "is_visible": false
 }

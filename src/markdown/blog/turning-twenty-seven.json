@@ -3,5 +3,9 @@
   "title": "Turning Twenty-Seven",
   "created_at": "September 17, 2015",
   "slug": "turning-twenty-seven",
-  "tags": ["life", "tech"]
+  "tags": [
+    "life",
+    "tech"
+  ],
+  "is_visible": false
 }

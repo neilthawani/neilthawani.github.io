@@ -3,5 +3,10 @@
   "title": "A night of vision planning and thinking about graduate school led to this post.",
   "created_at": "August 04, 2015",
   "slug": "a-night-of-vision-planning-and-thinking-about-graduate-school-led-to-this-post",
-  "tags": ["life", "goals", "vision planning"]
+  "tags": [
+    "life",
+    "goals",
+    "vision planning"
+  ],
+  "is_visible": false
 }

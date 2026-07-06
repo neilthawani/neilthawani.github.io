@@ -4,5 +4,10 @@
   "created_at": "November 19, 2023",
   "subtitle": "",
   "slug": "deer-hunting",
-  "tags": ["fictional autobiography", "gun safety", "regret"]
+  "tags": [
+    "fictional autobiography",
+    "gun safety",
+    "regret"
+  ],
+  "is_visible": false
 }

@@ -3,5 +3,9 @@
   "title": "Finished R Programming!",
   "created_at": "March 01, 2015",
   "slug": "finished-r-programming",
-  "tags": ["coursera", "r programming"]
+  "tags": [
+    "coursera",
+    "r programming"
+  ],
+  "is_visible": false
 }

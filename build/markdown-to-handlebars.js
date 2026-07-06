@@ -15,6 +15,25 @@ var toFolder = args[1];
 
 var isDirectory;
 
+function removeStaleGeneratedFiles(directoryPath, extension, keepSlugs, keepFileNames) {
+    if (!fs.existsSync(directoryPath)) {
+        return;
+    }
+
+    var files = fs.readdirSync(directoryPath);
+    for (var i = 0; i < files.length; i++) {
+        var filename = files[i];
+        if (path.extname(filename) !== extension || keepFileNames.has(filename)) {
+            continue;
+        }
+
+        var slug = path.basename(filename, extension);
+        if (!keepSlugs.has(slug)) {
+            fs.unlinkSync(path.join(directoryPath, filename));
+        }
+    }
+}
+
 try {
     isDirectory = fs.lstatSync(from).isDirectory();
 } catch(e) {
@@ -27,6 +46,7 @@ if (isDirectory) {
 
     var showdownConverter = new showdown.Converter({tables: true}),
         blogPostArray = [];
+    var visibleSlugs = new Set();
 
     var files = fs.readdirSync(from);
     for (var i = 0; i < files.length; i++) {
@@ -35,10 +55,17 @@ if (isDirectory) {
             continue;
         }
 
-        var fileSlug = file.split(".")[0];
-        var markdownFile = fs.readFileSync(`${from}${fileSlug}.md`).toString();
-        var jsonFile = fs.readFileSync(`${from}${fileSlug}.json`).toString();
+        var fileSlug = path.basename(file, ".md");
+        var markdownFile = fs.readFileSync(path.join(from, `${fileSlug}.md`)).toString();
+        var jsonFile = fs.readFileSync(path.join(from, `${fileSlug}.json`)).toString();
         var jsonData = JSON.parse(jsonFile);
+        var isVisible = jsonData["is_visible"] !== false;
+
+        if (!isVisible) {
+            continue;
+        }
+
+        visibleSlugs.add(fileSlug);
 
         var title = jsonData["title"];
         var createdAt = jsonData["created_at"];
@@ -57,10 +84,13 @@ if (isDirectory) {
             formattedFileContents = beautifyHtml(fileContents),
             fullTemplate = `{{#> base}}\n\n${formattedFileContents}\n\n{{/base}}`;
 
-        var filenameToWrite = `${toFolder}${fileSlug}`;
+        var filenameToWrite = path.join(toFolder, fileSlug);
         fs.writeFileSync(`${filenameToWrite}.hbs`, fullTemplate);
         blogPostArray.push({ "filename": `blog/${fileSlug}`, "title": title, "createdAt": createdAt, "tags": tagsString });
     }
+
+    removeStaleGeneratedFiles(toFolder, ".hbs", visibleSlugs, new Set(["index.hbs"]));
+    removeStaleGeneratedFiles(path.join(process.cwd(), "blog"), ".html", visibleSlugs, new Set(["index.html"]));
 
     var indexFileContents = '<div class="blog-post-item-list"><h1 class="text-center">All Posts</h1>\n\n',
         blogPostArray = blogPostArray.sort(function(a, b) {
@@ -87,5 +117,5 @@ if (isDirectory) {
     var formattedIndexFileContents = beautifyHtml(indexFileContents),
         fullIndexTemplate = `{{#> base}}\n\n${formattedIndexFileContents}\n\n{{/base}}`;
 
-    fs.writeFileSync(`${toFolder}index.hbs`, fullIndexTemplate)
+    fs.writeFileSync(path.join(toFolder, "index.hbs"), fullIndexTemplate)
 }

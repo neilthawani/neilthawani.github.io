@@ -3,5 +3,10 @@
   "title": "Model Representation",
   "created_at": "November 28, 2016",
   "slug": "model-representation",
-  "tags": ["coursera", "machine learning", "andrew ng"]
+  "tags": [
+    "coursera",
+    "machine learning",
+    "andrew ng"
+  ],
+  "is_visible": false
 }

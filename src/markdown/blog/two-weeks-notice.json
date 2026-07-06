@@ -3,5 +3,9 @@
   "title": "Two Weeks Notice",
   "created_at": "March 18, 2015",
   "slug": "two-weeks-notice",
-  "tags": ["life", "career"]
+  "tags": [
+    "life",
+    "career"
+  ],
+  "is_visible": false
 }

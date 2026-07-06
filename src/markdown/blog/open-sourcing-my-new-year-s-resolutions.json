@@ -3,5 +3,10 @@
   "title": "Open-Sourcing My New Year's Resolutions",
   "created_at": "January 12, 2016",
   "slug": "open-sourcing-my-new-year-s-resolutions",
-  "tags": ["life goals", "career", "personal development"]
+  "tags": [
+    "life goals",
+    "career",
+    "personal development"
+  ],
+  "is_visible": false
 }

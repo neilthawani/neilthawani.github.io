@@ -3,5 +3,10 @@
   "title": "Let It Burn",
   "created_at": "May 19, 2016",
   "slug": "let-it-burn",
-  "tags": ["life", "burning man", "post-scarcity"]
+  "tags": [
+    "life",
+    "burning man",
+    "post-scarcity"
+  ],
+  "is_visible": false
 }
