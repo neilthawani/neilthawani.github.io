@@ -9126,6 +9126,24 @@ i:before {
   pointer-events: none !important;
 }
 
+@media (max-width: 991px) {
+  /* Override Google's runtime class-based container styles without depending on random class names. */
+  body > div:has(> iframe.mmGMM) {
+    padding: 0 !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+  }
+  body > div:has(> iframe.mmGMM) > button {
+    top: 68px !important;
+    right: 16px !important;
+    background-color: #aaa !important;
+  }
+  body > div:has(> iframe.mmGMM) > iframe.mmGMM {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
 .project-card {
   width: 400px;
   height: max-content;
