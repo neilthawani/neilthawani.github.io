@@ -151,7 +151,7 @@
 .button-selector {
   font-size: 24px;
   background-color: white;
-  padding: 10px;
+  padding: 20px;
   box-shadow: 2px 2px 1px #777;
   width: max-content;
   margin: 40px auto 0 auto;
@@ -9130,6 +9130,7 @@ i:before {
   width: 400px;
   height: max-content;
   padding: 5px;
+  margin: 40px 20px;
   text-align: center;
   box-shadow: 2px 2px 1px #777;
   background-color: white;
@@ -9137,7 +9138,7 @@ i:before {
 }
 
 .project-card-content {
-  padding: 20px 10px 10px 10px;
+  padding: 32px;
 }
 
 .project-card-icon {
@@ -9290,7 +9291,7 @@ p:last-child {
 
 .content-container {
   color: #777;
-  padding: 20px 40px;
+  padding: 40px;
   background-color: white;
   box-shadow: 2px 2px 1px #777;
   margin: 25px auto;
