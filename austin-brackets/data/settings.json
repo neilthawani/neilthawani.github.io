@@ -1,0 +1,6 @@
+{
+    "live_voting": false,
+    "apps_script_url": "https://script.google.com/macros/s/PLACEHOLDER_DEPLOYMENT_ID/exec",
+    "mode": "local_demo",
+    "refresh_seconds": 90
+}

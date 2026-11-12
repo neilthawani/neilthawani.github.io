@@ -1,0 +1,523 @@
+:root {
+    font:
+        15px/1.5 system-ui,
+        -apple-system,
+        Segoe UI,
+        sans-serif;
+    color: #f1f4f2;
+    background: #0c1515;
+    --bg: #0c1515;
+    --card: #182625;
+    --edge: #34504a;
+    --muted: #a0b7af;
+    --accent: #f9c878;
+    --green: #a7e6bd;
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+}
+header {
+    padding: 12px clamp(12px, 3vw, 28px);
+    background:
+        radial-gradient(ellipse at 95% 0%, #35412b, transparent 52%), #121f1c;
+    border-bottom: 1px solid var(--edge);
+}
+.header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.header-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 0.65rem;
+}
+h1 {
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    letter-spacing: -0.04em;
+    margin: 2px 0 0;
+}
+p {
+    color: var(--muted);
+    margin: 0.25rem 0;
+}
+select,
+button {
+    border-radius: 8px;
+    background: #1c302b;
+    border: 1px solid #48645a;
+    color: #f0f6f1;
+    padding: 6px 10px;
+    font: inherit;
+    font-size: 0.78rem;
+}
+button {
+    cursor: pointer;
+}
+button:hover,
+select:hover {
+    border-color: var(--accent);
+}
+button:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+.mode {
+    font-size: 0.72rem;
+    color: #d8bc78;
+}
+main {
+    padding: 10px clamp(12px, 3vw, 28px) 16px;
+}
+.notice {
+    display: none;
+    border-radius: 9px;
+    border: 1px solid #8d6e4b;
+    padding: 10px 15px;
+    background: #312b20;
+    color: #ffe1ac;
+    margin-bottom: 18px;
+}
+.notice.show {
+    display: block;
+}
+.section-title {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+.section-title h2 {
+    margin: 0;
+    font-size: 1.15rem;
+    letter-spacing: -0.03em;
+}
+.section-title p {
+    margin: 0;
+    font-size: 0.82rem;
+}
+.chip {
+    border: 1px solid var(--edge);
+    border-radius: 24px;
+    padding: 4px 10px;
+    color: #c4d9d1;
+    font-size: 0.72rem;
+}
+.pending {
+    color: #82978e;
+    font-style: italic;
+    font-size: 0.8rem;
+}
+.champion {
+    max-width: 320px;
+    padding: 14px 16px;
+    border: 1px solid #af8c49;
+    background: #302c1c;
+    border-radius: 12px;
+    margin: 18px auto 0;
+    text-align: center;
+}
+.champion strong {
+    font-size: 1.1rem;
+}
+.champion p {
+    font-size: 0.85rem;
+}
+
+/* Classic mirrored sports bracket (NFL-style) */
+.tourney-scroller {
+    overflow: hidden;
+    width: 100%;
+    padding: 0;
+}
+.tourney {
+    display: flex;
+    align-items: stretch;
+    width: max-content;
+    margin: 0 auto;
+    transform-origin: top center;
+}
+.tourney-side {
+    display: flex;
+    align-items: stretch;
+}
+.tourney-right {
+    flex-direction: row-reverse;
+}
+.tourney-round {
+    display: flex;
+    flex-direction: column;
+    width: 148px;
+    padding: 0 10px;
+}
+.tourney-round-title {
+    flex: 0 0 auto;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--accent);
+    text-align: center;
+    padding-bottom: 6px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--edge);
+    min-height: 2.2em;
+}
+.tourney-round-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+}
+.seed-slot {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    min-height: 0;
+    padding: 4px 0;
+}
+/* Opening round sets the bracket height — each match needs room to breathe */
+.tourney-round[data-round="0"] .seed-slot {
+    flex: 0 0 auto;
+    min-height: 64px;
+}
+.tourney-round[data-round="0"] .bracket-game {
+    min-height: 52px;
+    gap: 14px;
+}
+
+/* Connectors: horizontal stub + vertical pair bridge */
+.tourney-left .seed-slot::after,
+.tourney-right .seed-slot::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    border-top: 2px solid #7a9a8e;
+    pointer-events: none;
+}
+.tourney-left .seed-slot::after {
+    right: -10px;
+}
+.tourney-right .seed-slot::after {
+    left: -10px;
+}
+.tourney-left .seed-slot:nth-child(odd)::before,
+.tourney-left .seed-slot:nth-child(even)::before {
+    content: "";
+    position: absolute;
+    right: -10px;
+    width: 0;
+    border-right: 2px solid #7a9a8e;
+    pointer-events: none;
+}
+.tourney-left .seed-slot:nth-child(odd)::before {
+    top: 50%;
+    height: 50%;
+}
+.tourney-left .seed-slot:nth-child(even)::before {
+    top: 0;
+    height: 50%;
+}
+.tourney-right .seed-slot:nth-child(odd)::before,
+.tourney-right .seed-slot:nth-child(even)::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    width: 0;
+    border-left: 2px solid #7a9a8e;
+    pointer-events: none;
+}
+.tourney-right .seed-slot:nth-child(odd)::before {
+    top: 50%;
+    height: 50%;
+}
+.tourney-right .seed-slot:nth-child(even)::before {
+    top: 0;
+    height: 50%;
+}
+.tourney-left .tourney-round:last-child .seed-slot::before,
+.tourney-right .tourney-round:last-child .seed-slot::before {
+    display: none;
+}
+
+.tourney-final {
+    display: flex;
+    flex-direction: column;
+    width: 168px;
+    padding: 0 12px;
+    border-left: 1px solid var(--edge);
+    border-right: 1px solid var(--edge);
+}
+.tourney-final .seed-slot {
+    align-items: stretch;
+}
+.tourney-final .champion {
+    margin-top: 8px;
+    width: 100%;
+    max-width: none;
+}
+
+/* Two team lines per match — exemplar sports-bracket look */
+.bracket-game {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 6px 0;
+}
+.bracket-game.final-game {
+    gap: 18px;
+    min-height: 72px;
+}
+.slot {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    min-height: 24px;
+    padding: 0 2px 4px;
+    border-bottom: 2px solid #9bb5aa;
+}
+.slot.winner {
+    border-bottom-color: var(--accent);
+}
+.slot.winner .name {
+    color: var(--accent);
+}
+.slot-empty .pending {
+    font-size: 0.62rem;
+}
+.zip-tag {
+    flex: 0 0 auto;
+    font-size: 0.55rem;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+.name {
+    display: block;
+    min-width: 0;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #f5f5f0;
+    font-weight: 650;
+    text-decoration: none;
+    font-size: 0.66rem;
+    line-height: 1.1;
+}
+.name:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+.score {
+    white-space: nowrap;
+    font-size: 0.58rem;
+    color: var(--green);
+    font-variant-numeric: tabular-nums;
+}
+.rate {
+    padding: 0 4px;
+    background: #2a473c;
+    font-size: 0.55rem;
+    border-radius: 4px;
+    line-height: 1.4;
+}
+.tip {
+    display: none;
+    position: absolute;
+    top: calc(100% - 2px);
+    left: 0;
+    z-index: 12;
+    background: #f3f1e9;
+    color: #203027;
+    padding: 12px;
+    border-radius: 9px;
+    width: 290px;
+    max-width: 80vw;
+    box-shadow: 0 12px 30px #0008;
+    font-size: 0.78rem;
+    pointer-events: none;
+}
+.slot:hover .tip,
+.slot:focus-within .tip {
+    display: block;
+}
+.tip strong {
+    display: block;
+    margin-bottom: 4px;
+}
+.tip p {
+    color: #34493d;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 14px;
+}
+.card {
+    background: var(--card);
+    border: 1px solid var(--edge);
+    border-radius: 12px;
+    padding: 15px;
+}
+.card h3 {
+    margin: 0 0 6px;
+}
+.weight-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.88rem;
+}
+.weight-table td,
+.weight-table th {
+    text-align: left;
+    border-bottom: 1px solid var(--edge);
+    padding: 9px;
+}
+.weight-table td:last-child {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+.weight-table th {
+    color: var(--muted);
+}
+.weight-table caption {
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+}
+.leader {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    border-bottom: 1px solid var(--edge);
+    padding: 12px 0;
+}
+.leader .address {
+    color: var(--muted);
+    font-size: 0.77rem;
+}
+.fine {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+.actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.empty {
+    color: var(--muted);
+    font-style: italic;
+    padding: 12px 0;
+}
+dialog {
+    background: #14231f;
+    border: 1px solid #5d816e;
+    border-radius: 16px;
+    color: #f2f5ef;
+    width: min(610px, 96vw);
+    max-height: 90vh;
+    padding: 24px;
+    box-shadow: 0 24px 80px #0009;
+}
+dialog::backdrop {
+    background: #000b;
+}
+.dialog-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+.dialog-head h2 {
+    margin: 8px 0 2px;
+}
+.dialog-head p {
+    font-size: 0.8rem;
+}
+.close {
+    align-self: start;
+    font-size: 1.5rem;
+}
+.rating-field {
+    padding: 12px 0;
+    border-bottom: 1px solid #335044;
+}
+.rating-field .field-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+}
+.rating-field label {
+    font-weight: 700;
+}
+.rating-field .percent {
+    color: var(--accent);
+}
+.rating-field p {
+    font-size: 0.8rem;
+    margin: 3px 0 9px;
+}
+.rating-field select {
+    width: 100%;
+}
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+.primary {
+    background: #eac27c;
+    color: #1d251b;
+    font-weight: 800;
+}
+.primary:hover {
+    background: #ffda9a;
+}
+footer {
+    border-top: 1px solid var(--edge);
+    padding: 12px clamp(12px, 3vw, 28px) 16px;
+    font-size: 0.8rem;
+    max-width: 100%;
+}
+footer p {
+    max-width: 900px;
+}
+footer button {
+    margin-top: 12px;
+    font-size: 0.8rem;
+}
+@media (max-width: 650px) {
+    .tourney-round {
+        width: 120px;
+        padding: 0 6px;
+    }
+    .tourney-final {
+        width: 140px;
+    }
+}

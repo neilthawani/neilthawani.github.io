@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Austin Burger Brackets</title>
+    <link rel="stylesheet" href="/styles/food-brackets.css">
+</head>
+<body data-food="burgers">
+    <header>
+        <div class="header-row">
+            <div>
+                <div class="eyebrow">Austin food championship · Community ratings</div>
+                <h1>Austin's Best <span id="headingFood">Burger</span></h1>
+            </div>
+            <div class="header-meta">
+                <span id="mode" class="mode"></span>
+                <button id="refresh" type="button" hidden>Refresh scores</button>
+                <button id="toggleWeights" type="button">Public weights</button>
+                <span id="stat" class="chip"></span>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div id="notice" class="notice" role="status"></div>
+        <div class="section-title">
+            <div>
+                <h2 id="sectionHeading"></h2>
+                <p id="sectionText"></p>
+            </div>
+        </div>
+        <div id="content"></div>
+    </main>
+    
+    <dialog id="ratingDialog">
+        <form id="ratingForm">
+            <div class="dialog-head">
+                <div>
+                    <div class="eyebrow">Community ballot</div>
+                    <h2 id="rateTitle"></h2>
+                    <p id="rateAddress"></p>
+                </div>
+                <button type="button" id="closeDialog" class="close" aria-label="Close">×</button>
+            </div>
+            <div id="metricInputs"></div>
+            <p class="fine">
+                Your rating is calculated from the publicly displayed category weights.
+                All metrics are required. No name or email is collected.
+            </p>
+            <div class="dialog-actions">
+                <button type="button" id="cancelRating">Cancel</button>
+                <button type="submit" class="primary">Submit rating</button>
+            </div>
+        </form>
+    </dialog>
+    
+    <footer>
+        <p>
+            Each physical location is a distinct entrant. Scores are on a 1–10 scale.
+            A restaurant qualifies after at least <strong id="minVotes"></strong> completed ratings.
+            Score ties stay undecided. Restaurant names open official websites when recorded;
+            otherwise a website search.
+        </p>
+        <p id="backendNote"></p>
+        <button id="export" type="button">Export this browser's ratings (JSON)</button>
+    </footer>
+    <script>
+    /* Austin Brackets frontend.
+     * Public weights: /austin-brackets/data/weights.json
+     * Page food type comes from <body data-food="burgers|tacos">.
+     * Toggle live voting in /austin-brackets/data/settings.json (live_voting).
+     */
+    (function () {
+        'use strict';
+    
+        const $ = (id) => document.getElementById(id);
+    
+        // burgers.html vs tacos.html — each page owns one food type
+        const pageFood = document.body.dataset.food === 'tacos' ? 'tacos' : 'burgers';
+    
+        const state = {
+            food: pageFood,
+            view: 'brackets',
+            db: {},
+            rules: null,
+            settings: null,
+            remote: {},
+            local: [],
+            activeId: null
+        };
+    
+        const liveVoting = () => !!(state.settings && state.settings.live_voting);
+    
+        // Escape user-facing strings before injecting into HTML
+        const html = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        }[c]));
+    
+        // smashburger → Smashburger
+        const title = (s) => String(s || '')
+            .replaceAll('_', ' ')
+            .replace(/\b\w/g, (c) => c.toUpperCase());
+    
+        // Prefer official site fields; otherwise Google search for the restaurant
+        const restaurantUrl = (r) => {
+            if (/^https?:\/\//.test(r.website || '')) {
+                return r.website;
+            }
+            if (
+                /^https?:\/\//.test(r.source_url || '') &&
+                !/reddit|eater|yelp|tripadvisor|infatuation/.test(r.source_url)
+            ) {
+                return r.source_url;
+            }
+            return 'https://www.google.com/search?q=' +
+                encodeURIComponent(r.restaurant + ' Austin Texas official website');
+        };
+    
+        const ids = () => state.db[state.food] || [];
+        const types = () => [...new Set((state.db.burgers || []).map((x) => x.type))].sort();
+        const categoryFor = (r) => (state.food === 'tacos' ? 'taco' : r.type);
+        const categoryWeights = (type) =>
+            state.rules.weights[type] || state.rules.weights.unclassified_burger;
+    
+        // Burger ballots also collect champions_burger metrics for the overall final
+        const ratingKeys = (r) => [...new Set([
+            ...Object.keys(categoryWeights(categoryFor(r))),
+            ...(state.food === 'burgers' ? Object.keys(categoryWeights('champions_burger')) : [])
+        ])];
+    
+        // All locations for this page (burgers.html or tacos.html)
+        const contenders = () => ids();
+        const bracketKind = () => (state.food === 'tacos' ? 'taco' : null);
+    
+        const grouped = () => {
+            if (Object.groupBy) {
+                return Object.groupBy(contenders(), (r) => r.zip_code);
+            }
+            return contenders().reduce((a, r) => {
+                (a[r.zip_code] ??= []).push(r);
+                return a;
+            }, {});
+        };
+    
+        const zips = () => Object.keys(grouped()).sort((a, b) =>
+            b.localeCompare(a, undefined, { numeric: true })
+        );
+    
+        const store = () => {
+            try {
+                localStorage.setItem('austin_brackets_ballots_v1', JSON.stringify(state.local));
+            } catch (e) {
+                console.warn(e);
+            }
+        };
+    
+        function showNotice(message) {
+            $('notice').textContent = message;
+            $('notice').classList.toggle('show', !!message);
+        }
+    
+        // Merge Google Sheets aggregates with any local demo ballots
+        function getAggregates() {
+            const out = JSON.parse(JSON.stringify(state.remote));
+            for (const vote of state.local) {
+                const a = out[vote.restaurant_id] ??= { count: 0, metrics: {} };
+                a.count++;
+                for (const [k, v] of Object.entries(vote.scores)) {
+                    const m = a.metrics[k] ??= { sum: 0, count: 0 };
+                    m.sum += v;
+                    m.count++;
+                }
+            }
+            return out;
+        }
+    
+        // Weighted mean for a restaurant; incomplete if any required metric is missing
+        function scored(r, kind) {
+            const a = getAggregates()[r.restaurant_id];
+            if (!a) {
+                return { score: null, count: 0, complete: false };
+            }
+    
+            const weights = categoryWeights(kind || categoryFor(r));
+            let score = 0;
+    
+            for (const [k, w] of Object.entries(weights)) {
+                const m = a.metrics?.[k];
+                if (!m || !m.count) {
+                    return { score: null, count: a.count, complete: false };
+                }
+                score += (m.sum / m.count) * (w / 100);
+            }
+    
+            return {
+                score,
+                count: a.count,
+                complete: a.count >= state.rules.min_voters
+            };
+        }
+    
+        function restaurantTip(r) {
+            const typeLine = state.food === 'burgers'
+                ? '<p>' + html(title(r.type)) + '</p>'
+                : '';
+            return `<div class="tip"><strong>${html(r.restaurant)}</strong>${html(r.address)}` +
+                `<p>${html(r.notes || 'No notes')}</p>${typeLine}</div>`;
+        }
+    
+        // One team line in the classic sports-bracket style
+        function restaurantSlot(r, opts = {}) {
+            const {
+                winnerId = null,
+                placeholder = 'TBD',
+                showZip = false
+            } = opts;
+    
+            if (!r) {
+                return `<div class="slot slot-empty"><span class="pending">${html(placeholder)}</span></div>`;
+            }
+    
+            const s = scored(r);
+            const link = restaurantUrl(r);
+            const content = html(r.restaurant);
+            const isWinner = liveVoting() && winnerId && r.restaurant_id === winnerId;
+            const zipTag = showZip
+                ? `<span class="zip-tag">${html(r.zip_code)}</span>`
+                : '';
+    
+            const scoreHtml = liveVoting()
+                ? `<span class="score" title="${s.count} ratings">${s.score === null ? '—' : s.score.toFixed(2)}</span>`
+                : '';
+            const rateHtml = liveVoting()
+                ? `<button class="rate" data-rate="${html(r.restaurant_id)}" title="Rate ${content}">Rate</button>`
+                : '';
+    
+            return `<div class="slot${isWinner ? ' winner' : ''}">` +
+                zipTag +
+                `<a class="name" href="${html(link)}" rel="noopener noreferrer" target="_blank">${content}</a>` +
+                scoreHtml + rateHtml + restaurantTip(r) +
+                '</div>';
+        }
+    
+        // Advance logic: byes always pass through; live matches need scores
+        function advanceRestaurant(a, b, kind) {
+            if (a && !b) {
+                return a;
+            }
+            if (b && !a) {
+                return b;
+            }
+            if (!a || !b || !liveVoting()) {
+                return null;
+            }
+            const sa = scored(a, kind);
+            const sb = scored(b, kind);
+            if (!sa.complete || !sb.complete || sa.score === sb.score) {
+                return null;
+            }
+            return sa.score > sb.score ? a : b;
+        }
+    
+        function padPower2(arr) {
+            const n = Math.max(1, arr.length);
+            const size = 2 ** Math.ceil(Math.log2(n));
+            return arr.concat(Array(size - arr.length).fill(null));
+        }
+    
+        // Seed restaurants by ZIP so neighbors meet in early rounds (ZIP sub-brackets)
+        function seedRestaurantsForZips(zipKeys, byZip) {
+            let ordered = [];
+            for (const zip of zipKeys) {
+                const list = (byZip[zip] || []).slice().sort((a, b) =>
+                    a.restaurant.localeCompare(b.restaurant)
+                );
+                ordered = ordered.concat(padPower2(list.length ? list : [null]));
+            }
+            if (!ordered.length) {
+                ordered = [null];
+            }
+            return padPower2(ordered);
+        }
+    
+        // Classic single-elim rounds for one half of the mirrored bracket
+        function buildSide(zipKeys, byZip, kind) {
+            const seeded = seedRestaurantsForZips(zipKeys, byZip);
+            const rounds = [];
+            let current = seeded;
+    
+            while (current.length > 1) {
+                const matches = [];
+                const next = [];
+                for (let i = 0; i < current.length; i += 2) {
+                    const a = current[i];
+                    const b = current[i + 1];
+                    const winner = advanceRestaurant(a, b, kind);
+                    matches.push({ a, b, winner });
+                    next.push(winner);
+                }
+                rounds.push(matches);
+                current = next;
+            }
+    
+            return {
+                rounds,
+                champion: current[0] || null
+            };
+        }
+    
+        function roundTitle(index, total) {
+            if (index === 0) {
+                return 'Opening round';
+            }
+            if (index === total - 1) {
+                return 'Side final';
+            }
+            if (index === 1) {
+                return 'Regional';
+            }
+            return 'Round ' + (index + 1);
+        }
+    
+        function renderMatch(match, isOpening) {
+            const placeholder = isOpening ? 'Bye' : 'Winner';
+            return '<div class="bracket-game">' +
+                restaurantSlot(match.a, {
+                    winnerId: match.winner && match.winner.restaurant_id,
+                    placeholder,
+                    showZip: isOpening
+                }) +
+                restaurantSlot(match.b, {
+                    winnerId: match.winner && match.winner.restaurant_id,
+                    placeholder,
+                    showZip: isOpening
+                }) +
+                '</div>';
+        }
+    
+        function renderSideColumns(side, direction) {
+            const totalRounds = side.rounds.length;
+            let cols = '';
+    
+            side.rounds.forEach((matches, idx) => {
+                cols += `<div class="tourney-round" data-round="${idx}">` +
+                    `<div class="tourney-round-title">${roundTitle(idx, totalRounds)}</div>` +
+                    '<div class="tourney-round-body">';
+                matches.forEach((m) => {
+                    cols += `<div class="seed-slot">${renderMatch(m, idx === 0)}</div>`;
+                });
+                cols += '</div></div>';
+            });
+    
+            return `<div class="tourney-side tourney-${direction}">${cols}</div>`;
+        }
+    
+        // Mirrored NFL-style bracket: restaurants on lines, ZIP-seeded, final in the center
+        function renderMirroredBracket(kind) {
+            const byZip = grouped();
+            const zipList = zips();
+            if (!zipList.length) {
+                return '<p class="empty">No restaurants here.</p>';
+            }
+    
+            const mid = Math.ceil(zipList.length / 2);
+            const left = buildSide(zipList.slice(0, mid), byZip, kind);
+            const right = buildSide(zipList.slice(mid), byZip, kind);
+            const finalWinner = advanceRestaurant(left.champion, right.champion, kind);
+    
+            let champNote = '';
+            if (liveVoting() && finalWinner) {
+                const s = scored(finalWinner, kind);
+                champNote = `<div class="champion"><strong>🏆 ${html(finalWinner.restaurant)}</strong>` +
+                    `<p>${s.score.toFixed(2)}/10</p></div>`;
+            }
+    
+            const finalMatch = '<div class="bracket-game final-game">' +
+                restaurantSlot(left.champion, {
+                    winnerId: finalWinner && finalWinner.restaurant_id,
+                    placeholder: 'Side champion'
+                }) +
+                restaurantSlot(right.champion, {
+                    winnerId: finalWinner && finalWinner.restaurant_id,
+                    placeholder: 'Side champion'
+                }) +
+                '</div>';
+    
+            return '<div class="tourney-scroller"><div class="tourney">' +
+                renderSideColumns(left, 'left') +
+                `<div class="tourney-final">` +
+                '<div class="tourney-round-title">Championship</div>' +
+                `<div class="tourney-round-body"><div class="seed-slot">${finalMatch}${champNote}</div></div>` +
+                '</div>' +
+                renderSideColumns(right, 'right') +
+                '</div></div>';
+        }
+    
+        // Scale bracket to page width only — keep full height (page may scroll vertically)
+        function fitTourneyToWidth() {
+            const scroller = document.querySelector('.tourney-scroller');
+            const tourney = document.querySelector('.tourney');
+            if (!scroller || !tourney) {
+                return;
+            }
+    
+            tourney.style.transform = 'none';
+            scroller.style.height = '';
+    
+            const availableW = scroller.clientWidth;
+            const neededW = tourney.scrollWidth;
+            const naturalHeight = tourney.offsetHeight;
+            if (!availableW || !neededW) {
+                return;
+            }
+    
+            const scale = Math.min(1, availableW / neededW);
+            tourney.style.transformOrigin = 'top center';
+            tourney.style.transform = 'scale(' + scale + ')';
+            scroller.style.height = Math.ceil(naturalHeight * scale) + 'px';
+        }
+    
+        function renderWeights(isBurger) {
+            const listed = isBurger ? [...types(), 'champions_burger'] : ['taco'];
+            return '<div class="grid">' + listed.map((t) => {
+                const w = categoryWeights(t);
+                const r = ids().find((x) => x.type === t) || ids()[0];
+                return `<div class="card"><table class="weight-table"><caption>${html(title(t))}</caption>` +
+                    '<thead><tr><th>Metric</th><th>Weight</th></tr></thead><tbody>' +
+                    Object.entries(w).map(([k, n]) =>
+                        `<tr><td><strong>${html(title(k))}</strong>` +
+                        `<div class="fine">${html(r?.[k]?.__comment || '')}</div></td>` +
+                        `<td>${n}%</td></tr>`
+                    ).join('') +
+                    '</tbody><tfoot><tr><th>Total</th><th>100%</th></tr></tfoot></table></div>';
+            }).join('') + '</div>';
+        }
+    
+        function render() {
+            const isBurger = state.food === 'burgers';
+            const voting = liveVoting();
+            const kind = bracketKind();
+    
+            $('headingFood').textContent = isBurger ? 'Burger' : 'Taco';
+            $('refresh').hidden = !voting;
+            $('toggleWeights').textContent = state.view === 'weights'
+                ? 'Show bracket'
+                : 'Public weights';
+    
+            const zs = zips();
+            const count = contenders().length;
+            const qual = contenders().filter((r) => scored(r).complete).length;
+            $('stat').textContent = voting
+                ? `${qual}/${count} qualified · ${zs.length} ZIPs`
+                : `${count} restaurants · ${zs.length} ZIPs`;
+    
+            const descriptions = {
+                brackets: [
+                    isBurger ? 'Austin burger tournament' : 'Austin taco tournament',
+                    'Same-ZIP restaurants meet first · winners advance to the center'
+                ],
+                weights: [
+                    'Public scoring weights',
+                    'Full weighting rules are visible to every voter'
+                ]
+            };
+    
+            $('sectionHeading').textContent = descriptions[state.view][0];
+            $('sectionText').textContent = descriptions[state.view][1];
+    
+            let body = '';
+            if (state.view === 'weights') {
+                body = renderWeights(isBurger);
+            } else {
+                body = renderMirroredBracket(kind);
+            }
+    
+            $('content').innerHTML = body;
+            requestAnimationFrame(() => fitTourneyToWidth());
+    
+            if (!voting) {
+                $('mode').textContent = 'Live voting off';
+                $('backendNote').textContent =
+                    'Live voting is disabled. Set live_voting to true in austin-brackets/data/settings.json to collect ratings and crown ZIP winners.';
+                $('export').hidden = true;
+            } else if (state.settings.mode === 'google_sheets') {
+                $('mode').textContent = 'Live voting · Sheets';
+                $('backendNote').textContent =
+                    'Submitted votes are stored in the linked Google Sheet. Refresh retrieves published aggregates.';
+                $('export').hidden = false;
+            } else {
+                $('mode').textContent = 'Live voting · local';
+                $('backendNote').textContent =
+                    'Demo mode: submissions remain only in this browser. Configure Google Apps Script and mode google_sheets for shared votes.';
+                $('export').hidden = false;
+            }
+        }
+    
+        function showRating(id) {
+            if (!liveVoting()) {
+                return;
+            }
+    
+            const r = ids().find((x) => x.restaurant_id === id);
+            if (!r) {
+                return;
+            }
+    
+            state.activeId = id;
+            $('rateTitle').textContent = r.restaurant;
+            $('rateAddress').textContent = r.address;
+    
+            const primary = categoryWeights(categoryFor(r));
+            const champ = state.food === 'burgers' ? categoryWeights('champions_burger') : {};
+            const keys = ratingKeys(r);
+    
+            $('metricInputs').innerHTML = keys.map((k, i) => {
+                const percent = primary[k] === undefined
+                    ? 'Finals: ' + champ[k] + '%'
+                    : 'Category: ' + primary[k] + '%' +
+                        (champ[k] === undefined ? '' : ' · Finals: ' + champ[k] + '%');
+    
+                const options = Array.from({ length: 10 }, (_, n) =>
+                    `<option value="${n + 1}">${n + 1}</option>`
+                ).join('');
+    
+                return `<div class="rating-field"><div class="field-head">` +
+                    `<label for="m${i}">${html(title(k))}</label>` +
+                    `<span class="percent">${percent}</span></div>` +
+                    `<p>${html(r[k]?.__comment || 'Rate quality for this metric')}</p>` +
+                    `<select required data-metric="${html(k)}" id="m${i}">` +
+                    '<option value="">Choose a score</option>' + options +
+                    '</select></div>';
+            }).join('');
+    
+            $('ratingDialog').showModal();
+        }
+    
+        // Cross-origin POST via hidden form + iframe (Apps Script has limited CORS)
+        function backendSubmit(vote) {
+            return new Promise((resolve, reject) => {
+                const url = state.settings.apps_script_url;
+                if (!/^https:\/\/script\.google\.com\/macros\/s\//.test(url)) {
+                    reject(Error('Apps Script URL is invalid'));
+                    return;
+                }
+    
+                const frame = document.createElement('iframe');
+                frame.name = 'vote_frame_' + Date.now();
+                frame.style.display = 'none';
+                frame.title = 'Vote submission';
+    
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = url;
+                form.target = frame.name;
+                form.style.display = 'none';
+    
+                const input = document.createElement('input');
+                input.name = 'payload';
+                input.value = JSON.stringify(vote);
+                form.append(input);
+                document.body.append(frame, form);
+    
+                let sent = false;
+                const finish = () => {
+                    if (sent) {
+                        return;
+                    }
+                    sent = true;
+                    resolve();
+                    setTimeout(() => {
+                        frame.remove();
+                        form.remove();
+                    }, 2000);
+                };
+    
+                frame.onload = finish;
+                setTimeout(finish, 2800);
+                form.submit();
+            });
+        }
+    
+        async function submitRating(e) {
+            e.preventDefault();
+            if (!liveVoting()) {
+                return;
+            }
+    
+            const r = ids().find((x) => x.restaurant_id === state.activeId);
+            if (!r) {
+                return;
+            }
+    
+            const scores = {};
+            for (const field of $('metricInputs').querySelectorAll('select[data-metric]')) {
+                const n = Number(field.value);
+                if (!Number.isInteger(n) || n < 1 || n > 10) {
+                    return;
+                }
+                scores[field.dataset.metric] = n;
+            }
+    
+            const vote = {
+                submission_id: globalThis.crypto?.randomUUID?.() ||
+                    Date.now() + '_' + Math.random().toString(36).slice(2),
+                restaurant_id: r.restaurant_id,
+                food: state.food,
+                type: r.type,
+                zip_code: r.zip_code,
+                scores
+            };
+    
+            $('ratingDialog').close();
+    
+            if (state.settings.mode === 'google_sheets') {
+                try {
+                    await backendSubmit(vote);
+                    showNotice(
+                        'Submission sent. Google Apps Script responses cannot be confirmed directly from this page; refresh scores to verify it was recorded.'
+                    );
+                } catch (err) {
+                    showNotice('Vote could not be submitted: ' + err.message);
+                }
+            } else {
+                state.local.push(vote);
+                store();
+                showNotice('Saved in this browser only (demo mode). Export your ratings for backup.');
+                render();
+            }
+        }
+    
+        // JSONP GET for aggregates (Apps Script Content Service)
+        function refreshRemote() {
+            return new Promise((resolve) => {
+                if (!liveVoting() || state.settings.mode !== 'google_sheets') {
+                    resolve();
+                    return;
+                }
+    
+                const url = state.settings.apps_script_url;
+                if (!/^https:\/\/script\.google\.com\/macros\/s\//.test(url)) {
+                    showNotice('Configure a valid Apps Script URL in austin-brackets/data/settings.json');
+                    resolve();
+                    return;
+                }
+    
+                const callback = 'austinRatings_' + Math.random().toString(36).slice(2);
+                const script = document.createElement('script');
+                let done = false;
+    
+                const finish = () => {
+                    if (done) {
+                        return;
+                    }
+                    done = true;
+                    script.remove();
+                    delete window[callback];
+                    resolve();
+                };
+    
+                window[callback] = (data) => {
+                    if (data && data.aggregates) {
+                        state.remote = data.aggregates;
+                        render();
+                    } else {
+                        showNotice('Could not load aggregate scores.');
+                    }
+                    finish();
+                };
+    
+                script.onerror = () => {
+                    showNotice('Score refresh failed. Check the Apps Script deployment and URL.');
+                    finish();
+                };
+                script.src = url + '?callback=' + callback + '&t=' + Date.now();
+                document.head.append(script);
+                setTimeout(finish, 12000);
+            });
+        }
+    
+        function exportRatings() {
+            if (!liveVoting()) {
+                return;
+            }
+            const blob = new Blob([JSON.stringify(state.local, null, 2)], {
+                type: 'application/json'
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'austin_local_votes.json';
+            a.click();
+            setTimeout(() => URL.revokeObjectURL(url), 2000);
+        }
+    
+        async function init() {
+            $('headingFood').textContent = pageFood === 'burgers' ? 'Burger' : 'Taco';
+    
+            try {
+                const paths = [
+                    '/austin-brackets/data/burgers.json',
+                    '/austin-brackets/data/tacos.json',
+                    '/austin-brackets/data/weights.json',
+                    '/austin-brackets/data/settings.json'
+                ];
+    
+                const res = await Promise.all(paths.map((p) =>
+                    fetch(p).then((x) => {
+                        if (!x.ok) {
+                            throw Error('Cannot load ' + p);
+                        }
+                        return x.json();
+                    })
+                ));
+    
+                state.db = { burgers: res[0], tacos: res[1] };
+                state.rules = res[2];
+                state.settings = res[3];
+                state.local = JSON.parse(localStorage.getItem('austin_brackets_ballots_v1') || '[]');
+    
+                $('minVotes').textContent = state.rules.min_voters;
+                render();
+                await refreshRemote();
+    
+                if (liveVoting() && state.settings.mode === 'google_sheets') {
+                    setInterval(
+                        refreshRemote,
+                        Math.max(30, state.settings.refresh_seconds || 90) * 1000
+                    );
+                }
+            } catch (err) {
+                showNotice(
+                    'Unable to load site data. Ensure austin-brackets/data is deployed with this site. ' +
+                    err.message
+                );
+            }
+        }
+    
+        $('toggleWeights').addEventListener('click', () => {
+            state.view = state.view === 'weights' ? 'brackets' : 'weights';
+            render();
+        });
+    
+        $('refresh').addEventListener('click', () => refreshRemote());
+        $('export').addEventListener('click', exportRatings);
+        $('closeDialog').addEventListener('click', () => $('ratingDialog').close());
+        $('cancelRating').addEventListener('click', () => $('ratingDialog').close());
+        $('ratingForm').addEventListener('submit', submitRating);
+    
+        document.addEventListener('click', (e) => {
+            const b = e.target.closest('[data-rate]');
+            if (b && liveVoting()) {
+                showRating(b.dataset.rate);
+            }
+        });
+    
+        let resizeTimer = null;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(fitTourneyToWidth, 100);
+        });
+    
+        init();
+    })();
+    </script>
+</body>
+</html>

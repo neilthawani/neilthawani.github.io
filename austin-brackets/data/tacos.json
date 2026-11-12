@@ -1,0 +1,2624 @@
+[
+  {
+    "zip_code": "78759",
+    "street_address": "12200 Research Blvd, Ste 400",
+    "restaurant": "OneTaco Taquería",
+    "address": "12200 Research Blvd, Ste 400, Austin, TX 78759",
+    "notes": "Brick-and-mortar; Research Blvd",
+    "source_url": "https://www.onetaco.com/visit-us",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_475c79d0be31",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78759",
+    "street_address": "4211 Spicewood Springs Rd",
+    "restaurant": "Torchy’s Tacos",
+    "address": "4211 Spicewood Springs Rd, Austin, TX 78759",
+    "notes": "Brick-and-mortar; Spicewood",
+    "source_url": "https://torchystacos.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_5c29b273d047",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78758",
+    "street_address": "12001 Burnet Rd",
+    "restaurant": "Tacodeli",
+    "address": "12001 Burnet Rd, Austin, TX 78758",
+    "notes": "Brick-and-mortar; Gracy Farms",
+    "source_url": "https://locations.tacodeli.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_372443602a2c",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78758",
+    "street_address": "10414 Mc Kalla Pl",
+    "restaurant": "OneTaco Taquería",
+    "address": "10414 Mc Kalla Pl, Austin, TX 78758",
+    "notes": "Q2 Stadium concession; matchdays only; stadium seating",
+    "source_url": "https://www.onetaco.com/visit-us",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_922d14847a8e",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78757",
+    "street_address": "7301 Burnet Rd",
+    "restaurant": "Tacodeli",
+    "address": "7301 Burnet Rd, Austin, TX 78757",
+    "notes": "Brick-and-mortar; Crestview",
+    "source_url": "https://locations.tacodeli.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_71a6c25f8307",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78757",
+    "street_address": "6425 Burnet Rd",
+    "restaurant": "El Chilito",
+    "address": "6425 Burnet Rd, Austin, TX 78757",
+    "notes": "Storefront; Burnet Road",
+    "source_url": "https://www.guide2.co/austin/eat/tacos",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_a6d202468909",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78757",
+    "street_address": "3300 W Anderson Ln, Ste 303",
+    "restaurant": "Eldorado Cafe",
+    "address": "3300 W Anderson Ln, Ste 303, Austin, TX 78757",
+    "notes": "Full-service restaurant; tacos on menu",
+    "source_url": "https://tacoportal.com/en/austin",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_59985bea3b39",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78757",
+    "street_address": "2900 W Anderson Ln, Ste K",
+    "restaurant": "OneTaco Taquería",
+    "address": "2900 W Anderson Ln, Ste K, Austin, TX 78757",
+    "notes": "Brick-and-mortar; Anderson Lane",
+    "source_url": "https://www.onetaco.com/visit-us",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_382d8dc7f8a3",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78756",
+    "street_address": "5520 Burnet Rd, Ste 101",
+    "restaurant": "Taco Flats",
+    "address": "5520 Burnet Rd, Ste 101, Austin, TX 78756",
+    "notes": "Brick-and-mortar; Burnet",
+    "source_url": "https://tacoflats.com/locations/",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_a2c8fc2764cd",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78756",
+    "street_address": "5119 Burnet Rd",
+    "restaurant": "Torchy’s Tacos",
+    "address": "5119 Burnet Rd, Austin, TX 78756",
+    "notes": "Brick-and-mortar; Burnet",
+    "source_url": "https://torchystacos.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_5c693327a6a1",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78756",
+    "street_address": "4200 N Lamar Blvd",
+    "restaurant": "Tacodeli",
+    "address": "4200 N Lamar Blvd, Austin, TX 78756",
+    "notes": "Brick-and-mortar; Rosedale",
+    "source_url": "https://locations.tacodeli.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_e815f1059347",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78753",
+    "street_address": "9306 N Lamar Blvd",
+    "restaurant": "Tacos El Charly",
+    "address": "9306 N Lamar Blvd, Austin, TX 78753",
+    "notes": "Truck with folding tables explicitly confirmed",
+    "source_url": "https://www.theinfatuation.com/austin/guides/best-austin-tacos",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_53ade4c58a96",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78753",
+    "street_address": "8624 N Lamar Blvd",
+    "restaurant": "Carnitas El Guero",
+    "address": "8624 N Lamar Blvd, Austin, TX 78753",
+    "notes": "Restaurant; full kitchen and seating",
+    "source_url": "https://www.theinfatuation.com/austin/guides/best-austin-tacos",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_a323ffa251f9",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78753",
+    "street_address": "500 W Canyon Ridge Dr, Ste L400",
+    "restaurant": "OneTaco Taquería",
+    "address": "500 W Canyon Ridge Dr, Ste L400, Austin, TX 78753",
+    "notes": "Brick-and-mortar; Tech Ridge",
+    "source_url": "https://www.onetaco.com/visit-us",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_7d281e8c771c",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78753",
+    "street_address": "102 W Powell Ln",
+    "restaurant": "Ñoños Tacos",
+    "address": "102 W Powell Ln, Austin, TX 78753",
+    "notes": "Taco window; covered patio seating confirmed",
+    "source_url": "https://austin.eater.com/maps/best-tacos-austin",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_621f3116eb00",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78752",
+    "street_address": "6801 Airport Blvd",
+    "restaurant": "Brazas Taco House",
+    "address": "6801 Airport Blvd, Austin, TX 78752",
+    "notes": "Brick-and-mortar taco restaurant",
+    "source_url": "https://www.guide2.co/austin/eat/tacos",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_4ba97c354294",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78752",
+    "street_address": "6539 N Lamar Blvd",
+    "restaurant": "Paprika ATX",
+    "address": "6539 N Lamar Blvd, Austin, TX 78752",
+    "notes": "Brick-and-mortar since 2025",
+    "source_url": "https://austin.eater.com/maps/best-tacos-austin",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_f633782b9b87",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78751",
+    "street_address": "5804 N Interstate 35",
+    "restaurant": "Amaya’s Taco Village",
+    "address": "5804 N Interstate 35, Austin, TX 78751",
+    "notes": "Sit-down Tex-Mex restaurant",
+    "source_url": "https://www.guide2.co/austin/eat/tacos",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_00c36946e3f4",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78750",
+    "street_address": "12233 Ranch Rd 620 N, Bldg C",
+    "restaurant": "OneTaco Taquería",
+    "address": "12233 Ranch Rd 620 N, Bldg C, Austin, TX 78750",
+    "notes": "Brick-and-mortar; Anderson Mill",
+    "source_url": "https://www.onetaco.com/visit-us",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_2d6a5ceee743",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78750",
+    "street_address": "6507 Jester Blvd, Ste 105",
+    "restaurant": "Catrina’s Tacos & Margaritas",
+    "address": "6507 Jester Blvd, Ste 105, Austin, TX 78750",
+    "notes": "Brick-and-mortar restaurant",
+    "source_url": "https://www.guide2.co/austin/eat/tacos",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_8ad6295a4ede",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78749",
+    "street_address": "5900 W Slaughter Ln, Ste 550",
+    "restaurant": "Torchy’s Tacos",
+    "address": "5900 W Slaughter Ln, Ste 550, Austin, TX 78749",
+    "notes": "Brick-and-mortar; Escarpment",
+    "source_url": "https://torchystacos.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_758b00aab037",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78749",
+    "street_address": "5701 W Slaughter Ln",
+    "restaurant": "Tacodeli",
+    "address": "5701 W Slaughter Ln, Austin, TX 78749",
+    "notes": "Brick-and-mortar; Circle C",
+    "source_url": "https://locations.tacodeli.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_6eb49c95a3ff",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78749",
+    "street_address": "4301 W William Cannon Dr, Bldg G, Ste 400",
+    "restaurant": "Torchy’s Tacos",
+    "address": "4301 W William Cannon Dr, Bldg G, Ste 400, Austin, TX 78749",
+    "notes": "Brick-and-mortar; Arbor Trails",
+    "source_url": "https://torchystacos.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_7308695667ac",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78748",
+    "street_address": "9900 S Interstate 35",
+    "restaurant": "Amaya’s Taco Village",
+    "address": "9900 S Interstate 35, Austin, TX 78748",
+    "notes": "Sit-down Tex-Mex restaurant",
+    "source_url": "https://www.guide2.co/austin/eat/tacos",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_458a94f5fc83",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78748",
+    "street_address": "8601 S Congress Ave, Ste 250",
+    "restaurant": "Torchy’s Tacos",
+    "address": "8601 S Congress Ave, Ste 250, Austin, TX 78748",
+    "notes": "Brick-and-mortar; Slaughter",
+    "source_url": "https://torchystacos.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_47ac11c729aa",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78746",
+    "street_address": "1500 Spyglass Dr, Ste B",
+    "restaurant": "Tacodeli",
+    "address": "1500 Spyglass Dr, Ste B, Austin, TX 78746",
+    "notes": "Brick-and-mortar; original Spyglass location",
+    "source_url": "https://locations.tacodeli.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_23119f9ecae8",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78746",
+    "street_address": "701 S Capital of Texas Hwy, Ste E-590",
+    "restaurant": "Tacodeli",
+    "address": "701 S Capital of Texas Hwy, Ste E-590, Austin, TX 78746",
+    "notes": "Brick-and-mortar; Westlake",
+    "source_url": "https://locations.tacodeli.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_dd7934b603ce",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78745",
+    "street_address": "2623 Jones Rd",
+    "restaurant": "Autenticos Michoacanos",
+    "address": "2623 Jones Rd, Austin, TX 78745",
+    "notes": "Food trailer; outdoor seating explicitly documented",
+    "source_url": "https://www.theinfatuation.com/austin/guides/best-austin-tacos",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_146f9f7156ac",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78745",
+    "street_address": "623 W Dittmar Rd",
+    "restaurant": "Casa Linda Taqueria",
+    "address": "623 W Dittmar Rd, Austin, TX 78745",
+    "notes": "Taqueria restaurant; storefront",
+    "source_url": "https://www.guide2.co/austin/eat/tacos",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_66472ccad052",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78744",
+    "street_address": "3504 Montopolis Dr",
+    "restaurant": "Veracruz All Natural",
+    "address": "3504 Montopolis Dr, Austin, TX 78744",
+    "notes": "East Radio site; shared venue seating",
+    "source_url": "https://www.veracruzallnatural.com/locations/",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_aa7d5a7c3a0a",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78727",
+    "street_address": "12221 Riata Trace Pkwy, Ste 100",
+    "restaurant": "Taco Flats",
+    "address": "12221 Riata Trace Pkwy, Ste 100, Austin, TX 78727",
+    "notes": "Brick-and-mortar; Riata",
+    "source_url": "https://tacoflats.com/locations/",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_7cd9c29ea037",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78726",
+    "street_address": "11521 Ranch Rd 620 N, Ste E-1000",
+    "restaurant": "Torchy’s Tacos",
+    "address": "11521 Ranch Rd 620 N, Ste E-1000, Austin, TX 78726",
+    "notes": "Brick-and-mortar; Anderson Mill",
+    "source_url": "https://torchystacos.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_8906e2e5ba61",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78723",
+    "street_address": "5706 Manor Rd",
+    "restaurant": "Mi Trailita Y Mas",
+    "address": "5706 Manor Rd, Austin, TX 78723",
+    "notes": "Brick-and-mortar; dining room confirmed",
+    "source_url": "https://austin.eater.com/maps/best-tacos-austin",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_edff247a66e9",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78723",
+    "street_address": "1905 Aldrich St",
+    "restaurant": "Veracruz Fonda & Bar",
+    "address": "1905 Aldrich St, Austin, TX 78723",
+    "notes": "Brick-and-mortar; Mueller; Michelin-listed",
+    "source_url": "https://guide.michelin.com/en/best-of/best-tacos-in-austin-texas-mexican-restaurants-michelin-guide",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_23a313dc0665",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78723",
+    "street_address": "1801 E 51st St, Bldg D",
+    "restaurant": "Torchy’s Tacos",
+    "address": "1801 E 51st St, Bldg D, Austin, TX 78723",
+    "notes": "Brick-and-mortar; Mueller",
+    "source_url": "https://torchystacos.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_8246936eebaf",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78722",
+    "street_address": "2806 Manor Rd",
+    "restaurant": "La Santa Barbacha",
+    "address": "2806 Manor Rd, Austin, TX 78722",
+    "notes": "Food trailer; shaded dedicated picnic tables confirmed",
+    "source_url": "https://guide.michelin.com/en/best-of/best-tacos-in-austin-texas-mexican-restaurants-michelin-guide",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_a7ee07a86f21",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78719",
+    "street_address": "3600 Presidential Blvd",
+    "restaurant": "Tacodeli",
+    "address": "3600 Presidential Blvd, Austin, TX 78719",
+    "notes": "Airport concession; restricted airport access; seating in terminal",
+    "source_url": "https://locations.tacodeli.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_32b3db035bb0",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78705",
+    "street_address": "3023 Guadalupe St",
+    "restaurant": "Taqueria de Diez",
+    "address": "3023 Guadalupe St, Austin, TX 78705",
+    "notes": "Brick-and-mortar; campus location",
+    "source_url": "https://www.guide2.co/austin/eat/tacos",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_6991e1ef5713",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78705",
+    "street_address": "2809 San Jacinto Blvd",
+    "restaurant": "Taco Joint",
+    "address": "2809 San Jacinto Blvd, Austin, TX 78705",
+    "notes": "Brick-and-mortar; UT campus",
+    "source_url": "https://tacoportal.com/en/austin",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_0bb8c0d398e6",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78705",
+    "street_address": "104 E 31st St, Unit B",
+    "restaurant": "Vaquero Taquero",
+    "address": "104 E 31st St, Unit B, Austin, TX 78705",
+    "notes": "Counter and outdoor tables documented",
+    "source_url": "https://austin.eater.com/maps/best-tacos-austin",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_9875fb881695",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78704",
+    "street_address": "3005 S Lamar Blvd, Ste D116",
+    "restaurant": "Torchy’s Tacos",
+    "address": "3005 S Lamar Blvd, Ste D116, Austin, TX 78704",
+    "notes": "Brick-and-mortar; South Lamar",
+    "source_url": "https://torchystacos.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_f0daa2913a33",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78704",
+    "street_address": "2803 S Lamar Blvd",
+    "restaurant": "Papalote Taco House",
+    "address": "2803 S Lamar Blvd, Austin, TX 78704",
+    "notes": "Brick-and-mortar; tacos and breakfast tacos",
+    "source_url": "https://www.theinfatuation.com/austin/guides/best-austin-tacos",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_25874ca959f1",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78704",
+    "street_address": "2110 S Lamar Blvd, Ste C",
+    "restaurant": "Taqueria de Diez",
+    "address": "2110 S Lamar Blvd, Ste C, Austin, TX 78704",
+    "notes": "Brick-and-mortar; South Lamar",
+    "source_url": "https://www.guide2.co/austin/eat/tacos",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_54a0c85d7076",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78704",
+    "street_address": "1822 S Congress Ave",
+    "restaurant": "Torchy’s Tacos",
+    "address": "1822 S Congress Ave, Austin, TX 78704",
+    "notes": "Brick-and-mortar; South Congress",
+    "source_url": "https://torchystacos.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_7d78db581ead",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78704",
+    "street_address": "1302 S 1st St",
+    "restaurant": "De Nada Cantina",
+    "address": "1302 S 1st St, Austin, TX 78704",
+    "notes": "Brick-and-mortar; taco-centric cantina",
+    "source_url": "https://tacoportal.com/en/austin",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_98c4a9fe8284",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78704",
+    "street_address": "134 E Riverside Dr",
+    "restaurant": "Taco Joint",
+    "address": "134 E Riverside Dr, Austin, TX 78704",
+    "notes": "Brick-and-mortar with patio",
+    "source_url": "https://tacoportal.com/en/austin",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_7ec5aa4c6833",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78703",
+    "street_address": "1110 West Lynn St",
+    "restaurant": "Taco Flats",
+    "address": "1110 West Lynn St, Austin, TX 78703",
+    "notes": "Brick-and-mortar; Clarksville",
+    "source_url": "https://tacoflats.com/locations/",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_09d1c73e747f",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78702",
+    "street_address": "2512 E 12th St",
+    "restaurant": "Nixta Taqueria",
+    "address": "2512 E 12th St, Austin, TX 78702",
+    "notes": "Full-service taqueria; indoor/outdoor seating",
+    "source_url": "https://guide.michelin.com/en/best-of/best-tacos-in-austin-texas-mexican-restaurants-michelin-guide",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_d288d10d36c6",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78702",
+    "street_address": "2505 Webberville Rd",
+    "restaurant": "Veracruz All Natural",
+    "address": "2505 Webberville Rd, Austin, TX 78702",
+    "notes": "Permanent Veracruz location; outdoor seating",
+    "source_url": "https://www.veracruzallnatural.com/locations/",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_8a8ce6b5883f",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78702",
+    "street_address": "2500 E 6th St",
+    "restaurant": "Taco Flats",
+    "address": "2500 E 6th St, Austin, TX 78702",
+    "notes": "Food trailer at La Holly bar; venue seating",
+    "source_url": "https://tacoflats.com/locations/",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_d898bb487c0d",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78702",
+    "street_address": "2308 E Cesar Chavez St",
+    "restaurant": "The Vegan Nom",
+    "address": "2308 E Cesar Chavez St, Austin, TX 78702",
+    "notes": "Vegan Nom Food Park; shared seating",
+    "source_url": "https://tacoportal.com/en/austin",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_685b865d00d7",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78702",
+    "street_address": "2305 E 7th St",
+    "restaurant": "Joe’s Bakery & Coffee Shop",
+    "address": "2305 E 7th St, Austin, TX 78702",
+    "notes": "Full-service restaurant; breakfast tacos",
+    "source_url": "https://guide.michelin.com/en/best-of/best-tacos-in-austin-texas-mexican-restaurants-michelin-guide",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_0c90a5be9df9",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78702",
+    "street_address": "2300 E Cesar Chavez St",
+    "restaurant": "Juan in a Million",
+    "address": "2300 E Cesar Chavez St, Austin, TX 78702",
+    "notes": "Full-service restaurant; breakfast tacos",
+    "source_url": "https://www.guide2.co/austin/eat/tacos",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_480ef6f6dd87",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78702",
+    "street_address": "1906 E Cesar Chavez St",
+    "restaurant": "Granny’s Tacos",
+    "address": "1906 E Cesar Chavez St, Austin, TX 78702",
+    "notes": "Secondary location per directory; verify same-address tenant",
+    "source_url": "https://www.guide2.co/austin/eat/tacos",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_7de62d578978",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78702",
+    "street_address": "1800 E 6th St",
+    "restaurant": "Suerte",
+    "address": "1800 E 6th St, Austin, TX 78702",
+    "notes": "Full-service restaurant; suadero tacos",
+    "source_url": "https://guide.michelin.com/en/best-of/best-tacos-in-austin-texas-mexican-restaurants-michelin-guide",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_5ef88d4fbe42",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78702",
+    "street_address": "1623 E 7th St",
+    "restaurant": "El Chilito",
+    "address": "1623 E 7th St, Austin, TX 78702",
+    "notes": "Storefront; East 7th",
+    "source_url": "https://www.guide2.co/austin/eat/tacos",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_b9b5febafa60",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78702",
+    "street_address": "1401 E 7th St",
+    "restaurant": "Granny’s Tacos",
+    "address": "1401 E 7th St, Austin, TX 78702",
+    "notes": "Truck kitchen with indoor dining room/bar and outdoor seating",
+    "source_url": "https://austin.eater.com/maps/best-tacos-austin",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_e0f94e3e455c",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78702",
+    "street_address": "1319 Rosewood Ave",
+    "restaurant": "Discada",
+    "address": "1319 Rosewood Ave, Austin, TX 78702",
+    "notes": "Trailer behind Chalmers; bar seating documented",
+    "source_url": "https://austin.eater.com/maps/best-tacos-austin",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_85ddfe3b57fa",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78702",
+    "street_address": "1210 E Cesar Chavez St",
+    "restaurant": "Las Trancas Taco Stand",
+    "address": "1210 E Cesar Chavez St, Austin, TX 78702",
+    "notes": "Taco trailer with multiple picnic tables",
+    "source_url": "https://austin.eater.com/maps/best-tacos-austin",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_41a61488ee8d",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78702",
+    "street_address": "1108 E 12th St",
+    "restaurant": "Ensenada ATX",
+    "address": "1108 E 12th St, Austin, TX 78702",
+    "notes": "Arbor Food Park; shared picnic seating confirmed; verify current site",
+    "source_url": "https://austin.eater.com/maps/best-tacos-austin",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_862588eb695d",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78701",
+    "street_address": "522 Congress Ave, Ste 100",
+    "restaurant": "Velvet Taco",
+    "address": "522 Congress Ave, Ste 100, Austin, TX 78701",
+    "notes": "Brick-and-mortar; downtown",
+    "source_url": "https://tacoportal.com/en/austin",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_f6cd19716c74",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78701",
+    "street_address": "520 W 6th St",
+    "restaurant": "OneTaco Taquería",
+    "address": "520 W 6th St, Austin, TX 78701",
+    "notes": "Inside Little Woodrow’s; bar seating",
+    "source_url": "https://www.onetaco.com/visit-us",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_9c84cbd6528c",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78701",
+    "street_address": "501 Colorado St",
+    "restaurant": "Comedor",
+    "address": "501 Colorado St, Austin, TX 78701",
+    "notes": "Full-service restaurant; bone marrow tacos",
+    "source_url": "https://guide.michelin.com/en/best-of/best-tacos-in-austin-texas-mexican-restaurants-michelin-guide",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_447be90cbfb7",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78701",
+    "street_address": "500 E 4th St",
+    "restaurant": "Austin Taco Project",
+    "address": "500 E 4th St, Austin, TX 78701",
+    "notes": "Full-service restaurant/bar",
+    "source_url": "https://www.guide2.co/austin/eat/tacos",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_91c2a72b3ad4",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78701",
+    "street_address": "402 Brazos St",
+    "restaurant": "OneTaco Taquería",
+    "address": "402 Brazos St, Austin, TX 78701",
+    "notes": "Brick-and-mortar; Frost Tower",
+    "source_url": "https://www.onetaco.com/visit-us",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_4c4b80f5cf7e",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78701",
+    "street_address": "301 Congress Ave",
+    "restaurant": "Tacodeli",
+    "address": "301 Congress Ave, Austin, TX 78701",
+    "notes": "Brick-and-mortar; downtown",
+    "source_url": "https://locations.tacodeli.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_72e34d89aa14",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78701",
+    "street_address": "206 Trinity St, Unit 110",
+    "restaurant": "Taqueria de Diez",
+    "address": "206 Trinity St, Unit 110, Austin, TX 78701",
+    "notes": "Brick-and-mortar; downtown",
+    "source_url": "https://tacoportal.com/en/austin",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_5bf4bbcf7147",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78701",
+    "street_address": "111 E Cesar Chavez St",
+    "restaurant": "Veracruz All Natural",
+    "address": "111 E Cesar Chavez St, Austin, TX 78701",
+    "notes": "At LINE Hotel; seating at hotel venue",
+    "source_url": "https://www.veracruzallnatural.com/locations/",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_35d105d83aee",
+    "type": "taco"
+  },
+  {
+    "zip_code": "78701",
+    "street_address": "110 San Antonio St, Unit 120",
+    "restaurant": "Torchy’s Tacos",
+    "address": "110 San Antonio St, Unit 120, Austin, TX 78701",
+    "notes": "Brick-and-mortar; Northshore",
+    "source_url": "https://torchystacos.com/locations",
+    "filling_quality": {
+      "__comment": "(flavor, seasoning, tenderness, freshness, cooking)",
+      "scores": []
+    },
+    "tortilla_quality": {
+      "__comment": "(flavor, texture, freshness, integrity)",
+      "scores": []
+    },
+    "salsa_quality": {
+      "__comment": "(flavor, heat, acidity, compatibility)",
+      "scores": []
+    },
+    "flavor_balance": {
+      "__comment": "(filling, tortilla, salsa, toppings)",
+      "scores": []
+    },
+    "texture": {
+      "__comment": "(crispness, tenderness, moisture, contrast)",
+      "scores": []
+    },
+    "value": {
+      "__comment": "(quality and portion relative to price)",
+      "scores": []
+    },
+    "distinctiveness": {
+      "__comment": "(regional identity, preparation, originality)",
+      "scores": []
+    },
+    "restaurant_id": "taco_fea99ab55d62",
+    "type": "taco"
+  }
+]

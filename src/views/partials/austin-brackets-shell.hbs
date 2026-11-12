@@ -1,0 +1,58 @@
+<header>
+    <div class="header-row">
+        <div>
+            <div class="eyebrow">Austin food championship · Community ratings</div>
+            <h1>Austin's Best <span id="headingFood">Burger</span></h1>
+        </div>
+        <div class="header-meta">
+            <span id="mode" class="mode"></span>
+            <button id="refresh" type="button" hidden>Refresh scores</button>
+            <button id="toggleWeights" type="button">Public weights</button>
+            <span id="stat" class="chip"></span>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div id="notice" class="notice" role="status"></div>
+    <div class="section-title">
+        <div>
+            <h2 id="sectionHeading"></h2>
+            <p id="sectionText"></p>
+        </div>
+    </div>
+    <div id="content"></div>
+</main>
+
+<dialog id="ratingDialog">
+    <form id="ratingForm">
+        <div class="dialog-head">
+            <div>
+                <div class="eyebrow">Community ballot</div>
+                <h2 id="rateTitle"></h2>
+                <p id="rateAddress"></p>
+            </div>
+            <button type="button" id="closeDialog" class="close" aria-label="Close">×</button>
+        </div>
+        <div id="metricInputs"></div>
+        <p class="fine">
+            Your rating is calculated from the publicly displayed category weights.
+            All metrics are required. No name or email is collected.
+        </p>
+        <div class="dialog-actions">
+            <button type="button" id="cancelRating">Cancel</button>
+            <button type="submit" class="primary">Submit rating</button>
+        </div>
+    </form>
+</dialog>
+
+<footer>
+    <p>
+        Each physical location is a distinct entrant. Scores are on a 1–10 scale.
+        A restaurant qualifies after at least <strong id="minVotes"></strong> completed ratings.
+        Score ties stay undecided. Restaurant names open official websites when recorded;
+        otherwise a website search.
+    </p>
+    <p id="backendNote"></p>
+    <button id="export" type="button">Export this browser's ratings (JSON)</button>
+</footer>

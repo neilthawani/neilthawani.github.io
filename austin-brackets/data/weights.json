@@ -1,0 +1,96 @@
+{
+  "version": "1.0",
+  "score_scale": [
+    1,
+    10
+  ],
+  "min_voters": 3,
+  "weights": {
+    "smashburger": {
+      "crust_quality": 25,
+      "patty_quality": 20,
+      "juiciness": 15,
+      "cheese_integration": 10,
+      "bun_quality": 10,
+      "flavor_balance": 10,
+      "value": 10
+    },
+    "pub_burger": {
+      "patty_quality": 25,
+      "juiciness": 20,
+      "bun_quality": 15,
+      "toppings_sauce": 15,
+      "flavor_balance": 10,
+      "texture": 10,
+      "value": 5
+    },
+    "classic_diner_burger": {
+      "patty_quality": 25,
+      "cooking_execution": 20,
+      "flavor_balance": 20,
+      "bun_quality": 10,
+      "texture": 10,
+      "toppings_sauce": 10,
+      "value": 5
+    },
+    "charbroiled_burger": {
+      "char_smoke_quality": 25,
+      "patty_quality": 20,
+      "juiciness": 20,
+      "flavor_balance": 15,
+      "bun_quality": 10,
+      "value": 10
+    },
+    "bbq_smoked_burger": {
+      "char_smoke_quality": 25,
+      "patty_quality": 20,
+      "juiciness": 20,
+      "flavor_balance": 15,
+      "bun_quality": 10,
+      "value": 10
+    },
+    "gourmet_specialty_burger": {
+      "patty_quality": 20,
+      "toppings_sauce": 20,
+      "flavor_balance": 20,
+      "creativity": 15,
+      "cooking_execution": 15,
+      "value": 10
+    },
+    "plant_based_burger": {
+      "patty_quality": 25,
+      "texture": 20,
+      "flavor_balance": 20,
+      "bun_quality": 10,
+      "toppings_sauce": 10,
+      "creativity": 5,
+      "value": 10
+    },
+    "unclassified_burger": {
+      "patty_quality": 25,
+      "cooking_execution": 15,
+      "juiciness": 15,
+      "bun_quality": 10,
+      "toppings_sauce": 10,
+      "flavor_balance": 15,
+      "value": 10
+    },
+    "taco": {
+      "filling_quality": 25,
+      "tortilla_quality": 20,
+      "salsa_quality": 15,
+      "flavor_balance": 15,
+      "texture": 10,
+      "value": 10,
+      "distinctiveness": 5
+    },
+    "champions_burger": {
+      "flavor_balance": 30,
+      "patty_quality": 20,
+      "texture": 15,
+      "toppings_sauce": 15,
+      "cooking_execution": 10,
+      "value": 10
+    }
+  }
+}
