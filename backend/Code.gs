@@ -1,63 +1,3185 @@
-/** Austin Food Brackets Google Sheets backend
- * 1. Create a Google Sheet, Extensions > Apps Script, paste this file.
- * 2. Run setup() once and authorize.
- * 3. Deploy > New deployment > Web app > Execute as me > Anyone.
- * 4. Paste /exec URL into data/settings.json and set mode to google_sheets.
- * CAUTION: Public unauthenticated endpoint: suitable for a small pilot, not a fraud-resistant contest.
+/**
+ * Austin Food Brackets — Google Sheets backend
+ *
+ * Setup:
+ *   1. Create a Google Sheet → Extensions → Apps Script → paste this file.
+ *   2. Run setup() once and authorize.
+ *   3. Deploy → New deployment → Web app → Execute as me → Anyone.
+ *   4. Paste the /exec URL into data/settings.json and set mode to google_sheets.
+ *
+ * CAUTION: Public unauthenticated endpoint — fine for a small pilot,
+ * not a fraud-resistant contest.
  */
+
+/** Sheet tab that stores individual vote rows. */
 const TAB = 'Votes';
-const HEADER = ['timestamp','submission_id','restaurant_id','food','type','zip_code','scores_json'];
-// Whitelisted restaurant IDs and metric names are generated from the supplied JSON catalog.
-const ALLOWED = {"burger_40ee77b307b2":{"food":"burgers","type":"pub_burger","zip_code":"78759","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_36a378736296":{"food":"burgers","type":"classic_diner_burger","zip_code":"78759","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_56d9b7e26aa6":{"food":"burgers","type":"classic_diner_burger","zip_code":"78759","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_ba35acb55983":{"food":"burgers","type":"unclassified_burger","zip_code":"78758","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_524a26ef795a":{"food":"burgers","type":"smashburger","zip_code":"78758","metrics":["bun_quality","cheese_integration","cooking_execution","crust_quality","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_90facbb2f596":{"food":"burgers","type":"smashburger","zip_code":"78758","metrics":["bun_quality","cheese_integration","cooking_execution","crust_quality","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_d8b1e3cbe538":{"food":"burgers","type":"smashburger","zip_code":"78758","metrics":["bun_quality","cheese_integration","cooking_execution","crust_quality","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_1157f69480e4":{"food":"burgers","type":"classic_diner_burger","zip_code":"78758","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_bb20b4deb3cf":{"food":"burgers","type":"classic_diner_burger","zip_code":"78757","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_4f040f42b063":{"food":"burgers","type":"gourmet_specialty_burger","zip_code":"78757","metrics":["cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_7a94c704a6fe":{"food":"burgers","type":"unclassified_burger","zip_code":"78756","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_4344c4d2bb64":{"food":"burgers","type":"classic_diner_burger","zip_code":"78756","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_0a6c983f96ee":{"food":"burgers","type":"pub_burger","zip_code":"78756","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_99170c8e108e":{"food":"burgers","type":"smashburger","zip_code":"78754","metrics":["bun_quality","cheese_integration","cooking_execution","crust_quality","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_c5c014c07b00":{"food":"burgers","type":"classic_diner_burger","zip_code":"78753","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_c839a92e422a":{"food":"burgers","type":"unclassified_burger","zip_code":"78753","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_2a4380775be5":{"food":"burgers","type":"classic_diner_burger","zip_code":"78752","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_f871037493cd":{"food":"burgers","type":"classic_diner_burger","zip_code":"78751","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_aac416a95e94":{"food":"burgers","type":"smashburger","zip_code":"78751","metrics":["bun_quality","cheese_integration","cooking_execution","crust_quality","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_d943120dc6a5":{"food":"burgers","type":"gourmet_specialty_burger","zip_code":"78751","metrics":["cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_70f9b9c9df2b":{"food":"burgers","type":"unclassified_burger","zip_code":"78751","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_886b36ad7478":{"food":"burgers","type":"pub_burger","zip_code":"78751","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_87b1afc20303":{"food":"burgers","type":"classic_diner_burger","zip_code":"78750","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_5b78c2c66075":{"food":"burgers","type":"unclassified_burger","zip_code":"78750","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_b9c229690584":{"food":"burgers","type":"classic_diner_burger","zip_code":"78749","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_1e77fd8915b8":{"food":"burgers","type":"bbq_smoked_burger","zip_code":"78748","metrics":["bun_quality","char_smoke_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_76ce3c6d7c51":{"food":"burgers","type":"pub_burger","zip_code":"78748","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_b37ca03ebfff":{"food":"burgers","type":"unclassified_burger","zip_code":"78748","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_8469a4c8166d":{"food":"burgers","type":"bbq_smoked_burger","zip_code":"78748","metrics":["bun_quality","char_smoke_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_35d490ef90a6":{"food":"burgers","type":"classic_diner_burger","zip_code":"78748","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_19c1bbce45a9":{"food":"burgers","type":"classic_diner_burger","zip_code":"78746","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_4db7cc6f4d10":{"food":"burgers","type":"classic_diner_burger","zip_code":"78746","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_9e996a93ef19":{"food":"burgers","type":"pub_burger","zip_code":"78745","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_d58339b17e4f":{"food":"burgers","type":"bbq_smoked_burger","zip_code":"78745","metrics":["bun_quality","char_smoke_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_5e63339ff639":{"food":"burgers","type":"unclassified_burger","zip_code":"78745","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_24be50c11b61":{"food":"burgers","type":"classic_diner_burger","zip_code":"78745","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_fef657356218":{"food":"burgers","type":"smashburger","zip_code":"78745","metrics":["bun_quality","cheese_integration","cooking_execution","crust_quality","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_d6f4b2d970d9":{"food":"burgers","type":"unclassified_burger","zip_code":"78745","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_9691156778cb":{"food":"burgers","type":"classic_diner_burger","zip_code":"78742","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_28c65c2f5d90":{"food":"burgers","type":"smashburger","zip_code":"78741","metrics":["bun_quality","cheese_integration","cooking_execution","crust_quality","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_cbb22403c92d":{"food":"burgers","type":"unclassified_burger","zip_code":"78738","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_5b2428bd8e50":{"food":"burgers","type":"unclassified_burger","zip_code":"78737","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_6f94fe3d5434":{"food":"burgers","type":"unclassified_burger","zip_code":"78735","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_11c9f27b8a89":{"food":"burgers","type":"classic_diner_burger","zip_code":"78734","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_371fdff1c939":{"food":"burgers","type":"unclassified_burger","zip_code":"78731","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_82fb8ede0d1b":{"food":"burgers","type":"classic_diner_burger","zip_code":"78723","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_99d5c6e9949d":{"food":"burgers","type":"unclassified_burger","zip_code":"78723","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_0636463d0286":{"food":"burgers","type":"unclassified_burger","zip_code":"78723","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_e9ba57cf1883":{"food":"burgers","type":"unclassified_burger","zip_code":"78723","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_f3caf37ef9d8":{"food":"burgers","type":"gourmet_specialty_burger","zip_code":"78722","metrics":["cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_da25695805a0":{"food":"burgers","type":"pub_burger","zip_code":"78722","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_2df8e9c0faa5":{"food":"burgers","type":"unclassified_burger","zip_code":"78722","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_7bfc7c07edff":{"food":"burgers","type":"unclassified_burger","zip_code":"78717","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_ee853b31b091":{"food":"burgers","type":"classic_diner_burger","zip_code":"78705","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_560ce464fbb3":{"food":"burgers","type":"pub_burger","zip_code":"78705","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_cad76b65d544":{"food":"burgers","type":"pub_burger","zip_code":"78705","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_99dc3d99b32e":{"food":"burgers","type":"pub_burger","zip_code":"78705","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_ddaaf4e9c19b":{"food":"burgers","type":"classic_diner_burger","zip_code":"78705","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_8b933af1a710":{"food":"burgers","type":"unclassified_burger","zip_code":"78705","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_97f22dd80467":{"food":"burgers","type":"classic_diner_burger","zip_code":"78704","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_9af2ca048b51":{"food":"burgers","type":"unclassified_burger","zip_code":"78704","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_96840363cdfe":{"food":"burgers","type":"unclassified_burger","zip_code":"78704","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_2ae243ee94c9":{"food":"burgers","type":"unclassified_burger","zip_code":"78704","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_e3977307a419":{"food":"burgers","type":"smashburger","zip_code":"78704","metrics":["bun_quality","cheese_integration","cooking_execution","crust_quality","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_f71bb590e9c5":{"food":"burgers","type":"smashburger","zip_code":"78704","metrics":["bun_quality","cheese_integration","cooking_execution","crust_quality","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_e11adfc142ed":{"food":"burgers","type":"pub_burger","zip_code":"78704","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_1e781b1aad1f":{"food":"burgers","type":"gourmet_specialty_burger","zip_code":"78704","metrics":["cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_e7ea2b6b6902":{"food":"burgers","type":"unclassified_burger","zip_code":"78704","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_0cc4ef84adca":{"food":"burgers","type":"gourmet_specialty_burger","zip_code":"78704","metrics":["cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_c7ad0d3c1547":{"food":"burgers","type":"gourmet_specialty_burger","zip_code":"78704","metrics":["cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_e586ff6cbec5":{"food":"burgers","type":"gourmet_specialty_burger","zip_code":"78704","metrics":["cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_4932f2d21d11":{"food":"burgers","type":"smashburger","zip_code":"78704","metrics":["bun_quality","cheese_integration","cooking_execution","crust_quality","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_7ef8c84e90f7":{"food":"burgers","type":"unclassified_burger","zip_code":"78704","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_b8c5dc07d48d":{"food":"burgers","type":"unclassified_burger","zip_code":"78704","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_e63658c441b6":{"food":"burgers","type":"classic_diner_burger","zip_code":"78704","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_2e6a863031f9":{"food":"burgers","type":"unclassified_burger","zip_code":"78704","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_7f7b58f01654":{"food":"burgers","type":"classic_diner_burger","zip_code":"78704","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_e5053cfc20a0":{"food":"burgers","type":"gourmet_specialty_burger","zip_code":"78704","metrics":["cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_8a2a7b6a0d4d":{"food":"burgers","type":"classic_diner_burger","zip_code":"78703","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_c2d88a86968c":{"food":"burgers","type":"gourmet_specialty_burger","zip_code":"78703","metrics":["cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_a354dcfc2519":{"food":"burgers","type":"unclassified_burger","zip_code":"78703","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_18a81f175fa1":{"food":"burgers","type":"unclassified_burger","zip_code":"78703","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_d78e5eb1653e":{"food":"burgers","type":"gourmet_specialty_burger","zip_code":"78703","metrics":["cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_d02d1adff2d2":{"food":"burgers","type":"gourmet_specialty_burger","zip_code":"78703","metrics":["cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_90551b598552":{"food":"burgers","type":"unclassified_burger","zip_code":"78703","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_5b534ab3c4d7":{"food":"burgers","type":"unclassified_burger","zip_code":"78703","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_62089c883f58":{"food":"burgers","type":"unclassified_burger","zip_code":"78703","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_9c3ff2abb7f2":{"food":"burgers","type":"unclassified_burger","zip_code":"78703","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_1b912c2576c8":{"food":"burgers","type":"unclassified_burger","zip_code":"78702","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_24294ba39a52":{"food":"burgers","type":"unclassified_burger","zip_code":"78702","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_ee6593e200e5":{"food":"burgers","type":"classic_diner_burger","zip_code":"78702","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_866ce90ee742":{"food":"burgers","type":"pub_burger","zip_code":"78702","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_749f98b6c2fa":{"food":"burgers","type":"plant_based_burger","zip_code":"78702","metrics":["bun_quality","cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_d06be7885dbb":{"food":"burgers","type":"gourmet_specialty_burger","zip_code":"78702","metrics":["cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_6c9534ad6de4":{"food":"burgers","type":"unclassified_burger","zip_code":"78702","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_649d50a76925":{"food":"burgers","type":"gourmet_specialty_burger","zip_code":"78702","metrics":["cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_ae2df9db4242":{"food":"burgers","type":"unclassified_burger","zip_code":"78702","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_583cdd97f795":{"food":"burgers","type":"gourmet_specialty_burger","zip_code":"78702","metrics":["cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_989c787f8f57":{"food":"burgers","type":"unclassified_burger","zip_code":"78702","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_a0cee122a63d":{"food":"burgers","type":"gourmet_specialty_burger","zip_code":"78702","metrics":["cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_355d7ee2ed38":{"food":"burgers","type":"unclassified_burger","zip_code":"78702","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_7266ae5964a0":{"food":"burgers","type":"smashburger","zip_code":"78702","metrics":["bun_quality","cheese_integration","cooking_execution","crust_quality","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_e7d1d60a4dd6":{"food":"burgers","type":"gourmet_specialty_burger","zip_code":"78702","metrics":["cooking_execution","creativity","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_356f89cd2048":{"food":"burgers","type":"smashburger","zip_code":"78702","metrics":["bun_quality","cheese_integration","cooking_execution","crust_quality","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_8d12baf1b6ed":{"food":"burgers","type":"classic_diner_burger","zip_code":"78702","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_f38c9e2e390a":{"food":"burgers","type":"pub_burger","zip_code":"78701","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_dcaa5ddef217":{"food":"burgers","type":"smashburger","zip_code":"78701","metrics":["bun_quality","cheese_integration","cooking_execution","crust_quality","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_70b36fc6e876":{"food":"burgers","type":"pub_burger","zip_code":"78701","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_6f9174256142":{"food":"burgers","type":"classic_diner_burger","zip_code":"78701","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_58d6dca062bc":{"food":"burgers","type":"unclassified_burger","zip_code":"78701","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_dc74668f3425":{"food":"burgers","type":"unclassified_burger","zip_code":"78701","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_2f56323bea24":{"food":"burgers","type":"unclassified_burger","zip_code":"78701","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_1fcb4a2802aa":{"food":"burgers","type":"unclassified_burger","zip_code":"78701","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_141037269814":{"food":"burgers","type":"unclassified_burger","zip_code":"78701","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_ccd28356ef39":{"food":"burgers","type":"unclassified_burger","zip_code":"78701","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_559857415c45":{"food":"burgers","type":"unclassified_burger","zip_code":"78701","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_0feba632ba06":{"food":"burgers","type":"unclassified_burger","zip_code":"78701","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_4ad89abd05f2":{"food":"burgers","type":"unclassified_burger","zip_code":"78701","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_9eb22113f6ba":{"food":"burgers","type":"classic_diner_burger","zip_code":"78701","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_ad0ea2d4db80":{"food":"burgers","type":"unclassified_burger","zip_code":"78701","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_9eaeff9f4ca7":{"food":"burgers","type":"smashburger","zip_code":"78701","metrics":["bun_quality","cheese_integration","cooking_execution","crust_quality","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_6146e5523563":{"food":"burgers","type":"unclassified_burger","zip_code":"78701","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_803c205f08fe":{"food":"burgers","type":"classic_diner_burger","zip_code":"78665","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_8942cf9624a4":{"food":"burgers","type":"classic_diner_burger","zip_code":"78665","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_33e9f38b991a":{"food":"burgers","type":"classic_diner_burger","zip_code":"78664","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_77a9c1634a3c":{"food":"burgers","type":"smashburger","zip_code":"78664","metrics":["bun_quality","cheese_integration","cooking_execution","crust_quality","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_db9094da9f27":{"food":"burgers","type":"unclassified_burger","zip_code":"78652","metrics":["bun_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"burger_f612bb1463cd":{"food":"burgers","type":"classic_diner_burger","zip_code":"78640","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_73168da7f94c":{"food":"burgers","type":"classic_diner_burger","zip_code":"78640","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_eb6cd7d0d139":{"food":"burgers","type":"classic_diner_burger","zip_code":"78634","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_b3a060708d9b":{"food":"burgers","type":"classic_diner_burger","zip_code":"78626","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_2f0cdd44b3fb":{"food":"burgers","type":"classic_diner_burger","zip_code":"78613","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_ca5cf695488b":{"food":"burgers","type":"classic_diner_burger","zip_code":"78610","metrics":["bun_quality","cooking_execution","flavor_balance","patty_quality","texture","toppings_sauce","value"]},"burger_48d2f9094ef6":{"food":"burgers","type":"bbq_smoked_burger","zip_code":"78610","metrics":["bun_quality","char_smoke_quality","cooking_execution","flavor_balance","juiciness","patty_quality","texture","toppings_sauce","value"]},"taco_475c79d0be31":{"food":"tacos","type":"taco","zip_code":"78759","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_5c29b273d047":{"food":"tacos","type":"taco","zip_code":"78759","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_372443602a2c":{"food":"tacos","type":"taco","zip_code":"78758","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_922d14847a8e":{"food":"tacos","type":"taco","zip_code":"78758","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_71a6c25f8307":{"food":"tacos","type":"taco","zip_code":"78757","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_a6d202468909":{"food":"tacos","type":"taco","zip_code":"78757","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_59985bea3b39":{"food":"tacos","type":"taco","zip_code":"78757","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_382d8dc7f8a3":{"food":"tacos","type":"taco","zip_code":"78757","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_a2c8fc2764cd":{"food":"tacos","type":"taco","zip_code":"78756","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_5c693327a6a1":{"food":"tacos","type":"taco","zip_code":"78756","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_e815f1059347":{"food":"tacos","type":"taco","zip_code":"78756","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_53ade4c58a96":{"food":"tacos","type":"taco","zip_code":"78753","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_a323ffa251f9":{"food":"tacos","type":"taco","zip_code":"78753","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_7d281e8c771c":{"food":"tacos","type":"taco","zip_code":"78753","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_621f3116eb00":{"food":"tacos","type":"taco","zip_code":"78753","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_4ba97c354294":{"food":"tacos","type":"taco","zip_code":"78752","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_f633782b9b87":{"food":"tacos","type":"taco","zip_code":"78752","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_00c36946e3f4":{"food":"tacos","type":"taco","zip_code":"78751","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_2d6a5ceee743":{"food":"tacos","type":"taco","zip_code":"78750","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_8ad6295a4ede":{"food":"tacos","type":"taco","zip_code":"78750","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_758b00aab037":{"food":"tacos","type":"taco","zip_code":"78749","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_6eb49c95a3ff":{"food":"tacos","type":"taco","zip_code":"78749","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_7308695667ac":{"food":"tacos","type":"taco","zip_code":"78749","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_458a94f5fc83":{"food":"tacos","type":"taco","zip_code":"78748","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_47ac11c729aa":{"food":"tacos","type":"taco","zip_code":"78748","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_23119f9ecae8":{"food":"tacos","type":"taco","zip_code":"78746","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_dd7934b603ce":{"food":"tacos","type":"taco","zip_code":"78746","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_146f9f7156ac":{"food":"tacos","type":"taco","zip_code":"78745","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_66472ccad052":{"food":"tacos","type":"taco","zip_code":"78745","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_aa7d5a7c3a0a":{"food":"tacos","type":"taco","zip_code":"78744","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_7cd9c29ea037":{"food":"tacos","type":"taco","zip_code":"78727","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_8906e2e5ba61":{"food":"tacos","type":"taco","zip_code":"78726","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_edff247a66e9":{"food":"tacos","type":"taco","zip_code":"78723","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_23a313dc0665":{"food":"tacos","type":"taco","zip_code":"78723","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_8246936eebaf":{"food":"tacos","type":"taco","zip_code":"78723","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_a7ee07a86f21":{"food":"tacos","type":"taco","zip_code":"78722","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_32b3db035bb0":{"food":"tacos","type":"taco","zip_code":"78719","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_6991e1ef5713":{"food":"tacos","type":"taco","zip_code":"78705","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_0bb8c0d398e6":{"food":"tacos","type":"taco","zip_code":"78705","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_9875fb881695":{"food":"tacos","type":"taco","zip_code":"78705","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_f0daa2913a33":{"food":"tacos","type":"taco","zip_code":"78704","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_25874ca959f1":{"food":"tacos","type":"taco","zip_code":"78704","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_54a0c85d7076":{"food":"tacos","type":"taco","zip_code":"78704","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_7d78db581ead":{"food":"tacos","type":"taco","zip_code":"78704","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_98c4a9fe8284":{"food":"tacos","type":"taco","zip_code":"78704","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_7ec5aa4c6833":{"food":"tacos","type":"taco","zip_code":"78704","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_09d1c73e747f":{"food":"tacos","type":"taco","zip_code":"78703","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_d288d10d36c6":{"food":"tacos","type":"taco","zip_code":"78702","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_8a8ce6b5883f":{"food":"tacos","type":"taco","zip_code":"78702","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_d898bb487c0d":{"food":"tacos","type":"taco","zip_code":"78702","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_685b865d00d7":{"food":"tacos","type":"taco","zip_code":"78702","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_0c90a5be9df9":{"food":"tacos","type":"taco","zip_code":"78702","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_480ef6f6dd87":{"food":"tacos","type":"taco","zip_code":"78702","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_7de62d578978":{"food":"tacos","type":"taco","zip_code":"78702","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_5ef88d4fbe42":{"food":"tacos","type":"taco","zip_code":"78702","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_b9b5febafa60":{"food":"tacos","type":"taco","zip_code":"78702","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_e0f94e3e455c":{"food":"tacos","type":"taco","zip_code":"78702","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_85ddfe3b57fa":{"food":"tacos","type":"taco","zip_code":"78702","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_41a61488ee8d":{"food":"tacos","type":"taco","zip_code":"78702","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_862588eb695d":{"food":"tacos","type":"taco","zip_code":"78702","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_f6cd19716c74":{"food":"tacos","type":"taco","zip_code":"78701","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_9c84cbd6528c":{"food":"tacos","type":"taco","zip_code":"78701","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_447be90cbfb7":{"food":"tacos","type":"taco","zip_code":"78701","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_91c2a72b3ad4":{"food":"tacos","type":"taco","zip_code":"78701","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_4c4b80f5cf7e":{"food":"tacos","type":"taco","zip_code":"78701","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_72e34d89aa14":{"food":"tacos","type":"taco","zip_code":"78701","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_5bf4bbcf7147":{"food":"tacos","type":"taco","zip_code":"78701","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_35d105d83aee":{"food":"tacos","type":"taco","zip_code":"78701","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]},"taco_fea99ab55d62":{"food":"tacos","type":"taco","zip_code":"78701","metrics":["distinctiveness","filling_quality","flavor_balance","salsa_quality","texture","tortilla_quality","value"]}};
-function setup(){
-  const ss=SpreadsheetApp.getActiveSpreadsheet();
-  if(!ss)throw Error('Bind this script to a Google Sheet');
-  let sheet=ss.getSheetByName(TAB)||ss.insertSheet(TAB);
-  if(sheet.getLastRow()===0){sheet.appendRow(HEADER);sheet.setFrozenRows(1)}
-  return 'Ready: '+ss.getUrl();
+
+/** Column order for the Votes sheet. */
+const HEADER = [
+    'timestamp',
+    'submission_id',
+    'restaurant_id',
+    'food',
+    'type',
+    'zip_code',
+    'scores_json'
+];
+
+/**
+ * Whitelisted restaurant IDs and allowed metric names,
+ * generated from the burgers/tacos JSON catalog.
+ */
+const ALLOWED = {
+    "burger_40ee77b307b2": {
+        "food": "burgers",
+        "type": "pub_burger",
+        "zip_code": "78759",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_36a378736296": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78759",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_56d9b7e26aa6": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78759",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_ba35acb55983": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78758",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_524a26ef795a": {
+        "food": "burgers",
+        "type": "smashburger",
+        "zip_code": "78758",
+        "metrics": [
+            "bun_quality",
+            "cheese_integration",
+            "cooking_execution",
+            "crust_quality",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_90facbb2f596": {
+        "food": "burgers",
+        "type": "smashburger",
+        "zip_code": "78758",
+        "metrics": [
+            "bun_quality",
+            "cheese_integration",
+            "cooking_execution",
+            "crust_quality",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_d8b1e3cbe538": {
+        "food": "burgers",
+        "type": "smashburger",
+        "zip_code": "78758",
+        "metrics": [
+            "bun_quality",
+            "cheese_integration",
+            "cooking_execution",
+            "crust_quality",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_1157f69480e4": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78758",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_bb20b4deb3cf": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78757",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_4f040f42b063": {
+        "food": "burgers",
+        "type": "gourmet_specialty_burger",
+        "zip_code": "78757",
+        "metrics": [
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_7a94c704a6fe": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78756",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_4344c4d2bb64": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78756",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_0a6c983f96ee": {
+        "food": "burgers",
+        "type": "pub_burger",
+        "zip_code": "78756",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_99170c8e108e": {
+        "food": "burgers",
+        "type": "smashburger",
+        "zip_code": "78754",
+        "metrics": [
+            "bun_quality",
+            "cheese_integration",
+            "cooking_execution",
+            "crust_quality",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_c5c014c07b00": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78753",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_c839a92e422a": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78753",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_2a4380775be5": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78752",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_f871037493cd": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78751",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_aac416a95e94": {
+        "food": "burgers",
+        "type": "smashburger",
+        "zip_code": "78751",
+        "metrics": [
+            "bun_quality",
+            "cheese_integration",
+            "cooking_execution",
+            "crust_quality",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_d943120dc6a5": {
+        "food": "burgers",
+        "type": "gourmet_specialty_burger",
+        "zip_code": "78751",
+        "metrics": [
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_70f9b9c9df2b": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78751",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_886b36ad7478": {
+        "food": "burgers",
+        "type": "pub_burger",
+        "zip_code": "78751",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_87b1afc20303": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78750",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_5b78c2c66075": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78750",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_b9c229690584": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78749",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_1e77fd8915b8": {
+        "food": "burgers",
+        "type": "bbq_smoked_burger",
+        "zip_code": "78748",
+        "metrics": [
+            "bun_quality",
+            "char_smoke_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_76ce3c6d7c51": {
+        "food": "burgers",
+        "type": "pub_burger",
+        "zip_code": "78748",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_b37ca03ebfff": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78748",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_8469a4c8166d": {
+        "food": "burgers",
+        "type": "bbq_smoked_burger",
+        "zip_code": "78748",
+        "metrics": [
+            "bun_quality",
+            "char_smoke_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_35d490ef90a6": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78748",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_19c1bbce45a9": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78746",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_4db7cc6f4d10": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78746",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_9e996a93ef19": {
+        "food": "burgers",
+        "type": "pub_burger",
+        "zip_code": "78745",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_d58339b17e4f": {
+        "food": "burgers",
+        "type": "bbq_smoked_burger",
+        "zip_code": "78745",
+        "metrics": [
+            "bun_quality",
+            "char_smoke_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_5e63339ff639": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78745",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_24be50c11b61": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78745",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_fef657356218": {
+        "food": "burgers",
+        "type": "smashburger",
+        "zip_code": "78745",
+        "metrics": [
+            "bun_quality",
+            "cheese_integration",
+            "cooking_execution",
+            "crust_quality",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_d6f4b2d970d9": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78745",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_9691156778cb": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78742",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_28c65c2f5d90": {
+        "food": "burgers",
+        "type": "smashburger",
+        "zip_code": "78741",
+        "metrics": [
+            "bun_quality",
+            "cheese_integration",
+            "cooking_execution",
+            "crust_quality",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_cbb22403c92d": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78738",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_5b2428bd8e50": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78737",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_6f94fe3d5434": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78735",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_11c9f27b8a89": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78734",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_371fdff1c939": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78731",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_82fb8ede0d1b": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78723",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_99d5c6e9949d": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78723",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_0636463d0286": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78723",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_e9ba57cf1883": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78723",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_f3caf37ef9d8": {
+        "food": "burgers",
+        "type": "gourmet_specialty_burger",
+        "zip_code": "78722",
+        "metrics": [
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_da25695805a0": {
+        "food": "burgers",
+        "type": "pub_burger",
+        "zip_code": "78722",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_2df8e9c0faa5": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78722",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_7bfc7c07edff": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78717",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_ee853b31b091": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78705",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_560ce464fbb3": {
+        "food": "burgers",
+        "type": "pub_burger",
+        "zip_code": "78705",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_cad76b65d544": {
+        "food": "burgers",
+        "type": "pub_burger",
+        "zip_code": "78705",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_99dc3d99b32e": {
+        "food": "burgers",
+        "type": "pub_burger",
+        "zip_code": "78705",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_ddaaf4e9c19b": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78705",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_8b933af1a710": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78705",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_97f22dd80467": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78704",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_9af2ca048b51": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78704",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_96840363cdfe": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78704",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_2ae243ee94c9": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78704",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_e3977307a419": {
+        "food": "burgers",
+        "type": "smashburger",
+        "zip_code": "78704",
+        "metrics": [
+            "bun_quality",
+            "cheese_integration",
+            "cooking_execution",
+            "crust_quality",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_f71bb590e9c5": {
+        "food": "burgers",
+        "type": "smashburger",
+        "zip_code": "78704",
+        "metrics": [
+            "bun_quality",
+            "cheese_integration",
+            "cooking_execution",
+            "crust_quality",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_e11adfc142ed": {
+        "food": "burgers",
+        "type": "pub_burger",
+        "zip_code": "78704",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_1e781b1aad1f": {
+        "food": "burgers",
+        "type": "gourmet_specialty_burger",
+        "zip_code": "78704",
+        "metrics": [
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_e7ea2b6b6902": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78704",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_0cc4ef84adca": {
+        "food": "burgers",
+        "type": "gourmet_specialty_burger",
+        "zip_code": "78704",
+        "metrics": [
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_c7ad0d3c1547": {
+        "food": "burgers",
+        "type": "gourmet_specialty_burger",
+        "zip_code": "78704",
+        "metrics": [
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_e586ff6cbec5": {
+        "food": "burgers",
+        "type": "gourmet_specialty_burger",
+        "zip_code": "78704",
+        "metrics": [
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_4932f2d21d11": {
+        "food": "burgers",
+        "type": "smashburger",
+        "zip_code": "78704",
+        "metrics": [
+            "bun_quality",
+            "cheese_integration",
+            "cooking_execution",
+            "crust_quality",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_7ef8c84e90f7": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78704",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_b8c5dc07d48d": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78704",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_e63658c441b6": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78704",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_2e6a863031f9": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78704",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_7f7b58f01654": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78704",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_e5053cfc20a0": {
+        "food": "burgers",
+        "type": "gourmet_specialty_burger",
+        "zip_code": "78704",
+        "metrics": [
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_8a2a7b6a0d4d": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78703",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_c2d88a86968c": {
+        "food": "burgers",
+        "type": "gourmet_specialty_burger",
+        "zip_code": "78703",
+        "metrics": [
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_a354dcfc2519": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78703",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_18a81f175fa1": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78703",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_d78e5eb1653e": {
+        "food": "burgers",
+        "type": "gourmet_specialty_burger",
+        "zip_code": "78703",
+        "metrics": [
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_d02d1adff2d2": {
+        "food": "burgers",
+        "type": "gourmet_specialty_burger",
+        "zip_code": "78703",
+        "metrics": [
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_90551b598552": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78703",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_5b534ab3c4d7": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78703",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_62089c883f58": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78703",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_9c3ff2abb7f2": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78703",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_1b912c2576c8": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78702",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_24294ba39a52": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78702",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_ee6593e200e5": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78702",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_866ce90ee742": {
+        "food": "burgers",
+        "type": "pub_burger",
+        "zip_code": "78702",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_749f98b6c2fa": {
+        "food": "burgers",
+        "type": "plant_based_burger",
+        "zip_code": "78702",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_d06be7885dbb": {
+        "food": "burgers",
+        "type": "gourmet_specialty_burger",
+        "zip_code": "78702",
+        "metrics": [
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_6c9534ad6de4": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78702",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_649d50a76925": {
+        "food": "burgers",
+        "type": "gourmet_specialty_burger",
+        "zip_code": "78702",
+        "metrics": [
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_ae2df9db4242": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78702",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_583cdd97f795": {
+        "food": "burgers",
+        "type": "gourmet_specialty_burger",
+        "zip_code": "78702",
+        "metrics": [
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_989c787f8f57": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78702",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_a0cee122a63d": {
+        "food": "burgers",
+        "type": "gourmet_specialty_burger",
+        "zip_code": "78702",
+        "metrics": [
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_355d7ee2ed38": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78702",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_7266ae5964a0": {
+        "food": "burgers",
+        "type": "smashburger",
+        "zip_code": "78702",
+        "metrics": [
+            "bun_quality",
+            "cheese_integration",
+            "cooking_execution",
+            "crust_quality",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_e7d1d60a4dd6": {
+        "food": "burgers",
+        "type": "gourmet_specialty_burger",
+        "zip_code": "78702",
+        "metrics": [
+            "cooking_execution",
+            "creativity",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_356f89cd2048": {
+        "food": "burgers",
+        "type": "smashburger",
+        "zip_code": "78702",
+        "metrics": [
+            "bun_quality",
+            "cheese_integration",
+            "cooking_execution",
+            "crust_quality",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_8d12baf1b6ed": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78702",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_f38c9e2e390a": {
+        "food": "burgers",
+        "type": "pub_burger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_dcaa5ddef217": {
+        "food": "burgers",
+        "type": "smashburger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cheese_integration",
+            "cooking_execution",
+            "crust_quality",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_70b36fc6e876": {
+        "food": "burgers",
+        "type": "pub_burger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_6f9174256142": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_58d6dca062bc": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_dc74668f3425": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_2f56323bea24": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_1fcb4a2802aa": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_141037269814": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_ccd28356ef39": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_559857415c45": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_0feba632ba06": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_4ad89abd05f2": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_9eb22113f6ba": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_ad0ea2d4db80": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_9eaeff9f4ca7": {
+        "food": "burgers",
+        "type": "smashburger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cheese_integration",
+            "cooking_execution",
+            "crust_quality",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_6146e5523563": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78701",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_803c205f08fe": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78665",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_8942cf9624a4": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78665",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_33e9f38b991a": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78664",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_77a9c1634a3c": {
+        "food": "burgers",
+        "type": "smashburger",
+        "zip_code": "78664",
+        "metrics": [
+            "bun_quality",
+            "cheese_integration",
+            "cooking_execution",
+            "crust_quality",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_db9094da9f27": {
+        "food": "burgers",
+        "type": "unclassified_burger",
+        "zip_code": "78652",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_f612bb1463cd": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78640",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_73168da7f94c": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78640",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_eb6cd7d0d139": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78634",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_b3a060708d9b": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78626",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_2f0cdd44b3fb": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78613",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_ca5cf695488b": {
+        "food": "burgers",
+        "type": "classic_diner_burger",
+        "zip_code": "78610",
+        "metrics": [
+            "bun_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "burger_48d2f9094ef6": {
+        "food": "burgers",
+        "type": "bbq_smoked_burger",
+        "zip_code": "78610",
+        "metrics": [
+            "bun_quality",
+            "char_smoke_quality",
+            "cooking_execution",
+            "flavor_balance",
+            "juiciness",
+            "patty_quality",
+            "texture",
+            "toppings_sauce",
+            "value"
+        ]
+    },
+    "taco_475c79d0be31": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78759",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_5c29b273d047": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78759",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_372443602a2c": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78758",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_922d14847a8e": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78758",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_71a6c25f8307": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78757",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_a6d202468909": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78757",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_59985bea3b39": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78757",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_382d8dc7f8a3": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78757",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_a2c8fc2764cd": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78756",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_5c693327a6a1": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78756",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_e815f1059347": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78756",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_53ade4c58a96": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78753",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_a323ffa251f9": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78753",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_7d281e8c771c": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78753",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_621f3116eb00": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78753",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_4ba97c354294": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78752",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_f633782b9b87": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78752",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_00c36946e3f4": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78751",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_2d6a5ceee743": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78750",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_8ad6295a4ede": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78750",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_758b00aab037": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78749",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_6eb49c95a3ff": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78749",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_7308695667ac": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78749",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_458a94f5fc83": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78748",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_47ac11c729aa": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78748",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_23119f9ecae8": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78746",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_dd7934b603ce": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78746",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_146f9f7156ac": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78745",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_66472ccad052": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78745",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_aa7d5a7c3a0a": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78744",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_7cd9c29ea037": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78727",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_8906e2e5ba61": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78726",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_edff247a66e9": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78723",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_23a313dc0665": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78723",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_8246936eebaf": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78723",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_a7ee07a86f21": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78722",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_32b3db035bb0": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78719",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_6991e1ef5713": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78705",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_0bb8c0d398e6": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78705",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_9875fb881695": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78705",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_f0daa2913a33": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78704",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_25874ca959f1": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78704",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_54a0c85d7076": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78704",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_7d78db581ead": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78704",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_98c4a9fe8284": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78704",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_7ec5aa4c6833": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78704",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_09d1c73e747f": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78703",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_d288d10d36c6": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78702",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_8a8ce6b5883f": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78702",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_d898bb487c0d": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78702",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_685b865d00d7": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78702",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_0c90a5be9df9": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78702",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_480ef6f6dd87": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78702",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_7de62d578978": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78702",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_5ef88d4fbe42": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78702",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_b9b5febafa60": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78702",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_e0f94e3e455c": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78702",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_85ddfe3b57fa": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78702",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_41a61488ee8d": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78702",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_862588eb695d": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78702",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_f6cd19716c74": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78701",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_9c84cbd6528c": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78701",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_447be90cbfb7": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78701",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_91c2a72b3ad4": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78701",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_4c4b80f5cf7e": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78701",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_72e34d89aa14": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78701",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_5bf4bbcf7147": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78701",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_35d105d83aee": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78701",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    },
+    "taco_fea99ab55d62": {
+        "food": "tacos",
+        "type": "taco",
+        "zip_code": "78701",
+        "metrics": [
+            "distinctiveness",
+            "filling_quality",
+            "flavor_balance",
+            "salsa_quality",
+            "texture",
+            "tortilla_quality",
+            "value"
+        ]
+    }
+};
+
+/**
+ * One-time setup: ensure the Votes sheet exists with a header row.
+ * @returns {string} Confirmation message with the spreadsheet URL.
+ */
+function setup() {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    if (!ss) {
+        throw Error('Bind this script to a Google Sheet');
+    }
+
+    let sheet = ss.getSheetByName(TAB) || ss.insertSheet(TAB);
+    if (sheet.getLastRow() === 0) {
+        sheet.appendRow(HEADER);
+        sheet.setFrozenRows(1);
+    }
+
+    return 'Ready: ' + ss.getUrl();
 }
-function voteSheet_(){const ss=SpreadsheetApp.getActiveSpreadsheet();if(!ss)throw Error('Not bound to spreadsheet');return ss.getSheetByName(TAB)||ss.insertSheet(TAB)}
-function output_(obj,callback){
-  const payload=JSON.stringify(obj);
-  if(callback && /^[a-zA-Z_$][\w$]{0,100}$/.test(callback))return ContentService.createTextOutput(callback+'('+payload+');').setMimeType(ContentService.MimeType.JAVASCRIPT);
-  return ContentService.createTextOutput(payload).setMimeType(ContentService.MimeType.JSON);
+
+/** Return the Votes sheet, creating it if missing. */
+function voteSheet_() {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    if (!ss) {
+        throw Error('Not bound to spreadsheet');
+    }
+    return ss.getSheetByName(TAB) || ss.insertSheet(TAB);
 }
-function doGet(e){
-  try{
-    const sheet=voteSheet_();const rows=sheet.getLastRow()>1?sheet.getRange(2,1,sheet.getLastRow()-1,7).getValues():[];
-    const aggregates={};
-    rows.forEach(row=>{
-      const id=String(row[2]);if(!ALLOWED[id])return;
-      let scores;try{scores=JSON.parse(row[6])}catch(_){return}
-      const entry=aggregates[id]||(aggregates[id]={count:0,metrics:{}});
-      entry.count++;
-      Object.keys(scores).forEach(key=>{
-        if(!ALLOWED[id].metrics.includes(key))return;
-        const value=Number(scores[key]);if(!Number.isInteger(value)||value<1||value>10)return;
-        const s=entry.metrics[key]||(entry.metrics[key]={sum:0,count:0});s.sum+=value;s.count++;
-      });
-    });
-    return output_({ok:true,aggregates},(e&&e.parameter&&e.parameter.callback)||'');
-  }catch(err){return output_({ok:false,error:String(err)},(e&&e.parameter&&e.parameter.callback)||'')}
+
+/**
+ * Serialize a response as JSON, or JSONP when a safe callback name is provided.
+ * @param {Object} obj - Response payload.
+ * @param {string} [callback] - Optional JSONP callback name.
+ */
+function output_(obj, callback) {
+    const payload = JSON.stringify(obj);
+
+    // Only allow a simple JS identifier as the JSONP callback name.
+    if (callback && /^[a-zA-Z_$][\w$]{0,100}$/.test(callback)) {
+        return ContentService
+            .createTextOutput(callback + '(' + payload + ');')
+            .setMimeType(ContentService.MimeType.JAVASCRIPT);
+    }
+
+    return ContentService
+        .createTextOutput(payload)
+        .setMimeType(ContentService.MimeType.JSON);
 }
-function doPost(e){
- const lock=LockService.getScriptLock();
- try{
-  if(!e||!e.parameter||!e.parameter.payload)throw Error('Missing payload');
-  if(String(e.parameter.payload).length>10000)throw Error('Payload too large');
-  const vote=JSON.parse(e.parameter.payload),allowed=ALLOWED[vote.restaurant_id];
-  if(!allowed)throw Error('Unknown restaurant ID');
-  if(vote.food!==allowed.food||vote.type!==allowed.type||String(vote.zip_code)!==allowed.zip_code)throw Error('Restaurant metadata mismatch');
-  if(typeof vote.submission_id!=='string'||!/^[\w-]{10,120}$/.test(vote.submission_id))throw Error('Invalid submission ID');
-  const keys=Object.keys(vote.scores||{});
-  if(keys.length!==allowed.metrics.length||keys.some(k=>!allowed.metrics.includes(k)))throw Error('All expected metrics must be provided');
-  keys.forEach(k=>{const n=vote.scores[k];if(!Number.isInteger(n)||n<1||n>10)throw Error('Invalid score')});
-  lock.waitLock(20000);
-  try{
-    const sheet=voteSheet_();const last=sheet.getLastRow();
-    if(last>1){const ids=sheet.getRange(2,2,last-1,1).getValues();if(ids.some(x=>x[0]===vote.submission_id))return output_({ok:true,duplicate:true})}
-    sheet.appendRow([new Date(),vote.submission_id,vote.restaurant_id,vote.food,vote.type,vote.zip_code,JSON.stringify(vote.scores)]);
-  }finally{lock.releaseLock()}
-  return output_({ok:true});
- }catch(err){return output_({ok:false,error:String(err)})}
+
+/**
+ * GET — return per-restaurant score aggregates for the bracket UI.
+ * Optional ?callback= for JSONP (needed for some static hosting setups).
+ */
+function doGet(e) {
+    const callback = (e && e.parameter && e.parameter.callback) || '';
+
+    try {
+        const sheet = voteSheet_();
+        const lastRow = sheet.getLastRow();
+        const rows = lastRow > 1
+            ? sheet.getRange(2, 1, lastRow - 1, 7).getValues()
+            : [];
+
+        const aggregates = {};
+
+        rows.forEach((row) => {
+            const id = String(row[2]);
+            if (!ALLOWED[id]) {
+                return;
+            }
+
+            let scores;
+            try {
+                scores = JSON.parse(row[6]);
+            } catch (_) {
+                return;
+            }
+
+            const entry = aggregates[id] || (aggregates[id] = {
+                count: 0,
+                metrics: {}
+            });
+            entry.count++;
+
+            Object.keys(scores).forEach((key) => {
+                // Skip metrics that are not in this restaurant's whitelist.
+                if (!ALLOWED[id].metrics.includes(key)) {
+                    return;
+                }
+
+                const value = Number(scores[key]);
+                if (!Number.isInteger(value) || value < 1 || value > 10) {
+                    return;
+                }
+
+                const m = entry.metrics[key] || (entry.metrics[key] = {
+                    sum: 0,
+                    count: 0
+                });
+                m.sum += value;
+                m.count++;
+            });
+        });
+
+        return output_({ ok: true, aggregates }, callback);
+    } catch (err) {
+        return output_({ ok: false, error: String(err) }, callback);
+    }
+}
+
+/**
+ * POST — validate and append a single restaurant ballot.
+ * Expects form field `payload` = JSON string of the vote object.
+ */
+function doPost(e) {
+    const lock = LockService.getScriptLock();
+
+    try {
+        if (!e || !e.parameter || !e.parameter.payload) {
+            throw Error('Missing payload');
+        }
+        if (String(e.parameter.payload).length > 10000) {
+            throw Error('Payload too large');
+        }
+
+        const vote = JSON.parse(e.parameter.payload);
+        const allowed = ALLOWED[vote.restaurant_id];
+
+        if (!allowed) {
+            throw Error('Unknown restaurant ID');
+        }
+
+        // Reject tampered food/type/zip that do not match the catalog.
+        if (
+            vote.food !== allowed.food ||
+            vote.type !== allowed.type ||
+            String(vote.zip_code) !== allowed.zip_code
+        ) {
+            throw Error('Restaurant metadata mismatch');
+        }
+
+        if (
+            typeof vote.submission_id !== 'string' ||
+            !/^[\w-]{10,120}$/.test(vote.submission_id)
+        ) {
+            throw Error('Invalid submission ID');
+        }
+
+        const keys = Object.keys(vote.scores || {});
+        if (
+            keys.length !== allowed.metrics.length ||
+            keys.some((k) => !allowed.metrics.includes(k))
+        ) {
+            throw Error('All expected metrics must be provided');
+        }
+
+        keys.forEach((k) => {
+            const n = vote.scores[k];
+            if (!Number.isInteger(n) || n < 1 || n > 10) {
+                throw Error('Invalid score');
+            }
+        });
+
+        // Serialize writes so duplicate submission_id checks stay consistent.
+        lock.waitLock(20000);
+        try {
+            const sheet = voteSheet_();
+            const last = sheet.getLastRow();
+
+            if (last > 1) {
+                const ids = sheet.getRange(2, 2, last - 1, 1).getValues();
+                if (ids.some((x) => x[0] === vote.submission_id)) {
+                    return output_({ ok: true, duplicate: true });
+                }
+            }
+
+            sheet.appendRow([
+                new Date(),
+                vote.submission_id,
+                vote.restaurant_id,
+                vote.food,
+                vote.type,
+                vote.zip_code,
+                JSON.stringify(vote.scores)
+            ]);
+        } finally {
+            lock.releaseLock();
+        }
+
+        return output_({ ok: true });
+    } catch (err) {
+        return output_({ ok: false, error: String(err) });
+    }
 }

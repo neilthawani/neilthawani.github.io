@@ -1,16 +1,31 @@
 <script>
 /* Austin Brackets frontend.
+ * Bracket tree ported from single-burger-bracket (absolute cards + SVG elbows).
  * Public weights: /austin-brackets/data/weights.json
- * Page food type comes from <body data-food="burgers|tacos">.
- * Toggle live voting in /austin-brackets/data/settings.json (live_voting).
+ * Page food type: <body data-food="burgers|tacos">
+ * Toggle live voting: /austin-brackets/data/settings.json (live_voting)
  */
 (function () {
     'use strict';
 
     const $ = (id) => document.getElementById(id);
-
-    // burgers.html vs tacos.html — each page owns one food type
     const pageFood = document.body.dataset.food === 'tacos' ? 'tacos' : 'burgers';
+
+    // Burgers: type then ZIP. Tacos: ZIP only.
+    const GROUP_BY = pageFood === 'burgers'
+        ? ['type', 'zip_code']
+        : ['zip_code'];
+
+    const CARD_W = 194;
+    const COLUMN_W = 252;
+    const LEAF_H = 28;
+    const MATCH_H = 52;
+    const ROW_H = 66;
+    const TOP = 55;
+    const LEFT = 16;
+
+    const picks = new Map();
+    const pinned = new Set(); // card ids whose address stays expanded after click
 
     const state = {
         food: pageFood,
@@ -25,64 +40,72 @@
 
     const liveVoting = () => !!(state.settings && state.settings.live_voting);
 
-    // Escape user-facing strings before injecting into HTML
-    const html = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#39;'
-    }[c]));
+    const make = (tag, className, text) => {
+        const element = document.createElement(tag);
+        if (className) {
+            element.className = className;
+        }
+        if (text != null) {
+            element.textContent = text;
+        }
+        return element;
+    };
 
-    // smashburger → Smashburger
+    const uid = (item) => item.restaurant_id ?? `${item.restaurant}|${item.address}`;
+    const real = (value) => value && !value.pending;
+    const unknown = () => ({ pending: true, restaurant: 'Winner TBD' });
+    const details = (item) => [item.address, item.notes].filter(Boolean).join('\n');
+
     const title = (s) => String(s || '')
         .replaceAll('_', ' ')
         .replace(/\b\w/g, (c) => c.toUpperCase());
 
-    // Prefer official site fields; otherwise Google search for the restaurant
-    const restaurantUrl = (r) => {
-        if (/^https?:\/\//.test(r.website || '')) {
-            return r.website;
+    // Same content as the native tooltip, structured for the expanded card
+    function cardDetailsEl(item) {
+        const box = make('div', 'card-details');
+        if (item.address) {
+            box.append(make('div', 'card-address', item.address));
         }
-        if (
-            /^https?:\/\//.test(r.source_url || '') &&
-            !/reddit|eater|yelp|tripadvisor|infatuation/.test(r.source_url)
-        ) {
-            return r.source_url;
+        if (item.notes) {
+            box.append(make('div', 'card-notes', item.notes));
         }
-        return 'https://www.google.com/search?q=' +
-            encodeURIComponent(r.restaurant + ' Austin Texas official website');
-    };
+        if (state.food === 'burgers' && item.type) {
+            box.append(make('div', 'card-type', title(item.type)));
+        }
+        return box;
+    }
+
+    function wireExpand(el, pinId) {
+        el.addEventListener('mouseenter', () => el.classList.add('is-hot'));
+        el.addEventListener('mouseleave', () => el.classList.remove('is-hot'));
+        el.addEventListener('click', (e) => {
+            if (e.target.closest('.leaf-rate')) {
+                return;
+            }
+            if (pinned.has(pinId)) {
+                pinned.delete(pinId);
+                el.classList.remove('is-pinned');
+            } else {
+                pinned.add(pinId);
+                el.classList.add('is-pinned');
+            }
+        });
+        if (pinned.has(pinId)) {
+            el.classList.add('is-pinned');
+        }
+    }
 
     const ids = () => state.db[state.food] || [];
     const types = () => [...new Set((state.db.burgers || []).map((x) => x.type))].sort();
+    const contenders = () => ids();
     const categoryFor = (r) => (state.food === 'tacos' ? 'taco' : r.type);
     const categoryWeights = (type) =>
         state.rules.weights[type] || state.rules.weights.unclassified_burger;
 
-    // Burger ballots also collect champions_burger metrics for the overall final
     const ratingKeys = (r) => [...new Set([
         ...Object.keys(categoryWeights(categoryFor(r))),
         ...(state.food === 'burgers' ? Object.keys(categoryWeights('champions_burger')) : [])
     ])];
-
-    // All locations for this page (burgers.html or tacos.html)
-    const contenders = () => ids();
-    const bracketKind = () => (state.food === 'tacos' ? 'taco' : null);
-
-    const grouped = () => {
-        if (Object.groupBy) {
-            return Object.groupBy(contenders(), (r) => r.zip_code);
-        }
-        return contenders().reduce((a, r) => {
-            (a[r.zip_code] ??= []).push(r);
-            return a;
-        }, {});
-    };
-
-    const zips = () => Object.keys(grouped()).sort((a, b) =>
-        b.localeCompare(a, undefined, { numeric: true })
-    );
 
     const store = () => {
         try {
@@ -97,7 +120,6 @@
         $('notice').classList.toggle('show', !!message);
     }
 
-    // Merge Google Sheets aggregates with any local demo ballots
     function getAggregates() {
         const out = JSON.parse(JSON.stringify(state.remote));
         for (const vote of state.local) {
@@ -112,7 +134,6 @@
         return out;
     }
 
-    // Weighted mean for a restaurant; incomplete if any required metric is missing
     function scored(r, kind) {
         const a = getAggregates()[r.restaurant_id];
         if (!a) {
@@ -137,223 +158,261 @@
         };
     }
 
-    function restaurantTip(r) {
-        const typeLine = state.food === 'burgers'
-            ? '<p>' + html(title(r.type)) + '</p>'
-            : '';
-        return `<div class="tip"><strong>${html(r.restaurant)}</strong>${html(r.address)}` +
-            `<p>${html(r.notes || 'No notes')}</p>${typeLine}</div>`;
-    }
+    // --- Exemplar tree: grouping → elimination → layout → SVG draw ---
 
-    // One team line in the classic sports-bracket style
-    function restaurantSlot(r, opts = {}) {
-        const {
-            winnerId = null,
-            placeholder = 'TBD',
-            showZip = false
-        } = opts;
-
-        if (!r) {
-            return `<div class="slot slot-empty"><span class="pending">${html(placeholder)}</span></div>`;
-        }
-
-        const s = scored(r);
-        const link = restaurantUrl(r);
-        const content = html(r.restaurant);
-        const isWinner = liveVoting() && winnerId && r.restaurant_id === winnerId;
-        const zipTag = showZip
-            ? `<span class="zip-tag">${html(r.zip_code)}</span>`
-            : '';
-
-        const scoreHtml = liveVoting()
-            ? `<span class="score" title="${s.count} ratings">${s.score === null ? '—' : s.score.toFixed(2)}</span>`
-            : '';
-        const rateHtml = liveVoting()
-            ? `<button class="rate" data-rate="${html(r.restaurant_id)}" title="Rate ${content}">Rate</button>`
-            : '';
-
-        return `<div class="slot${isWinner ? ' winner' : ''}">` +
-            zipTag +
-            `<a class="name" href="${html(link)}" rel="noopener noreferrer" target="_blank">${content}</a>` +
-            scoreHtml + rateHtml + restaurantTip(r) +
-            '</div>';
-    }
-
-    // Advance logic: byes always pass through; live matches need scores
-    function advanceRestaurant(a, b, kind) {
-        if (a && !b) {
-            return a;
-        }
-        if (b && !a) {
-            return b;
-        }
-        if (!a || !b || !liveVoting()) {
-            return null;
-        }
-        const sa = scored(a, kind);
-        const sb = scored(b, kind);
-        if (!sa.complete || !sb.complete || sa.score === sb.score) {
-            return null;
-        }
-        return sa.score > sb.score ? a : b;
-    }
-
-    function padPower2(arr) {
-        const n = Math.max(1, arr.length);
-        const size = 2 ** Math.ceil(Math.log2(n));
-        return arr.concat(Array(size - arr.length).fill(null));
-    }
-
-    // Seed restaurants by ZIP so neighbors meet in early rounds (ZIP sub-brackets)
-    function seedRestaurantsForZips(zipKeys, byZip) {
-        let ordered = [];
-        for (const zip of zipKeys) {
-            const list = (byZip[zip] || []).slice().sort((a, b) =>
-                a.restaurant.localeCompare(b.restaurant)
-            );
-            ordered = ordered.concat(padPower2(list.length ? list : [null]));
-        }
-        if (!ordered.length) {
-            ordered = [null];
-        }
-        return padPower2(ordered);
-    }
-
-    // Classic single-elim rounds for one half of the mirrored bracket
-    function buildSide(zipKeys, byZip, kind) {
-        const seeded = seedRestaurantsForZips(zipKeys, byZip);
-        const rounds = [];
-        let current = seeded;
-
-        while (current.length > 1) {
-            const matches = [];
-            const next = [];
-            for (let i = 0; i < current.length; i += 2) {
-                const a = current[i];
-                const b = current[i + 1];
-                const winner = advanceRestaurant(a, b, kind);
-                matches.push({ a, b, winner });
-                next.push(winner);
+    function groupsFor(items, key) {
+        const groups = new Map();
+        items.forEach((item) => {
+            const value = String(item[key] ?? 'Unclassified');
+            if (!groups.has(value)) {
+                groups.set(value, []);
             }
-            rounds.push(matches);
-            current = next;
-        }
-
-        return {
-            rounds,
-            champion: current[0] || null
-        };
-    }
-
-    function roundTitle(index, total) {
-        if (index === 0) {
-            return 'Opening round';
-        }
-        if (index === total - 1) {
-            return 'Side final';
-        }
-        if (index === 1) {
-            return 'Regional';
-        }
-        return 'Round ' + (index + 1);
-    }
-
-    function renderMatch(match, isOpening) {
-        const placeholder = isOpening ? 'Bye' : 'Winner';
-        return '<div class="bracket-game">' +
-            restaurantSlot(match.a, {
-                winnerId: match.winner && match.winner.restaurant_id,
-                placeholder,
-                showZip: isOpening
-            }) +
-            restaurantSlot(match.b, {
-                winnerId: match.winner && match.winner.restaurant_id,
-                placeholder,
-                showZip: isOpening
-            }) +
-            '</div>';
-    }
-
-    function renderSideColumns(side, direction) {
-        const totalRounds = side.rounds.length;
-        let cols = '';
-
-        side.rounds.forEach((matches, idx) => {
-            cols += `<div class="tourney-round" data-round="${idx}">` +
-                `<div class="tourney-round-title">${roundTitle(idx, totalRounds)}</div>` +
-                '<div class="tourney-round-body">';
-            matches.forEach((m) => {
-                cols += `<div class="seed-slot">${renderMatch(m, idx === 0)}</div>`;
-            });
-            cols += '</div></div>';
+            groups.get(value).push(item);
         });
-
-        return `<div class="tourney-side tourney-${direction}">${cols}</div>`;
+        return [...groups].sort(([a], [b]) =>
+            b.localeCompare(a, undefined, { numeric: true })
+        );
     }
 
-    // Mirrored NFL-style bracket: restaurants on lines, ZIP-seeded, final in the center
-    function renderMirroredBracket(kind) {
-        const byZip = grouped();
-        const zipList = zips();
-        if (!zipList.length) {
-            return '<p class="empty">No restaurants here.</p>';
+    function createTree(items, fields) {
+        function leaf(item) {
+            return { kind: 'leaf', item, id: uid(item), height: 0, first: -1, last: -1 };
         }
 
-        const mid = Math.ceil(zipList.length / 2);
-        const left = buildSide(zipList.slice(0, mid), byZip, kind);
-        const right = buildSide(zipList.slice(mid), byZip, kind);
-        const finalWinner = advanceRestaurant(left.champion, right.champion, kind);
-
-        let champNote = '';
-        if (liveVoting() && finalWinner) {
-            const s = scored(finalWinner, kind);
-            champNote = `<div class="champion"><strong>🏆 ${html(finalWinner.restaurant)}</strong>` +
-                `<p>${s.score.toFixed(2)}/10</p></div>`;
+        function pair(a, b, context) {
+            const id = `match:${context}:${a.id}:${b.id}`;
+            return {
+                kind: 'match',
+                left: a,
+                right: b,
+                id,
+                height: Math.max(a.height, b.height) + 1,
+                first: -1,
+                last: -1
+            };
         }
 
-        const finalMatch = '<div class="bracket-game final-game">' +
-            restaurantSlot(left.champion, {
-                winnerId: finalWinner && finalWinner.restaurant_id,
-                placeholder: 'Side champion'
-            }) +
-            restaurantSlot(right.champion, {
-                winnerId: finalWinner && finalWinner.restaurant_id,
-                placeholder: 'Side champion'
-            }) +
-            '</div>';
+        function elimination(trees, context) {
+            let round = 0;
+            while (trees.length > 1) {
+                const next = [];
+                for (let i = 0; i < trees.length; i += 2) {
+                    next.push(
+                        i + 1 < trees.length
+                            ? pair(trees[i], trees[i + 1], `${context}/r${round}/g${i / 2}`)
+                            : trees[i]
+                    );
+                }
+                trees = next;
+                round++;
+            }
+            return trees[0] ?? null;
+        }
 
-        return '<div class="tourney-scroller"><div class="tourney">' +
-            renderSideColumns(left, 'left') +
-            `<div class="tourney-final">` +
-            '<div class="tourney-round-title">Championship</div>' +
-            `<div class="tourney-round-body"><div class="seed-slot">${finalMatch}${champNote}</div></div>` +
-            '</div>' +
-            renderSideColumns(right, 'right') +
-            '</div></div>';
+        function groupTree(members, depth, context) {
+            if (depth >= fields.length) {
+                return elimination(members.map(leaf), context);
+            }
+            const children = groupsFor(members, fields[depth]).map(([key, part]) =>
+                groupTree(part, depth + 1, `${context}/${fields[depth]}:${key}`)
+            );
+            return elimination(children.filter(Boolean), context);
+        }
+
+        return groupTree(items, 0, 'citywide');
     }
 
-    // Scale bracket to page width only — keep full height (page may scroll vertically)
-    function fitTourneyToWidth() {
-        const scroller = document.querySelector('.tourney-scroller');
-        const tourney = document.querySelector('.tourney');
-        if (!scroller || !tourney) {
+    function calculateLayout(root) {
+        const leaves = [];
+        const matches = [];
+
+        function collect(node) {
+            if (node.kind === 'leaf') {
+                node.first = node.last = leaves.length;
+                node.y = TOP + leaves.length * ROW_H;
+                leaves.push(node);
+                return;
+            }
+            collect(node.left);
+            collect(node.right);
+            node.first = node.left.first;
+            node.last = node.right.last;
+            node.y = (node.left.y + node.right.y) / 2;
+            matches.push(node);
+        }
+
+        collect(root);
+        const width = LEFT * 2 + (root.height + 1) * COLUMN_W + 225;
+        const height = TOP * 2 + (leaves.length - 1) * ROW_H + MATCH_H;
+        return { leaves, matches, width, height };
+    }
+
+    // Prefer auto score when live; else click picks; browse mode stays TBD
+    function resolveMatchWinner(left, right, matchId) {
+        if (!real(left) || !real(right)) {
+            return unknown();
+        }
+
+        if (liveVoting()) {
+            const sa = scored(left);
+            const sb = scored(right);
+            if (sa.complete && sb.complete && sa.score !== sb.score) {
+                return sa.score > sb.score ? left : right;
+            }
+            const picked = picks.get(matchId);
+            return [left, right].find((item) => uid(item) === picked) ?? unknown();
+        }
+
+        return unknown();
+    }
+
+    function winnerOf(node) {
+        if (node.kind === 'leaf') {
+            return node.item;
+        }
+        const left = winnerOf(node.left);
+        const right = winnerOf(node.right);
+        return resolveMatchWinner(left, right, node.id);
+    }
+
+    function addGeneratedCSS(depth) {
+        document.querySelector('#dynamic-bracket-css')?.remove();
+        const css = make('style');
+        css.id = 'dynamic-bracket-css';
+        css.textContent = `:root{--card-width:${CARD_W}px;--leaf-height:${LEAF_H}px;--match-height:${MATCH_H}px}\n` +
+            Array.from({ length: depth + 1 }, (_, i) =>
+                `.depth-${i}{left:${LEFT + i * COLUMN_W}px}`
+            ).join('\n');
+        document.head.append(css);
+    }
+
+    function draw(data) {
+        const host = $('bracket');
+        if (!host) {
             return;
         }
 
-        tourney.style.transform = 'none';
-        scroller.style.height = '';
-
-        const availableW = scroller.clientWidth;
-        const neededW = tourney.scrollWidth;
-        const naturalHeight = tourney.offsetHeight;
-        if (!availableW || !neededW) {
+        host.replaceChildren();
+        const root = createTree(data, GROUP_BY.map((key) => key.toLowerCase()));
+        if (!root) {
+            host.textContent = 'No restaurants';
             return;
         }
 
-        const scale = Math.min(1, availableW / neededW);
-        tourney.style.transformOrigin = 'top center';
-        tourney.style.transform = 'scale(' + scale + ')';
-        scroller.style.height = Math.ceil(naturalHeight * scale) + 'px';
+        const { leaves, matches, width, height } = calculateLayout(root);
+        addGeneratedCSS(root.height);
+
+        const canvas = make('div', 'tree');
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('class', 'connectors');
+        svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+        svg.setAttribute('aria-hidden', 'true');
+
+        const path = (d) => {
+            const el = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            el.setAttribute('d', d);
+            el.setAttribute('fill', 'none');
+            el.setAttribute('stroke', '#48645a');
+            el.setAttribute('stroke-width', '1.4');
+            svg.append(el);
+        };
+
+        for (const match of matches) {
+            const endX = LEFT + match.height * COLUMN_W;
+            for (const child of [match.left, match.right]) {
+                const startX = LEFT + child.height * COLUMN_W + CARD_W;
+                const elbow = Math.min(
+                    endX - 9,
+                    startX + Math.max(12, (endX - startX) / 2)
+                );
+                path(`M${startX} ${child.y} H${elbow} V${match.y} H${endX}`);
+            }
+        }
+
+        canvas.append(svg);
+
+        for (const leaf of leaves) {
+            const pinId = uid(leaf.item);
+            const el = make('div', 'leaf depth-0');
+            el.style.top = `${leaf.y - LEAF_H / 2}px`;
+            el.title = details(leaf.item);
+            el.append(make('span', 'card-name', leaf.item.restaurant));
+            el.append(cardDetailsEl(leaf.item));
+            if (liveVoting()) {
+                const rate = make('button', 'leaf-rate', 'Rate');
+                rate.type = 'button';
+                rate.dataset.rate = leaf.item.restaurant_id;
+                rate.title = 'Rate ' + leaf.item.restaurant;
+                el.append(rate);
+            }
+            wireExpand(el, pinId);
+            canvas.append(el);
+        }
+
+        const voting = liveVoting();
+        for (const match of matches) {
+            const el = make('div', `match depth-${match.height}`);
+            el.style.top = `${match.y - MATCH_H / 2}px`;
+            const opponents = [winnerOf(match.left), winnerOf(match.right)];
+            const selectable = voting && opponents.every(real);
+
+            for (const opponent of opponents) {
+                const button = make('button', 'option');
+                button.type = 'button';
+
+                let label = opponent.restaurant;
+                if (real(opponent)) {
+                    button.title = details(opponent);
+                    const s = scored(opponent);
+                    if (voting && s.score !== null) {
+                        label = `${opponent.restaurant} (${s.score.toFixed(2)})`;
+                    }
+                    button.append(make('span', 'card-name', label));
+                    button.append(cardDetailsEl(opponent));
+                    wireExpand(button, `${match.id}::${uid(opponent)}`);
+                } else {
+                    button.disabled = true;
+                    button.append(make('span', 'card-name', label));
+                }
+
+                if (selectable && picks.get(match.id) === uid(opponent)) {
+                    button.classList.add('selected');
+                }
+                if (selectable) {
+                    button.addEventListener('click', () => {
+                        picks.set(match.id, uid(opponent));
+                        draw(data);
+                    });
+                }
+                el.append(button);
+            }
+            canvas.append(el);
+        }
+
+        const titleEl = make('div', 'round-label', 'Championship');
+        titleEl.style.left = `${LEFT + root.height * COLUMN_W}px`;
+        canvas.append(titleEl);
+
+        const champion = winnerOf(root);
+        const badge = make(
+            'div',
+            'champion',
+            real(champion) ? `🏆 ${champion.restaurant}` : '🏆 Champion TBD'
+        );
+        badge.style.top = `${root.y - 18}px`;
+        badge.style.left = `${LEFT + root.height * COLUMN_W + CARD_W + 26}px`;
+        if (real(champion)) {
+            badge.title = details(champion);
+        }
+        canvas.append(badge);
+
+        path(
+            `M${LEFT + root.height * COLUMN_W + CARD_W} ${root.y} H${LEFT + root.height * COLUMN_W + CARD_W + 26}`
+        );
+        host.append(canvas);
     }
 
     function renderWeights(isBurger) {
@@ -361,11 +420,11 @@
         return '<div class="grid">' + listed.map((t) => {
             const w = categoryWeights(t);
             const r = ids().find((x) => x.type === t) || ids()[0];
-            return `<div class="card"><table class="weight-table"><caption>${html(title(t))}</caption>` +
+            return `<div class="card"><table class="weight-table"><caption>${title(t)}</caption>` +
                 '<thead><tr><th>Metric</th><th>Weight</th></tr></thead><tbody>' +
                 Object.entries(w).map(([k, n]) =>
-                    `<tr><td><strong>${html(title(k))}</strong>` +
-                    `<div class="fine">${html(r?.[k]?.__comment || '')}</div></td>` +
+                    `<tr><td><strong>${title(k)}</strong>` +
+                    `<div class="fine">${r?.[k]?.__comment || ''}</div></td>` +
                     `<td>${n}%</td></tr>`
                 ).join('') +
                 '</tbody><tfoot><tr><th>Total</th><th>100%</th></tr></tfoot></table></div>';
@@ -375,7 +434,7 @@
     function render() {
         const isBurger = state.food === 'burgers';
         const voting = liveVoting();
-        const kind = bracketKind();
+        const list = contenders();
 
         $('headingFood').textContent = isBurger ? 'Burger' : 'Taco';
         $('refresh').hidden = !voting;
@@ -383,17 +442,13 @@
             ? 'Show bracket'
             : 'Public weights';
 
-        const zs = zips();
-        const count = contenders().length;
-        const qual = contenders().filter((r) => scored(r).complete).length;
-        $('stat').textContent = voting
-            ? `${qual}/${count} qualified · ${zs.length} ZIPs`
-            : `${count} restaurants · ${zs.length} ZIPs`;
+        const zipCount = new Set(list.map((r) => r.zip_code)).size;
+        $('stat').textContent = `${list.length} restaurants · ${zipCount} ZIPs`;
 
         const descriptions = {
             brackets: [
                 isBurger ? 'Austin burger tournament' : 'Austin taco tournament',
-                'Same-ZIP restaurants meet first · winners advance to the center'
+                'One continuous elimination bracket. Grouping determines who meets first; every branch connects to the same final.'
             ],
             weights: [
                 'Public scoring weights',
@@ -404,30 +459,27 @@
         $('sectionHeading').textContent = descriptions[state.view][0];
         $('sectionText').textContent = descriptions[state.view][1];
 
-        let body = '';
         if (state.view === 'weights') {
-            body = renderWeights(isBurger);
+            $('content').innerHTML = renderWeights(isBurger);
         } else {
-            body = renderMirroredBracket(kind);
+            $('content').innerHTML = '<div id="bracket">Loading…</div>';
+            draw(list);
         }
-
-        $('content').innerHTML = body;
-        requestAnimationFrame(() => fitTourneyToWidth());
 
         if (!voting) {
             $('mode').textContent = 'Live voting off';
             $('backendNote').textContent =
-                'Live voting is disabled. Set live_voting to true in austin-brackets/data/settings.json to collect ratings and crown ZIP winners.';
+                'Live voting is disabled. Set live_voting to true in austin-brackets/data/settings.json to rate restaurants and advance the bracket.';
             $('export').hidden = true;
         } else if (state.settings.mode === 'google_sheets') {
             $('mode').textContent = 'Live voting · Sheets';
             $('backendNote').textContent =
-                'Submitted votes are stored in the linked Google Sheet. Refresh retrieves published aggregates.';
+                'Submitted votes are stored in the linked Google Sheet. Refresh retrieves published aggregates. Click a match to pick when scores are tied or incomplete.';
             $('export').hidden = false;
         } else {
             $('mode').textContent = 'Live voting · local';
             $('backendNote').textContent =
-                'Demo mode: submissions remain only in this browser. Configure Google Apps Script and mode google_sheets for shared votes.';
+                'Demo mode: ratings stay in this browser. Complete scores auto-advance matches; otherwise click to pick a winner.';
             $('export').hidden = false;
         }
     }
@@ -461,10 +513,10 @@
             ).join('');
 
             return `<div class="rating-field"><div class="field-head">` +
-                `<label for="m${i}">${html(title(k))}</label>` +
+                `<label for="m${i}">${title(k)}</label>` +
                 `<span class="percent">${percent}</span></div>` +
-                `<p>${html(r[k]?.__comment || 'Rate quality for this metric')}</p>` +
-                `<select required data-metric="${html(k)}" id="m${i}">` +
+                `<p>${r[k]?.__comment || 'Rate quality for this metric'}</p>` +
+                `<select required data-metric="${k}" id="m${i}">` +
                 '<option value="">Choose a score</option>' + options +
                 '</select></div>';
         }).join('');
@@ -472,7 +524,6 @@
         $('ratingDialog').showModal();
     }
 
-    // Cross-origin POST via hidden form + iframe (Apps Script has limited CORS)
     function backendSubmit(vote) {
         return new Promise((resolve, reject) => {
             const url = state.settings.apps_script_url;
@@ -553,7 +604,7 @@
             try {
                 await backendSubmit(vote);
                 showNotice(
-                    'Submission sent. Google Apps Script responses cannot be confirmed directly from this page; refresh scores to verify it was recorded.'
+                    'Submission sent. Refresh scores to verify it was recorded.'
                 );
             } catch (err) {
                 showNotice('Vote could not be submitted: ' + err.message);
@@ -561,12 +612,11 @@
         } else {
             state.local.push(vote);
             store();
-            showNotice('Saved in this browser only (demo mode). Export your ratings for backup.');
+            showNotice('Saved in this browser only (demo mode).');
             render();
         }
     }
 
-    // JSONP GET for aggregates (Apps Script Content Service)
     function refreshRemote() {
         return new Promise((resolve) => {
             if (!liveVoting() || state.settings.mode !== 'google_sheets') {
@@ -689,12 +739,6 @@
         if (b && liveVoting()) {
             showRating(b.dataset.rate);
         }
-    });
-
-    let resizeTimer = null;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(fitTourneyToWidth, 100);
     });
 
     init();
