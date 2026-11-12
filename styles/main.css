@@ -9182,6 +9182,12 @@ i:before {
   overflow-wrap: anywhere;
 }
 
+.project-card-video {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .project-card-tools-logos {
   display: flex;
   flex-direction: row;
